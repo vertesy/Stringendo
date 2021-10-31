@@ -34,13 +34,12 @@ BackupDir = "~/GitHub/Packages/StringParser/Development/"
 dir.create(BackupDir)
 
 # devtools::use_package("vioplot")
-DESCRIPTION <- list("Title" = "StringParser is the fastest way to create, annotate and export plots in R"
+DESCRIPTION <- list("Title" = "StringParser helper functions"
     , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "StringParser is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
     , "Version" = "0.1.0"
-    # , "Version" = "4.0.0"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Imports" = "MarkdownReports" #CodeAndRoll2
