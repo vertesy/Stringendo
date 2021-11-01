@@ -1,8 +1,8 @@
 ######################################################################################################
-# Create_the_StringParser_Package.v0.1.R
+# Create_the_Stringendo_Package.v0.1.R
 # 31 10 2021
 ######################################################################################################
-# source("/Users/abel.vertesy/GitHub/Packages/StringParser/Development/Create_the_StringParser_Package.v0.1.R")
+# source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.v0.1.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
 # install.packages("devtools")
@@ -23,28 +23,28 @@ if (print == TRUE) {
 }
 
 # Setup ------------------------
-PackageName = 	"StringParser"
+PackageName = 	"Stringendo"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
 fname = 	kollapse(PackageName, ".R")
 Package_FnP = 	kollapse(RepositoryDir, "R/", fname)
 
-BackupDir = "~/GitHub/Packages/StringParser/Development/"
+BackupDir = "~/GitHub/Packages/Stringendo/Development/"
 dir.create(BackupDir)
 
 # devtools::use_package("vioplot")
-DESCRIPTION <- list("Title" = "StringParser helper functions"
+DESCRIPTION <- list("Title" = "Stringendo helper functions"
     , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
-    , "Description" = "StringParser is a set of R functions to parse strings from variables and to manipulate strings."
+    , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
     , "Version" = "0.1.0"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Imports" = "MarkdownReports" #CodeAndRoll2
     # , "Suggests" = ""
-    , "BugReports"= "https://github.com/vertesy/StringParser/issues"
+    , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
 
 
@@ -52,7 +52,7 @@ setwd(RepositoryDir)
 if ( !dir.exists(RepositoryDir) ) { create(path = RepositoryDir, description = DESCRIPTION, rstudio = TRUE)
 } else {
     getwd()
-    try(file.remove(c("DESCRIPTION","NAMESPACE", "StringParser.Rproj")))
+    try(file.remove(c("DESCRIPTION","NAMESPACE", "Stringendo.Rproj")))
     create_package(path = RepositoryDir, fields = DESCRIPTION, open = F)
 }
 
@@ -81,8 +81,8 @@ document()
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
 install(RepositoryDir)
-# require("StringParser")
-# # remove.packages("StringParser")
+# require("Stringendo")
+# # remove.packages("Stringendo")
 # # Test your package ------------------------------------------------
 # help("wplot")
 # cat("\014")
@@ -90,13 +90,13 @@ install(RepositoryDir)
 
 
 # Test if you can install from github ------------------------------------------------
-# devtools::install_github(repo = "vertesy/StringParser")
+# devtools::install_github(repo = "vertesy/Stringendo")
 
-# require("StringParser")
+# require("Stringendo")
 
 # Clean up if not needed anymore ------------------------------------------------
 # View(installed.packages())
-# remove.packages("StringParser")
+# remove.packages("Stringendo")
 
 check(RepositoryDir, cran = TRUE)
 # as.package(RepositoryDir)
@@ -104,9 +104,9 @@ check(RepositoryDir, cran = TRUE)
 #
 # # source("https://install-github.me/r-lib/desc")
 # # library(desc)
-# # desc$set("StringParser", "foo")
-# # desc$get(StringParser)
+# # desc$set("Stringendo", "foo")
+# # desc$get(Stringendo)
 #
 #
-# system("cd ~/GitHub/StringParser/; ls -a; open .Rbuildignore")
+# system("cd ~/GitHub/Stringendo/; ls -a; open .Rbuildignore")
 #

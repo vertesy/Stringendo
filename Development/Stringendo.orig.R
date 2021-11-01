@@ -1,11 +1,11 @@
 ######################################################################
-# StringParser
+# Stringendo
 ######################################################################
 # String parsing functionalites for generating plotnames, filenames and path.
 # Used by MarkdownReports and ggExpress.
 # Many functionalities were formerly part of CodeAndRoll.
-# try(source("~/GitHub/Packages/StringParser/R/StringParser.R"), silent = T)
-# try(source("https://raw.githubusercontent.com/vertesy/StringParser/main/StringParser.R"), silent = T)
+# try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = T)
+# try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
 
 
