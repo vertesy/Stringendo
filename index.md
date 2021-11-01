@@ -1,37 +1,119 @@
-## Welcome to GitHub Pages
+# Stringendo - A string parsing library
 
-You can use the [editor on GitHub](https://github.com/vertesy/Stringendo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+String parsing functionalites for generating plotnames, filenames and path. Used by [Stringendo](https://github.com/vertesy/Stringendo) and [ggExpress](https://github.com/vertesy/ggExpress). 
+Complements the new [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2). Many functionalities were part of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<br><br>
 
-```markdown
-Syntax highlighted code block
+## Installation
 
-# Header 1
-## Header 2
-### Header 3
+Install directly from **GitHub** via **devtools** with one R command:
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```R
+# install.packages("devtools"); # If you don't have it.
+require("devtools")
+devtools::install_github(repo = "vertesy/Stringendo")
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+...then simply load the package:
 
-### Jekyll Themes
+```R
+require("Stringendo")
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vertesy/Stringendo/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Alternatively, you simply source it from the web. 
+*This way function help will not work, and you will have no local copy of the code on your hard drive.*
 
-### Support or Contact
+```R
+source("https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R")
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<br><br>
+
+## List of functions
+
+- #### idate 
+
+  Parse current date, dot separated.
+
+- #### ppp 
+
+  Paste by point
+
+- #### pps 
+
+  Paste by (forward) slash
+
+- #### ppu 
+
+  Paste by underscore
+
+- #### ppd 
+
+  Paste by dash
+
+- #### kpp 
+
+  kollapse by point
+
+- #### kppu 
+
+  kollapse by underscore
+
+- #### kpps 
+
+  kollapse by (forward) slash
+
+- #### kppd 
+
+  kollapse by dash
+
+- #### sppp 
+
+  Simplified Paste by point
+
+- #### percentile2value 
+
+  Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()'s "vline" paramter.
+
+- #### parsepvalue 
+
+  Parse p-value from a number to a string.
+
+- #### eval_parse_kollapse 
+
+  evaluate and parse (dyn_var_caller)
+
+- #### param.list.2.fname 
+
+  Take a list of parameters and parse a string from their names and values.
+
+- #### PasteDirNameFromFlags 
+
+  Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
+
+- #### PasteOutdirFromFlags 
+
+  Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
+
+- #### flag.name_value 
+
+  Returns the name and its value, if its not FALSE.
+
+- #### flag.nameiftrue 
+
+  Returns the name and its value, if its TRUE.
+
+- #### flag.names_list 
+
+  Returns the name and value of each element in a list of parameters.
+
+- #### flag.names_list.all.new 
+
+  Returns the name and value of each element in a list of parameters.
+
+- #### param.list.flag 
+
+  Returns the name and value of each element in a list of parameters.
