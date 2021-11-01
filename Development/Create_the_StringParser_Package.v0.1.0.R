@@ -42,7 +42,7 @@ DESCRIPTION <- list("Title" = "Stringendo helper functions"
     , "Version" = "0.1.0"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
-    , "Imports" = "MarkdownReports" #CodeAndRoll2
+    # , "Imports" = "MarkdownReports" #CodeAndRoll2
     # , "Suggests" = ""
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
