@@ -1,9 +1,36 @@
 # Stringendo - A string parsing library
 
-String parsing functionalites for generating plotnames, filenames and path. Used by [MarkdownReports](https://github.com/vertesy/MarkdownReports) and [ggExpress](https://github.com/vertesy/ggExpress). 
+String parsing functionalites for generating plotnames, filenames and path. Used by [Stringendo](https://github.com/vertesy/Stringendo) and [ggExpress](https://github.com/vertesy/ggExpress). 
 Complements the new [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2). Many functionalities were part of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).
 
 
+
+<br><br>
+
+## Installation
+
+Install directly from **GitHub** via **devtools** with one R command:
+
+```R
+# install.packages("devtools"); # If you don't have it.
+require("devtools")
+devtools::install_github(repo = "vertesy/Stringendo")
+```
+
+...then simply load the package:
+
+```R
+require("Stringendo")
+```
+
+Alternatively, you simply source it from the web. 
+*This way function help will not work, and you will have no local copy of the code on your hard drive.*
+
+```R
+source("https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R")
+```
+
+<br><br>
 
 ## List of functions
 
