@@ -3,6 +3,8 @@
 export(PasteDirNameFromFlags)
 export(PasteOutdirFromFlags)
 export(eval_parse_kollapse)
+export(extPDF)
+export(extPNG)
 export(flag.name_value)
 export(flag.nameiftrue)
 export(flag.names_list)

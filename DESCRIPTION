@@ -1,22 +1,19 @@
-Package: StringParser
-Title: StringParser is the fastest way to create, annotate and export
-    plots in R
-Version: 0.1.0
+Package: Stringendo
+Title: Stringendo helper functions
+Version: 0.1.1
 Authors@R: 
     person(given = "Abel",
            family = "Vertesy",
            role = c("aut", "cre"),
            email = "a.vertesy@imba.oeaw.ac.at")
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
-Description: StringParser is a set of R functions to parse strings from
+Description: Stringendo is a set of R functions to parse strings from
     variables and to manipulate strings.
 License: GPL-3 + file LICENSE
-BugReports: https://github.com/vertesy/StringParser/issues
-Imports: 
-    MarkdownReports
+BugReports: https://github.com/vertesy/Stringendo/issues
 Encoding: UTF-8
 LazyData: true
-Packaged: 2021-10-31 22:45:02
+Packaged: 2021-11-02 10:41:30
 Repository: CRAN
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

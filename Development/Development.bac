@@ -1,13 +1,13 @@
 ######################################################################
-# StringParser
+# Stringendo
 ######################################################################
 # String parsing functionalites for generating plotnames, filenames and path.
 # Used by MarkdownReports and ggExpress.
 # Many functionalities were formerly part of CodeAndRoll.
 
 
-# try(source("~/GitHub/Packages/StringParser/R/StringParser.R"), silent = T)
-# try(source("https://raw.githubusercontent.com/vertesy/StringParser/main/StringParser.R"), silent = T)
+# try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = T)
+# try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
 
 
@@ -22,7 +22,7 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Paste by point
 #' @description Paste by point
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 ppp <- function(...) { paste(..., sep = '.') }
 
@@ -30,14 +30,14 @@ ppp <- function(...) { paste(..., sep = '.') }
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Paste by (forward) slash
 #' @description Paste by (forward) slash
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 pps <- function(...) { paste(..., sep = '/') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Paste by underscore
 #' @description Paste by underscore
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 ppu <- function(...) { paste(..., sep = '_') }
 
@@ -45,42 +45,42 @@ ppu <- function(...) { paste(..., sep = '_') }
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Paste by dash
 #' @description Paste by dash
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 ppd <- function(...) { paste(..., sep = '-') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Collapse by point
 #' @description Collapse by point
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 kpp <- function(...) { paste(..., sep = '.', collapse = '.') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Collapse by underscore
 #' @description Collapse by underscore
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Collapse by dash
 #' @description Collapse by dash
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 
 
@@ -113,7 +113,7 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title parsepvalue
 #' @description Parse p-value from a number to a string.
-#' @param pvalue pvalue to parse, Default: 0.01
+#' @param pvalue pvalue to parse. Default: 0.01
 
 #' @export
 parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
@@ -122,7 +122,7 @@ parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title eval_parse_kollapse
 #' @description evaluate and parse (dyn_var_caller)
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 
 #' @export
 eval_parse_kollapse <- function(...) {
@@ -144,7 +144,7 @@ param.list.2.fname <- function(ls.of.params = p) {
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title PasteDirNameFromFlags
 #' @description Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 
 
@@ -167,7 +167,7 @@ PasteDirNameFromFlags <- function(...) {
 #' @title PasteOutdirFromFlags
 #' @description Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 #' @param path path, Default: '~/Dropbox/Abel.IMBA/AnalysisD'
-#' @param ... Multiple simple variables to parse,
+#' @param ... Multiple simple variables to parse.
 #' @export
 
 
@@ -261,3 +261,19 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 #  --------------------------------------------------------------------
 #  --------------------------------------------------------------------
 
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+#' @title extPDF
+#' @description add pdf as extension to a file name
+#' @param vec Filename basis.
+#' @examples extPDF("mypltt")
+#' @export
+extPDF <- function(vec) ppp(vec, "pdf") # add pdf as extension to a file name
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+#' @title extPNG
+#' @description FUNCTION_DESCRIPTION
+#' @param vec Filename basis.
+#' @examples extPNG("mypltt")
+#' @export
+extPNG <- function(vec) ppp(vec, "png") # add png as extension to a file name
