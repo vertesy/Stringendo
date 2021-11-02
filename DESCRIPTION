@@ -1,6 +1,6 @@
 Package: Stringendo
 Title: Stringendo helper functions
-Version: 0.1.1
+Version: 0.1.3
 Authors@R: 
     person(given = "Abel",
            family = "Vertesy",
@@ -13,7 +13,7 @@ License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
 Encoding: UTF-8
 LazyData: true
-Packaged: 2021-11-02 10:41:30
+Packaged: 2021-11-02 13:59:17
 Repository: CRAN
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

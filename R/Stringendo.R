@@ -401,3 +401,35 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) { 
   }
   return(string)
 }
+
+
+#' substrRight
+#'
+#' Take the right substring of a string
+#' @param x a character vector.
+#' @param n integer. The number of elements on the right to be kept.
+#' @export
+#' @examples substrRight  ("Not cool", n = 4)
+
+substrRight <- function(x, n) {
+  substr(x, nchar(x) - n + 1, nchar(x))
+}
+
+#' percentage_formatter
+#'
+#' Parse a string of 0-100% from a number between 0 and 1.
+#' @param x A vector of numbers between 0-1.
+#' @param digitz Number of digits to keep. 3 by default.
+#' @param keep.names Keep vector names
+#' @export
+#' @examples percentage_formatter (x = 4.2822212, digitz = 3)
+
+percentage_formatter <- function(x, digitz = 3, keep.names = F) {
+  if (keep.names) nmz <- names(x)
+  a = paste(100 * signif(x, digitz), "%", sep = " ")
+  a[a == "NaN %"] = NaN
+  a[a == "NA %"] = NA
+  if (keep.names) names(a) <- nmz
+  return(a)
+}
+
