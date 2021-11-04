@@ -18,6 +18,11 @@ require('CodeAndRoll2')
 require('Stringendo')
 
 
+kollapse <- function(..., collapseby = "", print = TRUE) {
+    if (print == TRUE) { print(paste0(c(...), collapse = collapseby))}
+    paste0(c(...), collapse = collapseby)
+}
+
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
@@ -36,11 +41,11 @@ DESCRIPTION <- list("Title" = "Stringendo helper functions"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.1.4"
+    , "Version" = "0.2.1"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     # , "Depends" =  "Stringendo"
-    # , "Imports" = "MarkdownReports" #CodeAndRoll2
+    , "Imports" = "base, devtools, grDevices, usethis, utils"
     # , "Suggests" = ""
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )

@@ -293,13 +293,14 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 # _________________________________________________________________________________________________
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
-#' @param par PARAM_DESCRIPTION, Default: p$umap.min_dist
+#' @param par A list element e.g.: p$umap
+#' @example param.list.flag(par = p$umap.n_neighbors)
 #' @export
 
 
-flag.names_list <- function(par = p$'umap.min_dist') {
+flag.names_list <- function(par) {
   if (length(par)) paste(substitute(par), kppu(par) , sep = "_")[[3]]
-};  # param.list.flag(par = p$umap.n_neighbors)
+};
 
 # _________________________________________________________________________________________________
 #' @title flag.names_list.all.new

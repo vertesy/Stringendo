@@ -4,10 +4,10 @@
 \alias{flag.names_list}
 \title{flag.names_list}
 \usage{
-flag.names_list(par = p$umap.min_dist)
+flag.names_list(par)
 }
 \arguments{
-\item{par}{PARAM_DESCRIPTION, Default: p$umap.min_dist}
+\item{par}{A list element e.g.: p$umap}
 }
 \description{
 Returns the name and value of each element in a list of parameters.
