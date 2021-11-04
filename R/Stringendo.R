@@ -33,6 +33,26 @@ iprint <- function(...) {
 #' @export
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) }
 
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+#' stopif
+#'
+#' Stop script if the condition is met, and print a message
+#' @param condition any condition check that gives TRUE or FALSE
+#' @param message print a message
+#' @export
+#' @examples a = 1; stopif (a!= 1, message = "A is 1")
+
+stopif <-
+  function(condition, message = "") {
+    if (condition) {
+      iprint (message)
+      stop()
+    }
+  }
+
+
+
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title kollapse
 #' @description Collapses values and strings to one string (without a white space).
