@@ -5,22 +5,19 @@
 # source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.v0.1.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
-# install.packages("devtools")
+
+
 # Functions ------------------------
-try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE)
+require("devtools")
+require("roxygen2")
+require("stringr")
 
-# irequire("devtools")
-# install_version("devtools", version = "2.0.2", repos = "http://cran.at.r-project.org")
-irequire("devtools")
-irequire("roxygen2")
-irequire("stringr")
+# devtools::install_github(repo = "vertesy/CodeAndRoll2")
+require('CodeAndRoll2')
+# try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE) # ONLY If Stringendo not yet exist
+require('Stringendo')
 
-kollapse <-function(..., print = TRUE) {
-if (print == TRUE) {
-    print(paste0(c(...), collapse = ""))
-  }
-  paste0(c(...), collapse = "")
-}
+
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
@@ -39,9 +36,10 @@ DESCRIPTION <- list("Title" = "Stringendo helper functions"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.1.3"
+    , "Version" = "0.1.4"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
+    # , "Depends" =  "Stringendo"
     # , "Imports" = "MarkdownReports" #CodeAndRoll2
     # , "Suggests" = ""
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
@@ -109,4 +107,15 @@ check(RepositoryDir, cran = TRUE)
 #
 #
 # system("cd ~/GitHub/Stringendo/; ls -a; open .Rbuildignore")
-#
+
+# Check package dependencies ------------------------------------------------
+depFile = paste0(RepositoryDir, 'Development/Dependencies.R')
+
+(f.deps <- NCmisc::list.functions.in.file(filename = Package_FnP))
+# clipr::write_clip(f.deps)
+
+sink(file = depFile); print(f.deps); sink()
+p.deps <- gsub(x = names(f.deps), pattern = 'package:', replacement = '')
+write(x = p.deps, file = depFile, append = T)
+
+
