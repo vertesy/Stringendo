@@ -58,12 +58,12 @@ stopif <-
 #' @export
 
 irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
-if (!require(package = package_,  character.only = TRUE)) {
-  print("Not Installed yet.");install.packages(pkgs = package_);
-  Sys.sleep(1)
-  print("Loading package:")
-  require(package = package_, character.only = TRUE)
-}
+  if (!require(package = package_,  character.only = TRUE)) {
+    print("Not Installed yet.");install.packages(pkgs = package_);
+    Sys.sleep(1)
+    print("Loading package:")
+    require(package = package_, character.only = TRUE)
+  }
 }  # install package if cannot be loaded
 
 

@@ -36,7 +36,7 @@ BackupDir = "~/GitHub/Packages/Stringendo/Development/"
 dir.create(BackupDir)
 
 # devtools::use_package("vioplot")
-DESCRIPTION <- list("Title" = "Stringendo helper functions"
+DESCRIPTION <- list("Title" = "Stringendo - string parser"
     , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
