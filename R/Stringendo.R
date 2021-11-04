@@ -24,7 +24,7 @@ iprint <- function(...) {
   argument_list <- c(...)
   print(paste(argument_list, collapse = " "))
 }
-
+# any_print = iprint # for compatibility
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Parse current date, dot separated.
