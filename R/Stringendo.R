@@ -13,7 +13,7 @@
 
 # Auxiliary functions --------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title iprint
 #' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
@@ -26,7 +26,7 @@ iprint <- function(...) {
 }
 # any_print = iprint # for compatibility
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
 #' @description Parse current date, dot separated.
 #' @param Format PARAM_DESCRIPTION, Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
@@ -34,7 +34,7 @@ iprint <- function(...) {
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) }
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' stopif
 #'
 #' Stop script if the condition is met, and print a message
@@ -42,7 +42,6 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.
 #' @param message print a message
 #' @export
 #' @examples a = 1; stopif (a!= 1, message = "A is 1")
-
 stopif <-
   function(condition, message = "") {
     if (condition) {
@@ -51,9 +50,25 @@ stopif <-
     }
   }
 
+# _________________________________________________________________________________________________
+#' @title irequire
+#' @description Load a package. If it does not exist, try to install it from CRAN.
+#' @param package Packagename to load
+#' @examples irequire(gtools)
+#' @export
+
+irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
+if (!require(package = package_,  character.only = TRUE)) {
+  print("Not Installed yet.");install.packages(pkgs = package_);
+  Sys.sleep(1)
+  print("Loading package:")
+  require(package = package_, character.only = TRUE)
+}
+}  # install package if cannot be loaded
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+
+# _________________________________________________________________________________________________
 #' @title kollapse
 #' @description Collapses values and strings to one string (without a white space).
 #' It also prints the results (good for a quick check)
@@ -74,7 +89,7 @@ kollapse <- function(...,
 }
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Paste by point
 #' @description Paste by point
 #' @param ... Multiple simple variables to parse.
@@ -82,14 +97,14 @@ kollapse <- function(...,
 ppp <- function(...) { paste(..., sep = '.') }
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Paste by (forward) slash
 #' @description Paste by (forward) slash
 #' @param ... Multiple simple variables to parse.
 #' @export
 pps <- function(...) { paste(..., sep = '/') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Paste by underscore
 #' @description Paste by underscore
 #' @param ... Multiple simple variables to parse.
@@ -97,42 +112,42 @@ pps <- function(...) { paste(..., sep = '/') }
 ppu <- function(...) { paste(..., sep = '_') }
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Paste by dash
 #' @description Paste by dash
 #' @param ... Multiple simple variables to parse.
 #' @export
 ppd <- function(...) { paste(..., sep = '-') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
 #' @export
 kpp <- function(...) { paste(..., sep = '.', collapse = '.') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Collapse by underscore
 #' @description Collapse by underscore
 #' @param ... Multiple simple variables to parse.
 #' @export
 kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
 #' @export
 kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Collapse by dash
 #' @description Collapse by dash
 #' @param ... Multiple simple variables to parse.
 #' @export
 kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
@@ -146,7 +161,7 @@ sppp <- function(...) {
 
 ## String operations  -------------------------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title percentile2value
 #' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
 #' @param distribution A numeric vector
@@ -163,7 +178,7 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
   return(value)
 }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title parsepvalue
 #' @description Parse p-value from a number to a string.
 #' @param pvalue pvalue to parse. Default: 0.01
@@ -172,7 +187,7 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title eval_parse_kollapse
 #' @description evaluate and parse (dyn_var_caller)
 #' @param ... Multiple simple variables to parse.
@@ -183,7 +198,7 @@ eval_parse_kollapse <- function(...) {
 }
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
 #' @param ls.of.params PARAM_DESCRIPTION, Default: p
@@ -194,7 +209,7 @@ param.list.2.fname <- function(ls.of.params = p) {
   paste(names(ls.of.params), ls.of.params, sep = ".", collapse = "_")
 }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title PasteDirNameFromFlags
 #' @description Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
 #' @param ... Multiple simple variables to parse.
@@ -216,7 +231,7 @@ PasteDirNameFromFlags <- function(...) {
 
 ### File name and path parsing ------------------------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title PasteOutdirFromFlags
 #' @description Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 #' @param path path, Default: '~/Dropbox/Abel.IMBA/AnalysisD'
@@ -241,7 +256,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title flag.name_value
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
@@ -257,7 +272,7 @@ flag.name_value <- function(toggle, Separator = "_") {
   }
 }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title flag.nameiftrue
 #' @description Returns the name and its value, if its TRUE.
 #' @param toggle Binary variable
@@ -275,7 +290,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 } # returns the name if its value is true
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par PARAM_DESCRIPTION, Default: p$umap.min_dist
@@ -286,7 +301,7 @@ flag.names_list <- function(par = p$'umap.min_dist') {
   if (length(par)) paste(substitute(par), kppu(par) , sep = "_")[[3]]
 };  # param.list.flag(par = p$umap.n_neighbors)
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param pl List of parameters, Default: p.hm
@@ -298,7 +313,7 @@ flag.names_list.all.new <- function(pl = p.hm) {
   if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
 }
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title param.list.flag
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par parameter, Default: p$umap.min_dist
@@ -314,7 +329,7 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 #  --------------------------------------------------------------------
 #  --------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title extPDF
 #' @description add pdf as extension to a file name
 #' @param vec Filename basis.
@@ -323,7 +338,7 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 extPDF <- function(vec) ppp(vec, "pdf") # add pdf as extension to a file name
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------
+# _________________________________________________________________________________________________
 #' @title extPNG
 #' @description FUNCTION_DESCRIPTION
 #' @param vec Filename basis.
