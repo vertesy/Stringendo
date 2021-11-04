@@ -12,6 +12,20 @@
 
 
 # Auxiliary functions --------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+#' @title iprint
+#' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
+#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @examples iprint ("Hello ", "you ", 3, ", ", 11, " year old kids.")
+#' @export
+
+iprint <- function(...) {
+  argument_list <- c(...)
+  print(paste(argument_list, collapse = " "))
+}
+
+
 # ------------------------------------------------------------------------------------------------------------------------------------------------
 #' @title Parse current date, dot separated.
 #' @description Parse current date, dot separated.
@@ -195,7 +209,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   pastedFlagList <- kpp(flagList)
   CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
   # pastedOutDir <- kpps(path, CleanDirName, "/")
-  pastedOutDir <- p0(CleanDirName, "/")
+  pastedOutDir <- paste0(CleanDirName, "/")
   CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
   return(CleanDirName)
 }
@@ -396,7 +410,7 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) { 
   string <- gsub(x = string, pattern = '_+', replacement = '_')
   LastChr <- substr(string, nchar(string), nchar(string))
   if (trimFinal && LastChr == "_") {
-    iprint('LastChr: ', LastChr)
+    print(paste('LastChr: ', LastChr))
     string = substr(string, 1, (nchar(string)-1))
   }
   return(string)
