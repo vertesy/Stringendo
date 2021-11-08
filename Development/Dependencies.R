@@ -1,40 +1,26 @@
-$`character(0)`
-[1] "list.functions.in.file"
-
-$`package:base`
- [1] "c"           "dir.create"  "dir.exists"  "file.copy"  
- [5] "file.remove" "getwd"       "gsub"        "list"       
- [9] "ls"          "names"       "paste0"      "print"      
-[13] "require"     "rm"          "setwd"       "sink"       
-[17] "sort"        "strsplit"    "Sys.time"    "trimws"     
-[21] "try"         "union"       "unlist"      "write"      
-
-$`package:devtools`
-[1] "check"    "create"   "document" "install" 
-
-$`package:grDevices`
-[1] "dev.off"
-
-$`package:Stringendo`
+$`c(".GlobalEnv", "package:Stringendo")`
 [1] "kollapse"
 
-$`package:usethis`
-[1] "create_package"
+$`character(0)`
+[1] "ww.set.OutDir"
 
-$`package:utils`
-[1] "person"
+$`package:base`
+ [1] "as.character" "as.list"      "c"            "ceiling"     
+ [5] "eval"         "exists"       "floor"        "format"      
+ [9] "getwd"        "gsub"         "isFALSE"      "length"      
+[13] "match.call"   "names"        "nchar"        "parse"       
+[17] "paste"        "paste0"       "print"        "return"      
+[21] "signif"       "sort"         "substitute"   "substr"      
+[25] "Sys.time"    
 
+$`package:methods`
+[1] "hasArg"
+
+$`package:Stringendo`
+[1] "kpp"  "kppd" "kppu" "ppp" 
+
+c(".GlobalEnv", "Stringendo")
 character(0)
 base
-devtools
-grDevices
+methods
 Stringendo
-usethis
-utils
-character(0)
-base
-devtools
-grDevices
-Stringendo
-usethis
-utils

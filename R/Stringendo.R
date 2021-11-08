@@ -311,6 +311,24 @@ ParseFilePath <- function(...) { #
 }
 
 
+#' ww.FnP_parser
+#'
+#' Internal Function. Parses the full path from the filename & location of the file.
+#' @param fname Name of the file
+#' @param ext_wo_dot File extension without separating dot.
+#' @export
+#' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
+
+ww.FnP_parser <- function(fname, ext_wo_dot) {
+  path = if (exists('ww.set.OutDir2')) ww.set.OutDir() else { (getwd()); "install vertesy/MarkdownReports!"}
+  print(path)
+  FnP = if (methods::hasArg(ext_wo_dot)) {
+    kollapse (path, fname, ".", ext_wo_dot)
+  } else {
+    FnP = kollapse (path, fname)
+  }
+}
+
 
 # _________________________________________________________________________________________________
 #' @title PasteDirNameFromFlags
