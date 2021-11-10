@@ -320,7 +320,7 @@ ParseFilePath <- function(...) { #
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
 
 ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = if (exists('ww.set.OutDir2')) ww.set.OutDir() else { (getwd()); "install vertesy/MarkdownReports!"}
+  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
   print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
     kollapse (path, fname, ".", ext_wo_dot)
