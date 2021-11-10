@@ -15,7 +15,7 @@ require("stringr")
 # devtools::install_github(repo = "vertesy/CodeAndRoll2")
 require('CodeAndRoll2')
 # try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE) # ONLY If Stringendo not yet exist
-require('Stringendo')
+# require('Stringendo')
 
 
 kollapse <- function(..., collapseby = "", print = TRUE) {
@@ -41,12 +41,12 @@ DESCRIPTION <- list("Title" = "Stringendo - string parser"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.2.3"
+    , "Version" = "0.2.4"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     # , "Depends" =  "Stringendo"
     , "Imports" = "base, devtools, grDevices, usethis, utils"
-    , "Suggests" = "MarkdownReports"
+    , "Suggests" = "MarkdownHelpers, MarkdownReports"
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
 
@@ -83,6 +83,7 @@ document()
 
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
+unload("Stringendo")
 install(RepositoryDir, upgrade = F)
 
 # require("Stringendo")
