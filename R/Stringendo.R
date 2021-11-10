@@ -321,7 +321,7 @@ ParseFilePath <- function(...) { #
 
 ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
-  print(path)
+  # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
     kollapse (path, fname, ".", ext_wo_dot)
   } else {
