@@ -111,12 +111,8 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
-#' @param trim Trim empty parameters resulting in double dots? Up to 3; FALSE by default
 #' @export
-kpp <- function(..., trim = FALSE) {
-  new.string <- paste(..., sep = '.', collapse = '.')
-  if (trim) RemoveFinalDot(RemoveDoubleDot(new.string)) else new.string
-  }
+kpp <- function(...) { new.string <- paste(..., sep = '.', collapse = '.')  }
 
 # _________________________________________________________________________________________________
 #' @title Collapse by underscore
@@ -129,13 +125,8 @@ kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
-#' @param trim Trim empty parameters resulting in double slashes? Up to 3; FALSE by default
 #' @export
-kpps <- function(..., trim = FALSE) {
-  paste(..., sep = '/', collapse = '/')
-  if (trim) RemoveFinalSlash(RemoveDoubleSlash(new.string)) else new.string
-  }
-
+kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 
 
 # _________________________________________________________________________________________________
@@ -149,11 +140,28 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
+#' @example sppp('Apples..are...sweet.....')
 #' @export
+
 sppp <- function(...) {
   string <- paste(..., sep = '.')
-  gsub(pattern = '\\.+', replacement = '\\.', x = string)
+  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string)
+  gsub(pattern = '\\.+$', replacement = '', x = string)
 }
+
+# _________________________________________________________________________________________________
+#' @title Simplified Paste by fwd slash
+#' @description Simplified Paste by fwd slash
+#' @param ... Multiple simple variables to parse.
+#' @example spps('Apples//are///sweet//')
+#' @export
+
+spps <- function(...) {
+  string <- paste(..., sep = '/')
+  string <- gsub(pattern = '//+', replacement = '/', x = string)
+  gsub(pattern = '/+$', replacement = '', x = string)
+}
+
 
 
 
