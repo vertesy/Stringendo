@@ -144,7 +144,7 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @export
 
 sppp <- function(...) {
-  string <- paste(..., sep = '.')
+  string <- paste(..., sep = '.', collapse = '.')
   string <- gsub(pattern = '\\.+', replacement = '\\.', x = string)
   gsub(pattern = '\\.+$', replacement = '', x = string)
 }
@@ -157,7 +157,7 @@ sppp <- function(...) {
 #' @export
 
 spps <- function(...) {
-  string <- paste(..., sep = '/')
+  string <- paste(..., sep = '/', collapse = '/')
   string <- gsub(pattern = '//+', replacement = '/', x = string)
   gsub(pattern = '/+$', replacement = '', x = string)
 }
