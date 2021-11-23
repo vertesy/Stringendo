@@ -213,13 +213,56 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F) {
 # Path parsing ----
 # _________________________________________________________________________________________________
 
+
+#' AddTrailingDot
+#'
+#' @description Adds a final slash '/', if missing from a string (file path).
+#' @param string The file path potentially missing the trailing slash
+#' @export
+#'
+#' @examples AddTrailingDot(string = "stairway.to.heaven")
+
+AddTrailingDot <- function(string = "stairway.to.heaven") { #
+  LastChr <- substr(string, nchar(string), nchar(string))
+  if (!LastChr == "\\.")
+    string = paste0(string, ".")
+  return(string)
+}
+
+#' @title RemoveDoubleDot
+#'
+#' @description RemoveDoubleDot removes multiple consecutive slashes (e.g. '..') from a string (file path). Also works for 2,3 consecutive slashes
+#' @param string The file path potentially having Double Dot
+#' @export
+#'
+#' @examples RemoveDoubleDot(string = "stairway..to...heaven")
+
+RemoveDoubleDot <- function(string = "stairway..to.heaven") { #
+  gsub(x = string, pattern = '\\.\\.|\\.\\.\\.|\\.\\.\\.\\.', replacement = '.')
+}
+
+
+#' @title RemoveFinalDot
+#'
+#' @description RemoveFinalDot removes the final slash from a string
+#' @param string The file path potentially having Final Dot
+#' @export
+#'
+#' @examples RemoveFinalDot(string = "stairway..to...heaven...")
+
+RemoveFinalDot <- function(string = "stairway.to.heaven.") { #
+  gsub(x = string, pattern = '\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
+}
+
+
+
 #' AddTrailingSlash
 #'
 #' @description Adds a final slash '/', if missing from a string (file path).
 #' @param string The file path potentially missing the trailing slash
 #' @export
 #'
-#' @examples AddTrailingSlash (string = "stairway/to/heaven")
+#' @examples AddTrailingSlash(string = "stairway/to/heaven")
 
 AddTrailingSlash <- function(string = "stairway/to/heaven") { #
   LastChr <- substr(string, nchar(string), nchar(string))
@@ -234,7 +277,7 @@ AddTrailingSlash <- function(string = "stairway/to/heaven") { #
 #' @param string The file path potentially having Double Slash
 #' @export
 #'
-#' @examples RemoveDoubleSlash (string = "stairway//to///heaven")
+#' @examples RemoveDoubleSlash(string = "stairway//to///heaven")
 
 RemoveDoubleSlash <- function(string = "stairway//to/heaven") { #
   gsub(x = string, pattern = '//|///|////', replacement = '/')
@@ -247,10 +290,10 @@ RemoveDoubleSlash <- function(string = "stairway//to/heaven") { #
 #' @param string The file path potentially having Final Slash
 #' @export
 #'
-#' @examples RemoveDoubleSlash (string = "stairway//to///heaven")
+#' @examples RemoveFinalSlash(string = "stairway//to///heaven//")
 
-RemoveFinalSlash <- function(string = "stairway/to/heaven/") { #
-  gsub(x = string, pattern = '/$', replacement = '')
+RemoveFinalSlash <- function(string = "stairway/to/heaven//") { #
+  gsub(x = string, pattern = '/$|//$|///$|', replacement = '')
 }
 
 
@@ -321,7 +364,7 @@ ParseFilePath <- function(...) { #
 
 ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
-  print(path)
+  # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
     kollapse (path, fname, ".", ext_wo_dot)
   } else {

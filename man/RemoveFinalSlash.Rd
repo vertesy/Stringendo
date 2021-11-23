@@ -4,7 +4,7 @@
 \alias{RemoveFinalSlash}
 \title{RemoveFinalSlash}
 \usage{
-RemoveFinalSlash(string = "stairway/to/heaven/")
+RemoveFinalSlash(string = "stairway/to/heaven//")
 }
 \arguments{
 \item{string}{The file path potentially having Final Slash}
@@ -13,5 +13,5 @@ RemoveFinalSlash(string = "stairway/to/heaven/")
 RemoveFinalSlash removes the final slash from a string
 }
 \examples{
-RemoveDoubleSlash (string = "stairway//to///heaven")
+RemoveFinalSlash(string = "stairway//to///heaven//")
 }

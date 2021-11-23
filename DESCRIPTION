@@ -1,6 +1,6 @@
 Package: Stringendo
 Title: Stringendo - string parser
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: 
     person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
@@ -18,7 +18,7 @@ Suggests:
     MarkdownHelpers,
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2021-11-10 18:09:40
+Packaged: 2021-11-23 13:48:20
 Repository: CRAN
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2

@@ -41,7 +41,7 @@ DESCRIPTION <- list("Title" = "Stringendo - string parser"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.2.4"
+    , "Version" = "0.2.5"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     # , "Depends" =  "Stringendo"

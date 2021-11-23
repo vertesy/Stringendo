@@ -13,5 +13,5 @@ RemoveDoubleSlash(string = "stairway//to/heaven")
 RemoveDoubleSlash removes multiple consecutive slashes (e.g. '//') from a string (file path). Also works for 2,3 consecutive slashes
 }
 \examples{
-RemoveDoubleSlash (string = "stairway//to///heaven")
+RemoveDoubleSlash(string = "stairway//to///heaven")
 }
