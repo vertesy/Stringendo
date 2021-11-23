@@ -111,8 +111,12 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
+#' @param trim Trim empty parameters at the end? Up to 3; FALSE by default
 #' @export
-kpp <- function(...) { paste(..., sep = '.', collapse = '.') }
+kpp <- function(..., trim = F) {
+  new.string <- paste(..., sep = '.', collapse = '.')
+  if (trim) RemoveFinalDot(RemoveDoubleDot(new.string)) else new.string
+  }
 
 # _________________________________________________________________________________________________
 #' @title Collapse by underscore
@@ -235,9 +239,9 @@ AddTrailingDot <- function(string = "stairway.to.heaven") { #
 #' @param string The file path potentially having Double Dot
 #' @export
 #'
-#' @examples RemoveDoubleDot(string = "stairway..to...heaven")
+#' @examples RemoveDoubleDot(string = "stairway..to...heaven....") # replace by a single .
 
-RemoveDoubleDot <- function(string = "stairway..to.heaven") { #
+RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
   gsub(x = string, pattern = '\\.\\.|\\.\\.\\.|\\.\\.\\.\\.', replacement = '.')
 }
 
@@ -458,7 +462,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @example # Xseed = p$'seed' = F; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @example # Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {

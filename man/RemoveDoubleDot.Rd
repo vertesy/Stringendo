@@ -4,7 +4,7 @@
 \alias{RemoveDoubleDot}
 \title{RemoveDoubleDot}
 \usage{
-RemoveDoubleDot(string = "stairway..to.heaven")
+RemoveDoubleDot(string = "stairway...to.heaven.")
 }
 \arguments{
 \item{string}{The file path potentially having Double Dot}
@@ -13,5 +13,5 @@ RemoveDoubleDot(string = "stairway..to.heaven")
 RemoveDoubleDot removes multiple consecutive slashes (e.g. '..') from a string (file path). Also works for 2,3 consecutive slashes
 }
 \examples{
-RemoveDoubleDot(string = "stairway..to...heaven")
+RemoveDoubleDot(string = "stairway..to...heaven....") # replace by a single .
 }

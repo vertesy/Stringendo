@@ -83,7 +83,7 @@ document()
 
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
-unload("Stringendo")
+# unload("Stringendo")
 install(RepositoryDir, upgrade = F)
 
 # require("Stringendo")
