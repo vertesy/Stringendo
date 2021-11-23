@@ -111,9 +111,9 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
-#' @param trim Trim empty parameters at the end? Up to 3; FALSE by default
+#' @param trim Trim empty parameters resulting in double dots? Up to 3; FALSE by default
 #' @export
-kpp <- function(..., trim = F) {
+kpp <- function(..., trim = FALSE) {
   new.string <- paste(..., sep = '.', collapse = '.')
   if (trim) RemoveFinalDot(RemoveDoubleDot(new.string)) else new.string
   }
@@ -129,8 +129,14 @@ kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
+#' @param trim Trim empty parameters resulting in double slashes? Up to 3; FALSE by default
 #' @export
-kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
+kpps <- function(..., trim = FALSE) {
+  paste(..., sep = '/', collapse = '/')
+  if (trim) RemoveFinalSlash(RemoveDoubleSlash(new.string)) else new.string
+  }
+
+
 
 # _________________________________________________________________________________________________
 #' @title Collapse by dash

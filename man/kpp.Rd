@@ -4,12 +4,12 @@
 \alias{kpp}
 \title{Collapse by point}
 \usage{
-kpp(..., trim = F)
+kpp(..., trim = FALSE)
 }
 \arguments{
 \item{...}{Multiple simple variables to parse.}
 
-\item{trim}{Trim empty parameters at the end? Up to 3; FALSE by default}
+\item{trim}{Trim empty parameters resulting in double dots? Up to 3; FALSE by default}
 }
 \description{
 Collapse by point

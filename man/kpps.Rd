@@ -4,10 +4,12 @@
 \alias{kpps}
 \title{Collapse by (forward) slash}
 \usage{
-kpps(...)
+kpps(..., trim = FALSE)
 }
 \arguments{
 \item{...}{Multiple simple variables to parse.}
+
+\item{trim}{Trim empty parameters resulting in double slashes? Up to 3; FALSE by default}
 }
 \description{
 Collapse by (forward) slash
