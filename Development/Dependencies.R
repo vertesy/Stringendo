@@ -1,8 +1,9 @@
-$`c(".GlobalEnv", "package:Stringendo")`
+$.GlobalEnv
 [1] "kollapse"
 
 $`character(0)`
-[1] "ww.set.OutDir"
+[1] "kpp"           "kppd"          "kppu"          "ppp"          
+[5] "ww.set.OutDir"
 
 $`package:base`
  [1] "as.character" "as.list"      "c"            "ceiling"     
@@ -16,11 +17,7 @@ $`package:base`
 $`package:methods`
 [1] "hasArg"
 
-$`package:Stringendo`
-[1] "kpp"  "kppd" "kppu" "ppp" 
-
-c(".GlobalEnv", "Stringendo")
+.GlobalEnv
 character(0)
 base
 methods
-Stringendo
