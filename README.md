@@ -1,7 +1,7 @@
 # Stringendo - a string parsing library
 
-String parsing functionalites for generating plotnames, filenames and path. Used by [Stringendo](https://github.com/vertesy/Stringendo) and [ggExpress](https://github.com/vertesy/ggExpress). 
-Complements the new [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2). Many functionalities were part of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).
+String parsing functionalites for generating plotnames, filenames and path. Used by most of my other packages, including [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2) and [ggExpress](https://github.com/vertesy/ggExpress). 
+Many functionalities were part of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).
 
 
 
