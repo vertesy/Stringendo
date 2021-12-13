@@ -212,12 +212,14 @@ eval_parse_kollapse <- function(...) {
 #' @param x A vector of numbers between 0-1.
 #' @param digitz Number of digits to keep. 3 by default.
 #' @param keep.names Keep vector names
+#' @param prefix prefix added before the string, Default: NULL
+#' @param suffix suffix added after the string, Default: NULL
 #' @export
 #' @examples percentage_formatter (x = 4.2822212, digitz = 3)
 
-percentage_formatter <- function(x, digitz = 3, keep.names = F) {
+percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, suffix = NULL) {
   if (keep.names) nmz <- names(x)
-  a = paste(100 * signif(x, digitz), "%", sep = " ")
+  a = trimws(paste(prefix, 100 * signif(x, digitz), "%", suffix, sep = " ") )
   a[a == "NaN %"] = NaN
   a[a == "NA %"] = NA
   if (keep.names) names(a) <- nmz
@@ -491,8 +493,8 @@ flag.name_value <- function(toggle, Separator = "_") {
 #' @title flag.nameiftrue
 #' @description Returns the name and its value, if its TRUE.
 #' @param toggle Binary variable
-#' @param prefix prefix, Default: NULL
-#' @param suffix suffix, Default: NULL
+#' @param prefix prefix added before the string, Default: NULL
+#' @param suffix suffix added after the string, Default: NULL
 #' @param name.if.not Alternative name., Default: ''
 #' @export
 
