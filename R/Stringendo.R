@@ -605,3 +605,18 @@ parFlags2 <-
     }
     return(flg)
   }
+
+
+
+
+#' break.lines for plot titles
+#'
+#' @param char.vec A long sentence
+#' @param max.char Max characters per line
+#' @export
+#'
+#' @examples ww.break.lines()
+
+ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
+  gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
+}
