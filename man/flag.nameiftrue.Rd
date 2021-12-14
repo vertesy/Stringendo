@@ -9,9 +9,9 @@ flag.nameiftrue(toggle, prefix = NULL, suffix = NULL, name.if.not = "")
 \arguments{
 \item{toggle}{Binary variable}
 
-\item{prefix}{prefix, Default: NULL}
+\item{prefix}{prefix added before the string, Default: NULL}
 
-\item{suffix}{suffix, Default: NULL}
+\item{suffix}{suffix added after the string, Default: NULL}
 
 \item{name.if.not}{Alternative name., Default: ''}
 }
