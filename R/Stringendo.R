@@ -622,3 +622,25 @@ parFlags2 <-
 ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
+
+
+
+
+
+# _________________________________________________________________________________________________
+#' FormatAsExcelLink
+#'
+#' @param site_name site_name
+#' @param site_name site_name
+#' @export
+#' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation"), site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
+
+FormatAsExcelLink <- function(site_name, site_url) {
+  paste0(
+    "=HYPERLINK(\"",
+    site_url,
+    "\", \"",
+    site_name,
+    "\")"
+  )
+}
