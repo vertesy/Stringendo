@@ -145,8 +145,9 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
 sppp <- function(...) {
   string <- paste(..., sep = '.', collapse = '.')
-  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string)
-  gsub(pattern = '\\.+$', replacement = '', x = string)
+  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string) # replace final dot
+  string <- gsub(pattern = '\\.+$', replacement = '', x = string) # replace beginning > !would be an invisible file!
+  gsub(pattern = '^\\.+', replacement = '', x = string)
 }
 
 # _________________________________________________________________________________________________
@@ -386,7 +387,7 @@ ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
   # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
-    kollapse (path, fname, ".", ext_wo_dot)
+    kollapse(path, fname, ".", ext_wo_dot)
   } else {
     FnP = kollapse (path, fname)
   }
@@ -621,4 +622,26 @@ parFlags2 <-
 
 ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
+}
+
+
+
+
+
+# _________________________________________________________________________________________________
+#' FormatAsExcelLink
+#'
+#' @param site_name site_name
+#' @param site_name site_name
+#' @export
+#' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation"), site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
+
+FormatAsExcelLink <- function(site_name, site_url) {
+  paste0(
+    "=HYPERLINK(\"",
+    site_url,
+    "\", \"",
+    site_name,
+    "\")"
+  )
 }

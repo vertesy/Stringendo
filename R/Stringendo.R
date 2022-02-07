@@ -145,8 +145,9 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
 sppp <- function(...) {
   string <- paste(..., sep = '.', collapse = '.')
-  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string)
-  gsub(pattern = '\\.+$', replacement = '', x = string)
+  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string) # replace final dot
+  string <- gsub(pattern = '\\.+$', replacement = '', x = string) # replace beginning > !would be an invisible file!
+  gsub(pattern = '^\\.+', replacement = '', x = string)
 }
 
 # _________________________________________________________________________________________________
@@ -386,7 +387,7 @@ ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
   # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
-    kollapse (path, fname, ".", ext_wo_dot)
+    kollapse(path, fname, ".", ext_wo_dot)
   } else {
     FnP = kollapse (path, fname)
   }
