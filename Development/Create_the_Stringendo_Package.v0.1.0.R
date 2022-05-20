@@ -26,7 +26,7 @@ kollapse <- function(..., collapseby = "", print = TRUE) {
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
-package.version = "0.2.7"
+package.version = "0.2.8"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
@@ -82,17 +82,18 @@ getwd()
 document()
 
 
-# Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
-# unload("Stringendo")
-install(RepositoryDir, upgrade = F)
-
 {
   "update cff version"
   citpath <- paste0(RepositoryDir, 'CITATION.cff')
   xfun::gsub_file(file = citpath, perl = T
                   , "^version: v.+", paste0("version: v", package.version))
 }
+
+
+# Install your package ------------------------------------------------
+# # setwd(RepositoryDir)
+# unload("Stringendo")
+install(RepositoryDir, upgrade = F)
 
 # require("Stringendo")
 # # remove.packages("Stringendo")

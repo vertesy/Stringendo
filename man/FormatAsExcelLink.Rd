@@ -7,7 +7,9 @@
 FormatAsExcelLink(site_name, site_url)
 }
 \arguments{
-\item{site_name}{site_name}
+\item{site_name}{Text shown.}
+
+\item{site_url}{Hyperlink url.}
 }
 \description{
 FormatAsExcelLink

@@ -112,7 +112,7 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
 #' @export
-kpp <- function(...) { new.string <- paste(..., sep = '.', collapse = '.')  }
+kpp <- function(...) { paste(..., sep = '.', collapse = '.')  }
 
 # _________________________________________________________________________________________________
 #' @title Collapse by underscore
@@ -631,8 +631,8 @@ ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
 # _________________________________________________________________________________________________
 #' FormatAsExcelLink
 #'
-#' @param site_name site_name
-#' @param site_name site_name
+#' @param site_name Text shown.
+#' @param site_url Hyperlink url.
 #' @export
 #' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation"), site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
 
