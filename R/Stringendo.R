@@ -464,6 +464,8 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   # pastedOutDir <- kpps(path, CleanDirName, "/")
   pastedOutDir <- paste0(CleanDirName, "/")
   CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
+  CleanDirName <- gsub(x = pastedOutDir, pattern = '[/] + ',replacement = '/' )
+  CleanDirName <- gsub(x = pastedOutDir, pattern = '/\\.+',replacement = '/') # remove invisible directories '/.dirname'
   return(CleanDirName)
 }
 # PasteOutdirFromFlags("~/Dropbox/Abel.IMBA/AnalysisD/HCAB"
@@ -479,7 +481,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @example # Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @example Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {
@@ -512,7 +514,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par A list element e.g.: p$umap
-#' @example param.list.flag(par = p$umap.n_neighbors)
+#' @example # flag.names_list(par = p$'umap.n_neighbors')
 #' @export
 
 

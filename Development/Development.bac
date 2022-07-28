@@ -464,6 +464,8 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   # pastedOutDir <- kpps(path, CleanDirName, "/")
   pastedOutDir <- paste0(CleanDirName, "/")
   CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
+  CleanDirName <- gsub(x = pastedOutDir, pattern = '[/] + ',replacement = '/' )
+  CleanDirName <- gsub(x = pastedOutDir, pattern = '/\\.+',replacement = '/') # remove invisible directories '/.dirname'
   return(CleanDirName)
 }
 # PasteOutdirFromFlags("~/Dropbox/Abel.IMBA/AnalysisD/HCAB"
