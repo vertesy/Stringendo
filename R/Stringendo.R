@@ -234,17 +234,18 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 # Path parsing ----
 # _________________________________________________________________________________________________
 
-#' @title ReplaceWeirdCharacters
+
+#' @title ReplaceSpecialCharacters
 #'
-#' @description ReplaceWeirdCharacters replaces '[]$ at and ()' with dots
-#' @param string The string, e.g variable subset: "obj at meta$alpha[[3]]"
+#' @description ReplaceSpecialCharacters replaces '[]$@()' with dots
+#' @param string The string, e.g variable subset: "obj@meta$alpha[[3]]"
 #' @export
 #'
-#' @examples # ReplaceWeirdCharacters('string with at bracked and dollar signs')
+#' @examples # ReplaceSpecialCharacters('string with at bracked and dollar signs')
 
 
-ReplaceWeirdCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
-  gsub(x = string, pattern = '\\@|\\[|\\]|\\$', replacement = '.')
+ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
+  gsub(x = string, pattern = '\\@|\\[|\\]|\\$|\\/\\(\\)', replacement = '.')
 }
 
 
@@ -256,7 +257,7 @@ ReplaceWeirdCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
 #'
 #' @examples AddTrailingDot(string = "stairway.to.heaven")
 
-AddTrailingDot <- function(string = "stairway.to.heaven") { #
+AddTrailingDot <- function(string = "stairway.to.heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!LastChr == "\\.")
     string = paste0(string, ".")
@@ -271,7 +272,7 @@ AddTrailingDot <- function(string = "stairway.to.heaven") { #
 #'
 #' @examples RemoveDoubleDot(string = "stairway..to...heaven....") # replace by a single .
 
-RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
+RemoveDoubleDot <- function(string = "stairway...to.heaven.") {
   gsub(x = string, pattern = '\\.\\.|\\.\\.\\.|\\.\\.\\.\\.', replacement = '.')
 }
 
@@ -284,7 +285,7 @@ RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
 #'
 #' @examples RemoveFinalDot(string = "stairway..to...heaven...")
 
-RemoveFinalDot <- function(string = "stairway.to.heaven.") { #
+RemoveFinalDot <- function(string = "stairway.to.heaven.") {
   gsub(x = string, pattern = '\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
 }
 
@@ -297,7 +298,7 @@ RemoveFinalDot <- function(string = "stairway.to.heaven.") { #
 #'
 #' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
 
-RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { #
+RemoveTrailingDots <- function(string = "...stairway.to..heaven.") {
   gsub(x = string, pattern = '^\\.|^\\.\\.|^\\.\\.\\.|\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
 }
 
@@ -311,7 +312,7 @@ RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { #
 #'
 #' @examples AddTrailingSlash(string = "stairway/to/heaven")
 
-AddTrailingSlash <- function(string = "stairway/to/heaven") { #
+AddTrailingSlash <- function(string = "stairway/to/heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!LastChr == "/")
     string = paste0(string, "/")
@@ -326,7 +327,7 @@ AddTrailingSlash <- function(string = "stairway/to/heaven") { #
 #'
 #' @examples RemoveDoubleSlash(string = "stairway//to///heaven")
 
-RemoveDoubleSlash <- function(string = "stairway//to/heaven") { #
+RemoveDoubleSlash <- function(string = "stairway//to/heaven") {
   gsub(x = string, pattern = '//|///|////', replacement = '/')
 }
 
@@ -339,7 +340,7 @@ RemoveDoubleSlash <- function(string = "stairway//to/heaven") { #
 #'
 #' @examples RemoveFinalSlash(string = "stairway//to///heaven//")
 
-RemoveFinalSlash <- function(string = "stairway/to/heaven//") { #
+RemoveFinalSlash <- function(string = "stairway/to/heaven//") {
   gsub(x = string, pattern = '/$|//$|///$|', replacement = '')
 }
 
@@ -353,7 +354,7 @@ RemoveFinalSlash <- function(string = "stairway/to/heaven//") { #
 #'
 #' @examples FixUnderscores(string = "stairway//to/heaven")
 
-FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) { #
+FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
   string <- gsub(x = string, pattern = '_+', replacement = '_')
   LastChr <- substr(string, nchar(string), nchar(string))
   if (trimFinal && LastChr == "_") {
@@ -372,7 +373,7 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) { 
 #'
 #' @examples FixPath(string = "stairway//to/heaven")
 
-FixPath <- function(string = "stairway//to/heaven") { #
+FixPath <- function(string = "stairway//to/heaven") {
   string <- gsub(x = string, pattern = '//|///|////', replacement = '/')
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!LastChr == "/")
@@ -380,6 +381,21 @@ FixPath <- function(string = "stairway//to/heaven") { #
   return(string)
 }
 
+
+
+#' @title FixPlotName
+#'
+#' @description FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
+#' @param string Input string
+#' @export
+#'
+#' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
+
+FixPlotName <- function(string = 'obj@meta$alpha[[3]]') {
+  string <- ReplaceSpecialCharacters(string)
+  string <- RemoveTrailingDots(string)
+  RemoveDoubleDot(string)
+}
 
 
 
@@ -391,7 +407,7 @@ FixPath <- function(string = "stairway//to/heaven") { #
 #'
 #' @examples ParseFilePath(string = "stairway///to/heaven")
 
-ParseFilePath <- function(...) { #
+ParseFilePath <- function(...) {
   string <- paste(..., sep = '/', collapse = '/')  # kollapse by (forward) slash
   string <- gsub(x = string, pattern = '//', replacement = '/') # RemoveDoubleSlash
   LastChr <- substr(string, nchar(string), nchar(string)) # AddTrailingSlash
