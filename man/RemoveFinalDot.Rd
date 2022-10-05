@@ -10,7 +10,7 @@ RemoveFinalDot(string = "stairway.to.heaven.")
 \item{string}{The file path potentially having Final Dot}
 }
 \description{
-RemoveFinalDot removes the final slash from a string
+RemoveFinalDot removes the final dot from a string
 }
 \examples{
 RemoveFinalDot(string = "stairway..to...heaven...")

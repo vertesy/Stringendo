@@ -265,7 +265,7 @@ RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
 
 #' @title RemoveFinalDot
 #'
-#' @description RemoveFinalDot removes the final slash from a string
+#' @description RemoveFinalDot removes the final dot from a string
 #' @param string The file path potentially having Final Dot
 #' @export
 #'
@@ -273,6 +273,19 @@ RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
 
 RemoveFinalDot <- function(string = "stairway.to.heaven.") { #
   gsub(x = string, pattern = '\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
+}
+
+
+#' @title RemoveTrailingDots
+#'
+#' @description RemoveTrailingDots removes the trailing dots from a string
+#' @param string The string potentially having 1-3 dots at the beginnig or end
+#' @export
+#'
+#' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
+
+RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { #
+  gsub(x = string, pattern = '^\\.|^\\.\\.|^\\.\\.\\.|\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
 }
 
 
@@ -481,7 +494,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @example # Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @example Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {
@@ -514,7 +527,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par A list element e.g.: p$umap
-#' @example param.list.flag(par = p$umap.n_neighbors)
+#' @example # flag.names_list(par = p$'umap.n_neighbors')
 #' @export
 
 

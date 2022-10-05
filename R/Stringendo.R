@@ -265,7 +265,7 @@ RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
 
 #' @title RemoveFinalDot
 #'
-#' @description RemoveFinalDot removes the final slash from a string
+#' @description RemoveFinalDot removes the final dot from a string
 #' @param string The file path potentially having Final Dot
 #' @export
 #'
@@ -273,6 +273,19 @@ RemoveDoubleDot <- function(string = "stairway...to.heaven.") { #
 
 RemoveFinalDot <- function(string = "stairway.to.heaven.") { #
   gsub(x = string, pattern = '\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
+}
+
+
+#' @title RemoveTrailingDots
+#'
+#' @description RemoveTrailingDots removes the trailing dots from a string
+#' @param string The string potentially having 1-3 dots at the beginnig or end
+#' @export
+#'
+#' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
+
+RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { #
+  gsub(x = string, pattern = '^\\.|^\\.\\.|^\\.\\.\\.|\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
 }
 
 
