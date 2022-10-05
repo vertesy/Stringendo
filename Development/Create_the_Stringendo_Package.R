@@ -26,7 +26,7 @@ kollapse <- function(..., collapseby = "", print = TRUE) {
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
-package.version = "0.3.0"
+package.version = "0.3.1"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")

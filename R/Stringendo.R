@@ -234,6 +234,19 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 # Path parsing ----
 # _________________________________________________________________________________________________
 
+#' @title ReplaceWeirdCharacters
+#'
+#' @description ReplaceWeirdCharacters replaces '[]$ at and ()' with dots
+#' @param string The string, e.g variable subset: "obj at meta$alpha[[3]]"
+#' @export
+#'
+#' @examples # ReplaceWeirdCharacters('string with at bracked and dollar signs')
+
+
+ReplaceWeirdCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
+  gsub(x = string, pattern = '\\@|\\[|\\]|\\$', replacement = '.')
+}
+
 
 #' AddTrailingDot
 #'
