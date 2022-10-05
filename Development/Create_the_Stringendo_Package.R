@@ -1,8 +1,8 @@
 ######################################################################################################
-# Create_the_Stringendo_Package.v0.1.R
+# Create_the_Stringendo_Package.R
 # 31 10 2021
 ######################################################################################################
-# source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.v0.1.R")
+# source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
 

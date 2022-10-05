@@ -387,12 +387,14 @@ FixPath <- function(string = "stairway//to/heaven") {
 #'
 #' @description FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
 #' @param string Input string
+#' @param ... Additional strings to concatenate after the first one
 #' @export
 #'
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
 
-FixPlotName <- function(string = 'obj@meta$alpha[[3]]') {
+FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
   string <- ReplaceSpecialCharacters(string)
+  string <- sppp(string, ...) # add suffices
   string <- RemoveTrailingDots(string)
   RemoveDoubleDot(string)
 }
