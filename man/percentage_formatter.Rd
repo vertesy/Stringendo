@@ -9,7 +9,8 @@ percentage_formatter(
   digitz = 3,
   keep.names = F,
   prefix = NULL,
-  suffix = NULL
+  suffix = NULL,
+  sign_sep = ""
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ percentage_formatter(
 \item{prefix}{prefix added before the string, Default: NULL}
 
 \item{suffix}{suffix added after the string, Default: NULL}
+
+\item{sign_sep}{Need space before \% sign?}
 }
 \description{
 Parse a string of 0-100\% from a number between 0 and 1.

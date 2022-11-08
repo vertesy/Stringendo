@@ -4,10 +4,12 @@
 \alias{FixPlotName}
 \title{FixPlotName}
 \usage{
-FixPlotName(string = "obj@meta$alpha[[3]]")
+FixPlotName(string = "obj@meta$alpha[[3]]", ...)
 }
 \arguments{
 \item{string}{Input string}
+
+\item{...}{Additional strings to concatenate after the first one}
 }
 \description{
 FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)

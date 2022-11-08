@@ -140,7 +140,7 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
-#' @example sppp('Apples..are...sweet.....')
+#' @example # sppp('Apples..are...sweet.....')
 #' @export
 
 sppp <- function(...) {
@@ -154,7 +154,7 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
-#' @example spps('Apples//are///sweet//')
+#' @example # spps('Apples//are///sweet//')
 #' @export
 
 spps <- function(...) {
@@ -210,17 +210,21 @@ eval_parse_kollapse <- function(...) {
 #' percentage_formatter
 #'
 #' Parse a string of 0-100% from a number between 0 and 1.
+#'
 #' @param x A vector of numbers between 0-1.
 #' @param digitz Number of digits to keep. 3 by default.
 #' @param keep.names Keep vector names
 #' @param prefix prefix added before the string, Default: NULL
+#' @param sign_sep Need space before % sign?
 #' @param suffix suffix added after the string, Default: NULL
+#'
 #' @export
 #' @examples percentage_formatter (x = 4.2822212, digitz = 3)
 
-percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, suffix = NULL) {
+percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, suffix = NULL, sign_sep = "") {
   if (keep.names) nmz <- names(x)
-  a = trimws(paste(prefix, 100 * signif(x, digitz), "%", suffix, sep = " ") )
+  pc_sign <- paste(100 * signif(x, digitz), "%", sep = sign_sep)
+  a = trimws(paste(prefix, pc_sign, suffix, sep = " ") )
   a[a == "NaN %"] = NaN
   a[a == "NA %"] = NA
   if (keep.names) names(a) <- nmz
@@ -525,7 +529,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @example Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @example # Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {
