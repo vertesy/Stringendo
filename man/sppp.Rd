@@ -12,3 +12,6 @@ sppp(...)
 \description{
 Simplified Paste by point
 }
+\examples{
+sppp("Apples..are...sweet.....")
+}

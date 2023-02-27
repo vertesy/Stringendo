@@ -12,3 +12,6 @@ spps(...)
 \description{
 Simplified Paste by fwd slash
 }
+\examples{
+spps('Apples//are///sweet//')
+}

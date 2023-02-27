@@ -12,3 +12,6 @@ flag.names_list(par)
 \description{
 Returns the name and value of each element in a list of parameters.
 }
+\examples{
+# flag.names_list(par = p$'umap.n_neighbors')
+}

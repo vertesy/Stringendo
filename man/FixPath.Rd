@@ -4,7 +4,7 @@
 \alias{FixPath}
 \title{FixPath}
 \usage{
-FixPath(string = "stairway//to/heaven")
+FixPath(string = "stairway//to/heaven", is.file = FALSE)
 }
 \arguments{
 \item{string}{The file path potentially having Double Slash}

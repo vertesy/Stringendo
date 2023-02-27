@@ -140,7 +140,7 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
-#' @example # sppp('Apples..are...sweet.....')
+#' @examples sppp("Apples..are...sweet.....")
 #' @export
 
 sppp <- function(...) {
@@ -154,7 +154,7 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
-#' @example # spps('Apples//are///sweet//')
+#' @examples spps('Apples//are///sweet//')
 #' @export
 
 spps <- function(...) {
@@ -377,10 +377,10 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 #'
 #' @examples FixPath(string = "stairway//to/heaven")
 
-FixPath <- function(string = "stairway//to/heaven") {
+FixPath <- function(string = "stairway//to/heaven", is.file = FALSE) {
   string <- gsub(x = string, pattern = '//|///|////', replacement = '/')
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "/")
+  if (!is.file & !LastChr == "/")
     string = paste0(string, "/")
   return(string)
 }
@@ -529,7 +529,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @example # Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @examples Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {
@@ -562,7 +562,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par A list element e.g.: p$umap
-#' @example # flag.names_list(par = p$'umap.n_neighbors')
+#' @examples # flag.names_list(par = p$'umap.n_neighbors')
 #' @export
 
 
