@@ -30,7 +30,7 @@ iprint <- function(...) {
 # _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
 #' @description Parse current date, dot separated.
-#' @param Format PARAM_DESCRIPTION, Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#' @param Format Date format, Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
 #' @export
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) }
 
@@ -207,6 +207,7 @@ eval_parse_kollapse <- function(...) {
 
 
 
+# _________________________________________________________________________________________________
 #' percentage_formatter
 #'
 #' Parse a string of 0-100% from a number between 0 and 1.
@@ -462,7 +463,6 @@ PasteDirNameFromFlags <- function(...) {
 #                       ,  flag.nameiftrue(p$'Man.Int.Order') )
 
 
-
 # _________________________________________________________________________________________________
 #' @title extPDF
 #' @description add pdf as extension to a file name
@@ -474,7 +474,7 @@ extPDF <- function(vec) {  ppp(vec, "pdf") } # add pdf as extension to a file na
 
 # _________________________________________________________________________________________________
 #' @title extPNG
-#' @description FUNCTION_DESCRIPTION
+#' @description add pdf as extension to a file name
 #' @param vec Filename basis.
 #' @examples extPNG("mypltt")
 #' @export
@@ -488,7 +488,7 @@ extPNG <- function(vec) { ppp(vec, "png") } # add png as extension to a file nam
 # _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
-#' @param ls.of.params PARAM_DESCRIPTION, Default: p
+#' @param ls.of.params Input list of parameters, Default: p
 #' @export
 
 
@@ -595,12 +595,7 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 
 
 
-
-
-
-
-
-
+# _________________________________________________________________________________________________
 #' parFlags
 #'
 #' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
@@ -629,6 +624,7 @@ parFlags <-
   }
 
 
+# _________________________________________________________________________________________________
 #' parFlags2
 #'
 #' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
@@ -660,8 +656,7 @@ parFlags2 <-
   }
 
 
-
-
+# _________________________________________________________________________________________________
 #' break.lines for plot titles
 #'
 #' @param char.vec A long sentence
@@ -673,9 +668,6 @@ parFlags2 <-
 ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
-
-
-
 
 
 # _________________________________________________________________________________________________

@@ -10,7 +10,7 @@ extPNG(vec)
 \item{vec}{Filename basis.}
 }
 \description{
-FUNCTION_DESCRIPTION
+add pdf as extension to a file name
 }
 \examples{
 extPNG("mypltt")
