@@ -7,7 +7,7 @@
 param.list.2.fname(ls.of.params = p)
 }
 \arguments{
-\item{ls.of.params}{PARAM_DESCRIPTION, Default: p}
+\item{ls.of.params}{Input list of parameters, Default: p}
 }
 \description{
 Take a list of parameters and parse a string from their names and values.

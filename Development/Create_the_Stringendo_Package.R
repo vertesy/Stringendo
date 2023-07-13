@@ -26,7 +26,7 @@ kollapse <- function(..., collapseby = "", print = TRUE) {
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
-package.version = "0.3.4"
+package.version = "0.3.5"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
@@ -80,6 +80,7 @@ file.copy(from = Package_FnP, to = BackupOldFile, overwrite = TRUE)
 setwd(RepositoryDir)
 getwd()
 document()
+warnings()
 
 
 {
