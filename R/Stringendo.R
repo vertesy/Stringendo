@@ -37,7 +37,7 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.
 
 
 # _________________________________________________________________________________________________
-#' substrRight
+#' @title substrRight
 #'
 #' Take the right substring of a string
 #' @param x a character vector.
@@ -208,7 +208,7 @@ eval_parse_kollapse <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' percentage_formatter
+#' @title percentage_formatter
 #'
 #' Parse a string of 0-100% from a number between 0 and 1.
 #'
@@ -254,7 +254,7 @@ ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
 }
 
 
-#' AddTrailingDot
+#' @title AddTrailingDot
 #'
 #' @description Adds a final slash '/', if missing from a string (file path).
 #' @param string The file path potentially missing the trailing slash
@@ -309,7 +309,7 @@ RemoveTrailingDots <- function(string = "...stairway.to..heaven.") {
 
 
 
-#' AddTrailingSlash
+#' @title AddTrailingSlash
 #'
 #' @description Adds a final slash '/', if missing from a string (file path).
 #' @param string The file path potentially missing the trailing slash
@@ -424,7 +424,7 @@ ParseFilePath <- function(...) {
 }
 
 
-#' ww.FnP_parser
+#' @title ww.FnP_parser
 #'
 #' Internal Function. Parses the full path from the filename & location of the file.
 #' @param fname Name of the file
@@ -596,7 +596,7 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 
 
 # _________________________________________________________________________________________________
-#' parFlags
+#' @title parFlags
 #'
 #' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
 #' Use it for Suffixing plot names with the parameters that were used for that plot.
@@ -625,7 +625,7 @@ parFlags <-
 
 
 # _________________________________________________________________________________________________
-#' parFlags2
+#' @title parFlags2
 #'
 #' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
 #' Use it for Suffixing plot names with the parameters that were used for that plot.
@@ -657,7 +657,7 @@ parFlags2 <-
 
 
 # _________________________________________________________________________________________________
-#' break.lines for plot titles
+#' @title break.lines for plot titles
 #'
 #' @param char.vec A long sentence
 #' @param max.char Max characters per line
@@ -671,7 +671,7 @@ ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
 
 
 # _________________________________________________________________________________________________
-#' FormatAsExcelLink
+#' @title FormatAsExcelLink
 #'
 #' @param site_name Text shown.
 #' @param site_url Hyperlink url.
