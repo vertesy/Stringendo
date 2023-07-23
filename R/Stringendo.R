@@ -398,8 +398,8 @@ FixPath <- function(string = "stairway//to/heaven", is.file = FALSE) {
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
 
 FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
-  string <- ReplaceSpecialCharacters(string)
   string <- sppp(string, ...) # add suffices
+  string <- ReplaceSpecialCharacters(string)
   string <- RemoveTrailingDots(string)
   RemoveDoubleDot(string)
 }
