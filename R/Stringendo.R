@@ -374,11 +374,14 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 #'
 #' @description FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds a final '/' if missing from a file path.
 #' @param string The file path potentially having Double Slash
+#' @param ... Additional strings to concatenate after the first one
+#' @param is.file Do not add last slash if this string ends in a filename. Def: FALSE
 #' @export
 #'
 #' @examples FixPath(string = "stairway//to/heaven")
 
-FixPath <- function(string = "stairway//to/heaven", is.file = FALSE) {
+FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
+  string <- sppp(string, ...)
   string <- gsub(x = string, pattern = '//|///|////', replacement = '/')
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!is.file & !LastChr == "/")
@@ -398,7 +401,7 @@ FixPath <- function(string = "stairway//to/heaven", is.file = FALSE) {
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
 
 FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
-  string <- sppp(string, ...) # add suffices
+  string <- sppp(string, ...)
   string <- ReplaceSpecialCharacters(string)
   string <- RemoveTrailingDots(string)
   RemoveDoubleDot(string)
