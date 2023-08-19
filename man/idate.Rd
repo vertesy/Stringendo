@@ -7,7 +7,7 @@
 idate(Format = c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")[2])
 }
 \arguments{
-\item{Format}{Date format, Default: c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")\link{2}}
+\item{Format}{Date format. Default: c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")\link{2}}
 }
 \description{
 Parse current date, dot separated.

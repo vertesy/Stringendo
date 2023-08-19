@@ -1,6 +1,6 @@
 ######################################################################################################
 # Create_the_Stringendo_Package.R
-# 31 10 2021
+# 2023.08.19_13h
 ######################################################################################################
 # source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
 rm(list = ls(all.names = TRUE));
@@ -26,7 +26,7 @@ kollapse <- function(..., collapseby = "", print = TRUE) {
 
 # Setup ------------------------
 PackageName = 	"Stringendo"
-package.version = "0.3.5"
+package.version = "0.3.6"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")

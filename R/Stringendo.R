@@ -30,16 +30,17 @@ iprint <- function(...) {
 # _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
 #' @description Parse current date, dot separated.
-#' @param Format Date format, Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
 #' @export
-idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) { format(Sys.time(), format = Format ) }
 
-
+idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
+  format(Sys.time(), format = Format )
+  }
 
 # _________________________________________________________________________________________________
 #' @title substrRight
 #'
-#' Take the right substring of a string
+#' @description Take the right substring of a string
 #' @param x a character vector.
 #' @param n integer. The number of elements on the right to be kept.
 #' @export
@@ -210,7 +211,7 @@ eval_parse_kollapse <- function(...) {
 # _________________________________________________________________________________________________
 #' @title percentage_formatter
 #'
-#' Parse a string of 0-100% from a number between 0 and 1.
+#' @description Parse a string of 0-100% from a number between 0 and 1.
 #'
 #' @param x A vector of numbers between 0-1.
 #' @param digitz Number of digits to keep. 3 by default.
@@ -239,7 +240,35 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 # Path parsing ----
 # _________________________________________________________________________________________________
 
+#' @title Fix Special Characters for Bash
+#'
+#' @description This function takes a string representing a path and escapes certain special
+#' characters to make it compatible with Bash. Specifically, it escapes spaces,
+#' opening parentheses, and closing parentheses by placing a backslash before them.
+#' @param path A character string representing the path to be fixed.
+#' @return A character string with special characters escaped for Bash.
+#'
+#' @examples
+#' path <- "~/Dropbox (VBC)/Abel.IMBA/Data.dropbo"
+#' fixed_path <- fix_special_characters_bash(path)
+#' print(fixed_path) # Outputs: ~/Dropbox\ \(VBC\)/Abel.IMBA/Data.dropbo
+#'
+#' @export
+fix_special_characters_bash <- function(path) {
+  # Replace spaces with '\ '
+  path <- gsub(" ", "\\\\ ", path)
 
+  # Replace '(' with '\('
+  path <- gsub("\\(", "\\\\(", path)
+
+  # Replace ')' with '\)'
+  path <- gsub("\\)", "\\\\)", path)
+
+  return(path)
+}
+
+
+# _________________________________________________________________________________________________
 #' @title ReplaceSpecialCharacters
 #'
 #' @description ReplaceSpecialCharacters replaces '[]$@()' with dots
@@ -382,13 +411,12 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 
 FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
   string <- sppp(string, ...)
-  string <- gsub(x = string, pattern = '//|///|////', replacement = '/')
+  string <- gsub(x = string, pattern = "//|///|////", replacement = "/")
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!is.file & !LastChr == "/")
     string = paste0(string, "/")
   return(string)
 }
-
 
 
 #' @title FixPlotName
@@ -401,8 +429,8 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
 
 FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
-  string <- sppp(string, ...)
   string <- ReplaceSpecialCharacters(string)
+  string <- sppp(string, ...) # add suffices
   string <- RemoveTrailingDots(string)
   RemoveDoubleDot(string)
 }
@@ -429,7 +457,7 @@ ParseFilePath <- function(...) {
 
 #' @title ww.FnP_parser
 #'
-#' Internal Function. Parses the full path from the filename & location of the file.
+#' @description Internal Function. Parses the full path from the filename & location of the file.
 #' @param fname Name of the file
 #' @param ext_wo_dot File extension without separating dot.
 #' @export
@@ -466,9 +494,10 @@ PasteDirNameFromFlags <- function(...) {
 #                       ,  flag.nameiftrue(p$'Man.Int.Order') )
 
 
+
 # _________________________________________________________________________________________________
 #' @title extPDF
-#' @description add pdf as extension to a file name
+#' @description add '.pdf' as extension to a file name
 #' @param vec Filename basis.
 #' @examples extPDF("mypltt")
 #' @export
@@ -477,7 +506,7 @@ extPDF <- function(vec) {  ppp(vec, "pdf") } # add pdf as extension to a file na
 
 # _________________________________________________________________________________________________
 #' @title extPNG
-#' @description add pdf as extension to a file name
+#' @description add '.png' as extension to a file name
 #' @param vec Filename basis.
 #' @examples extPNG("mypltt")
 #' @export
@@ -491,7 +520,7 @@ extPNG <- function(vec) { ppp(vec, "png") } # add png as extension to a file nam
 # _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
-#' @param ls.of.params Input list of parameters, Default: p
+#' @param ls.of.params PARAM_DESCRIPTION, Default: p
 #' @export
 
 
@@ -598,10 +627,11 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 
 
 
+
 # _________________________________________________________________________________________________
 #' @title parFlags
 #'
-#' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
+#' @description Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
 #' Use it for Suffixing plot names with the parameters that were used for that plot.
 #' @param ... Paramter variables
 #' @param prefix Append something before?
@@ -630,7 +660,7 @@ parFlags <-
 # _________________________________________________________________________________________________
 #' @title parFlags2
 #'
-#' Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
+#' @description Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.
 #' Use it for Suffixing plot names with the parameters that were used for that plot.
 #' @param ... Paramter variables
 #' @param prefix Append something before?
@@ -659,6 +689,8 @@ parFlags2 <-
   }
 
 
+
+
 # _________________________________________________________________________________________________
 #' @title break.lines for plot titles
 #'
@@ -671,6 +703,8 @@ parFlags2 <-
 ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
+
+
 
 
 # _________________________________________________________________________________________________
@@ -690,3 +724,15 @@ FormatAsExcelLink <- function(site_name, site_url) {
     "\")"
   )
 }
+
+# _________________________________________________________________________________________________
+
+
+
+# _________________________________________________________________________________________________
+
+
+
+
+
+# _________________________________________________________________________________________________

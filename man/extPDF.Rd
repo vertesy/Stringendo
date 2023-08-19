@@ -10,7 +10,7 @@ extPDF(vec)
 \item{vec}{Filename basis.}
 }
 \description{
-add pdf as extension to a file name
+add '.pdf' as extension to a file name
 }
 \examples{
 extPDF("mypltt")

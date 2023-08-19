@@ -4,10 +4,14 @@
 \alias{FixPath}
 \title{FixPath}
 \usage{
-FixPath(string = "stairway//to/heaven", is.file = FALSE)
+FixPath(string = "stairway//to/heaven", ..., is.file = FALSE)
 }
 \arguments{
 \item{string}{The file path potentially having Double Slash}
+
+\item{...}{Additional strings to concatenate after the first one}
+
+\item{is.file}{Do not add last slash if this string ends in a filename. Def: FALSE}
 }
 \description{
 FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds a final '/' if missing from a file path.
