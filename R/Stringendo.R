@@ -58,6 +58,24 @@ substrRight <- function(x, n) {
 
 
 # _________________________________________________________________________________________________
+#' Paste Elements With Names
+#'
+#' @description This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
+#' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
+#' @param separator_names A character string to separate the names from the elements. Default is ":".
+#' @param separator_elements A character string to separate the name-element pairs in the resulting string. Default is " ".
+#' @example paste_w_names()
+#' @export
+
+paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
+                          , separator_names = ": ", separator_elements = " | ") {
+  paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
+  
+}
+# _________________________________________________________________________________________________
+
+
+
 #' @title kollapse
 #' @description Collapses values and strings to one string (without a white space).
 #' It also prints the results (good for a quick check)
