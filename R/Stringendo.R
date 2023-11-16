@@ -35,6 +35,7 @@ iprint <- function(...) {
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
   format(Sys.time(), format = Format )
+
   }
 
 # _________________________________________________________________________________________________
@@ -70,7 +71,7 @@ substrRight <- function(x, n) {
 paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
                           , separator_names = ": ", separator_elements = " | ") {
   paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
-  
+
 }
 # _________________________________________________________________________________________________
 
@@ -185,11 +186,13 @@ spps <- function(...) {
 
 
 
-## String operations  -------------------------------------------------------------------------------------------------
+# ______________________________________________________________________________________________----
+# String operations  -------------------------------------------------------------------------------------------------
 
-# _________________________________________________________________________________________________
+
 #' @title percentile2value
-#' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+#' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.
+#' Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
 #' @param distribution A numeric vector
 #' @param percentile percentile, Default: 0.95
 #' @param FirstValOverPercentile PARAM_DESCRIPTION, Default: TRUE
@@ -252,6 +255,35 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 }
 
 
+
+#' Convert a String to camelCase
+#'
+#' This function takes a string as input and converts it to camelCase format. It splits the string into words using
+#' dots as separators, capitalizes the first letter of each word (except the first word), and then concatenates
+#' them back together.
+#'
+#' @param input_string A character string to be converted to camelCase. The function expects a string where words
+#'                     are separated by dots. There is no default value for this parameter; a string must be
+#'                     provided.
+#'
+#' @return A character string converted to camelCase.
+#'
+#' @examples
+#' toCamelCase("plot.metadata.cor.heatMap")
+#'
+#' @export
+toCamelCase <- function(input_string) {
+  # Split the string into words using the dot as a separator
+  words <- strsplit(input_string, "\\.")[[1]]
+
+  # Capitalize the first letter of each word except the first one
+  words[-1] <- sapply(words[-1], function(word) {
+    paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
+  })
+
+  # Concatenate the words back together
+  return(paste0(words, collapse = ""))
+}
 
 
 # ______________________________________________________________________________________________----
