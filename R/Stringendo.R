@@ -65,11 +65,11 @@ substrRight <- function(x, n) {
 #' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
 #' @param separator_names A character string to separate the names from the elements. Default is ":".
 #' @param separator_elements A character string to separate the name-element pairs in the resulting string. Default is " ".
-#' @example paste_w_names()
+#' @example paste_w_names(c('a' = 1, 'b' = 2))
 #' @export
 
 paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
-                          , separator_names = ": ", separator_elements = " | ") {
+                          , separator_names = ":", separator_elements = " | ") {
   paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
 
 }

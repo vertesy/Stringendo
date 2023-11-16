@@ -18,5 +18,6 @@ percentile2value(
 \item{FirstValOverPercentile}{PARAM_DESCRIPTION, Default: TRUE}
 }
 \description{
-Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.
+Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
 }
