@@ -266,14 +266,14 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #' @param input_string A character string to be converted to camelCase. The function expects a string where words
 #'                     are separated by dots. There is no default value for this parameter; a string must be
 #'                     provided.
-#'
+#' @param toclipboard Copy to clipboard? Default: TRUE
 #' @return A character string converted to camelCase.
 #'
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
 #'
 #' @export
-toCamelCase <- function(input_string) {
+toCamelCase <- function(input_string, toclipboard = T) {
   # Split the string into words using the dot as a separator
   words <- strsplit(input_string, "\\.")[[1]]
 
@@ -281,6 +281,7 @@ toCamelCase <- function(input_string) {
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
+  if (toclipboard) try(clipr::write_clip(words), silent = T)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
@@ -297,7 +298,7 @@ toCamelCase <- function(input_string) {
 #'
 #' @param input_string A character string in camelCase, dot-separated format, or a combination of both.
 #'                     There is no default value for this parameter; a string must be provided.
-#'
+#' @param toclipboard Copy to clipboard? Default: TRUE
 #' @return A character string converted to underscore_separated format.
 #'
 #' @examples
@@ -306,12 +307,13 @@ toCamelCase <- function(input_string) {
 #' toUnderscoreSeparated("plot.metadataCor.heatMap")
 #'
 #' @export
-toUnderscoreSeparated <- function(input_string) {
+toUnderscoreSeparated <- function(input_string, toclipboard = T) {
   # Replace dots with underscores
   temp_string <- gsub("\\.", "_", input_string)
 
   # Insert underscores before uppercase letters followed by lowercase letters and convert to lowercase
   result_string <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
+  if (toclipboard) try(clipr::write_clip(result_string), silent = T)
 
   return(result_string)
 }
