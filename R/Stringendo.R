@@ -256,6 +256,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 
 
 
+# _________________________________________________________________________________________________
 #' Convert a String to camelCase
 #'
 #' This function takes a string as input and converts it to camelCase format. It splits the string into words using
@@ -283,6 +284,36 @@ toCamelCase <- function(input_string) {
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
+}
+
+
+# _________________________________________________________________________________________________
+#' Convert a String to underscore_separated Format
+#'
+#' This function converts a string from camelCase or dot-separated format to an underscore-separated format.
+#' It can handle strings that are a combination of camelCase and dot-separated formats. The function replaces
+#' dots with underscores and inserts an underscore before any uppercase letter that follows a lowercase letter.
+#' It then converts all characters to lowercase.
+#'
+#' @param input_string A character string in camelCase, dot-separated format, or a combination of both.
+#'                     There is no default value for this parameter; a string must be provided.
+#'
+#' @return A character string converted to underscore_separated format.
+#'
+#' @examples
+#' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
+#' toUnderscoreSeparated("plotMetadataCorHeatMap")
+#' toUnderscoreSeparated("plot.metadataCor.heatMap")
+#'
+#' @export
+toUnderscoreSeparated <- function(input_string) {
+  # Replace dots with underscores
+  temp_string <- gsub("\\.", "_", input_string)
+
+  # Insert underscores before uppercase letters followed by lowercase letters and convert to lowercase
+  result_string <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
+
+  return(result_string)
 }
 
 
