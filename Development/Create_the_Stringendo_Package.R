@@ -17,13 +17,6 @@ try(dev.off(), silent = TRUE)
 # # try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE) # ONLY If Stringendo not yet exist
 # require('Stringendo')
 
-
-# kollapse <- function(..., collapseby = "", print = TRUE) {
-#     if (print == TRUE) { print(paste0(c(...), collapse = collapseby))}
-#     paste0(c(...), collapse = collapseby)
-# }
-
-
 # Setup ------------------------
 package.name <- 	"Stringendo"
 package.version <- "0.3.8"

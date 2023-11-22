@@ -275,7 +275,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #' @importFrom clipr write_clip
 #'
 #' @export
-toCamelCase <- function(input_string, toclipboard = T) {
+toCamelCase <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) == 1)
 
   # Split the string into words using the dot as a separator
@@ -312,7 +312,7 @@ toCamelCase <- function(input_string, toclipboard = T) {
 #' @importFrom clipr write_clip
 #'
 #' @export
-toUnderscoreSeparated <- function(input_string, toclipboard = T) {
+toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
 
   # Replace dots with underscores
@@ -328,7 +328,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = T) {
 }
 
 
-# ______________________________________________________________________________________________----
+# _____________________________________________________________________________________________
 #' @title Convert String to Dot Separated Name
 #'
 #' @description Converts a string from camelCase or underscore_separated format to dot.separated.name format.
@@ -337,7 +337,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = T) {
 #'
 #' @param input_string A character string in camelCase or underscore_separated format to be converted.
 #'                     Default: No default value, a string must be provided.
-#' @param toclipboard Copy to clipboard? Default: FALSE.
+#' @param toclipboard Copy to clipboard? Default: TRUE
 #' @return A character string converted to dot-separated format. The result is always in lowercase.
 #' @examples
 #' toDotSeparated("plotMetadataCorHeatMap")
@@ -345,45 +345,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = T) {
 #' @importFrom clipr write_clip
 #' @export
 
-toDotSeparated <- function(input_string, toclipboard = FALSE) {
-  stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
-
-  # Handle underscore-separated input
-  input_string <- gsub("_", ".", input_string)
-
-  # Insert a dot before each uppercase letter (except the first character)
-  separated <- gsub("([A-Z])", ".\\1", input_string)
-
-  # Convert the entire string to lowercase
-  result <- tolower(separated)
-  stopifnot(is.character(result), nchar(result) > 0)
-
-  # Handle clipboard functionality
-  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = TRUE)
-
-  return(result)
-}
-
-
-# ______________________________________________________________________________________________----
-#' @title Convert String to Dot Separated Name
-#'
-#' @description Converts a string from camelCase or underscore_separated format to dot.separated.name format.
-#' Inserts dots before each uppercase letter (except if it's the first character) or replaces underscores with dots,
-#' and then converts the entire string to lowercase. The output will not start with a dot.
-#'
-#' @param input_string A character string in camelCase or underscore_separated format to be converted.
-#'                     Default: No default value, a string must be provided.
-#' @param toclipboard Copy to clipboard? Default: FALSE.
-#' @return A character string converted to dot-separated format. The result is always in lowercase and
-#'         does not start with a dot.
-#' @examples
-#' toDotSeparated("plotMetadataCorHeatMap")
-#' toDotSeparated("plot_Metadata_Cor_HeatMap")
-#' @importFrom clipr write_clip
-#' @export
-
-toDotSeparated <- function(input_string, toclipboard = FALSE) {
+toDotSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
 
   # Handle underscore-separated input
@@ -392,11 +354,9 @@ toDotSeparated <- function(input_string, toclipboard = FALSE) {
   # Insert a dot before each uppercase letter (except the first character)
   separated <- gsub("([A-Z])", ".\\1", input_string, perl = TRUE)
 
-  # Convert the entire string to lowercase
-  result <- tolower(separated)
+  # Convert the entire string to lowercase, and remove starting dot
+  result <- sub("^\\.", "", tolower(separated))
 
-  # Ensure output does not start with a dot
-  result <- sub("^\\.", "", result)
   stopifnot(is.character(result), nchar(result) > 0)
 
   # Handle clipboard functionality
@@ -404,6 +364,7 @@ toDotSeparated <- function(input_string, toclipboard = FALSE) {
 
   return(result)
 }
+
 
 
 
