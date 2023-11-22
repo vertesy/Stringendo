@@ -98,7 +98,7 @@ warnings()
 devtools::install(RepositoryDir, upgrade = F)
 
 'after uploading'
-'devtools::install_github(RepositoryDir, upgrade = F)'
+# devtools::install_github('vertesy/Stringendo', upgrade = F)
 
 # require("Stringendo")
 # # remove.packages("Stringendo")
