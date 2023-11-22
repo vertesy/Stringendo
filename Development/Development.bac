@@ -5,7 +5,8 @@
 # Used by MarkdownReports and ggExpress.
 # Many functionalities were formerly part of CodeAndRoll.
 
-
+# devtools::load_all("~/GitHub/Packages/Stringendo")
+# devtools::document("~/GitHub/Packages/Stringendo")
 # try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = T)
 # try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
@@ -257,11 +258,11 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 
 
 # _________________________________________________________________________________________________
-#' Convert a String to camelCase
+#' @title Convert a String to camelCase
 #'
-#' This function takes a string as input and converts it to camelCase format. It splits the string into words using
-#' dots as separators, capitalizes the first letter of each word (except the first word), and then concatenates
-#' them back together.
+#' @description This function takes a string as input and converts it to camelCase format.
+#' It splits the string into words using dots as separators, capitalizes the first letter of
+#' each word (except the first word), and then concatenates them back together.
 #'
 #' @param input_string A character string to be converted to camelCase. The function expects a string where words
 #'                     are separated by dots. There is no default value for this parameter; a string must be
@@ -271,9 +272,12 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #'
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
+#' @importFrom clipr write_clip
 #'
 #' @export
 toCamelCase <- function(input_string, toclipboard = T) {
+  stopifnot(is.character(input_string), length(input_string) == 1)
+
   # Split the string into words using the dot as a separator
   words <- strsplit(input_string, "\\.")[[1]]
 
@@ -281,7 +285,7 @@ toCamelCase <- function(input_string, toclipboard = T) {
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard) try(clipr::write_clip(words), silent = T)
+  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = T)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
@@ -289,9 +293,9 @@ toCamelCase <- function(input_string, toclipboard = T) {
 
 
 # _________________________________________________________________________________________________
-#' Convert a String to underscore_separated Format
+#' @title Convert a String to underscore_separated Format
 #'
-#' This function converts a string from camelCase or dot-separated format to an underscore-separated format.
+#' @description This function converts a string from camelCase or dot-separated format to an underscore-separated format.
 #' It can handle strings that are a combination of camelCase and dot-separated formats. The function replaces
 #' dots with underscores and inserts an underscore before any uppercase letter that follows a lowercase letter.
 #' It then converts all characters to lowercase.
@@ -305,18 +309,102 @@ toCamelCase <- function(input_string, toclipboard = T) {
 #' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
 #' toUnderscoreSeparated("plotMetadataCorHeatMap")
 #' toUnderscoreSeparated("plot.metadataCor.heatMap")
+#' @importFrom clipr write_clip
 #'
 #' @export
 toUnderscoreSeparated <- function(input_string, toclipboard = T) {
+  stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
+
   # Replace dots with underscores
   temp_string <- gsub("\\.", "_", input_string)
 
   # Insert underscores before uppercase letters followed by lowercase letters and convert to lowercase
-  result_string <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
-  if (toclipboard) try(clipr::write_clip(result_string), silent = T)
+  result <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
+  stopifnot(is.character(result), nchar(result) > 0)
 
-  return(result_string)
+  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = T)
+
+  return(result)
 }
+
+
+# ______________________________________________________________________________________________----
+#' @title Convert String to Dot Separated Name
+#'
+#' @description Converts a string from camelCase or underscore_separated format to dot.separated.name format.
+#' Inserts dots before each uppercase letter (except if it's the first character) or replaces underscores with dots,
+#' and then converts the entire string to lowercase.
+#'
+#' @param input_string A character string in camelCase or underscore_separated format to be converted.
+#'                     Default: No default value, a string must be provided.
+#' @param toclipboard Copy to clipboard? Default: FALSE.
+#' @return A character string converted to dot-separated format. The result is always in lowercase.
+#' @examples
+#' toDotSeparated("plotMetadataCorHeatMap")
+#' toDotSeparated("plot_Metadata_Cor_HeatMap")
+#' @importFrom clipr write_clip
+#' @export
+
+toDotSeparated <- function(input_string, toclipboard = FALSE) {
+  stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
+
+  # Handle underscore-separated input
+  input_string <- gsub("_", ".", input_string)
+
+  # Insert a dot before each uppercase letter (except the first character)
+  separated <- gsub("([A-Z])", ".\\1", input_string)
+
+  # Convert the entire string to lowercase
+  result <- tolower(separated)
+  stopifnot(is.character(result), nchar(result) > 0)
+
+  # Handle clipboard functionality
+  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = TRUE)
+
+  return(result)
+}
+
+
+# ______________________________________________________________________________________________----
+#' @title Convert String to Dot Separated Name
+#'
+#' @description Converts a string from camelCase or underscore_separated format to dot.separated.name format.
+#' Inserts dots before each uppercase letter (except if it's the first character) or replaces underscores with dots,
+#' and then converts the entire string to lowercase. The output will not start with a dot.
+#'
+#' @param input_string A character string in camelCase or underscore_separated format to be converted.
+#'                     Default: No default value, a string must be provided.
+#' @param toclipboard Copy to clipboard? Default: FALSE.
+#' @return A character string converted to dot-separated format. The result is always in lowercase and
+#'         does not start with a dot.
+#' @examples
+#' toDotSeparated("plotMetadataCorHeatMap")
+#' toDotSeparated("plot_Metadata_Cor_HeatMap")
+#' @importFrom clipr write_clip
+#' @export
+
+toDotSeparated <- function(input_string, toclipboard = FALSE) {
+  stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
+
+  # Handle underscore-separated input
+  input_string <- gsub("_", ".", input_string)
+
+  # Insert a dot before each uppercase letter (except the first character)
+  separated <- gsub("([A-Z])", ".\\1", input_string, perl = TRUE)
+
+  # Convert the entire string to lowercase
+  result <- tolower(separated)
+
+  # Ensure output does not start with a dot
+  result <- sub("^\\.", "", result)
+  stopifnot(is.character(result), nchar(result) > 0)
+
+  # Handle clipboard functionality
+  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = TRUE)
+
+  return(result)
+}
+
 
 
 # ______________________________________________________________________________________________----
@@ -543,9 +631,11 @@ ParseFilePath <- function(...) {
 #' @description Internal Function. Parses the full path from the filename & location of the file.
 #' @param fname Name of the file
 #' @param ext_wo_dot File extension without separating dot.
-#' @export
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-
+#' @importFrom MarkdownHelpers ww.set.OutDir
+#' @importFrom methods hasArg
+#'
+#' @export
 ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
   # print(path)

@@ -26,7 +26,7 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- 	"Stringendo"
-package.version <- "0.3.7"
+package.version <- "0.3.8"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")

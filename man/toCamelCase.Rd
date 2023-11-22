@@ -17,9 +17,9 @@ provided.}
 A character string converted to camelCase.
 }
 \description{
-This function takes a string as input and converts it to camelCase format. It splits the string into words using
-dots as separators, capitalizes the first letter of each word (except the first word), and then concatenates
-them back together.
+This function takes a string as input and converts it to camelCase format.
+It splits the string into words using dots as separators, capitalizes the first letter of
+each word (except the first word), and then concatenates them back together.
 }
 \examples{
 toCamelCase("plot.metadata.cor.heatMap")
