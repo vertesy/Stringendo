@@ -23,5 +23,4 @@ them back together.
 }
 \examples{
 toCamelCase("plot.metadata.cor.heatMap")
-
 }

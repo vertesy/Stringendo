@@ -18,15 +18,15 @@ try(dev.off(), silent = TRUE)
 # require('Stringendo')
 
 
-kollapse <- function(..., collapseby = "", print = TRUE) {
-    if (print == TRUE) { print(paste0(c(...), collapse = collapseby))}
-    paste0(c(...), collapse = collapseby)
-}
+# kollapse <- function(..., collapseby = "", print = TRUE) {
+#     if (print == TRUE) { print(paste0(c(...), collapse = collapseby))}
+#     paste0(c(...), collapse = collapseby)
+# }
 
 
 # Setup ------------------------
 package.name <- 	"Stringendo"
-package.version <- "0.3.6"
+package.version <- "0.3.7"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
@@ -45,8 +45,9 @@ DESCRIPTION <- list("Title" = "Stringendo - string parser"
     , "Version" = package.version
     , "Packaged" =  Sys.time()
     # , "Repository" =  "CRAN"
-    # , "Depends" =  "Stringendo"
-    , "Imports" = "base, devtools, grDevices, usethis, utils"
+    # , "Depends" =  ""
+    # , "Imports" = "devtools, grDevices, usethis, MarkdownReports"
+    , "Imports" = "methods, utils, clipr"
     , "Suggests" = "MarkdownHelpers, MarkdownReports"
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
@@ -95,6 +96,9 @@ warnings()
 # # setwd(RepositoryDir)
 # unload("Stringendo")
 devtools::install(RepositoryDir, upgrade = F)
+
+'after uploading'
+'devtools::install_github(RepositoryDir, upgrade = F)'
 
 # require("Stringendo")
 # # remove.packages("Stringendo")

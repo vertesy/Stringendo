@@ -35,6 +35,7 @@ iprint <- function(...) {
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
   format(Sys.time(), format = Format )
+
   }
 
 # _________________________________________________________________________________________________
@@ -58,6 +59,24 @@ substrRight <- function(x, n) {
 
 
 # _________________________________________________________________________________________________
+#' Paste Elements With Names
+#'
+#' @description This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
+#' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
+#' @param separator_names A character string to separate the names from the elements. Default is ":".
+#' @param separator_elements A character string to separate the name-element pairs in the resulting string. Default is " ".
+#' @examples paste_w_names(c('a' = 1, 'b' = 2))
+#' @export
+
+paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
+                          , separator_names = ":", separator_elements = " | ") {
+  paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
+
+}
+# _________________________________________________________________________________________________
+
+
+
 #' @title kollapse
 #' @description Collapses values and strings to one string (without a white space).
 #' It also prints the results (good for a quick check)
@@ -167,11 +186,13 @@ spps <- function(...) {
 
 
 
-## String operations  -------------------------------------------------------------------------------------------------
+# ______________________________________________________________________________________________----
+# String operations  -------------------------------------------------------------------------------------------------
 
-# _________________________________________________________________________________________________
+
 #' @title percentile2value
-#' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers. Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+#' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.
+#' Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
 #' @param distribution A numeric vector
 #' @param percentile percentile, Default: 0.95
 #' @param FirstValOverPercentile PARAM_DESCRIPTION, Default: TRUE
@@ -234,6 +255,68 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 }
 
 
+
+# _________________________________________________________________________________________________
+#' Convert a String to camelCase
+#'
+#' This function takes a string as input and converts it to camelCase format. It splits the string into words using
+#' dots as separators, capitalizes the first letter of each word (except the first word), and then concatenates
+#' them back together.
+#'
+#' @param input_string A character string to be converted to camelCase. The function expects a string where words
+#'                     are separated by dots. There is no default value for this parameter; a string must be
+#'                     provided.
+#' @param toclipboard Copy to clipboard? Default: TRUE
+#' @return A character string converted to camelCase.
+#'
+#' @examples
+#' toCamelCase("plot.metadata.cor.heatMap")
+#'
+#' @export
+toCamelCase <- function(input_string, toclipboard = T) {
+  # Split the string into words using the dot as a separator
+  words <- strsplit(input_string, "\\.")[[1]]
+
+  # Capitalize the first letter of each word except the first one
+  words[-1] <- sapply(words[-1], function(word) {
+    paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
+  })
+  if (toclipboard) try(clipr::write_clip(words), silent = T)
+
+  # Concatenate the words back together
+  return(paste0(words, collapse = ""))
+}
+
+
+# _________________________________________________________________________________________________
+#' Convert a String to underscore_separated Format
+#'
+#' This function converts a string from camelCase or dot-separated format to an underscore-separated format.
+#' It can handle strings that are a combination of camelCase and dot-separated formats. The function replaces
+#' dots with underscores and inserts an underscore before any uppercase letter that follows a lowercase letter.
+#' It then converts all characters to lowercase.
+#'
+#' @param input_string A character string in camelCase, dot-separated format, or a combination of both.
+#'                     There is no default value for this parameter; a string must be provided.
+#' @param toclipboard Copy to clipboard? Default: TRUE
+#' @return A character string converted to underscore_separated format.
+#'
+#' @examples
+#' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
+#' toUnderscoreSeparated("plotMetadataCorHeatMap")
+#' toUnderscoreSeparated("plot.metadataCor.heatMap")
+#'
+#' @export
+toUnderscoreSeparated <- function(input_string, toclipboard = T) {
+  # Replace dots with underscores
+  temp_string <- gsub("\\.", "_", input_string)
+
+  # Insert underscores before uppercase letters followed by lowercase letters and convert to lowercase
+  result_string <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
+  if (toclipboard) try(clipr::write_clip(result_string), silent = T)
+
+  return(result_string)
+}
 
 
 # ______________________________________________________________________________________________----
@@ -464,7 +547,7 @@ ParseFilePath <- function(...) {
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
 
 ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
+  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
   # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
     kollapse(path, fname, ".", ext_wo_dot)

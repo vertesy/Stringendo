@@ -6,7 +6,7 @@
 \usage{
 paste_w_names(
   named_vec = c(a = 1, b = 2),
-  separator_names = ": ",
+  separator_names = ":",
   separator_elements = " | "
 )
 }
@@ -19,4 +19,7 @@ paste_w_names(
 }
 \description{
 This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is \code{c('a' = 1, 'b' = 2)}.
+}
+\examples{
+paste_w_names(c('a' = 1, 'b' = 2))
 }

@@ -1,6 +1,6 @@
 Package: Stringendo
 Title: Stringendo - string parser
-Version: 0.3.6
+Version: 0.3.7
 Authors@R: 
     person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
@@ -9,15 +9,13 @@ Description: Stringendo is a set of R functions to parse strings from
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
 Imports: 
-    base,
-    devtools,
-    grDevices,
-    usethis,
+    clipr,
+    methods,
     utils
 Suggests: 
     MarkdownHelpers,
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2023-08-19 13:19:35.553036
+Packaged: 2023-11-22 18:24:02.87211
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

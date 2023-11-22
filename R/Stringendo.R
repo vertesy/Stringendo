@@ -65,7 +65,7 @@ substrRight <- function(x, n) {
 #' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
 #' @param separator_names A character string to separate the names from the elements. Default is ":".
 #' @param separator_elements A character string to separate the name-element pairs in the resulting string. Default is " ".
-#' @example paste_w_names(c('a' = 1, 'b' = 2))
+#' @examples paste_w_names(c('a' = 1, 'b' = 2))
 #' @export
 
 paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
@@ -271,6 +271,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #'
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
+#' @importFrom clipr write_clip
 #'
 #' @export
 toCamelCase <- function(input_string, toclipboard = T) {
@@ -281,7 +282,7 @@ toCamelCase <- function(input_string, toclipboard = T) {
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard) try(clipr::write_clip(words), silent = T)
+  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = T)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
@@ -305,7 +306,8 @@ toCamelCase <- function(input_string, toclipboard = T) {
 #' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
 #' toUnderscoreSeparated("plotMetadataCorHeatMap")
 #' toUnderscoreSeparated("plot.metadataCor.heatMap")
-#'
+#' @importFrom clipr write_clip
+#' 
 #' @export
 toUnderscoreSeparated <- function(input_string, toclipboard = T) {
   # Replace dots with underscores
@@ -313,7 +315,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = T) {
 
   # Insert underscores before uppercase letters followed by lowercase letters and convert to lowercase
   result_string <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
-  if (toclipboard) try(clipr::write_clip(result_string), silent = T)
+  if (toclipboard & require(clipr)) try(clipr::write_clip(result_string), silent = T)
 
   return(result_string)
 }
@@ -543,11 +545,13 @@ ParseFilePath <- function(...) {
 #' @description Internal Function. Parses the full path from the filename & location of the file.
 #' @param fname Name of the file
 #' @param ext_wo_dot File extension without separating dot.
-#' @export
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-
+#' @importFrom MarkdownHelpers ww.set.OutDir
+#' @importFrom methods hasArg
+#' 
+#' @export
 ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownReports for saving into OutDir!"}
+  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
   # print(path)
   FnP = if (methods::hasArg(ext_wo_dot)) {
     kollapse(path, fname, ".", ext_wo_dot)
