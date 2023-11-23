@@ -19,7 +19,7 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- 	"Stringendo"
-package.version <- "0.3.8"
+package.version <- "0.3.9"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
@@ -40,8 +40,8 @@ DESCRIPTION <- list("Title" = "Stringendo - string parser"
     # , "Repository" =  "CRAN"
     # , "Depends" =  ""
     # , "Imports" = "devtools, grDevices, usethis, MarkdownReports"
-    , "Imports" = "methods, utils, clipr"
-    , "Suggests" = "MarkdownHelpers, MarkdownReports"
+    , "Imports" = "clipr, MarkdownHelpers"
+    , "Suggests" = "MarkdownReports"
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
 

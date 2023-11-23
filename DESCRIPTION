@@ -1,6 +1,6 @@
 Package: Stringendo
 Title: Stringendo - string parser
-Version: 0.3.8
+Version: 0.3.9
 Authors@R: 
     person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
@@ -10,12 +10,10 @@ License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
 Imports: 
     clipr,
-    methods,
-    utils
+    MarkdownHelpers
 Suggests: 
-    MarkdownHelpers,
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2023-11-22 21:14:20.997247
+Packaged: 2023-11-23 16:04:12.094001
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

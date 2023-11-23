@@ -4,7 +4,7 @@
 \alias{toCamelCase}
 \title{Convert a String to camelCase}
 \usage{
-toCamelCase(input_string, toclipboard = T)
+toCamelCase(input_string, toclipboard = TRUE)
 }
 \arguments{
 \item{input_string}{A character string to be converted to camelCase. The function expects a string where words
