@@ -9,11 +9,11 @@ Description: Stringendo is a set of R functions to parse strings from
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
 Imports: 
-    clipr,
-    MarkdownHelpers
+    clipr
 Suggests: 
+    MarkdownHelpers,
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2023-11-23 16:04:12.094001
+Packaged: 2023-11-23 16:46:54.32564
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

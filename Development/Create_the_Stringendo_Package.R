@@ -40,8 +40,8 @@ DESCRIPTION <- list("Title" = "Stringendo - string parser"
     # , "Repository" =  "CRAN"
     # , "Depends" =  ""
     # , "Imports" = "devtools, grDevices, usethis, MarkdownReports"
-    , "Imports" = "clipr, MarkdownHelpers"
-    , "Suggests" = "MarkdownReports"
+    , "Imports" = "clipr"
+    , "Suggests" = "MarkdownHelpers, MarkdownReports"
     , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
 )
 

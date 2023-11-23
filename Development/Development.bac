@@ -593,14 +593,13 @@ ParseFilePath <- function(...) {
 #' @param fname Name of the file
 #' @param ext_wo_dot File extension without separating dot.
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-#' @importFrom MarkdownHelpers ww.set.OutDir
-#' @importFrom methods hasArg
+# #' @importFrom MarkdownHelpers ww.set.OutDir # THIS IS A TEMP FIX to allow it to install.
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot) {
   path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
   # print(path)
-  FnP = if (methods::hasArg(ext_wo_dot)) {
+  FnP = if (hasArg(ext_wo_dot)) {
     kollapse(path, fname, ".", ext_wo_dot)
   } else {
     FnP = kollapse (path, fname)
