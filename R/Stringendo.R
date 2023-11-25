@@ -514,7 +514,37 @@ fix_special_characters_bash <- function(path) {
 
 
 # _________________________________________________________________________________________________
+#' @title Parse Full File Path
+#'
+#' @description Constructs a full file path by combining a path, file name, and extension. It applies
+#'   string clean-up operations to each component and ensures proper formatting.
+#'
+#' @param path The directory path. If not provided, only file name and extension are used.
+#'   Default: NULL.
+#' @param file_name The name of the file. Clean-up operations are applied to remove special
+#'   characters and repeated dots. Default: Empty string.
+#' @param extension The file extension. If provided, it is appended to the file name with a
+#'   preceding dot. Clean-up operations remove any initial dots. Default: NULL.
+#' @return A string representing the full file path.
+#' @examples
+#' ParseFullFilePath(path = "home/user/docs/", file_name = "report@final", extension = ".txt")
+#' ParseFullFilePath(file_name = "report", extension = "txt")
+#' @export
+ParseFullFilePath <- function(path, file_name, extension) {
+  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
 
+  if (hasArg(path)) {
+    path <- AddTrailingSlashfNonePresent(ReplaceRepeatedSlashes(path))
+    full_path <- paste0(path, file_name)
+  } else { full_path <- file_name }
+
+  if (hasArg(extension)) {
+    extension <- ReplaceInitialDot(extension)
+    full_path <- paste0(full_path, '.', extension)
+  }
+
+  return(full_path)
+}
 
 #' @title FixUnderscores
 #'
