@@ -571,17 +571,17 @@ FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
 }
 
 
-#' @title ParseFilePath
+#' @title ParseDirPath
 #'
-#' @description ParseFilePath pastes elements by slash, then removes Double Slashes '//' from a
+#' @description ParseDirPath pastes elements by slash, then removes Double Slashes '//' from a
 #'   string and adds a final '/' if missing from a file path.
 #' @param ...  The set of strings (character vectors) to be parsed into a file path, and potentially
 #'   having Double Slashes, potentially missing a trailing slash.
 #' @export
 #'
-#' @examples ParseFilePath(string = "stairway///to/heaven")
+#' @examples ParseDirPath(string = "stairway///to/heaven")
 
-ParseFilePath <- function(...) {
+ParseDirPath <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
   string <- AddTrailingSlashfNonePresent(string)
