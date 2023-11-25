@@ -55,50 +55,121 @@ substrRight <- function(x, n) {
 
 
 # ______________________________________________________________________________________________----
-# Paste and collapse ----
-# _________________________________________________________________________________________________
-
+# Special character removal  -------------------------------------------------------------------------------------------------
 
 # _________________________________________________________________________________________________
-#' Paste Elements With Names
+#' @title ReplaceRepeatedDots
 #'
-#' @description This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
-#' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
-#' @param separator_names A character string to separate the names from the elements. Default is ":".
-#' @param separator_elements A character string to separate the name-element pairs in the resulting string. Default is " ".
-#' @examples paste_w_names(c('a' = 1, 'b' = 2))
+#' @description ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
+#' @param string The string (file name or path) potentially having multiple dots
+#' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # replace by a single dot.
+#'
+#' @export
+ReplaceRepeatedDots <- function(string) { gsub(pattern = '\\.+', replacement = '\\.', x = string) }
+
+#' @title ReplaceFinalDot
+#'
+#' @description ReplaceFinalDot removes the final dot from a string
+#' @param string The file path potentially having Final Dot
+#' @examples ReplaceFinalDot(string = "stairway..to...heaven...")
+#'
+#' @export
+ReplaceFinalDot <- function(string) { gsub(pattern = '\\.+$', replacement = '', x = string) }
+
+#' @title ReplaceInitialDot
+#'
+#' @description ReplaceInitialDot removes the initial dot from a string.
+#' @param string The string potentially having an initial dot.
+#' @examples ReplaceInitialDot(string = ".example...")
+#' @return A string with the initial dot removed.
+#' @export
+ReplaceInitialDot <- function(string) { gsub(pattern = '^\\.+', replacement = '', x = string) }
+
+#' @title RemoveTrailingDots
+#'
+#' @description RemoveTrailingDots removes dots at the beginning and end of a string.
+#' @param string The string potentially having unnecessary dots at the beginning or end.
+#' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
+#' @return A string with the trailing dots removed.
+#' @export
+RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { ReplaceFinalDot(ReplaceInitialDot(string)) }
+
+
+# _________________________________________________________________________________________________
+#' @title ReplaceRepeatedSlashes
+#'
+#' @description ReplaceRepeatedSlashes replaces multiple consecutive slashes with a single slash.
+#' @param string The string (file path) potentially having repeated slashes.
+#' @examples ReplaceRepeatedSlashes(string = "path//to//folder")
+#' @return A string with repeated slashes replaced by a single slash.
+#' @export
+ReplaceRepeatedSlashes <- function(string) { gsub(pattern = '//+', replacement = '/', x = string) }
+
+
+#' @title ReplaceFinalSlash
+#'
+#' @description ReplaceFinalSlash removes the final slash from a string (file path).
+#' @param string The string (file path) potentially having a final slash.
+#' @examples ReplaceFinalSlash(string = "path/to/folder/")
+#' @return A string with the final slash removed.
+#' @export
+ReplaceFinalSlash <- function(string) { gsub(pattern = '/+$', replacement = '', x = string) }
+
+
+
+# _________________________________________________________________________________________________
+#' @title ReplaceSpecialCharacters
+#'
+#' @description ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
+#' @param string The string potentially having special characters.
+#' @examples ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
+#' @return A string with special characters replaced by dots.
 #' @export
 
-paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
-                          , separator_names = ":", separator_elements = " | ") {
-  paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
-
+ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
+  gsub(x = string, pattern = '\\@|\\[|\\]|\\$|\\/\\(\\)', replacement = '.')
 }
-# _________________________________________________________________________________________________
 
 
+# ______________________________________________________________________________________________----
+# Special character addition -------------------------------------------------------------------------------------------------
 
-#' @title kollapse
-#' @description Collapses values and strings to one string (without a white space).
-#' It also prints the results (good for a quick check)
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
-#' @param collapseby collapse elements into a string separated by this character
-#' @param print Print the results to the terminal. TRUE by default.
-#' @examples kollapse("Hello ", LETTERS[24],
-#' ", the winning numbers are ", c(1, 3, 5, 65, 11), " . Yay!")
+
+#' @title AddTrailingDotIfNonePresent
+#'
+#' @description Adds a final slash '/', if missing from a string (file path).
+#' @param string The file path potentially missing the trailing slash
+#' @examples AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
+#'
 #' @export
-
-kollapse <- function(...,
-                     collapseby = "",
-                     print = TRUE) {
-  if (print == TRUE) {
-    print(paste0(c(...), collapse = collapseby))
-  }
-  paste0(c(...), collapse = collapseby)
+AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
+  LastChr <- substr(string, nchar(string), nchar(string))
+  if (!LastChr == "\\.")
+    string = paste0(string, ".")
+  return(string)
 }
 
 
-# _________________________________________________________________________________________________
+
+#' @title AddTrailingSlashfNonePresent
+#'
+#' @description Adds a final slash '/', if missing from a string (file path).
+#' @param string The file path potentially missing the trailing slash
+#' @examples AddTrailingSlashfNonePresent(string = "stairway/to/heaven")
+#'
+#' @export
+AddTrailingSlashfNonePresent <- function(string = "stairway/to/heaven") {
+  LastChr <- substr(string, nchar(string), nchar(string))
+  if (!LastChr == "/")
+    string = paste0(string, "/")
+  return(string)
+}
+
+
+# ______________________________________________________________________________________________----
+# Paste -----------------------------------------------------------------------
+
+
 #' @title Paste by point
 #' @description Paste by point
 #' @param ... Multiple simple variables to parse.
@@ -129,6 +200,29 @@ ppu <- function(...) { paste(..., sep = '_') }
 ppd <- function(...) { paste(..., sep = '-') }
 
 # _________________________________________________________________________________________________
+#' @title Paste Elements With Names
+#'
+#' @description This function takes a named vector and returns a string where each element is pasted
+#'  with its name. Elements are separated by a specified string, and name-element pairs are also
+#'  separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
+#' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
+#' @param separator_names A character string to separate the names from the elements. Default is ":".
+#' @param separator_elements A character string to separate the name-element pairs in the
+#' resulting string. Default is " ".
+#' @examples paste_w_names(c('a' = 1, 'b' = 2))
+#' @export
+paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
+                          , separator_names = ":", separator_elements = " | ") {
+  paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
+
+}
+
+
+
+
+# ______________________________________________________________________________________________----
+# Collapse (and paste) -----------------------------------------------------------------------
+
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
@@ -157,18 +251,44 @@ kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 #' @export
 kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 
+
+# _________________________________________________________________________________________________
+#' @title Kollapse
+#'
+#' @description Collapses values and strings to one string (without a white space).
+#' It also prints the results (good for a quick check)
+#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param collapseby collapse elements into a string separated by this character
+#' @param print Print the results to the terminal. TRUE by default.
+#' @examples kollapse("Hello ", LETTERS[24],
+#' ", the winning numbers are ", c(1, 3, 5, 65, 11), " . Yay!")
+#' @export
+
+kollapse <- function(...,
+                     collapseby = "",
+                     print = TRUE) {
+  if (print == TRUE) {
+    print(paste0(c(...), collapse = collapseby))
+  }
+  paste0(c(...), collapse = collapseby)
+}
+
+# ______________________________________________________________________________________________----
+# Lazy collapse and paste -----------------------------------------------------------------------
+
+
 # _________________________________________________________________________________________________
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
 #' @examples sppp("Apples..are...sweet.....")
 #' @export
-
 sppp <- function(...) {
-  string <- paste(..., sep = '.', collapse = '.')
-  string <- gsub(pattern = '\\.+', replacement = '\\.', x = string) # replace final dot
-  string <- gsub(pattern = '\\.+$', replacement = '', x = string) # replace beginning > !would be an invisible file!
-  gsub(pattern = '^\\.+', replacement = '', x = string)
+  string <- kpp(...)
+  string <- ReplaceRepeatedDots(string)
+  string <- ReplaceFinalDot(string)
+  string <- ReplaceInitialDot(string)
+  return(string)
 }
 
 # _________________________________________________________________________________________________
@@ -179,16 +299,16 @@ sppp <- function(...) {
 #' @export
 
 spps <- function(...) {
-  string <- paste(..., sep = '/', collapse = '/')
-  string <- gsub(pattern = '//+', replacement = '/', x = string)
-  gsub(pattern = '/+$', replacement = '', x = string)
+  string <- kpps(...)
+  string <- ReplaceRepeatedSlashes(string)
+  string <- ReplaceFinalSlash(string)
+  return(string)
 }
 
 
 
-
 # ______________________________________________________________________________________________----
-# String operations  -------------------------------------------------------------------------------------------------
+# Pretty Strings  ----------------------------------------------------------------------------------
 
 
 #' @title percentile2value
@@ -215,19 +335,6 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 
 #' @export
 parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
-
-
-# _________________________________________________________________________________________________
-#' @title eval_parse_kollapse
-#' @description evaluate and parse (dyn_var_caller)
-#' @param ... Multiple simple variables to parse.
-
-#' @export
-eval_parse_kollapse <- function(...) {
-  substitute(eval(parse(text = kollapse( ... , print = FALSE))))
-}
-
-
 
 
 # _________________________________________________________________________________________________
@@ -401,114 +508,6 @@ fix_special_characters_bash <- function(path) {
 
 
 # _________________________________________________________________________________________________
-#' @title ReplaceSpecialCharacters
-#'
-#' @description ReplaceSpecialCharacters replaces '[]$@()' with dots
-#' @param string The string, e.g variable subset: "obj@meta$alpha[[3]]"
-#' @export
-#'
-#' @examples # ReplaceSpecialCharacters('string with at bracked and dollar signs')
-
-
-ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
-  gsub(x = string, pattern = '\\@|\\[|\\]|\\$|\\/\\(\\)', replacement = '.')
-}
-
-
-#' @title AddTrailingDot
-#'
-#' @description Adds a final slash '/', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing slash
-#' @export
-#'
-#' @examples AddTrailingDot(string = "stairway.to.heaven")
-
-AddTrailingDot <- function(string = "stairway.to.heaven") {
-  LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "\\.")
-    string = paste0(string, ".")
-  return(string)
-}
-
-#' @title RemoveDoubleDot
-#'
-#' @description RemoveDoubleDot removes multiple consecutive slashes (e.g. '..') from a string (file path). Also works for 2,3 consecutive slashes
-#' @param string The file path potentially having Double Dot
-#' @export
-#'
-#' @examples RemoveDoubleDot(string = "stairway..to...heaven....") # replace by a single .
-
-RemoveDoubleDot <- function(string = "stairway...to.heaven.") {
-  gsub(x = string, pattern = '\\.\\.|\\.\\.\\.|\\.\\.\\.\\.', replacement = '.')
-}
-
-
-#' @title RemoveFinalDot
-#'
-#' @description RemoveFinalDot removes the final dot from a string
-#' @param string The file path potentially having Final Dot
-#' @export
-#'
-#' @examples RemoveFinalDot(string = "stairway..to...heaven...")
-
-RemoveFinalDot <- function(string = "stairway.to.heaven.") {
-  gsub(x = string, pattern = '\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
-}
-
-
-#' @title RemoveTrailingDots
-#'
-#' @description RemoveTrailingDots removes the trailing dots from a string
-#' @param string The string potentially having 1-3 dots at the beginnig or end
-#' @export
-#'
-#' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
-
-RemoveTrailingDots <- function(string = "...stairway.to..heaven.") {
-  gsub(x = string, pattern = '^\\.|^\\.\\.|^\\.\\.\\.|\\.$|\\.\\.$|\\.\\.\\.$', replacement = '')
-}
-
-
-
-#' @title AddTrailingSlash
-#'
-#' @description Adds a final slash '/', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing slash
-#' @export
-#'
-#' @examples AddTrailingSlash(string = "stairway/to/heaven")
-
-AddTrailingSlash <- function(string = "stairway/to/heaven") {
-  LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "/")
-    string = paste0(string, "/")
-  return(string)
-}
-
-#' @title RemoveDoubleSlash
-#'
-#' @description RemoveDoubleSlash removes multiple consecutive slashes (e.g. '//') from a string (file path). Also works for 2,3 consecutive slashes
-#' @param string The file path potentially having Double Slash
-#' @export
-#'
-#' @examples RemoveDoubleSlash(string = "stairway//to///heaven")
-
-RemoveDoubleSlash <- function(string = "stairway//to/heaven") {
-  gsub(x = string, pattern = '//|///|////', replacement = '/')
-}
-
-
-#' @title RemoveFinalSlash
-#'
-#' @description RemoveFinalSlash removes the final slash from a string
-#' @param string The file path potentially having Final Slash
-#' @export
-#'
-#' @examples RemoveFinalSlash(string = "stairway//to///heaven//")
-
-RemoveFinalSlash <- function(string = "stairway/to/heaven//") {
-  gsub(x = string, pattern = '/$|//$|///$|', replacement = '')
-}
 
 
 #' @title FixUnderscores
@@ -540,10 +539,17 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 #' @export
 #'
 #' @examples FixPath(string = "stairway//to/heaven")
+#'
+#'
+
+
+string = "/stairway//to/heaven////ds//"
+gsub(x = string, pattern = "//|///|////", replacement = "/")
+ReplaceRepeatedSlashes(string)
 
 FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
   string <- sppp(string, ...)
-  string <- gsub(x = string, pattern = "//|///|////", replacement = "/")
+  string <- ReplaceRepeatedSlashes(string)
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!is.file & !LastChr == "/")
     string = paste0(string, "/")
@@ -564,7 +570,7 @@ FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
   string <- ReplaceSpecialCharacters(string)
   string <- sppp(string, ...) # add suffices
   string <- RemoveTrailingDots(string)
-  RemoveDoubleDot(string)
+  ReplaceRepeatedDots(string)
 }
 
 
@@ -579,7 +585,7 @@ FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
 
 ParseFilePath <- function(...) {
   string <- paste(..., sep = '/', collapse = '/')  # kollapse by (forward) slash
-  string <- gsub(x = string, pattern = '//', replacement = '/') # RemoveDoubleSlash
+  string <- gsub(x = string, pattern = '//', replacement = '/') # ReplaceRepeatedSlashes
   LastChr <- substr(string, nchar(string), nchar(string)) # AddTrailingSlash
   if (!LastChr == "/")
     string = paste0(string, "/")
@@ -858,14 +864,26 @@ FormatAsExcelLink <- function(site_name, site_url) {
   )
 }
 
+
+
+
+# ______________________________________________________________________________________________----
+# Misc   -------------------------------------------------------------------------------------------
+
+#' @title eval_parse_kollapse
+#' @description evaluate and parse (dyn_var_caller)
+#' @param ... Multiple simple variables to parse.
+
+#' @export
+eval_parse_kollapse <- function(...) {
+  substitute(eval(parse(text = kollapse( ... , print = FALSE))))
+}
+
+
+
+
+# _________________________________________________________________________________________________
+
 # _________________________________________________________________________________________________
 
 
-
-# _________________________________________________________________________________________________
-
-
-
-
-
-# _________________________________________________________________________________________________
