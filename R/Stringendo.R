@@ -307,6 +307,12 @@ spps <- function(...) {
 
 
 
+
+
+
+
+
+
 # ______________________________________________________________________________________________----
 # Pretty Strings  ----------------------------------------------------------------------------------
 
@@ -536,17 +542,9 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 #' @param string The file path potentially having Double Slash
 #' @param ... Additional strings to concatenate after the first one
 #' @param is.file Do not add last slash if this string ends in a filename. Def: FALSE
-#' @export
-#'
 #' @examples FixPath(string = "stairway//to/heaven")
 #'
-#'
-
-
-string = "/stairway//to/heaven////ds//"
-gsub(x = string, pattern = "//|///|////", replacement = "/")
-ReplaceRepeatedSlashes(string)
-
+#' @export
 FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
   string <- sppp(string, ...)
   string <- ReplaceRepeatedSlashes(string)
@@ -562,10 +560,9 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
 #' @description FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
 #' @param string Input string
 #' @param ... Additional strings to concatenate after the first one
-#' @export
-#'
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
-
+#'
+#' @export
 FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
   string <- ReplaceSpecialCharacters(string)
   string <- sppp(string, ...) # add suffices
@@ -574,23 +571,23 @@ FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
 }
 
 
-
 #' @title ParseFilePath
 #'
-#' @description ParseFilePath pastes elements by slash, then removes Double Slashes '//' from a string and adds a final '/' if missing from a file path.
-#' @param ...  The set of strings (character vectors) to be parsed into a file path, and potentially having Double Slashes, potentially missing a trailing slash.
+#' @description ParseFilePath pastes elements by slash, then removes Double Slashes '//' from a
+#'   string and adds a final '/' if missing from a file path.
+#' @param ...  The set of strings (character vectors) to be parsed into a file path, and potentially
+#'   having Double Slashes, potentially missing a trailing slash.
 #' @export
 #'
 #' @examples ParseFilePath(string = "stairway///to/heaven")
 
 ParseFilePath <- function(...) {
-  string <- paste(..., sep = '/', collapse = '/')  # kollapse by (forward) slash
-  string <- gsub(x = string, pattern = '//', replacement = '/') # ReplaceRepeatedSlashes
-  LastChr <- substr(string, nchar(string), nchar(string)) # AddTrailingSlash
-  if (!LastChr == "/")
-    string = paste0(string, "/")
+  string <- kpps(...)
+  string <- ReplaceRepeatedSlashes(string)
+  string <- AddTrailingSlashfNonePresent(string)
   return(string)
 }
+
 
 
 #' @title ww.FnP_parser
