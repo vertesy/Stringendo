@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kollapse}
 \alias{kollapse}
-\title{kollapse}
+\title{Kollapse}
 \usage{
 kollapse(..., collapseby = "", print = TRUE)
 }

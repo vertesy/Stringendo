@@ -15,10 +15,13 @@ paste_w_names(
 
 \item{separator_names}{A character string to separate the names from the elements. Default is ":".}
 
-\item{separator_elements}{A character string to separate the name-element pairs in the resulting string. Default is " ".}
+\item{separator_elements}{A character string to separate the name-element pairs in the
+resulting string. Default is " ".}
 }
 \description{
-This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is \code{c('a' = 1, 'b' = 2)}.
+This function takes a named vector and returns a string where each element is pasted
+with its name. Elements are separated by a specified string, and name-element pairs are also
+separated by a specified string. The default named vector is \code{c('a' = 1, 'b' = 2)}.
 }
 \examples{
 paste_w_names(c('a' = 1, 'b' = 2))

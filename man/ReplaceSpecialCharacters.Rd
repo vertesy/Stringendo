@@ -7,11 +7,14 @@
 ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
 }
 \arguments{
-\item{string}{The string, e.g variable subset: "obj@meta$alpha[\link{3}]"}
+\item{string}{The string potentially having special characters.}
+}
+\value{
+A string with special characters replaced by dots.
 }
 \description{
-ReplaceSpecialCharacters replaces '[]$@()' with dots
+ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 }
 \examples{
-# ReplaceSpecialCharacters('string with at bracked and dollar signs')
+ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
 }
