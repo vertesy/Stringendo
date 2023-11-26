@@ -16,4 +16,5 @@ FixPlotName replaces special characters in an input string (dollar-, at-, bracke
 }
 \examples{
 FixPlotName(string = "obj at meta$alpha[[3]]")
+
 }

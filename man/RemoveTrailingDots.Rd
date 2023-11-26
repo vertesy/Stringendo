@@ -7,10 +7,13 @@
 RemoveTrailingDots(string = "...stairway.to..heaven.")
 }
 \arguments{
-\item{string}{The string potentially having 1-3 dots at the beginnig or end}
+\item{string}{The string potentially having unnecessary dots at the beginning or end.}
+}
+\value{
+A string with the trailing dots removed.
 }
 \description{
-RemoveTrailingDots removes the trailing dots from a string
+RemoveTrailingDots removes dots at the beginning and end of a string.
 }
 \examples{
 RemoveTrailingDots(string = "...stairway.to..heaven.")

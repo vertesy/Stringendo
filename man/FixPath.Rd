@@ -18,4 +18,5 @@ FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds 
 }
 \examples{
 FixPath(string = "stairway//to/heaven")
+
 }
