@@ -546,6 +546,8 @@ ParseFullFilePath <- function(path, file_name, extension) {
   return(full_path)
 }
 
+
+
 #' @title FixUnderscores
 #'
 #' @description FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
@@ -616,27 +618,6 @@ ParseDirPath <- function(...) {
   string <- ReplaceRepeatedSlashes(string)
   string <- AddTrailingSlashfNonePresent(string)
   return(string)
-}
-
-
-
-#' @title ww.FnP_parser
-#'
-#' @description Internal Function. Parses the full path from the filename & location of the file.
-#' @param fname Name of the file
-#' @param ext_wo_dot File extension without separating dot.
-#' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-# #' @importFrom MarkdownHelpers ww.set.OutDir # THIS IS A TEMP FIX to allow it to install.
-#'
-#' @export
-ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
-  # print(path)
-  FnP = if (hasArg(ext_wo_dot)) {
-    kollapse(path, fname, ".", ext_wo_dot)
-  } else {
-    FnP = kollapse (path, fname)
-  }
 }
 
 
