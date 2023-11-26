@@ -583,6 +583,7 @@ ParseFullFilePath <- function(path, file_name, extension) {
 
 
 
+# _________________________________________________________________________________________________
 #' @title FixUnderscores
 #'
 #' @description FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
@@ -602,6 +603,7 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 }
 
 
+# _________________________________________________________________________________________________
 #' @title FixPath
 #'
 #' @description FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds a final '/' if missing from a file path.
@@ -622,6 +624,7 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
 }
 
 
+# _________________________________________________________________________________________________
 #' @title FixPlotName
 #'
 #' @description FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
@@ -638,15 +641,16 @@ FixPlotName <- function(string = "obj@meta$alpha[[3]]", ...) {
 }
 
 
+# _________________________________________________________________________________________________
 #' @title ParseDirPath
 #'
 #' @description ParseDirPath pastes elements by slash, then removes Double Slashes '//' from a
 #'   string and adds a final '/' if missing from a file path.
 #' @param ...  The set of strings (character vectors) to be parsed into a file path, and potentially
 #'   having Double Slashes, potentially missing a trailing slash.
-#' @export
-#'
 #' @examples ParseDirPath(string = "stairway///to/heaven")
+#'
+#' @export
 ParseDirPath <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
@@ -660,8 +664,6 @@ ParseDirPath <- function(...) {
 #' @description Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
 #' @param ... Multiple simple variables to parse.
 #' @export
-
-
 PasteDirNameFromFlags <- function(...) {
   flagList <- c(...)
   pastedFlagList <- kpp(flagList)
@@ -684,7 +686,7 @@ PasteDirNameFromFlags <- function(...) {
 #' @export
 extPDF <- function(vec) {
   ppp(vec, "pdf")
-} # add pdf as extension to a file name
+}
 
 
 # _________________________________________________________________________________________________
@@ -695,7 +697,7 @@ extPDF <- function(vec) {
 #' @export
 extPNG <- function(vec) {
   ppp(vec, "png")
-} # add png as extension to a file name
+}
 
 # ______________________________________________________________________________________________----
 # Flag parsing for path / directory naming ----
@@ -705,10 +707,9 @@ extPNG <- function(vec) {
 # _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
-#' @param ls.of.params PARAM_DESCRIPTION, Default: p
+#' @param ls.of.params List of parameters, Default: p
+#'
 #' @export
-
-
 param.list.2.fname <- function(ls.of.params = p) {
   paste(names(ls.of.params), ls.of.params, sep = ".", collapse = "_")
 }
@@ -719,9 +720,8 @@ param.list.2.fname <- function(ls.of.params = p) {
 #' @description Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 #' @param path path, Default: '~/Dropbox/Abel.IMBA/AnalysisD'
 #' @param ... Multiple simple variables to parse.
+#'
 #' @export
-
-
 PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   flagList <- c(path, ...)
   pastedFlagList <- kpp(flagList)
@@ -746,13 +746,10 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @examples Xseed <- 1212
-#' p <- list()
-#' p$"seed" <- 1212
-#' flag.name_value(Xseed)
-#' flag.name_value(p$"seed")
+#' @examples Xseed <- 1212; p <- list(); p$"seed" <- 1212
+#' flag.name_value(Xseed); flag.name_value(p$"seed")
+#'
 #' @export
-
 flag.name_value <- function(toggle, Separator = "_") {
   if (!isFALSE(toggle)) {
     output <- paste(substitute(toggle), toggle, sep = Separator)
@@ -768,9 +765,8 @@ flag.name_value <- function(toggle, Separator = "_") {
 #' @param prefix prefix added before the string, Default: NULL
 #' @param suffix suffix added after the string, Default: NULL
 #' @param name.if.not Alternative name., Default: ''
+#'
 #' @export
-
-
 flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = "") {
   output <- if (toggle) {
     paste0(prefix, (substitute(toggle)), suffix)
@@ -787,36 +783,34 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par A list element e.g.: p$umap
 #' @examples # flag.names_list(par = p$'umap.n_neighbors')
+#'
 #' @export
-
-
 flag.names_list <- function(par) {
   if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
 }
+
+
 # _________________________________________________________________________________________________
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param pl List of parameters, Default: p.hm
+#'
 #' @export
-
-
 flag.names_list.all.new <- function(pl = p.hm) {
   # if (length(pl)) paste(kppu(names(pl)), kppu(pl) , sep = "_")
   if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
 }
 
+
 # _________________________________________________________________________________________________
 #' @title param.list.flag
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param par parameter, Default: p$umap.min_dist
+#'
 #' @export
-
-
 param.list.flag <- function(par = p$"umap.min_dist") {
   paste(substitute(par), par, sep = "_")[[3]]
 } # param.list.flag(par = p$umap.n_neighbors)
-
-
 
 
 # _________________________________________________________________________________________________
@@ -828,12 +822,10 @@ param.list.flag <- function(par = p$"umap.min_dist") {
 #' @param prefix Append something before?
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param collapsechar Separating character between each parameters-flag
+#' @examples pearson <- TRUE; filtered <- TRUE;  normalized <- FALSE
+#' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized); MyPlotname
+#'
 #' @export
-#' @examples pearson <- TRUE
-#' filtered <- TRUE
-#' normalized <- FALSE
-#' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized)
-#' MyPlotname
 parFlags <-
   function(prefix = "",
            ...,
@@ -862,12 +854,10 @@ parFlags <-
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param coll.char Separating character between each parameters-flag
 #' @param coll.char.intra Separating character between parameters and its value
+#' @examples pearson <- TRUE; filtered <- 3;  normalized <- FALSE
+#' MyPlotname <- parFlags2(prefix = "MyPlot", pearson, filtered, normalized); MyPlotname
+#'
 #' @export
-#' @examples pearson <- TRUE
-#' filtered <- 3
-#' normalized <- FALSE
-#' MyPlotname <- parFlags2(prefix = "MyPlot", pearson, filtered, normalized)
-#' MyPlotname
 parFlags2 <-
   function(prefix = ".",
            ...,
@@ -895,10 +885,10 @@ parFlags2 <-
 #'
 #' @param char.vec A long sentence
 #' @param max.char Max characters per line
-#' @export
+#' @examples ww.break.lines(char.vec = kppd(LETTERS))
 #'
-#' @examples ww.break.lines()
-ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
+#' @export
+ww.break.lines <- function(char.vec, max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
 
@@ -910,8 +900,10 @@ ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
 #'
 #' @param site_name Text shown.
 #' @param site_url Hyperlink url.
+#' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation")
+#' , site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
+#'
 #' @export
-#' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation"), site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
 FormatAsExcelLink <- function(site_name, site_url) {
   paste0(
     "=HYPERLINK(\"",
@@ -931,7 +923,7 @@ FormatAsExcelLink <- function(site_name, site_url) {
 #' @title eval_parse_kollapse
 #' @description evaluate and parse (dyn_var_caller)
 #' @param ... Multiple simple variables to parse.
-
+#'
 #' @export
 eval_parse_kollapse <- function(...) {
   substitute(eval(parse(text = kollapse(..., print = FALSE))))
