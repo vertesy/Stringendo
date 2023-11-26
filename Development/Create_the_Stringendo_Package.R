@@ -1,8 +1,7 @@
 ######################################################################################################
 # Create_the_Stringendo_Package.R
-# 2023.08.19_13h
 ######################################################################################################
-# source("/Users/abel.vertesy/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
+# source("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
 
@@ -136,3 +135,7 @@ p.dep.new <- sort(union( p.deps, p.dep.declared))
 # clipr::write_clip(p.dep.new)
 
 
+# Linter and Styler ------------------------------------------------
+
+
+styler::style_file("~/GitHub/Packages/Stringendo/R/Stringendo.R")

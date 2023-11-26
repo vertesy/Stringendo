@@ -1,23 +1,32 @@
-$.GlobalEnv
-[1] "kollapse"
-
-$`character(0)`
-[1] "kpp"           "kppd"          "kppu"          "ppp"          
-[5] "ww.set.OutDir"
+$`c(".GlobalEnv", "package:Stringendo")`
+[1] "ReplaceRepeatedDots"      "ReplaceSpecialCharacters"
 
 $`package:base`
- [1] "as.character" "as.list"      "c"            "ceiling"     
- [5] "eval"         "exists"       "floor"        "format"      
- [9] "getwd"        "gsub"         "isFALSE"      "length"      
-[13] "match.call"   "names"        "nchar"        "parse"       
-[17] "paste"        "paste0"       "print"        "return"      
-[21] "signif"       "sort"         "substitute"   "substr"      
-[25] "Sys.time"    
+ [1] "any"          "as.character" "as.list"      "c"            "ceiling"     
+ [6] "eval"         "floor"        "format"       "gsub"         "is.character"
+[11] "is.na"        "isFALSE"      "length"       "match.call"   "names"       
+[16] "nchar"        "parse"        "paste"        "paste0"       "print"       
+[21] "require"      "return"       "sapply"       "signif"       "sort"        
+[26] "stopifnot"    "strsplit"     "sub"          "substitute"   "substr"      
+[31] "Sys.time"     "tolower"      "toupper"      "trimws"       "try"         
+
+$`package:clipr`
+[1] "write_clip"
 
 $`package:methods`
 [1] "hasArg"
 
-.GlobalEnv
-character(0)
+$`package:Stringendo`
+ [1] "AddTrailingSlashfNonePresent" "kollapse"                    
+ [3] "kpp"                          "kppd"                        
+ [5] "kpps"                         "kppu"                        
+ [7] "ppp"                          "RemoveTrailingDots"          
+ [9] "ReplaceFinalDot"              "ReplaceFinalSlash"           
+[11] "ReplaceInitialDot"            "ReplaceRepeatedSlashes"      
+[13] "sppp"                        
+
+c(".GlobalEnv", "Stringendo")
 base
+clipr
 methods
+Stringendo
