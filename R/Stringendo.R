@@ -19,7 +19,7 @@
 #' @title iprint
 #' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
-#' @examples iprint ("Hello ", "you ", 3, ", ", 11, " year old kids.")
+#' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
 iprint <- function(...) {
@@ -35,9 +35,8 @@ iprint <- function(...) {
 #' @export
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
-  format(Sys.time(), format = Format )
-
-  }
+  format(Sys.time(), format = Format)
+}
 
 # _________________________________________________________________________________________________
 #' @title substrRight
@@ -46,8 +45,7 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
 #' @param x a character vector.
 #' @param n integer. The number of elements on the right to be kept.
 #' @export
-#' @examples substrRight  ("Not cool", n = 4)
-
+#' @examples substrRight("Not cool", n = 4)
 substrRight <- function(x, n) {
   substr(x, nchar(x) - n + 1, nchar(x))
 }
@@ -65,7 +63,9 @@ substrRight <- function(x, n) {
 #' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # replace by a single dot.
 #'
 #' @export
-ReplaceRepeatedDots <- function(string) { gsub(pattern = '\\.+', replacement = '\\.', x = string) }
+ReplaceRepeatedDots <- function(string) {
+  gsub(pattern = "\\.+", replacement = "\\.", x = string)
+}
 
 #' @title ReplaceFinalDot
 #'
@@ -74,7 +74,9 @@ ReplaceRepeatedDots <- function(string) { gsub(pattern = '\\.+', replacement = '
 #' @examples ReplaceFinalDot(string = "stairway..to...heaven...")
 #'
 #' @export
-ReplaceFinalDot <- function(string) { gsub(pattern = '\\.+$', replacement = '', x = string) }
+ReplaceFinalDot <- function(string) {
+  gsub(pattern = "\\.+$", replacement = "", x = string)
+}
 
 #' @title ReplaceInitialDot
 #'
@@ -83,7 +85,9 @@ ReplaceFinalDot <- function(string) { gsub(pattern = '\\.+$', replacement = '', 
 #' @examples ReplaceInitialDot(string = ".example...")
 #' @return A string with the initial dot removed.
 #' @export
-ReplaceInitialDot <- function(string) { gsub(pattern = '^\\.+', replacement = '', x = string) }
+ReplaceInitialDot <- function(string) {
+  gsub(pattern = "^\\.+", replacement = "", x = string)
+}
 
 #' @title RemoveTrailingDots
 #'
@@ -92,7 +96,9 @@ ReplaceInitialDot <- function(string) { gsub(pattern = '^\\.+', replacement = ''
 #' @examples RemoveTrailingDots(string = "...stairway.to..heaven.")
 #' @return A string with the trailing dots removed.
 #' @export
-RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { ReplaceFinalDot(ReplaceInitialDot(string)) }
+RemoveTrailingDots <- function(string = "...stairway.to..heaven.") {
+  ReplaceFinalDot(ReplaceInitialDot(string))
+}
 
 
 # _________________________________________________________________________________________________
@@ -103,7 +109,9 @@ RemoveTrailingDots <- function(string = "...stairway.to..heaven.") { ReplaceFina
 #' @examples ReplaceRepeatedSlashes(string = "path//to//folder")
 #' @return A string with repeated slashes replaced by a single slash.
 #' @export
-ReplaceRepeatedSlashes <- function(string) { gsub(pattern = '//+', replacement = '/', x = string) }
+ReplaceRepeatedSlashes <- function(string) {
+  gsub(pattern = "//+", replacement = "/", x = string)
+}
 
 
 #' @title ReplaceFinalSlash
@@ -113,7 +121,9 @@ ReplaceRepeatedSlashes <- function(string) { gsub(pattern = '//+', replacement =
 #' @examples ReplaceFinalSlash(string = "path/to/folder/")
 #' @return A string with the final slash removed.
 #' @export
-ReplaceFinalSlash <- function(string) { gsub(pattern = '/+$', replacement = '', x = string) }
+ReplaceFinalSlash <- function(string) {
+  gsub(pattern = "/+$", replacement = "", x = string)
+}
 
 
 
@@ -126,8 +136,8 @@ ReplaceFinalSlash <- function(string) { gsub(pattern = '/+$', replacement = '', 
 #' @return A string with special characters replaced by dots.
 #' @export
 
-ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
-  gsub(x = string, pattern = '\\@|\\[|\\]|\\$|\\/\\(\\)', replacement = '.')
+ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]") {
+  gsub(x = string, pattern = "\\@|\\[|\\]|\\$|\\/\\(\\)", replacement = ".")
 }
 
 
@@ -144,8 +154,9 @@ ReplaceSpecialCharacters <- function(string = 'obj@meta$alpha[[3]]' ) {
 #' @export
 AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "\\.")
-    string = paste0(string, ".")
+  if (!LastChr == "\\.") {
+    string <- paste0(string, ".")
+  }
   return(string)
 }
 
@@ -160,8 +171,9 @@ AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
 #' @export
 AddTrailingSlashfNonePresent <- function(string = "stairway/to/heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "/")
-    string = paste0(string, "/")
+  if (!LastChr == "/") {
+    string <- paste0(string, "/")
+  }
   return(string)
 }
 
@@ -174,7 +186,9 @@ AddTrailingSlashfNonePresent <- function(string = "stairway/to/heaven") {
 #' @description Paste by point
 #' @param ... Multiple simple variables to parse.
 #' @export
-ppp <- function(...) { paste(..., sep = '.') }
+ppp <- function(...) {
+  paste(..., sep = ".")
+}
 
 
 # _________________________________________________________________________________________________
@@ -182,14 +196,18 @@ ppp <- function(...) { paste(..., sep = '.') }
 #' @description Paste by (forward) slash
 #' @param ... Multiple simple variables to parse.
 #' @export
-pps <- function(...) { paste(..., sep = '/') }
+pps <- function(...) {
+  paste(..., sep = "/")
+}
 
 # _________________________________________________________________________________________________
 #' @title Paste by underscore
 #' @description Paste by underscore
 #' @param ... Multiple simple variables to parse.
 #' @export
-ppu <- function(...) { paste(..., sep = '_') }
+ppu <- function(...) {
+  paste(..., sep = "_")
+}
 
 
 # _________________________________________________________________________________________________
@@ -197,7 +215,9 @@ ppu <- function(...) { paste(..., sep = '_') }
 #' @description Paste by dash
 #' @param ... Multiple simple variables to parse.
 #' @export
-ppd <- function(...) { paste(..., sep = '-') }
+ppd <- function(...) {
+  paste(..., sep = "-")
+}
 
 # _________________________________________________________________________________________________
 #' @title Paste Elements With Names
@@ -209,12 +229,12 @@ ppd <- function(...) { paste(..., sep = '-') }
 #' @param separator_names A character string to separate the names from the elements. Default is ":".
 #' @param separator_elements A character string to separate the name-element pairs in the
 #' resulting string. Default is " ".
-#' @examples paste_w_names(c('a' = 1, 'b' = 2))
+#' @examples paste_w_names(c("a" = 1, "b" = 2))
 #' @export
-paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
-                          , separator_names = ":", separator_elements = " | ") {
+paste_w_names <- function(
+    named_vec = c("a" = 1, "b" = 2),
+    separator_names = ":", separator_elements = " | ") {
   paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
-
 }
 
 
@@ -227,21 +247,27 @@ paste_w_names <- function(named_vec = c('a' = 1, 'b' = 2)
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
 #' @export
-kpp <- function(...) { paste(..., sep = '.', collapse = '.')  }
+kpp <- function(...) {
+  paste(..., sep = ".", collapse = ".")
+}
 
 # _________________________________________________________________________________________________
 #' @title Collapse by underscore
 #' @description Collapse by underscore
 #' @param ... Multiple simple variables to parse.
 #' @export
-kppu <- function(...) { paste(..., sep = '_',  collapse = '_') }
+kppu <- function(...) {
+  paste(..., sep = "_", collapse = "_")
+}
 
 # _________________________________________________________________________________________________
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
 #' @export
-kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
+kpps <- function(...) {
+  paste(..., sep = "/", collapse = "/")
+}
 
 
 # _________________________________________________________________________________________________
@@ -249,7 +275,9 @@ kpps <- function(...) { paste(..., sep = '/', collapse = '/') }
 #' @description Collapse by dash
 #' @param ... Multiple simple variables to parse.
 #' @export
-kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
+kppd <- function(...) {
+  paste(..., sep = "-", collapse = "-")
+}
 
 
 # _________________________________________________________________________________________________
@@ -260,8 +288,10 @@ kppd <- function(...) { paste(..., sep = '-', collapse = '-') }
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
 #' @param collapseby collapse elements into a string separated by this character
 #' @param print Print the results to the terminal. TRUE by default.
-#' @examples kollapse("Hello ", LETTERS[24],
-#' ", the winning numbers are ", c(1, 3, 5, 65, 11), " . Yay!")
+#' @examples kollapse(
+#'   "Hello ", LETTERS[24],
+#'   ", the winning numbers are ", c(1, 3, 5, 65, 11), " . Yay!"
+#' )
 #' @export
 
 kollapse <- function(...,
@@ -295,7 +325,7 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
-#' @examples spps('Apples//are///sweet//')
+#' @examples spps("Apples//are///sweet//")
 #' @export
 
 spps <- function(...) {
@@ -327,10 +357,13 @@ spps <- function(...) {
 
 
 percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercentile = TRUE) {
-  index = percentile * length(distribution)
-  if (FirstValOverPercentile) { index = ceiling(index)
-  } else {index = floor(index) }
-  value = sort(distribution)[index]
+  index <- percentile * length(distribution)
+  if (FirstValOverPercentile) {
+    index <- ceiling(index)
+  } else {
+    index <- floor(index)
+  }
+  value <- sort(distribution)[index]
   return(value)
 }
 
@@ -340,7 +373,8 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @param pvalue pvalue to parse. Default: 0.01
 
 #' @export
-parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value from a number to a string.
+parsepvalue <- function(pvalue = 0.01) paste0("(p<", pvalue, ")")
+# Parse p-value from a number to a string.
 
 
 # _________________________________________________________________________________________________
@@ -356,14 +390,13 @@ parsepvalue <- function(pvalue = 0.01) paste0("(p<",pvalue,")"); # Parse p-value
 #' @param suffix suffix added after the string, Default: NULL
 #'
 #' @export
-#' @examples percentage_formatter (x = 4.2822212, digitz = 3)
-
+#' @examples percentage_formatter(x = 4.2822212, digitz = 3)
 percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, suffix = NULL, sign_sep = "") {
   if (keep.names) nmz <- names(x)
   pc_sign <- paste(100 * signif(x, digitz), "%", sep = sign_sep)
-  a = trimws(paste(prefix, pc_sign, suffix, sep = " ") )
-  a[a == "NaN %"] = NaN
-  a[a == "NA %"] = NA
+  a <- trimws(paste(prefix, pc_sign, suffix, sep = " "))
+  a[a == "NaN %"] <- NaN
+  a[a == "NA %"] <- NA
   if (keep.names) names(a) <- nmz
   return(a)
 }
@@ -536,11 +569,13 @@ ParseFullFilePath <- function(path, file_name, extension) {
   if (hasArg(path)) {
     path <- AddTrailingSlashfNonePresent(ReplaceRepeatedSlashes(path))
     full_path <- paste0(path, file_name)
-  } else { full_path <- file_name }
+  } else {
+    full_path <- file_name
+  }
 
   if (hasArg(extension)) {
     extension <- ReplaceInitialDot(extension)
-    full_path <- paste0(full_path, '.', extension)
+    full_path <- paste0(full_path, ".", extension)
   }
 
   return(full_path)
@@ -556,13 +591,12 @@ ParseFullFilePath <- function(path, file_name, extension) {
 #' @export
 #'
 #' @examples FixUnderscores(string = "stairway//to/heaven")
-
 FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
-  string <- gsub(x = string, pattern = '_+', replacement = '_')
+  string <- gsub(x = string, pattern = "_+", replacement = "_")
   LastChr <- substr(string, nchar(string), nchar(string))
   if (trimFinal && LastChr == "_") {
-    print(paste('LastChr: ', LastChr))
-    string = substr(string, 1, (nchar(string)-1))
+    print(paste("LastChr: ", LastChr))
+    string <- substr(string, 1, (nchar(string) - 1))
   }
   return(string)
 }
@@ -581,8 +615,9 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
   string <- sppp(string, ...)
   string <- ReplaceRepeatedSlashes(string)
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!is.file & !LastChr == "/")
-    string = paste0(string, "/")
+  if (!is.file & !LastChr == "/") {
+    string <- paste0(string, "/")
+  }
   return(string)
 }
 
@@ -595,7 +630,7 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
 #' @examples FixPlotName(string = "obj at meta$alpha[[3]]")
 #'
 #' @export
-FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
+FixPlotName <- function(string = "obj@meta$alpha[[3]]", ...) {
   string <- ReplaceSpecialCharacters(string)
   string <- sppp(string, ...) # add suffices
   string <- RemoveTrailingDots(string)
@@ -612,7 +647,6 @@ FixPlotName <- function(string = 'obj@meta$alpha[[3]]', ...) {
 #' @export
 #'
 #' @examples ParseDirPath(string = "stairway///to/heaven")
-
 ParseDirPath <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
@@ -631,7 +665,7 @@ ParseDirPath <- function(...) {
 PasteDirNameFromFlags <- function(...) {
   flagList <- c(...)
   pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
+  CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
   return(CleanDirName)
 }
 # PasteDirNameFromFlags("HCAB"
@@ -648,7 +682,9 @@ PasteDirNameFromFlags <- function(...) {
 #' @param vec Filename basis.
 #' @examples extPDF("mypltt")
 #' @export
-extPDF <- function(vec) {  ppp(vec, "pdf") } # add pdf as extension to a file name
+extPDF <- function(vec) {
+  ppp(vec, "pdf")
+} # add pdf as extension to a file name
 
 
 # _________________________________________________________________________________________________
@@ -657,7 +693,9 @@ extPDF <- function(vec) {  ppp(vec, "pdf") } # add pdf as extension to a file na
 #' @param vec Filename basis.
 #' @examples extPNG("mypltt")
 #' @export
-extPNG <- function(vec) { ppp(vec, "png") } # add png as extension to a file name
+extPNG <- function(vec) {
+  ppp(vec, "png")
+} # add png as extension to a file name
 
 # ______________________________________________________________________________________________----
 # Flag parsing for path / directory naming ----
@@ -687,12 +725,12 @@ param.list.2.fname <- function(ls.of.params = p) {
 PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   flagList <- c(path, ...)
   pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = '[\\..] + ',replacement = '\\.' )
+  CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
   # pastedOutDir <- kpps(path, CleanDirName, "/")
   pastedOutDir <- paste0(CleanDirName, "/")
-  CleanDirName <- gsub(x = pastedOutDir, pattern = '[//] + ',replacement = '/' )
-  CleanDirName <- gsub(x = pastedOutDir, pattern = '[/] + ',replacement = '/' )
-  CleanDirName <- gsub(x = pastedOutDir, pattern = '/\\.+',replacement = '/') # remove invisible directories '/.dirname'
+  CleanDirName <- gsub(x = pastedOutDir, pattern = "[//] + ", replacement = "/")
+  CleanDirName <- gsub(x = pastedOutDir, pattern = "[/] + ", replacement = "/")
+  CleanDirName <- gsub(x = pastedOutDir, pattern = "/\\.+", replacement = "/") # remove invisible directories '/.dirname'
   return(CleanDirName)
 }
 # PasteOutdirFromFlags("~/Dropbox/Abel.IMBA/AnalysisD/HCAB"
@@ -708,13 +746,17 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @examples Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+#' @examples Xseed <- 1212
+#' p <- list()
+#' p$"seed" <- 1212
+#' flag.name_value(Xseed)
+#' flag.name_value(p$"seed")
 #' @export
 
 flag.name_value <- function(toggle, Separator = "_") {
   if (!isFALSE(toggle)) {
-    output = paste(substitute(toggle), toggle, sep = Separator)
-    if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
+    output <- paste(substitute(toggle), toggle, sep = Separator)
+    if (length(output) > 1) output <- output[length(output)] # fix for when input is a list element like p$'myparam'
     return(output)
   }
 }
@@ -730,9 +772,12 @@ flag.name_value <- function(toggle, Separator = "_") {
 
 
 flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = "") {
-  output = if (toggle) { paste0(prefix, (substitute(toggle)), suffix)
-  } else {paste0(prefix, name.if.not, suffix)}
-  if (length(output) > 1) output = output[length(output)]  # fix for when input is a list element like p$'myparam'
+  output <- if (toggle) {
+    paste0(prefix, (substitute(toggle)), suffix)
+  } else {
+    paste0(prefix, name.if.not, suffix)
+  }
+  if (length(output) > 1) output <- output[length(output)] # fix for when input is a list element like p$'myparam'
   return(output)
 } # returns the name if its value is true
 
@@ -746,9 +791,8 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 flag.names_list <- function(par) {
-  if (length(par)) paste(substitute(par), kppu(par) , sep = "_")[[3]]
-};
-
+  if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
+}
 # _________________________________________________________________________________________________
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
@@ -768,9 +812,9 @@ flag.names_list.all.new <- function(pl = p.hm) {
 #' @export
 
 
-param.list.flag <- function(par = p$'umap.min_dist') {
+param.list.flag <- function(par = p$"umap.min_dist") {
   paste(substitute(par), par, sep = "_")[[3]]
-}  # param.list.flag(par = p$umap.n_neighbors)
+} # param.list.flag(par = p$umap.n_neighbors)
 
 
 
@@ -785,21 +829,25 @@ param.list.flag <- function(par = p$'umap.min_dist') {
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param collapsechar Separating character between each parameters-flag
 #' @export
-#' @examples pearson = TRUE; filtered = TRUE; normalized = FALSE
-#' MyPlotname = parFlags(prefix = "MyPlot", pearson, filtered, normalized ); MyPlotname
-
+#' @examples pearson <- TRUE
+#' filtered <- TRUE
+#' normalized <- FALSE
+#' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized)
+#' MyPlotname
 parFlags <-
   function(prefix = "",
            ...,
            pasteflg = TRUE,
            collapsechar = ".") {
-    namez = as.character(as.list(match.call())[-(1:2)])
-    val = c(...)
-    names(val) = namez
+    namez <- as.character(as.list(match.call())[-(1:2)])
+    val <- c(...)
+    names(val) <- namez
     # flg = names(which(as.logical.wNames(val))) # which_names()
-    flg = names(val)[val]
+    flg <- names(val)[val]
     print(flg)
-    flg = if (pasteflg) {paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))}
+    flg <- if (pasteflg) {
+      paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))
+    }
     return(flg)
   }
 
@@ -815,22 +863,26 @@ parFlags <-
 #' @param coll.char Separating character between each parameters-flag
 #' @param coll.char.intra Separating character between parameters and its value
 #' @export
-#' @examples pearson = TRUE; filtered = 3; normalized = FALSE;
-#' MyPlotname = parFlags2(prefix = "MyPlot", pearson, filtered, normalized ); MyPlotname
-
+#' @examples pearson <- TRUE
+#' filtered <- 3
+#' normalized <- FALSE
+#' MyPlotname <- parFlags2(prefix = "MyPlot", pearson, filtered, normalized)
+#' MyPlotname
 parFlags2 <-
   function(prefix = ".",
            ...,
            pasteflg = TRUE,
            coll.char = ".",
            coll.char.intra = "_") {
-    val = c(...)
-    namez = as.character(as.list(match.call())[-(1:2)])
-    names(val) = namez
-    flg = if (pasteflg) {
-      paste0(prefix,
-             coll.char,
-             paste0(namez, coll.char.intra, val, collapse = coll.char))
+    val <- c(...)
+    namez <- as.character(as.list(match.call())[-(1:2)])
+    names(val) <- namez
+    flg <- if (pasteflg) {
+      paste0(
+        prefix,
+        coll.char,
+        paste0(namez, coll.char.intra, val, collapse = coll.char)
+      )
     }
     return(flg)
   }
@@ -846,7 +898,6 @@ parFlags2 <-
 #' @export
 #'
 #' @examples ww.break.lines()
-
 ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
@@ -861,7 +912,6 @@ ww.break.lines <- function(char.vec = kppd(LETTERS), max.char = 50) {
 #' @param site_url Hyperlink url.
 #' @export
 #' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation"), site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
-
 FormatAsExcelLink <- function(site_name, site_url) {
   paste0(
     "=HYPERLINK(\"",
@@ -884,7 +934,7 @@ FormatAsExcelLink <- function(site_name, site_url) {
 
 #' @export
 eval_parse_kollapse <- function(...) {
-  substitute(eval(parse(text = kollapse( ... , print = FALSE))))
+  substitute(eval(parse(text = kollapse(..., print = FALSE))))
 }
 
 
@@ -893,5 +943,3 @@ eval_parse_kollapse <- function(...) {
 # _________________________________________________________________________________________________
 
 # _________________________________________________________________________________________________
-
-
