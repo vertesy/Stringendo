@@ -1,19 +1,18 @@
 Package: Stringendo
 Title: Stringendo - string parser
-Version: 0.5.0
+Version: 0.5.5
 Authors@R: 
-    person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
-Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
+    person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
+Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
 Description: Stringendo is a set of R functions to parse strings from
     variables and to manipulate strings.
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
+Depends: 
+    base
 Imports: 
     clipr
-Suggests: 
-    MarkdownHelpers,
-    MarkdownReports
 Encoding: UTF-8
-Packaged: 2023-11-26 02:06:03.899714
+Packaged: 2023-11-27 21:07:25.081435
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

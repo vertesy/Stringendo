@@ -16,4 +16,5 @@ string and adds a final '/' if missing from a file path.
 }
 \examples{
 ParseDirPath(string = "stairway///to/heaven")
+
 }

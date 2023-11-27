@@ -2,140 +2,90 @@
 # Create_the_Stringendo_Package.R
 ######################################################################################################
 # source("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
-rm(list = ls(all.names = TRUE));
-try(dev.off(), silent = TRUE)
+rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
 
 
 # Functions ------------------------
-# require("devtools")
-# require("roxygen2")
-# require("stringr")
-
-# # devtools::install_github(repo = "vertesy/CodeAndRoll2")
-# require('CodeAndRoll2')
-# # try (source('~/GitHub/Packages/CodeAndRoll/CodeAndRoll.R'),silent= FALSE) # ONLY If Stringendo not yet exist
-# require('Stringendo')
+require(PackageTools)
+devtools::load_all("~/GitHub/Packages/PackageTools")
 
 # Setup ------------------------
-package.name <- 	"Stringendo"
-package.version <- "0.5.0"
-setwd("~/GitHub/Packages/")
+repository.dir <- "~/GitHub/Packages/Stringendo/"
+config.path <- file.path(repository.dir, "Development/config.R")
 
-RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
-fname <-	paste0(package.name, ".R")
-Package_FnP <-		paste0(RepositoryDir, "R/", fname)
+"TAKE A LOOK AT"
+file.edit(config.path)
+source(config.path)
+package.name <- DESCRIPTION$'package.name'
 
-BackupDir <- "~/GitHub/Packages/Stringendo/Development/"
-dir.create(BackupDir)
-
-# devtools::use_package("vioplot")
-DESCRIPTION <- list("Title" = "Stringendo - string parser"
-    , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
-    , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
-    , "Description" = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings."
-    , "License" = "GPL-3 + file LICENSE"
-    , "Version" = package.version
-    , "Packaged" =  Sys.time()
-    # , "Repository" =  "CRAN"
-    # , "Depends" =  ""
-    # , "Imports" = "devtools, grDevices, usethis, MarkdownReports"
-    , "Imports" = "clipr"
-    , "Suggests" = "MarkdownHelpers, MarkdownReports"
-    , "BugReports"= "https://github.com/vertesy/Stringendo/issues"
-)
-
-
-setwd(RepositoryDir)
-if ( !dir.exists(RepositoryDir) ) { create(path = RepositoryDir, description = DESCRIPTION, rstudio = TRUE)
-} else {
-    getwd()
-    try(file.remove(c("DESCRIPTION","NAMESPACE", "Stringendo.Rproj")))
-    usethis::create_package(path = RepositoryDir, fields = DESCRIPTION, open = F)
-}
-
-
-# go and write fun's ------------------------------------------------------------------------
-# file.edit(Package_FnP)
-
-# Create Roxygen Skeletons ------------------------
-# RoxygenReady(Package_FnP)
-
-# replace output files ------------------------------------------------
-BackupOldFile <-	(paste0(BackupDir, "Development", ".bac"))
-AnnotatedFile <-	(paste0(BackupDir, "Development", ".annot.R"))
-file.copy(from = Package_FnP, to = BackupOldFile, overwrite = TRUE)
-# file.copy(from = AnnotatedFile, to = Package_FnP, overwrite = TRUE)
-
-# Manual editing of descriptors ------------------------------------------------
-# file.edit(Package_FnP)
-
-# Compile a package ------------------------------------------------
-setwd(RepositoryDir)
-getwd()
-devtools::document()
-warnings()
-
-
-{
-  "update cff version"
-  citpath <- paste0(RepositoryDir, 'CITATION.cff')
-  xfun::gsub_file(file = citpath, perl = T
-                  , "^version: v.+", paste0("version: v", package.version))
-}
-
+PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
+'git add commit push to remote'
 
 # Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
-# unload("Stringendo")
-devtools::install(RepositoryDir, upgrade = F)
-
-'after uploading'
-pak::pkg_install('vertesy/Stringendo')
-
-# require("Stringendo")
-# # remove.packages("Stringendo")
-# # Test your package ------------------------------------------------
-# help("wplot")
-# cat("\014")
-# devtools::run_examples()
+"disable rprofile by"
+rprofile()
+devtools::install_local(repository.dir, upgrade = F)
 
 
 # Test if you can install from github ------------------------------------------------
-# devtools::install_github(repo = "vertesy/Stringendo")
+remote.path <- file.path(DESCRIPTION$'github.user', package.name)
+pak::pkg_install(remote.path)
 
-# require("Stringendo")
+devtools::install_github(repo = "vertesy/Seurat.utils", upgrade = F)
 
-# Clean up if not needed anymore ------------------------------------------------
-# View(installed.packages())
-# remove.packages("Stringendo")
+# unload(package.name)
+# require(package.name, character.only = TRUE)
+# # remove.packages(package.name)
 
-check(RepositoryDir, cran = TRUE)
-# as.package(RepositoryDir)
-#
-#
-# # source("https://install-github.me/r-lib/desc")
-# # library(desc)
-# # desc$set("Stringendo", "foo")
-# # desc$get(Stringendo)
-#
-#
-# system("cd ~/GitHub/Stringendo/; ls -a; open .Rbuildignore")
+# if (!require("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install(version = "3.18")
+# BiocManager::install("MatrixGenerics")
 
-# Check package dependencies ------------------------------------------------
-depFile = paste0(RepositoryDir, 'Development/Dependencies.R')
-
-(f.deps <- NCmisc::list.functions.in.file(filename = Package_FnP))
-# clipr::write_clip(f.deps)
-
-sink(file = depFile); print(f.deps); sink()
-p.deps <- gsub(x = names(f.deps), pattern = 'package:', replacement = '')
-write(x = p.deps, file = depFile, append = T)
-p.dep.declared <- trimws(unlist(strsplit(DESCRIPTION$Imports, ",")))
-p.dep.new <- sort(union( p.deps, p.dep.declared))
-# clipr::write_clip(p.dep.new)
+# CMD CHECK ------------------------------------------------
+checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
-# Linter and Styler ------------------------------------------------
+
+# Automated Codebase linting to tidyverse style ------------------------------------------------
+styler::style_pkg(repository.dir)
 
 
-styler::style_file("~/GitHub/Packages/Stringendo/R/Stringendo.R")
+# Extract package dependencies ------------------------------------------------
+PackageTools::extract_package_dependencies(repository.dir)
+
+
+# Visualize function dependencies within the package------------------------------------------------
+{
+  warning("works only on the installed version of the package!")
+  pkgnet_result <- pkgnet::CreatePackageReport(package.name)
+  fun_graph     <- pkgnet_result$FunctionReporter$pkg_graph$'igraph'
+  PackageTools::convert_igraph_to_mermaid(graph = fun_graph, openMermaid = T, copy_to_clipboard = T)
+}
+
+
+# Try to find and add missing @importFrom statements------------------------------------------------
+devtools::load_all("~/GitHub/Packages/PackageTools/")
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T))
+if (F) {
+  (excluded.packages <- unlist(strsplit(DESCRIPTION$'depends', split = ", ")))
+  for (scriptX in ls.scripts.full.path) {
+    PackageTools::add_importFrom_statements(scriptX, exclude_packages = excluded.packages)
+  }
+}
+
+
+# Generate the list of functions ------------------------------------------------
+for (scriptX in ls.scripts.full.path) {
+  PackageTools::list_of_funs_to_markdown(scriptX)
+}
+
+PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
+
+
+# Replaces T with TRUE and F with FALSE ------------------------------------------------
+for (scriptX in ls.scripts.full.path) {
+  PackageTools::replace_tf_with_true_false(scriptX, strict_mode = F)
+}
+
+

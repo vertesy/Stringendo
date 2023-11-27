@@ -15,5 +15,7 @@ flag.name_value(toggle, Separator = "_")
 Returns the name and its value, if its not FALSE.
 }
 \examples{
-Xseed = 1212; p = list(); p$'seed' = 1212; flag.name_value(Xseed); flag.name_value(p$'seed')
+Xseed <- 1212; p <- list(); p$"seed" <- 1212
+flag.name_value(Xseed); flag.name_value(p$"seed")
+
 }

@@ -24,5 +24,5 @@ with its name. Elements are separated by a specified string, and name-element pa
 separated by a specified string. The default named vector is \code{c('a' = 1, 'b' = 2)}.
 }
 \examples{
-paste_w_names(c('a' = 1, 'b' = 2))
+paste_w_names(c("a" = 1, "b" = 2))
 }

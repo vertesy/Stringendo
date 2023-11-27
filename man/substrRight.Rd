@@ -15,5 +15,5 @@ substrRight(x, n)
 Take the right substring of a string
 }
 \examples{
-substrRight  ("Not cool", n = 4)
+substrRight("Not cool", n = 4)
 }

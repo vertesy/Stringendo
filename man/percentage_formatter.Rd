@@ -30,5 +30,5 @@ percentage_formatter(
 Parse a string of 0-100\% from a number between 0 and 1.
 }
 \examples{
-percentage_formatter (x = 4.2822212, digitz = 3)
+percentage_formatter(x = 4.2822212, digitz = 3)
 }

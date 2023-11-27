@@ -4,7 +4,7 @@
 \alias{ww.break.lines}
 \title{break.lines for plot titles}
 \usage{
-ww.break.lines(char.vec = kppd(LETTERS), max.char = 50)
+ww.break.lines(char.vec, max.char = 50)
 }
 \arguments{
 \item{char.vec}{A long sentence}
@@ -15,5 +15,6 @@ ww.break.lines(char.vec = kppd(LETTERS), max.char = 50)
 break.lines for plot titles
 }
 \examples{
-ww.break.lines()
+ww.break.lines(char.vec = kppd(LETTERS))
+
 }
