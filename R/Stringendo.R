@@ -67,25 +67,25 @@ ReplaceRepeatedDots <- function(string) {
   gsub(pattern = "\\.+", replacement = "\\.", x = string)
 }
 
-#' @title ReplaceFinalDot
+#' @title RemoveFinalDot
 #'
-#' @description ReplaceFinalDot removes the final dot from a string
+#' @description RemoveFinalDot removes the final dot from a string
 #' @param string The file path potentially having Final Dot
-#' @examples ReplaceFinalDot(string = "stairway..to...heaven...")
+#' @examples RemoveFinalDot(string = "stairway..to...heaven...")
 #'
 #' @export
-ReplaceFinalDot <- function(string) {
+RemoveFinalDot <- function(string) {
   gsub(pattern = "\\.+$", replacement = "", x = string)
 }
 
-#' @title ReplaceInitialDot
+#' @title RemoveInitialDot
 #'
-#' @description ReplaceInitialDot removes the initial dot from a string.
+#' @description RemoveInitialDot removes the initial dot from a string.
 #' @param string The string potentially having an initial dot.
-#' @examples ReplaceInitialDot(string = ".example...")
+#' @examples RemoveInitialDot(string = ".example...")
 #' @return A string with the initial dot removed.
 #' @export
-ReplaceInitialDot <- function(string) {
+RemoveInitialDot <- function(string) {
   gsub(pattern = "^\\.+", replacement = "", x = string)
 }
 
@@ -97,7 +97,7 @@ ReplaceInitialDot <- function(string) {
 #' @return A string with the trailing dots removed.
 #' @export
 RemoveTrailingDots <- function(string = "...stairway.to..heaven.") {
-  ReplaceFinalDot(ReplaceInitialDot(string))
+  RemoveFinalDot(RemoveInitialDot(string))
 }
 
 
@@ -316,8 +316,8 @@ kollapse <- function(...,
 sppp <- function(...) {
   string <- kpp(...)
   string <- ReplaceRepeatedDots(string)
-  string <- ReplaceFinalDot(string)
-  string <- ReplaceInitialDot(string)
+  string <- RemoveFinalDot(string)
+  string <- RemoveInitialDot(string)
   return(string)
 }
 
@@ -574,7 +574,7 @@ ParseFullFilePath <- function(path, file_name, extension) {
   }
 
   if (hasArg(extension)) {
-    extension <- ReplaceInitialDot(extension)
+    extension <- RemoveInitialDot(extension)
     full_path <- paste0(full_path, ".", extension)
   }
 

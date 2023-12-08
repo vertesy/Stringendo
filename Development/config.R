@@ -1,7 +1,7 @@
 # Configuration for the Package
 DESCRIPTION <- list(
   package.name = "Stringendo",
-  version = "0.5.7",
+  version = "0.6.0",
   title = "Stringendo - string parser",
   description = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings.",
 
