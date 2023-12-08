@@ -114,14 +114,14 @@ ReplaceRepeatedSlashes <- function(string) {
 }
 
 
-#' @title ReplaceFinalSlash
+#' @title RemoveFinalSlash
 #'
-#' @description ReplaceFinalSlash removes the final slash from a string (file path).
+#' @description RemoveFinalSlash removes the final slash(es) from a string (file path).
 #' @param string The string (file path) potentially having a final slash.
-#' @examples ReplaceFinalSlash(string = "path/to/folder/")
+#' @examples RemoveFinalSlash(string = "path/to/folder/")
 #' @return A string with the final slash removed.
 #' @export
-ReplaceFinalSlash <- function(string) {
+RemoveFinalSlash <- function(string) {
   gsub(pattern = "/+$", replacement = "", x = string)
 }
 
@@ -331,7 +331,7 @@ sppp <- function(...) {
 spps <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
-  string <- ReplaceFinalSlash(string)
+  string <- RemoveFinalSlash(string)
   return(string)
 }
 

@@ -2,49 +2,39 @@
 # Create_the_Stringendo_Package.R
 ######################################################################################################
 # source("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
-rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
-
+# rm(list = ls(all.names = TRUE));
+try(dev.off(), silent = TRUE)
 
 # Functions ------------------------
-require(PackageTools)
-devtools::load_all("~/GitHub/Packages/PackageTools")
-
-# Setup ------------------------
-repository.dir <- "~/GitHub/Packages/Stringendo/"
+repository.dir <- "~/GitHub/Packages/Stringendo"
 config.path <- file.path(repository.dir, "Development/config.R")
 
 "TAKE A LOOK AT"
 file.edit(config.path)
 source(config.path)
-package.name <- DESCRIPTION$'package.name'
 
+# Install your package ------------------------------------------------
+# install.packages('pracma')
+# install.packages('stringdist')
+# install.packages('ggExtra')
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 'git add commit push to remote'
+
 
 # Install your package ------------------------------------------------
 "disable rprofile by"
 rprofile()
 devtools::install_local(repository.dir, upgrade = F)
 
-
 # Test if you can install from github ------------------------------------------------
-remote.path <- file.path(DESCRIPTION$'github.user', package.name)
+remote.path <- file.path(DESCRIPTION$'github.user', DESCRIPTION$'package.name')
 pak::pkg_install(remote.path)
-
-devtools::install_github(repo = "vertesy/Seurat.utils", upgrade = F)
-
-# unload(package.name)
-# require(package.name, character.only = TRUE)
-# # remove.packages(package.name)
-
-# if (!require("BiocManager", quietly = TRUE))
-#   install.packages("BiocManager")
-# BiocManager::install(version = "3.18")
-# BiocManager::install("MatrixGenerics")
+# unload(DESCRIPTION$'package.name')
+# require(DESCRIPTION$'package.name')
+# # remove.packages(DESCRIPTION$'package.name')
 
 # CMD CHECK ------------------------------------------------
 checkres <- devtools::check(repository.dir, cran = FALSE)
-
 
 
 # Automated Codebase linting to tidyverse style ------------------------------------------------
@@ -58,8 +48,9 @@ PackageTools::extract_package_dependencies(repository.dir)
 # Visualize function dependencies within the package------------------------------------------------
 {
   warning("works only on the installed version of the package!")
-  pkgnet_result <- pkgnet::CreatePackageReport(package.name)
+  pkgnet_result <- pkgnet::CreatePackageReport(DESCRIPTION$'package.name')
   fun_graph     <- pkgnet_result$FunctionReporter$pkg_graph$'igraph'
+
   PackageTools::convert_igraph_to_mermaid(graph = fun_graph, openMermaid = T, copy_to_clipboard = T)
 }
 
@@ -85,7 +76,10 @@ PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
 
 # Replaces T with TRUE and F with FALSE ------------------------------------------------
 for (scriptX in ls.scripts.full.path) {
-  PackageTools::replace_tf_with_true_false(scriptX, strict_mode = F)
+  PackageTools::replace_tf_with_true_false(scriptX)
 }
+
+
+
 
 
