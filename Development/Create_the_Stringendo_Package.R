@@ -26,6 +26,7 @@ PackageTools::document_and_create_package(repository.dir, config_file = 'config.
 rprofile()
 devtools::install_local(repository.dir, upgrade = F)
 
+
 # Test if you can install from github ------------------------------------------------
 remote.path <- file.path(DESCRIPTION$'github.user', DESCRIPTION$'package.name')
 pak::pkg_install(remote.path)
