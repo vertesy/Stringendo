@@ -614,7 +614,9 @@ FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
 #'
 #' @export
 FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
-  string <- sppp(string, ...)
+  string <- spps(string, ...)
+  string <- RemoveTrailingDots(string)
+  string <- ReplaceRepeatedDots(string)
   string <- ReplaceRepeatedSlashes(string)
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!is.file & !LastChr == "/") {
@@ -634,8 +636,8 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
 #'
 #' @export
 FixPlotName <- function(string = "obj@meta$alpha[[3]]", ...) {
-  string <- ReplaceSpecialCharacters(string)
   string <- sppp(string, ...) # add suffices
+  string <- ReplaceSpecialCharacters(string)
   string <- RemoveTrailingDots(string)
   ReplaceRepeatedDots(string)
 }
