@@ -11,6 +11,47 @@
 # try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
 
+
+# ______________________________________________________________________________________________----
+# Control functions ----
+# _________________________________________________________________________________________________
+
+# ______________________________________________________________________________________________________________________________
+#' @title Stop Execution If Condition is True
+#'
+#' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
+#' It is the complement of the `stopifnot()` function and is used for asserting conditions where
+#' an error should be thrown if the condition is TRUE, rather than FALSE.
+#' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
+#' @param message An optional error message to display if the condition is TRUE.
+#'
+#' @examples a <- 1
+#' stopif(a != 1, message = "A is 1")
+#' @export
+stopif <- function(condition, message = 'Condition is TRUE.') {
+  if (isTRUE(condition)) stop(message)
+}
+
+
+# ______________________________________________________________________________________________________________________________
+#' @title Negation of '%in%' Operator
+#'
+#' @description
+#' `%!in%` is used to test if elements of one vector are not present in another vector.
+#' It is the negation of the `%in%` operator. This operator returns `TRUE` for elements
+#' of `x` that are not in `y`.
+#'
+#' @param x A vector of values to be matched.
+#' @param y A vector of values to be matched against.
+#' @return A logical vector indicating if elements in `x` are not present in `y`.
+#' @examples
+#' c(1, 2, 3) %!in% c(2, 4, 6)
+#' # [1]  TRUE FALSE  TRUE
+#' @export
+'%!in%' <- function(x, y) !('%in%'(x, y))
+
+
+
 # ______________________________________________________________________________________________----
 # Generic auxiliary functions ----
 # _________________________________________________________________________________________________
