@@ -289,7 +289,7 @@ paste_w_names <- function(
 #' @param ... Multiple simple variables to parse.
 #' @export
 kpp <- function(...) {
-  paste(..., sep = ".", collapse = ".")
+  paste(c(...), sep = ".", collapse = ".")
 }
 
 # _________________________________________________________________________________________________
@@ -298,7 +298,7 @@ kpp <- function(...) {
 #' @param ... Multiple simple variables to parse.
 #' @export
 kppu <- function(...) {
-  paste(..., sep = "_", collapse = "_")
+  paste(c(...), sep = "_", collapse = "_")
 }
 
 # _________________________________________________________________________________________________
@@ -307,7 +307,7 @@ kppu <- function(...) {
 #' @param ... Multiple simple variables to parse.
 #' @export
 kpps <- function(...) {
-  paste(..., sep = "/", collapse = "/")
+  paste(c(...), sep = "/", collapse = "/")
 }
 
 
@@ -317,8 +317,18 @@ kpps <- function(...) {
 #' @param ... Multiple simple variables to parse.
 #' @export
 kppd <- function(...) {
-  paste(..., sep = "-", collapse = "-")
+  paste(c(...), sep = "-", collapse = "-")
 }
+
+# _________________________________________________________________________________________________
+#' @title Collapse by white space
+#' @description Collapse by white space
+#' @param ... Multiple simple variables to parse.
+#' @export
+kppws <- function(...) {
+  paste(c(...), sep = " ", collapse = " ")
+}
+
 
 
 # _________________________________________________________________________________________________
