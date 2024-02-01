@@ -432,8 +432,8 @@ spps <- function(...) {
 
 sppu <- function(...) {
   string <- kppu(...)
-  string <- ReplaceRepeated(string)
-  string <- RemoveFinalstring)
+  string <- ReplaceRepeatedUnderscores(string)
+  string <- RemoveFinalUnderscores(string)
   return(string)
 }
 
