@@ -96,7 +96,7 @@ substrRight <- function(x, n) {
 # ______________________________________________________________________________________________----
 # Special character removal  -------------------------------------------------------------------------------------------------
 
-# _________________________________________________________________________________________________
+
 #' @title ReplaceRepeatedDots
 #'
 #' @description ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
@@ -108,6 +108,7 @@ ReplaceRepeatedDots <- function(string) {
   gsub(pattern = "\\.+", replacement = "\\.", x = string)
 }
 
+# _________________________________________________________________________________________________
 #' @title RemoveFinalDot
 #'
 #' @description RemoveFinalDot removes the final dot from a string
@@ -119,6 +120,7 @@ RemoveFinalDot <- function(string) {
   gsub(pattern = "\\.+$", replacement = "", x = string)
 }
 
+# _________________________________________________________________________________________________
 #' @title RemoveInitialDot
 #'
 #' @description RemoveInitialDot removes the initial dot from a string.
@@ -130,6 +132,7 @@ RemoveInitialDot <- function(string) {
   gsub(pattern = "^\\.+", replacement = "", x = string)
 }
 
+# _________________________________________________________________________________________________
 #' @title RemoveTrailingDots
 #'
 #' @description RemoveTrailingDots removes dots at the beginning and end of a string.
@@ -155,6 +158,7 @@ ReplaceRepeatedSlashes <- function(string) {
 }
 
 
+# _________________________________________________________________________________________________
 #' @title RemoveFinalSlash
 #'
 #' @description RemoveFinalSlash removes the final slash(es) from a string (file path).
@@ -165,6 +169,33 @@ ReplaceRepeatedSlashes <- function(string) {
 RemoveFinalSlash <- function(string) {
   gsub(pattern = "/+$", replacement = "", x = string)
 }
+
+
+# _________________________________________________________________________________________________
+#' @title ReplaceRepeatedUnderscores
+#'
+#' @description ReplaceRepeatedUnderscores replaces multiple consecutive slashes with a single slash.
+#' @param string The string (file path) potentially having repeated slashes.
+#' @examples ReplaceRepeatedUnderscores(string = "path//to//folder")
+#' @return A string with repeated slashes replaced by a single slash.
+#' @export
+ReplaceRepeatedUnderscores <- function(string) {
+  gsub(pattern = "_+", replacement = "_", x = string)
+}
+
+
+# _________________________________________________________________________________________________
+#' @title RemoveFinalUnderscores
+#'
+#' @description RemoveFinalUnderscores removes the final slash(es) from a string (file path).
+#' @param string The string (file path) potentially having a final slash.
+#' @examples RemoveFinalUnderscores(string = "path/to/folder/")
+#' @return A string with the final slash removed.
+#' @export
+RemoveFinalUnderscores <- function(string) {
+  gsub(pattern = "_+$", replacement = "", x = string)
+}
+
 
 
 
@@ -287,6 +318,7 @@ paste_w_names <- function(
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
+#' @example kpp("A", 1:2, "end")
 #' @export
 kpp <- function(...) {
   paste(c(...), sep = ".", collapse = ".")
@@ -296,6 +328,7 @@ kpp <- function(...) {
 #' @title Collapse by underscore
 #' @description Collapse by underscore
 #' @param ... Multiple simple variables to parse.
+#' @example kppu("A", 1:2, "end")
 #' @export
 kppu <- function(...) {
   paste(c(...), sep = "_", collapse = "_")
@@ -305,6 +338,7 @@ kppu <- function(...) {
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
+#' @example kpps("A", 1:2, "end")
 #' @export
 kpps <- function(...) {
   paste(c(...), sep = "/", collapse = "/")
@@ -315,6 +349,7 @@ kpps <- function(...) {
 #' @title Collapse by dash
 #' @description Collapse by dash
 #' @param ... Multiple simple variables to parse.
+#' @example kppd("A", 1:2, "end")
 #' @export
 kppd <- function(...) {
   paste(c(...), sep = "-", collapse = "-")
@@ -324,6 +359,7 @@ kppd <- function(...) {
 #' @title Collapse by white space
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
+#' @example kppws("A", 1:2, "end")
 #' @export
 kppws <- function(...) {
   paste(c(...), sep = " ", collapse = " ")
@@ -362,7 +398,7 @@ kollapse <- function(...,
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
-#' @examples sppp("Apples..are...sweet.....")
+#' @example sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
 #' @export
 sppp <- function(...) {
   string <- kpp(...)
@@ -376,13 +412,28 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
-#' @examples spps("Apples//are///sweet//")
+#' @example spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
 #' @export
 
 spps <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
   string <- RemoveFinalSlash(string)
+  return(string)
+}
+
+
+# _________________________________________________________________________________________________
+#' @title Simplified Paste by underscore
+#' @description Simplified Paste by underscore
+#' @param ... Multiple simple variables to parse.
+#' @example sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
+#' @export
+
+sppu <- function(...) {
+  string <- kppu(...)
+  string <- ReplaceRepeated(string)
+  string <- RemoveFinalstring)
   return(string)
 }
 
