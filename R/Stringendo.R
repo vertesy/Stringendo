@@ -34,10 +34,9 @@ stopif <- function(condition, message = 'Condition is TRUE.') {
 
 
 # ______________________________________________________________________________________________________________________________
-#' @title Negation of '%in%' Operator
+#' @title Negation of the `in` (w. grapes) Operator
 #'
-#' @description
-#' `%!in%` is used to test if elements of one vector are not present in another vector.
+#' @description `%!in%` is used to test if elements of one vector are not present in another vector.
 #' It is the negation of the `%in%` operator. This operator returns `TRUE` for elements
 #' of `x` that are not in `y`.
 #'
