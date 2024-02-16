@@ -317,7 +317,7 @@ paste_w_names <- function(
 #' @title Collapse by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
-#' @example kpp("A", 1:2, "end")
+#' @examples kpp("A", 1:2, "end")
 #' @export
 kpp <- function(...) {
   paste(c(...), sep = ".", collapse = ".")
@@ -327,7 +327,7 @@ kpp <- function(...) {
 #' @title Collapse by underscore
 #' @description Collapse by underscore
 #' @param ... Multiple simple variables to parse.
-#' @example kppu("A", 1:2, "end")
+#' @examples kppu("A", 1:2, "end")
 #' @export
 kppu <- function(...) {
   paste(c(...), sep = "_", collapse = "_")
@@ -337,7 +337,7 @@ kppu <- function(...) {
 #' @title Collapse by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
-#' @example kpps("A", 1:2, "end")
+#' @examples kpps("A", 1:2, "end")
 #' @export
 kpps <- function(...) {
   paste(c(...), sep = "/", collapse = "/")
@@ -348,7 +348,7 @@ kpps <- function(...) {
 #' @title Collapse by dash
 #' @description Collapse by dash
 #' @param ... Multiple simple variables to parse.
-#' @example kppd("A", 1:2, "end")
+#' @examples kppd("A", 1:2, "end")
 #' @export
 kppd <- function(...) {
   paste(c(...), sep = "-", collapse = "-")
@@ -358,7 +358,7 @@ kppd <- function(...) {
 #' @title Collapse by white space
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
-#' @example kppws("A", 1:2, "end")
+#' @examples kppws("A", 1:2, "end")
 #' @export
 kppws <- function(...) {
   paste(c(...), sep = " ", collapse = " ")
@@ -397,7 +397,7 @@ kollapse <- function(...,
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
 #' @param ... Multiple simple variables to parse.
-#' @example sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
+#' @examples sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
 #' @export
 sppp <- function(...) {
   string <- kpp(...)
@@ -411,7 +411,7 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
-#' @example spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
+#' @examples spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
 #' @export
 
 spps <- function(...) {
@@ -426,7 +426,7 @@ spps <- function(...) {
 #' @title Simplified Paste by underscore
 #' @description Simplified Paste by underscore
 #' @param ... Multiple simple variables to parse.
-#' @example sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
+#' @examples sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
 #' @export
 
 sppu <- function(...) {

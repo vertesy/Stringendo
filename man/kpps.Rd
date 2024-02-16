@@ -12,3 +12,6 @@ kpps(...)
 \description{
 Collapse by (forward) slash
 }
+\examples{
+kpps("A", 1:2, "end")
+}

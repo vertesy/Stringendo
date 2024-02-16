@@ -12,3 +12,6 @@ kppu(...)
 \description{
 Collapse by underscore
 }
+\examples{
+kppu("A", 1:2, "end")
+}

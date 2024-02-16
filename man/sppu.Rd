@@ -12,3 +12,6 @@ sppu(...)
 \description{
 Simplified Paste by underscore
 }
+\examples{
+sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
+}

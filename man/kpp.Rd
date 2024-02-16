@@ -12,3 +12,6 @@ kpp(...)
 \description{
 Collapse by point
 }
+\examples{
+kpp("A", 1:2, "end")
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{\%!in\%}
 \alias{\%!in\%}
-\title{Negation of '\%in\%' Operator}
+\title{Negation of the \verb{in} (w. grapes) Operator}
 \usage{
 x \%!in\% y
 }

@@ -12,3 +12,6 @@ kppd(...)
 \description{
 Collapse by dash
 }
+\examples{
+kppd("A", 1:2, "end")
+}

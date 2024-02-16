@@ -12,3 +12,6 @@ kppws(...)
 \description{
 Collapse by white space
 }
+\examples{
+kppws("A", 1:2, "end")
+}
