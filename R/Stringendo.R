@@ -56,17 +56,16 @@ stopif <- function(condition, message = 'Condition is TRUE.') {
 # _________________________________________________________________________________________________
 
 # ______________________________________________________________________________________________________________________________
-#' @title messagews
-#' @description message pasted with white space
+#' @title imessage
+#' @description A variant to message() pasting with white space, sibling of iprint().
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
-messageWS <- function(..., collapse = " ") {
+imessage <- function(..., collapse = " ") {
   argument_list <- c(...)
   message(paste(argument_list, collapse = collapse))
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
