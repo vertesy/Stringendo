@@ -56,6 +56,20 @@ stopif <- function(condition, message = 'Condition is TRUE.') {
 # _________________________________________________________________________________________________
 
 # ______________________________________________________________________________________________________________________________
+#' @title messagews
+#' @description message pasted with white space
+#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
+#' @export
+
+messageWS <- function(..., collapse = " ") {
+  argument_list <- c(...)
+  message(paste(argument_list, collapse = collapse))
+}
+
+
+
+# ______________________________________________________________________________________________________________________________
 #' @title iprint
 #' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
@@ -66,7 +80,6 @@ iprint <- function(...) {
   argument_list <- c(...)
   print(paste(argument_list, collapse = " "))
 }
-# any_print = iprint # for compatibility
 
 # _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
