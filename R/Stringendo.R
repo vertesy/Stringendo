@@ -620,6 +620,30 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   return(result)
 }
 
+# _____________________________________________________________________________________________
+#' @title Convert CamelCase to Sentence
+#'
+#' @description Takes a camelCase string and converts it to a sentence format: space-separated,
+#' with the first letter capitalized and no period at the end.
+#'
+#' @param camelCaseString A character string in camelCase format.
+#' @return A character string converted to sentence format.
+#' @examples
+#' toSentence("mergeSmallCategories")
+#' @export
+#'
+#' @importFrom stringr str_replace_all str_to_title
+toSentence <- function(camelCaseString) {
+    stopifnot(is.character(camelCaseString))
+
+  # Insert a space before each uppercase letter, except the first character
+  sentence <- gsub("([a-z])([A-Z])", "\\1 \\2", camelCaseString)
+
+  # Capitalize the first letter of the sentence
+  sentence <- tolower(sentence)
+  paste0(toupper(substr(sentence, 1, 1)), substr(sentence, 2, nchar(sentence)))
+}
+
 
 
 
