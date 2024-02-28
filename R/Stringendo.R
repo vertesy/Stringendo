@@ -377,6 +377,17 @@ kppws <- function(...) {
 }
 
 
+# _________________________________________________________________________________________________
+#' @title Collapse by comma (and white space)
+#' @description Collapse by white space
+#' @param ... Multiple simple variables to parse.
+#' @examples kppws("A", 1:2, "end")
+#' @export
+kppc <- function(...) {
+  paste(c(...), sep = " ", collapse = ", ")
+}
+
+
 
 # _________________________________________________________________________________________________
 #' @title Kollapse
