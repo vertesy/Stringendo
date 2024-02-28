@@ -97,9 +97,9 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
 #' @param x Vector to check.
 #' @return Logical indicating if `x` has names.
 #' @examples
-#' has_names(c(a=1, b=2)); has_names(1:3)
+#' HasNames(c(a=1, b=2)); HasNames(1:3)
 #' @export
-has_names <- function(x) !is.null(names(x))
+HasNames <- function(x) !is.null(names(x))
 
 
 # _________________________________________________________________________________________________
