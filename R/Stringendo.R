@@ -865,10 +865,12 @@ extPNG <- function(vec) {
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
 #' @param ls.of.params List of parameters, Default: p
+#' @param sep Separator name-2-value, Default: "."
+#' @param collapse Separator between elements, Default: "_"
 #'
 #' @export
-param.list.2.fname <- function(ls.of.params = p) {
-  paste(names(ls.of.params), ls.of.params, sep = ".", collapse = "_")
+param.list.2.fname <- function(ls.of.params = p, sep = ".", collapse = "_") {
+  paste(names(ls.of.params), ls.of.params, sep = sep, collapse = collapse)
 }
 
 
