@@ -220,6 +220,17 @@ RemoveFinalUnderscores <- function(string) {
 }
 
 
+# _________________________________________________________________________________________________
+#' @title ReplaceRepeatedWhitespaces
+#'
+#' @description ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
+#' @param string The string (file path) potentially having repeated slashes.
+#' @examples ReplaceRepeatedUnderscores(string = "path   to    folder")
+#' @return A string with repeated slashes replaced by a single slash.
+#' @export
+ReplaceRepeatedWhitespaces <- function(string) {
+  gsub(pattern = " +", replacement = " ", x = string)
+}
 
 
 # _________________________________________________________________________________________________
@@ -232,7 +243,9 @@ RemoveFinalUnderscores <- function(string) {
 #' @export
 
 ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]") {
-  gsub(x = string, pattern = "\\@|\\[|\\]|\\$|\\/\\(\\)", replacement = ".")
+  x <- gsub(x = string, pattern = "\\||\\@|\\[|\\]|\\$|\\/\\(\\)", replacement = ".")
+  x <- ReplaceRepeatedWhitespaces(x)
+  ReplaceRepeatedDots(x)
 }
 
 
