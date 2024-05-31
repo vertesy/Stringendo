@@ -4,7 +4,7 @@
 \alias{RemoveWhitespaces}
 \title{RemoveWhitespaces}
 \usage{
-RemoveWhitespaces(string)
+RemoveWhitespaces(string, replacement = "")
 }
 \arguments{
 \item{string}{The string (file path) potentially having repeated slashes.}

@@ -4,7 +4,7 @@
 \alias{ReplaceSpecialCharacters}
 \title{ReplaceSpecialCharacters}
 \usage{
-ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
+ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]", replacement = ".")
 }
 \arguments{
 \item{string}{The string potentially having special characters.}
