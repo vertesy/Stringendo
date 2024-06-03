@@ -910,6 +910,9 @@ params.2.fname <- function(..., sep = ".", collapse = "_") {
   x <- x[!idx.empty]
   nmz <- nmz[!idx.empty]
 
+  # Fix if not a single value
+  x <- sapply(x, sppp)
+
   result <- paste(nmz, x, sep = sep, collapse = collapse)
 
   return(result)
