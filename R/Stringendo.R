@@ -578,7 +578,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #' countDotOrUnderscoreSeparated("add_translated.metadata")
 #' countDotOrUnderscoreSeparated("addTranslatedMetadata")
 #' }
-#' #'
+#' @importFrom dplyr case_when
 #' @return An integer representing the number of "." characters in the string.
 #' @export
 countDotOrUnderscoreSeparated <- function(string) {
@@ -591,14 +591,16 @@ countDotOrUnderscoreSeparated <- function(string) {
   usc_count <- sum(strsplit(string, "")[[1]] == "_")
   message(paste("Number of underscores in the string:", usc_count))
 
-  res <- case_when(
+  estimated_separator <- dplyr::case_when(
     dot_count > usc_count ~ "dot",
     dot_count < usc_count ~ "underscore",
     dot_count == 0 & usc_count == 0 ~ "none", # this is matched 1st
     dot_count == usc_count ~ "equal"
   )
 
-  return(res)
+  message("Estimated separator: ", estimated_separator)
+
+  return(estimated_separator)
 }
 
 
@@ -609,22 +611,33 @@ countDotOrUnderscoreSeparated <- function(string) {
 #' It splits the string into words using dots as separators, capitalizes the first letter of
 #' each word (except the first word), and then concatenates them back together.
 #'
-#' @param input_string A character string to be converted to camelCase. The function expects a string where words
-#'                     are separated by dots. There is no default value for this parameter; a string must be
-#'                     provided.
+#' @param input_string A character string to be converted to camelCase. The function expects a
+#' string where words are separated by dots. There is no default value for this parameter;
+#' a string must be provided.
+#' @param estimated_separator A character string representing the separator used in the input string.
+#' Default: countDotOrUnderscoreSeparated(input_string)
 #' @param toclipboard Copy to clipboard? Default: TRUE
 #' @return A character string converted to camelCase.
 #'
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
+#' toCamelCase("plot_metadata_cor_heat_map")
 #' @importFrom clipr write_clip
 #'
 #' @export
-toCamelCase <- function(input_string, toclipboard = TRUE) {
+toCamelCase <- function(input_string,
+                        estimated_separator = countDotOrUnderscoreSeparated(input_string),
+                        toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) == 1)
 
-  # Split the string into words using the dot as a separator
-  words <- strsplit(input_string, "\\.")[[1]]
+  # Split the string into words using the appropriate separator
+  words <- if (estimated_separator == "underscore") {
+    strsplit(input_string, "_")[[1]]  # split by underscore
+  } else if (estimated_separator == "dot") {
+    strsplit(input_string, "\\.")[[1]]  # split by dot
+  } else {
+    stop("Cannot guess separator: provide it explicitly.")
+  }
 
   # Capitalize the first letter of each word except the first one
   words[-1] <- sapply(words[-1], function(word) {
