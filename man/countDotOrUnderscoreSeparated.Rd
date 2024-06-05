@@ -24,5 +24,4 @@ countDotOrUnderscoreSeparated("add_translated_metadata")
 countDotOrUnderscoreSeparated("add_translated.metadata")
 countDotOrUnderscoreSeparated("addTranslatedMetadata")
 }
-#'
 }

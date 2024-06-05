@@ -4,12 +4,19 @@
 \alias{toCamelCase}
 \title{Convert a String to camelCase}
 \usage{
-toCamelCase(input_string, toclipboard = TRUE)
+toCamelCase(
+  input_string,
+  estimated_separator = countDotOrUnderscoreSeparated(input_string),
+  toclipboard = TRUE
+)
 }
 \arguments{
-\item{input_string}{A character string to be converted to camelCase. The function expects a string where words
-are separated by dots. There is no default value for this parameter; a string must be
-provided.}
+\item{input_string}{A character string to be converted to camelCase. The function expects a
+string where words are separated by dots. There is no default value for this parameter;
+a string must be provided.}
+
+\item{estimated_separator}{A character string representing the separator used in the input string.
+Default: countDotOrUnderscoreSeparated(input_string)}
 
 \item{toclipboard}{Copy to clipboard? Default: TRUE}
 }
@@ -23,4 +30,5 @@ each word (except the first word), and then concatenates them back together.
 }
 \examples{
 toCamelCase("plot.metadata.cor.heatMap")
+toCamelCase("plot_metadata_cor_heat_map")
 }
