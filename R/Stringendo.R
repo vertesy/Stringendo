@@ -562,6 +562,45 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 }
 
 
+# _________________________________________________________________________________________________
+#' @title Count Dots or Underscores in a String and return
+#'
+#' @description
+#' This function counts the number of "." characters in a given string.
+#'
+#' @param string A character string in which the number of "." characters will be counted. Default: None.
+#' @return An integer representing the number of "." characters in the string.
+#' @export
+#' @examples
+#' \dontrun{
+#' countDotOrUnderscoreSeparated("Hello.World...")
+#' countDotOrUnderscoreSeparated("add_translated_metadata")
+#' countDotOrUnderscoreSeparated("add_translated.metadata")
+#' countDotOrUnderscoreSeparated("addTranslatedMetadata")
+#' }
+#' #'
+#' @return An integer representing the number of "." characters in the string.
+#' @export
+countDotOrUnderscoreSeparated <- function(string) {
+
+  stopifnot(is.character(string), length(string) == 1)
+
+  # Count the number of "." characters
+  dot_count <- sum(strsplit(string, "")[[1]] == ".")
+  message(paste("Number of dots in the string:", dot_count))
+  usc_count <- sum(strsplit(string, "")[[1]] == "_")
+  message(paste("Number of underscores in the string:", usc_count))
+
+  res <- case_when(
+    dot_count > usc_count ~ "dot",
+    dot_count < usc_count ~ "underscore",
+    dot_count == 0 & usc_count == 0 ~ "none", # this is matched 1st
+    dot_count == usc_count ~ "equal"
+  )
+
+  return(res)
+}
+
 
 # _________________________________________________________________________________________________
 #' @title Convert a String to camelCase
