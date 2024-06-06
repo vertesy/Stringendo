@@ -32,6 +32,33 @@ stopif <- function(condition, message = 'Condition is TRUE.') {
   if (isTRUE(condition)) stop(message)
 }
 
+# ______________________________________________________________________________________________________________________________
+#' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
+#'
+#' @description
+#' This function checks if a given variable is inherently numeric. It returns TRUE if the variable
+#' can be converted to a numeric value without loss of information and is not inherently a
+#' character string, otherwise it returns FALSE.
+#'
+#' @param x The variable to be tested. Default: NA.
+#'
+#' @return A logical value indicating whether the input is inherently numeric.
+#'
+#' @examples
+#' testNumericCompatible(0.1)         # Should return TRUE
+#' testNumericCompatible('0.1')       # Should return TRUE
+#' testNumericCompatible('apple')     # Should return FALSE
+#' testNumericCompatible('arma.0.1')  # Should return FALSE
+
+
+testNumericCompatible <- function(x) {
+  stopifnot(is.numeric(x) || is.character(x))
+  suppressWarnings({
+    x_is_numeric <- !is.na(as.numeric(x)) & is.numeric(as.numeric(x))
+  })
+  return(x_is_numeric)
+}
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title Negation of the `in` (w. grapes) Operator
