@@ -963,6 +963,37 @@ extPNG <- function(vec) {
 # _________________________________________________________________________________________________
 
 
+#' @title Parse Parameter String with Names
+#'
+#' @description This function parses a named vector and intermingles the names and values
+#' into a single string, with specified separators for the odd and even elements.
+#'
+#' @param named.vec A named vector to be parsed. Default: `NA`.
+#' @param sep1 A string separator for odd elements. Default: `": "`.
+#' @param sep2 A string separator for even elements. Default: `" | "`.
+#'
+#' @return A single string with intermingled names and values from the named vector.
+#'
+#' @examples
+#' named.vec <- c(ULm = "15", DLm = "67", Matm = "33", `EN-Lineage.m` = "21")
+#' parseParamStringWNames(named.vec)
+#' # "ULm: 15 | DLm: 67 | Matm: 33 | EN-Lineage.m: 21"
+#'
+#' @importFrom checkmate assert_character assert_named
+#' @export
+parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ")  {
+  stopifnot(
+    is.vector(named.vec), is.character(sep1), is.character(sep2),
+    length(names(named.vec)) == length(named.vec)
+  )
+
+  # Combine names and values using sapply
+  pairs <- sapply(seq_along(named.vec), function(i) paste(names(named.vec)[i], named.vec[i], sep = sep1))
+
+  # Collapse the pairs with the second separator
+  return(paste(pairs, collapse = sep2))
+}
+
 # _________________________________________________________________________________________________
 #' @title Convert Named Parameters to Filename
 #'
