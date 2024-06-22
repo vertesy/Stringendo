@@ -707,7 +707,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
   result <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
   stopifnot(is.character(result), nchar(result) > 0)
 
-  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = T)
+  if (toclipboard &  requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = T)
 
   return(result)
 }
@@ -745,7 +745,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(result), nchar(result) > 0)
 
   # Handle clipboard functionality
-  if (toclipboard & require("clipr")) try(clipr::write_clip(result), silent = TRUE)
+  if (toclipboard &  requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   return(result)
 }
