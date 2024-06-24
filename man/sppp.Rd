@@ -4,10 +4,12 @@
 \alias{sppp}
 \title{Simplified Paste by point}
 \usage{
-sppp(...)
+sppp(..., make.names = FALSE)
 }
 \arguments{
-\item{...}{Multiple simple variables to parse.}
+\item{...}{Multiple simple string variables to parse.}
+
+\item{make.names}{Should make.names applied to the concatenated string? Default is FALSE.}
 }
 \description{
 Simplified Paste by point

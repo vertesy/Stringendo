@@ -486,11 +486,13 @@ kollapse <- function(...,
 # _________________________________________________________________________________________________
 #' @title Simplified Paste by point
 #' @description Simplified Paste by point
-#' @param ... Multiple simple variables to parse.
+#' @param ... Multiple simple string variables to parse.
+#' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
 #' @examples sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
 #' @export
-sppp <- function(...) {
+sppp <- function(..., make.names = FALSE) {
   string <- kpp(...)
+  if(make.names) string <- make.names(string)
   string <- ReplaceRepeatedDots(string)
   string <- RemoveFinalDot(string)
   string <- RemoveInitialDot(string)
@@ -501,11 +503,13 @@ sppp <- function(...) {
 #' @title Simplified Paste by fwd slash
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
+#' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
 #' @examples spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
 #' @export
 
-spps <- function(...) {
+spps <- function(..., make.names = FALSE) {
   string <- kpps(...)
+  if(make.names) string <- make.names(string)
   string <- ReplaceRepeatedSlashes(string)
   string <- RemoveFinalSlash(string)
   return(string)
@@ -516,11 +520,13 @@ spps <- function(...) {
 #' @title Simplified Paste by underscore
 #' @description Simplified Paste by underscore
 #' @param ... Multiple simple variables to parse.
+#' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
 #' @examples sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
 #' @export
 
-sppu <- function(...) {
+sppu <- function(..., make.names = FALSE) {
   string <- kppu(...)
+  if(make.names) string <- make.names(string)
   string <- ReplaceRepeatedUnderscores(string)
   string <- RemoveFinalUnderscores(string)
   return(string)

@@ -4,10 +4,12 @@
 \alias{sppu}
 \title{Simplified Paste by underscore}
 \usage{
-sppu(...)
+sppu(..., make.names = FALSE)
 }
 \arguments{
 \item{...}{Multiple simple variables to parse.}
+
+\item{make.names}{Should make.names applied to the concatenated string? Default is FALSE.}
 }
 \description{
 Simplified Paste by underscore
