@@ -375,16 +375,18 @@ ppd <- function(...) {
 #' @description This function takes a named vector and returns a string where each element is pasted
 #'  with its name. Elements are separated by a specified string, and name-element pairs are also
 #'  separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
-#' @param named_vec A named vector. Default is `c('a' = 1, 'b' = 2)`.
-#' @param separator_names A character string to separate the names from the elements. Default is ":".
-#' @param separator_elements A character string to separate the name-element pairs in the
+#' @param x A named vector. Default is `c('a' = 1, 'b' = 2)`.
+#' @param sep1 A character string to separate the names from the elements. Default is ":".
+#' @param sep2 A character string to separate the name-element pairs in the
 #' resulting string. Default is " ".
-#' @examples paste_w_names(c("a" = 1, "b" = 2))
+#' @examples kwNames(c("a" = 1, "b" = 2))
 #' @export
-paste_w_names <- function(
-    named_vec = c("a" = 1, "b" = 2),
-    separator_names = ":", separator_elements = " | ") {
-  paste0(names(named_vec), separator_names, named_vec, collapse = separator_elements)
+kwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ") {
+  stopifnot(
+    is.vector(x),
+    HasNames(x)
+    )
+  paste0(names(x), sep1, x, collapse = sep2)
 }
 
 
