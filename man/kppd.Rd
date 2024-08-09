@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kppd}
 \alias{kppd}
-\title{Collapse by dash}
+\title{Collapse and paste by dash}
 \usage{
 kppd(...)
 }

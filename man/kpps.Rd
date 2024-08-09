@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kpps}
 \alias{kpps}
-\title{Collapse by (forward) slash}
+\title{Collapse and paste by (forward) slash}
 \usage{
 kpps(...)
 }

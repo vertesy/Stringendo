@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kpp}
 \alias{kpp}
-\title{Collapse by point}
+\title{Collapse and paste by point}
 \usage{
 kpp(...)
 }

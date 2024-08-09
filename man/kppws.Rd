@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kppws}
 \alias{kppws}
-\title{Collapse by white space}
+\title{Collapse and paste by white space}
 \usage{
 kppws(...)
 }

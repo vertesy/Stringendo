@@ -369,33 +369,13 @@ ppd <- function(...) {
   paste(..., sep = "-")
 }
 
-# _________________________________________________________________________________________________
-#' @title Paste Elements With Names
-#'
-#' @description This function takes a named vector and returns a string where each element is pasted
-#'  with its name. Elements are separated by a specified string, and name-element pairs are also
-#'  separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
-#' @param x A named vector. Default is `c('a' = 1, 'b' = 2)`.
-#' @param sep1 A character string to separate the names from the elements. Default is ":".
-#' @param sep2 A character string to separate the name-element pairs in the
-#' resulting string. Default is " ".
-#' @examples kwNames(c("a" = 1, "b" = 2))
-#' @export
-kwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ") {
-  stopifnot(
-    is.vector(x),
-    HasNames(x)
-    )
-  paste0(names(x), sep1, x, collapse = sep2)
-}
-
 
 
 
 # ______________________________________________________________________________________________----
 # Collapse (and paste) -----------------------------------------------------------------------
 
-#' @title Collapse by point
+#' @title Collapse and paste by point
 #' @description Collapse by point
 #' @param ... Multiple simple variables to parse.
 #' @examples kpp("A", 1:2, "end")
@@ -405,7 +385,7 @@ kpp <- function(...) {
 }
 
 # _________________________________________________________________________________________________
-#' @title Collapse by underscore
+#' @title Collapse and paste by underscore
 #' @description Collapse by underscore
 #' @param ... Multiple simple variables to parse.
 #' @examples kppu("A", 1:2, "end")
@@ -415,7 +395,7 @@ kppu <- function(...) {
 }
 
 # _________________________________________________________________________________________________
-#' @title Collapse by (forward) slash
+#' @title Collapse and paste by (forward) slash
 #' @description Collapse by (forward) slash
 #' @param ... Multiple simple variables to parse.
 #' @examples kpps("A", 1:2, "end")
@@ -426,7 +406,7 @@ kpps <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Collapse by dash
+#' @title Collapse and paste by dash
 #' @description Collapse by dash
 #' @param ... Multiple simple variables to parse.
 #' @examples kppd("A", 1:2, "end")
@@ -436,7 +416,7 @@ kppd <- function(...) {
 }
 
 # _________________________________________________________________________________________________
-#' @title Collapse by white space
+#' @title Collapse and paste by white space
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
 #' @examples kppws("A", 1:2, "end")
@@ -447,13 +427,33 @@ kppws <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Collapse by comma (and white space)
+#' @title Collapse and pasteby comma (and white space)
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
 #' @examples kppws("A", 1:2, "end")
 #' @export
 kppc <- function(...) {
   paste(c(...), sep = " ", collapse = ", ")
+}
+
+# _________________________________________________________________________________________________
+#' @title Collapse and paste Elements With Names
+#'
+#' @description This function takes a named vector and returns a string where each element is pasted
+#'  with its name. Elements are separated by a specified string, and name-element pairs are also
+#'  separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
+#' @param x A named vector. Default is `c('a' = 1, 'b' = 2)`.
+#' @param sep1 A character string to separate the names from the elements. Default is ":".
+#' @param sep2 A character string to separate the name-element pairs in the
+#' resulting string. Default is " ".
+#' @examples kpwNames(c("a" = 1, "b" = 2))
+#' @export
+kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ") {
+  stopifnot(
+    is.vector(x),
+    HasNames(x)
+  )
+  paste0(names(x), sep1, x, collapse = sep2)
 }
 
 

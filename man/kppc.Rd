@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kppc}
 \alias{kppc}
-\title{Collapse by comma (and white space)}
+\title{Collapse and pasteby comma (and white space)}
 \usage{
 kppc(...)
 }

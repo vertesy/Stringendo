@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{kppu}
 \alias{kppu}
-\title{Collapse by underscore}
+\title{Collapse and paste by underscore}
 \usage{
 kppu(...)
 }
