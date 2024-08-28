@@ -4,7 +4,13 @@
 \alias{kpwNames}
 \title{Collapse and paste Elements With Names}
 \usage{
-kpwNames(x = c(a = 1, b = 2), sep1 = ": ", sep2 = " | ")
+kpwNames(
+  x = c(a = 1, b = 2),
+  sep1 = ": ",
+  sep2 = " | ",
+  prefix = NULL,
+  suffix = NULL
+)
 }
 \arguments{
 \item{x}{A named vector. Default is \code{c('a' = 1, 'b' = 2)}.}
@@ -13,6 +19,10 @@ kpwNames(x = c(a = 1, b = 2), sep1 = ": ", sep2 = " | ")
 
 \item{sep2}{A character string to separate the name-element pairs in the
 resulting string. Default is " ".}
+
+\item{prefix}{A character string to add to the beginning of the resulting string. Default is NULL.}
+
+\item{suffix}{A character string to add to the end of the resulting string. Default is NULL.}
 }
 \description{
 This function takes a named vector and returns a string where each element is pasted

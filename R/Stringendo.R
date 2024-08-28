@@ -446,14 +446,18 @@ kppc <- function(...) {
 #' @param sep1 A character string to separate the names from the elements. Default is ":".
 #' @param sep2 A character string to separate the name-element pairs in the
 #' resulting string. Default is " ".
+#' @param prefix A character string to add to the beginning of the resulting string. Default is NULL.
+#' @param suffix A character string to add to the end of the resulting string. Default is NULL.
+#'
 #' @examples kpwNames(c("a" = 1, "b" = 2))
 #' @export
-kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ") {
+kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
   stopifnot(
     is.vector(x),
     HasNames(x)
   )
-  paste0(names(x), sep1, x, collapse = sep2)
+  x <- paste0(names(x), sep1, x, collapse = sep2)
+  paste0(prefix, x, suffix)
 }
 
 
