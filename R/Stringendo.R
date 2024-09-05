@@ -11,7 +11,6 @@
 # try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
 
-
 # ______________________________________________________________________________________________----
 # Control functions ----
 # _________________________________________________________________________________________________
@@ -615,6 +614,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 #' countDotOrUnderscoreSeparated("Hello.World...")
 #' countDotOrUnderscoreSeparated("add_translated_metadata")
 #' countDotOrUnderscoreSeparated("add_translated.metadata")
+#' countDotOrUnderscoreSeparated("add translated metadata")
 #' countDotOrUnderscoreSeparated("addTranslatedMetadata")
 #' }
 #' @importFrom dplyr case_when
@@ -624,17 +624,24 @@ countDotOrUnderscoreSeparated <- function(string) {
 
   stopifnot(is.character(string), length(string) == 1)
 
-  # Count the number of "." characters
-  dot_count <- sum(strsplit(string, "")[[1]] == ".")
-  message(paste("Number of dots in the string:", dot_count))
-  usc_count <- sum(strsplit(string, "")[[1]] == "_")
-  message(paste("Number of underscores in the string:", usc_count))
+  # Count the number of dots, underscores, and white spaces in the string
+  {
+    dot_count <- sum(strsplit(string, "")[[1]] == ".")
+    message(paste("Number of dots in the string:", dot_count))
+
+    usc_count <- sum(strsplit(string, "")[[1]] == "_")
+    message(paste("Number of underscores in the string:", usc_count))
+
+    ws_count <- sum(strsplit(string, "")[[1]] == " ")
+    message(paste("Number of white spaces in the string:", ws_count))
+  }
 
   estimated_separator <- dplyr::case_when(
-    dot_count > usc_count ~ "dot",
-    dot_count < usc_count ~ "underscore",
-    dot_count == 0 & usc_count == 0 ~ "none", # this is matched 1st
-    dot_count == usc_count ~ "equal"
+    dot_count > max(usc_count, ws_count) ~ "dot",
+    usc_count > max(usc_count, ws_count) ~ "underscore",
+    ws_count > max(dot_count, usc_count) ~ "white space",
+    dot_count == 0 & usc_count == 0 & ws_count == 0 ~ "none",
+    dot_count == usc_count & dot_count == usc_count ~ "undecided"
   )
 
   message("Estimated separator: ", estimated_separator)
@@ -664,6 +671,8 @@ countDotOrUnderscoreSeparated <- function(string) {
 #' @importFrom clipr write_clip
 #'
 #' @export
+
+"Cell Type Distribution in Networks and Corresponding Tissues."
 toCamelCase <- function(input_string,
                         estimated_separator = countDotOrUnderscoreSeparated(input_string),
                         toclipboard = TRUE) {
@@ -674,8 +683,10 @@ toCamelCase <- function(input_string,
     strsplit(input_string, "_")[[1]]  # split by underscore
   } else if (estimated_separator == "dot") {
     strsplit(input_string, "\\.")[[1]]  # split by dot
+  } else if (estimated_separator == "white space") {
+    strsplit(input_string, " ")[[1]] # split by white space
   } else {
-    stop("Cannot guess separator: provide it explicitly.")
+    stop("Cannot guess separator: provide it explicitly in 'estimated_separator'.")
   }
 
   # Capitalize the first letter of each word except the first one
@@ -712,6 +723,9 @@ toCamelCase <- function(input_string,
 toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
 
+  # Handle white space-separated input
+  input_string <- gsub("\\s+", "_", input_string)
+
   # Replace dots with underscores
   temp_string <- gsub("\\.", "_", input_string)
 
@@ -744,6 +758,9 @@ toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
 
 toDotSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
+
+  # Handle white space-separated input
+  input_string <- gsub("\\s+", ".", input_string)
 
   # Handle underscore-separated input
   input_string <- gsub("_", ".", input_string)

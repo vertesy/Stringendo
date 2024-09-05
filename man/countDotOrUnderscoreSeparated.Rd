@@ -22,6 +22,7 @@ This function counts the number of "." characters in a given string.
 countDotOrUnderscoreSeparated("Hello.World...")
 countDotOrUnderscoreSeparated("add_translated_metadata")
 countDotOrUnderscoreSeparated("add_translated.metadata")
+countDotOrUnderscoreSeparated("add translated metadata")
 countDotOrUnderscoreSeparated("addTranslatedMetadata")
 }
 }
