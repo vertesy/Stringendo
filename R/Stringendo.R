@@ -671,8 +671,6 @@ countDotOrUnderscoreSeparated <- function(string) {
 #' @importFrom clipr write_clip
 #'
 #' @export
-
-"Cell Type Distribution in Networks and Corresponding Tissues."
 toCamelCase <- function(input_string,
                         estimated_separator = countDotOrUnderscoreSeparated(input_string),
                         toclipboard = TRUE) {
