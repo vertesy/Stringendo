@@ -766,15 +766,15 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   # Insert a dot before each uppercase letter (except the first character)
   separated <- gsub("([A-Z])", ".\\1", input_string, perl = TRUE)
 
-  # Convert the entire string to lowercase, and remove starting dot
-  result <- sub("^\\.", "", tolower(separated))
+  # Convert the entire string to lowercase, and remove duplicated / starting dots (see sppp).
+  result <- sppp(tolower(separated))
 
   stopifnot(is.character(result), nchar(result) > 0)
 
   # Handle clipboard functionality
   if (toclipboard &  requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
-  return(result)
+  message(result)
 }
 
 # _____________________________________________________________________________________________
