@@ -455,6 +455,16 @@ kpipe <- function(...) {
   paste(c(...), sep = " | ", collapse = " | ")
 }
 
+# _________________________________________________________________________________________________
+#' @title Collapse and paste by newline (`\n`) preceded by a white space
+#' @description Collapse by white space
+#' @param ... Multiple simple variables to parse.
+#' @examples knl("A", 1:2, "end")
+#' @export
+knl <- function(...) {
+  paste(c(...), sep = " \n", collapse = " \n")
+}
+
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste Elements With Names
