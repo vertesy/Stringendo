@@ -369,6 +369,16 @@ ppd <- function(...) {
 }
 
 
+# _________________________________________________________________________________________________
+#' @title Paste by pipe (|) and white space around it
+#'
+#' @param ... Multiple simple variables to parse.
+#' @export
+ppipe <- function(...) {
+  paste(..., sep = " | ")
+}
+
+
 
 
 # ______________________________________________________________________________________________----
@@ -432,17 +442,17 @@ kppws <- function(...) {
 #' @examples kppc("A", 1:2, "end")
 #' @export
 kppc <- function(...) {
-  paste(c(...), sep = " ", collapse = ", ")
+  paste(c(...), sep = ", ", collapse = ", ")
 }
 
 # _________________________________________________________________________________________________
-#' @title Collapse and paste by pipe (|) and white space
+#' @title Collapse and paste by pipe (|) and white spaces around it
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
 #' @examples kpipe("A", 1:2, "end")
 #' @export
 kpipe <- function(...) {
-  paste(c(...), sep = " ", collapse = " | ")
+  paste(c(...), sep = " | ", collapse = " | ")
 }
 
 
