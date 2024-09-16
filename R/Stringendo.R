@@ -426,14 +426,25 @@ kppws <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Collapse and pasteby comma (and white space)
+#' @title Collapse and paste by comma (and white space)
 #' @description Collapse by white space
 #' @param ... Multiple simple variables to parse.
-#' @examples kppws("A", 1:2, "end")
+#' @examples kppc("A", 1:2, "end")
 #' @export
 kppc <- function(...) {
   paste(c(...), sep = " ", collapse = ", ")
 }
+
+# _________________________________________________________________________________________________
+#' @title Collapse and paste by pipe (|) and white space
+#' @description Collapse by white space
+#' @param ... Multiple simple variables to parse.
+#' @examples kpipe("A", 1:2, "end")
+#' @export
+kpipe <- function(...) {
+  paste(c(...), sep = " ", collapse = " | ")
+}
+
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste Elements With Names
