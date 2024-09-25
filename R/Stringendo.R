@@ -385,7 +385,7 @@ ppipe <- function(...) {
 #' @param ... Multiple simple variables to parse.
 #' @export
 pnl <- function(...) {
-  paste(..., sep = " \n ")
+  paste(..., sep = " \n")
 }
 
 
