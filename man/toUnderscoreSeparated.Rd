@@ -4,7 +4,7 @@
 \alias{toUnderscoreSeparated}
 \title{Convert a String to underscore_separated Format}
 \usage{
-toUnderscoreSeparated(input_string, toclipboard = TRUE)
+toUnderscoreSeparated(input_string, toclipboard = FALSE)
 }
 \arguments{
 \item{input_string}{A character string in camelCase, dot-separated format, or a combination of both.
