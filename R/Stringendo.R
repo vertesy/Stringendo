@@ -641,6 +641,14 @@ percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, s
 }
 
 
+# Format numbers as human readable strings
+format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
+  stopifnot(is.numeric(x))
+  x <- format(x, big.mark = big.mark, decimal.mark = decimal.mark, digits = digits)
+  return(x)
+}
+
+
 # _________________________________________________________________________________________________
 #' @title Count Dots or Underscores in a String and return
 #'
