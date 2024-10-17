@@ -279,13 +279,16 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 #'
 #' @description ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 #' @param string The string potentially having special characters.
+#' @param replacement The character to replace special characters with.
+#' @param remove_dots If TRUE, all dots are removed from the string (overwrites if replacement is a dot).
 #' @examples ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
 #' @return A string with special characters replaced by dots.
 #' @export
 
-ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".") {
-  x <- gsub(x = string, pattern = ",|\\||\\@|\\[|\\]|\\$|\\/\\(\\)", replacement = replacement)
-  # x <- ReplaceRepeatedWhitespaces(x)
+ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = F) {
+  x <- gsub(x = string, pattern = ",|\\||\\@|\\[|\\]|\\$|\\/\\(\\)|\\\\", replacement = replacement)
+  x <- ReplaceRepeatedWhitespaces(x)
+  if(remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
   ReplaceRepeatedDots(x)
 }
 
