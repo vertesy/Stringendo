@@ -190,6 +190,17 @@ testNumericCompatible <- function(x) {
 # _________________________________________________________________________________________________
 
 # ______________________________________________________________________________________________________________________________
+#' @title Message without collapsing
+#'
+#' @description This function prints a message for each element in a character vector, instead of
+#' collapsing them into a single line as done by, `message()`.
+#' @param vec A character vector to be printed.
+#'
+#' @examples message2(c("Hello", "world", "!", "I", "am", "here"))
+#' @export
+message2 <- function(vec) for (item in vec) message(item)
+
+# ______________________________________________________________________________________________________________________________
 #' @title imessage
 #' @description A variant to message() pasting with white space, sibling of iprint().
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
