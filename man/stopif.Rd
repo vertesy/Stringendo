@@ -2,21 +2,27 @@
 % Please edit documentation in R/Stringendo.R
 \name{stopif}
 \alias{stopif}
-\title{Stop Execution If Condition is True}
+\title{Stop execution if condition is TRUE}
 \usage{
-stopif(condition, message = "Condition is TRUE.")
+stopif(...)
 }
 \arguments{
-\item{condition}{A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.}
-
-\item{message}{An optional error message to display if the condition is TRUE.}
+\item{...}{Logical conditions to be checked. Each condition must evaluate to a logical vector.
+Default: none.}
+}
+\value{
+The function stops execution if any condition evaluates to \code{TRUE}.
 }
 \description{
-This function stops the execution of the script if the provided condition evaluates to TRUE.
-It is the complement of the \code{stopifnot()} function and is used for asserting conditions where
-an error should be thrown if the condition is TRUE, rather than FALSE.
+The \code{stopif()} function stops the execution if the condition is \code{TRUE}. It is the opposite of
+\code{stopifnot()}, which stops if the condition is not \code{TRUE}. This function is useful to increase
+clarity in the code by removing double negations.
 }
 \examples{
-a <- 1
-stopif(a != 1, message = "A is 1")
+x <- 5
+y <- 10
+
+# This will stop execution because x < y is TRUE
+stopif(x < y, y > 5)
+
 }

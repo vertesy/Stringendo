@@ -5,31 +5,139 @@
 # Used by MarkdownReports and ggExpress.
 # Many functionalities were formerly part of CodeAndRoll.
 
+# devtools::check_man("~/GitHub/Packages/Stringendo")
 # devtools::load_all("~/GitHub/Packages/Stringendo")
 # devtools::document("~/GitHub/Packages/Stringendo")
 # try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = T)
 # try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
 
-
 # ______________________________________________________________________________________________----
-# Control functions ----
+# Flow control functions ----
 # _________________________________________________________________________________________________
 
 # ______________________________________________________________________________________________________________________________
-#' @title Stop Execution If Condition is True
+
+
+
+# ______________________________________________________________________________________________________________________________
+#' @title Stop execution if condition is TRUE
 #'
-#' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
-#' It is the complement of the `stopifnot()` function and is used for asserting conditions where
-#' an error should be thrown if the condition is TRUE, rather than FALSE.
-#' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
-#' @param message An optional error message to display if the condition is TRUE.
+#' @description
+#' The `stopif()` function stops the execution if the condition is `TRUE`. It is the opposite of
+#' `stopifnot()`, which stops if the condition is not `TRUE`. This function is useful to increase
+#' clarity in the code by removing double negations.
 #'
-#' @examples a <- 1
-#' stopif(a != 1, message = "A is 1")
+#' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
+#'   Default: none.
+#'
+#' @return The function stops execution if any condition evaluates to `TRUE`.
+#'
+#' @examples
+#' x <- 5
+#' y <- 10
+#'
+#' # This will stop execution because x < y is TRUE
+#' stopif(x < y, y > 5)
+#'
 #' @export
-stopif <- function(condition, message = 'Condition is TRUE.') {
-  if (isTRUE(condition)) stop(message)
+stopif <- function(...) {
+  n <- ...length()  # Number of conditions passed
+
+  for (i in seq_len(n)) {
+    condition <- ...elt(i)  # Get each condition
+
+    # If the condition is TRUE, stop execution with an error
+    if (is.logical(condition) && all(condition, na.rm = TRUE)) {
+      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      stop(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
+    }
+  }
+
+  invisible()  # No visible output
 }
+
+
+
+# ______________________________________________________________________________________________________________________________
+#' @title Issue warnings if conditions are not TRUE
+#'
+#' @description
+#' The `warningifnot()` function checks whether each condition passed to it is `TRUE`. If any
+#' condition is not met, a warning is issued but the execution continues. This is similar to
+#' `stopifnot()`, which throws an error and halts execution, but `warningifnot()` only issues a
+#' warning, allowing the program to proceed.
+#'
+#' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
+#'   Default: none.
+#'
+#' @return The function returns `invisible()`, meaning it does not produce any visible output. It
+#'   issues warnings for each condition that evaluates to `FALSE` or contains `NA`.
+#'
+#' @examples
+#' x <- 5
+#' y <- 10
+#'
+#' # Example: This will issue a warning because x > y is FALSE
+#' warnifnot(x > y, y > 5)
+#'
+#' @export
+
+warnifnot <- function(...) {
+  n <- ...length()  # Number of conditions passed
+
+  for (i in seq_len(n)) {
+    condition <- ...elt(i)  # Get each condition
+
+    # If the condition is not TRUE, issue a warning
+    if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
+      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      warning(sprintf("%s is not TRUE", deparse(call)), call. = FALSE)
+    }
+  }
+
+  invisible()  # Return nothing, just issue warnings if needed
+}
+
+
+# ______________________________________________________________________________________________________________________________
+#' @title Issue a warning if condition is TRUE
+#'
+#' @description
+#' The `warnif()` function issues a warning if the condition is `TRUE`. It is the opposite of
+#' `warningifnot()`, which warns if the condition is not `TRUE`. This function is useful for issuing
+#' warnings when a certain condition is met.
+#'
+#' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
+#'   Default: none.
+#'
+#' @return The function returns `invisible()`, but issues warnings for each condition that evaluates
+#'   to `TRUE`.
+#'
+#' @examples
+#' x <- 5
+#' y <- 10
+#'
+#' # This will issue a warning because x < y is TRUE
+#' warnif(x < y, y > 5)
+#'
+#' @export
+warnif <- function(...) {
+  n <- ...length()  # Number of conditions passed
+
+  for (i in seq_len(n)) {
+    condition <- ...elt(i)  # Get each condition
+
+    # If the condition is TRUE, issue a warning
+    if (is.logical(condition) && all(condition, na.rm = TRUE)) {
+      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      warning(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
+    }
+  }
+
+  invisible()  # Return nothing, just issue warnings if needed
+}
+
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
@@ -59,8 +167,8 @@ testNumericCompatible <- function(x) {
 }
 
 
-# ______________________________________________________________________________________________________________________________
-#' @title Negation of the `in` (w. grapes) Operator
+# _____________________________________________________________________________________________________________________________ f f_
+#' @title Negation of the `in` (w. grapes) operator
 #'
 #' @description `%!in%` is used to test if elements of one vector are not present in another vector.
 #' It is the negation of the `%in%` operator. This operator returns `TRUE` for elements
@@ -85,6 +193,8 @@ testNumericCompatible <- function(x) {
 #' @title imessage
 #' @description A variant to message() pasting with white space, sibling of iprint().
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param collapse Separator to be used for collapsing. Default: " "
+#'
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -249,8 +359,10 @@ RemoveFinalUnderscores <- function(string) {
 # _________________________________________________________________________________________________
 #' @title RemoveWhitespaces
 #'
-#' @description RemoveWhitespaces replaces any nr of white spaces .
+#' @description RemoveWhitespaces replaces any nr of white spaces.
 #' @param string The string (file path) potentially having repeated slashes.
+#' @param replacement The string to replace the white spaces with. Default: ''.
+#'
 #' @examples RemoveWhitespaces(string = "path   To    Folder")
 #' @return A string with repeated slashes replaced by a single slash.
 #' @export
@@ -265,6 +377,8 @@ RemoveWhitespaces <- function(string, replacement = "") {
 #'
 #' @description ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
 #' @param string The string (file path) potentially having repeated slashes.
+#' @param replacement The string to replace the white spaces with. Default: ''.
+#'
 #' @examples ReplaceRepeatedWhitespaces(string = "path   to    folder")
 #' @return A string with repeated slashes replaced by a single slash.
 #' @export
@@ -1337,3 +1451,20 @@ eval_parse_kollapse <- function(...) {
 # _________________________________________________________________________________________________
 
 # _________________________________________________________________________________________________
+
+
+
+# #' @title Stop Execution If Condition is True
+# #'
+# #' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
+# #' It is the complement of the `stopifnot()` function and is used for asserting conditions where
+# #' an error should be thrown if the condition is TRUE, rather than FALSE.
+# #' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
+# #' @param message An optional error message to display if the condition is TRUE.
+# #'
+# #' @examples a <- 1
+# #' stopif(a != 1, message = "A is 1")
+# #' @export
+# stopif <- function(condition, message = 'Condition is TRUE.') {
+#   if (isTRUE(condition)) stop(message)
+# }

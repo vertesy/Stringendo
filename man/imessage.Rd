@@ -8,6 +8,8 @@ imessage(..., collapse = " ")
 }
 \arguments{
 \item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+
+\item{collapse}{Separator to be used for collapsing. Default: " "}
 }
 \description{
 A variant to message() pasting with white space, sibling of iprint().

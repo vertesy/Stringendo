@@ -8,12 +8,14 @@ RemoveWhitespaces(string, replacement = "")
 }
 \arguments{
 \item{string}{The string (file path) potentially having repeated slashes.}
+
+\item{replacement}{The string to replace the white spaces with. Default: ''.}
 }
 \value{
 A string with repeated slashes replaced by a single slash.
 }
 \description{
-RemoveWhitespaces replaces any nr of white spaces .
+RemoveWhitespaces replaces any nr of white spaces.
 }
 \examples{
 RemoveWhitespaces(string = "path   To    Folder")
