@@ -7,7 +7,7 @@
 percentage_formatter(
   x,
   digitz = 3,
-  keep.names = F,
+  keep.names = FALSE,
   prefix = NULL,
   suffix = NULL,
   sign_sep = ""

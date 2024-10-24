@@ -1,4 +1,4 @@
-# Stringendo - a string parsing library
+# Stringendo - a string parsing library ![status: active](https://raw.githubusercontent.com/vertesy/TheCorvinas/master/GitHub/Badges/active.svg)
 
 String parsing functionalites for generating plotnames, filenames and path. Used by most of my other packages, including [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2) and [ggExpress](https://github.com/vertesy/ggExpress). 
 Many functionalities were part of the formerly used [CodeAndRoll (v1)](https://github.com/vertesy/CodeAndRoll).
@@ -38,197 +38,210 @@ source("https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R
 
 <br>
 
-## List of Functions (47) 
+## List of Functions in Stringendo.R (67) 
+Updated: 2024/10/24 11:02
 
-Updated: 2023/11/24 16:40
+- #### 1 `stopif()`
+Stop execution if condition is TRUE.   The `stopif()` function stops the execution if the condition is `TRUE`. It is the opposite of  `stopifnot()`, which stops if the condition is not `TRUE`. This function is useful to increase  clarity in the code by removing double negations. 
 
-- #### 1 `iprint()`
+- #### 2 `warnifnot()`
+Issue warnings if conditions are not TRUE.   The `warningifnot()` function checks whether each condition passed to it is `TRUE`. If any  condition is not met, a warning is issued but the execution continues. This is similar to  `stopifnot()`, which throws an error and halts execution, but `warningifnot()` only issues a  warning, allowing the program to proceed. 
 
-  iprint. A more intelligent printing function that collapses any variable passed to it by white spaces.
+- #### 3 `warnif()`
+Issue a warning if condition is TRUE.   The `warnif()` function issues a warning if the condition is `TRUE`. It is the opposite of  `warningifnot()`, which warns if the condition is not `TRUE`. This function is useful for issuing  warnings when a certain condition is met. 
 
-- #### 2 `idate()`
+- #### 4 `testNumericCompatible()`
+Test if a Variable is Inherently Numeric ('0.1' as numeric).   This function checks if a given variable is inherently numeric. It returns TRUE if the variable  can be converted to a numeric value without loss of information and is not inherently a  character string, otherwise it returns FALSE. 
 
-  Parse current date, dot separated.. Parse current date, dot separated.
+- #### 5 `"%!in%"()`
+Negation of the `in` (w. grapes) operator. `%!in%` is used to test if elements of one vector are not present in another vector.  It is the negation of the `%in%` operator. This operator returns `TRUE` for elements  of `x` that are not in `y`. 
 
-- #### 3 `substrRight()`
+- #### 6 `message2()`
+Message without collapsing. This function prints a message for each element in a character vector, instead of  collapsing them into a single line as done by, `message()`.
 
-  substrRight. Take the right substring of a string
+- #### 7 `imessage()`
+imessage. A variant to message() pasting with white space, sibling of iprint().
 
-- #### 4 `paste_w_names()`
+- #### 8 `HasNames()`
+iprint. A more intelligent printing function that collapses any variable passed to it by white spaces.
 
-  . This function takes a named vector and returns a string where each element is pasted with its name. Elements are separated by a specified string, and name-element pairs are also separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
+- #### 9 `substrRight()`
+substrRight. Take the right substring of a string
 
-- #### 5 `kollapse()`
+- #### 10 `ReplaceRepeatedDots()`
+ReplaceRepeatedDots. ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
 
-  kollapse. Collapses values and strings to one string (without a white space).  It also prints the results (good for a quick check)
+- #### 11 `RemoveFinalDot()`
+RemoveFinalDot. RemoveFinalDot removes the final dot from a string
 
-- #### 6 `ppp()`
+- #### 12 `RemoveInitialDot()`
+RemoveInitialDot. RemoveInitialDot removes the initial dot from a string.
 
-  Paste by point. Paste by point
+- #### 13 `RemoveTrailingDots()`
+RemoveTrailingDots. RemoveTrailingDots removes dots at the beginning and end of a string.
 
-- #### 7 `pps()`
+- #### 14 `ReplaceRepeatedSlashes()`
+ReplaceRepeatedSlashes. ReplaceRepeatedSlashes replaces multiple consecutive slashes with a single slash.
 
-  Paste by (forward) slash. Paste by (forward) slash
+- #### 15 `RemoveFinalSlash()`
+RemoveFinalSlash. RemoveFinalSlash removes the final slash(es) from a string (file path).
 
-- #### 8 `ppu()`
+- #### 16 `ReplaceRepeatedUnderscores()`
+ReplaceRepeatedUnderscores. ReplaceRepeatedUnderscores replaces multiple consecutive slashes with a single slash.
 
-  Paste by underscore. Paste by underscore
+- #### 17 `RemoveFinalUnderscores()`
+RemoveFinalUnderscores. RemoveFinalUnderscores removes the final slash(es) from a string (file path).
 
-- #### 9 `ppd()`
+- #### 18 `RemoveWhitespaces()`
+RemoveWhitespaces. RemoveWhitespaces replaces any nr of white spaces.
 
-  Paste by dash. Paste by dash
+- #### 19 `ReplaceRepeatedWhitespaces()`
+ReplaceRepeatedWhitespaces. ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
 
-- #### 10 `kpp()`
+- #### 20 `ReplaceSpecialCharacters()`
+ReplaceSpecialCharacters. ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 
-  Collapse by point. Collapse by point
+- #### 21 `AddTrailingDotIfNonePresent()`
+AddTrailingDotIfNonePresent. Adds a final slash '/', if missing from a string (file path).
 
-- #### 11 `kppu()`
+- #### 22 `AddTrailingSlashfNonePresent()`
+AddTrailingSlashfNonePresent. Adds a final slash '/', if missing from a string (file path).
 
-  Collapse by underscore. Collapse by underscore
+- #### 23 `ppp()`
+Paste by point. Paste by point
 
-- #### 12 `kpps()`
+- #### 24 `pps()`
+Paste by (forward) slash. Paste by (forward) slash
 
-  Collapse by (forward) slash. Collapse by (forward) slash
+- #### 25 `ppu()`
+Paste by underscore. Paste by underscore
 
-- #### 13 `kppd()`
+- #### 26 `pnl()`
+Paste by dash. Paste by dash
 
-  Collapse by dash. Collapse by dash
+- #### 27 `kpp()`
+Collapse and paste by point. Collapse by point
 
-- #### 14 `sppp()`
+- #### 28 `kppu()`
+Collapse and paste by underscore. Collapse by underscore
 
-  Simplified Paste by point. Simplified Paste by point
+- #### 29 `kpps()`
+Collapse and paste by (forward) slash. Collapse by (forward) slash
 
-- #### 15 `spps()`
+- #### 30 `kppd()`
+Collapse and paste by dash. Collapse by dash
 
-  Simplified Paste by fwd slash. Simplified Paste by fwd slash
+- #### 31 `kppws()`
+Collapse and paste by white space. Collapse by white space
 
-- #### 16 `percentile2value()`
+- #### 32 `kppc()`
+Collapse and paste by comma (and white space). Collapse by white space
 
-  percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+- #### 33 `kpipe()`
+Collapse and paste by pipe (|) and white spaces around it. Collapse by white space
 
-- #### 17 `parsepvalue()`
+- #### 34 `knl()`
+Collapse and paste by newline (`\n`) preceded by a white space. Collapse by white space
 
-  parsepvalue. Parse p-value from a number to a string.
+- #### 35 `kpwNames()`
+Collapse and paste Elements With Names. This function takes a named vector and returns a string where each element is pasted   with its name. Elements are separated by a specified string, and name-element pairs are also   separated by a specified string. The default named vector is `c('a' = 1, 'b' = 2)`.
 
-- #### 18 `eval_parse_kollapse()`
+- #### 36 `kollapse()`
+Kollapse. Collapses values and strings to one string (without a white space).  It also prints the results (good for a quick check)
 
-  eval_parse_kollapse. evaluate and parse (dyn_var_caller)
+- #### 37 `sppp()`
+Simplified Paste by point. Simplified Paste by point
 
-- #### 19 `percentage_formatter()`
+- #### 38 `spps()`
+Simplified Paste by fwd slash. Simplified Paste by fwd slash
 
-  percentage_formatter. Parse a string of 0-100% from a number between 0 and 1. 
+- #### 39 `sppu()`
+Simplified Paste by underscore. Simplified Paste by underscore
 
-- #### 20 `toCamelCase()`
+- #### 40 `percentile2value()`
+percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
 
-  Convert a String to camelCase. This function takes a string as input and converts it to camelCase format.  It splits the string into words using dots as separators, capitalizes the first letter of  each word (except the first word), and then concatenates them back together. 
+- #### 41 `parsepvalue()`
+parsepvalue. Parse p-value from a number to a string.
 
-- #### 21 `toUnderscoreSeparated()`
+- #### 42 `format_number_h()`
+percentage_formatter. Parse a string of 0-100% from a number between 0 and 1. 
 
-  Convert a String to underscore_separated Format. This function converts a string from camelCase or dot-separated format to an underscore-separated format.  It can handle strings that are a combination of camelCase and dot-separated formats. The function replaces  dots with underscores and inserts an underscore before any uppercase letter that follows a lowercase letter.  It then converts all characters to lowercase. 
+- #### 43 `countDotOrUnderscoreSeparated()`
+Count Dots or Underscores in a String and return.   This function counts the number of "." characters in a given string. 
 
-- #### 22 `toDotSeparated()`
+- #### 44 `toCamelCase()`
+Convert a String to camelCase. This function takes a string as input and converts it to camelCase format.  It splits the string into words using dots as separators, capitalizes the first letter of  each word (except the first word), and then concatenates them back together. 
 
-  Convert String to Dot Separated Name. Converts a string from camelCase or underscore_separated format to dot.separated.name format.  Inserts dots before each uppercase letter (except if it's the first character) or replaces underscores with dots,  and then converts the entire string to lowercase. 
+- #### 45 `toUnderscoreSeparated()`
+Convert a String to underscore_separated Format. This function converts a string from camelCase or dot-separated format to an underscore-separated format.  It can handle strings that are a combination of camelCase and dot-separated formats. The function replaces  dots with underscores and inserts an underscore before any uppercase letter that follows a lowercase letter.  It then converts all characters to lowercase. 
 
-- #### 23 `fix_special_characters_bash()`
+- #### 46 `toDotSeparated()`
+Convert String to Dot Separated Name. Converts a string from camelCase or underscore_separated format to dot.separated.name format.  Inserts dots before each uppercase letter (except if it's the first character) or replaces underscores with dots,  and then converts the entire string to lowercase. 
 
-  Fix Special Characters for Bash. This function takes a string representing a path and escapes certain special  characters to make it compatible with Bash. Specifically, it escapes spaces,  opening parentheses, and closing parentheses by placing a backslash before them.
+- #### 47 `toSentence()`
+Convert CamelCase to Sentence. Takes a camelCase string and converts it to a sentence format: space-separated,  with the first letter capitalized and no period at the end. 
 
-- #### 24 `ReplaceSpecialCharacters()`
+- #### 48 `fix_special_characters_bash()`
+Fix Special Characters for Bash. This function takes a string representing a path and escapes certain special  characters to make it compatible with Bash. Specifically, it escapes spaces,  opening parentheses, and closing parentheses by placing a backslash before them.
 
-  ReplaceSpecialCharacters. ReplaceSpecialCharacters replaces '[]$@()' with dots
+- #### 49 `ParseFullFilePath()`
+Parse Full File Path. Constructs a full file path by combining a path, file name, and extension. It applies    string clean-up operations to each component and ensures proper formatting. 
 
-- #### 25 `AddTrailingDot()`
+- #### 50 `FixUnderscores()`
+FixUnderscores. FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
 
-  AddTrailingDot. Adds a final slash '/', if missing from a string (file path).
+- #### 51 `FixPath()`
+FixPath. FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds a final '/' if missing from a file path.
 
-- #### 26 `RemoveDoubleDot()`
+- #### 52 `FixPlotName()`
+FixPlotName. FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
 
-  RemoveDoubleDot. RemoveDoubleDot removes multiple consecutive slashes (e.g. '..') from a string (file path). Also works for 2,3 consecutive slashes
+- #### 53 `ParseDirPath()`
+ParseDirPath. ParseDirPath pastes elements by slash, then removes Double Slashes '//' from a    string and adds a final '/' if missing from a file path.
 
-- #### 27 `RemoveFinalDot()`
+- #### 54 `PasteDirNameFromFlags()`
+PasteDirNameFromFlags. Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
 
-  RemoveFinalDot. RemoveFinalDot removes the final dot from a string
+- #### 55 `extPDF()`
+extPDF. add '.pdf' as extension to a file name
 
-- #### 28 `RemoveTrailingDots()`
+- #### 56 `extPNG()`
+extPNG. add '.png' as extension to a file name
 
-  RemoveTrailingDots. RemoveTrailingDots removes the trailing dots from a string
+- #### 57 `parseParamStringWNames()`
+Parse Parameter String with Names. This function parses a named vector and intermingles the names and values  into a single string, with specified separators for the odd and even elements. 
 
-- #### 29 `AddTrailingSlash()`
+- #### 58 `params.2.fname()`
+Convert Named Parameters to Filename. This function takes named parameters and converts them into a filename string with  specified separators and collapse characters. It excludes any parameters with NULL values. 
 
-  AddTrailingSlash. Adds a final slash '/', if missing from a string (file path).
+- #### 59 `param.list.2.fname()`
+param.list.2.fname. Take a list of parameters and parse a string from their names and values.
 
-- #### 30 `RemoveDoubleSlash()`
+- #### 60 `PasteOutdirFromFlags()`
+PasteOutdirFromFlags. Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 
-  RemoveDoubleSlash. RemoveDoubleSlash removes multiple consecutive slashes (e.g. '//') from a string (file path). Also works for 2,3 consecutive slashes
+- #### 61 `flag.name_value()`
+flag.name_value. Returns the name and its value, if its not FALSE.
 
-- #### 31 `RemoveFinalSlash()`
+- #### 62 `flag.nameiftrue()`
+flag.nameiftrue. Returns the name and its value, if its TRUE.
 
-  RemoveFinalSlash. RemoveFinalSlash removes the final slash from a string
+- #### 63 `flag.names_list()`
+flag.names_list. Returns the name and value of each element in a list of parameters.
 
-- #### 32 `FixUnderscores()`
+- #### 64 `flag.names_list.all.new()`
+flag.names_list.all.new. Returns the name and value of each element in a list of parameters.
 
-  FixUnderscores. FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
+- #### 65 `param.list.flag()`
+param.list.flag. Returns the name and value of each element in a list of parameters.
 
-- #### 33 `FixPath()`
+- #### 66 `()`
+parFlags. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
-  FixPath. FixPath removes multiple consecutive slashes (e.g. '//') from a string and adds a final '/' if missing from a file path.
+- #### 67 `FormatAsExcelLink()`
+parFlags2. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
-- #### 34 `FixPlotName()`
-
-  FixPlotName. FixPlotName replaces special characters in an input string (dollar-, at-, bracket-signs)
-
-- #### 35 `ParseFilePath()`
-
-  ParseFilePath. ParseFilePath pastes elements by slash, then removes Double Slashes '//' from a string and adds a final '/' if missing from a file path.
-
-- #### 36 `ww.FnP_parser()`
-
-  ww.FnP_parser. Internal Function. Parses the full path from the filename & location of the file.
-
-- #### 37 `PasteDirNameFromFlags()`
-
-  PasteDirNameFromFlags. Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
-
-- #### 38 `extPDF()`
-
-  extPDF. add '.pdf' as extension to a file name
-
-- #### 39 `extPNG()`
-
-  extPNG. add '.png' as extension to a file name
-
-- #### 40 `param.list.2.fname()`
-
-  param.list.2.fname. Take a list of parameters and parse a string from their names and values.
-
-- #### 41 `PasteOutdirFromFlags()`
-
-  PasteOutdirFromFlags. Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
-
-- #### 42 `flag.name_value()`
-
-  flag.name_value. Returns the name and its value, if its not FALSE.
-
-- #### 43 `flag.nameiftrue()`
-
-  flag.nameiftrue. Returns the name and its value, if its TRUE.
-
-- #### 44 `flag.names_list()`
-
-  flag.names_list. Returns the name and value of each element in a list of parameters.
-
-- #### 45 `flag.names_list.all.new()`
-
-  flag.names_list.all.new. Returns the name and value of each element in a list of parameters.
-
-- #### 46 `param.list.flag()`
-
-  param.list.flag. Returns the name and value of each element in a list of parameters.
-
-- #### 47 `parFlags()`
-
-  parFlags. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
 
 

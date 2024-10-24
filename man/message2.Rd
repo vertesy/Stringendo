@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{message2}
 \alias{message2}
-\title{message wihtout collapsing}
+\title{Message without collapsing}
 \usage{
 message2(vec)
 }

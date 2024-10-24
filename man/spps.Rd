@@ -15,5 +15,6 @@ spps(..., make.names = FALSE)
 Simplified Paste by fwd slash
 }
 \examples{
-spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
+spps("A", 1:2, "end", "", NULL)
+kpps("A", 1:2, "end", "", NULL)
 }

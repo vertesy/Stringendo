@@ -1,9 +1,10 @@
 ######################################################################################################
 # Create_the_Stringendo_Package.R
 ######################################################################################################
-# source("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
+# file.edit("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
 # rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
+devtools::load_all("~/GitHub/Packages/PackageTools/")
 
 # Functions ------------------------
 repository.dir <- "~/GitHub/Packages/Stringendo"
@@ -17,6 +18,8 @@ source(config.path)
 # install.packages('pracma')
 # install.packages('stringdist')
 # install.packages('ggExtra')
+require(PackageTools)
+
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 'git add commit push to remote'
 
@@ -58,7 +61,7 @@ PackageTools::extract_package_dependencies(repository.dir)
 
 # Try to find and add missing @importFrom statements------------------------------------------------
 devtools::load_all("~/GitHub/Packages/PackageTools/")
-(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = .R$))
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
 if (F) {
   (excluded.packages <- unlist(strsplit(DESCRIPTION$'depends', split = ", ")))
   for (scriptX in ls.scripts.full.path) {
@@ -71,13 +74,19 @@ if (F) {
 for (scriptX in ls.scripts.full.path) {
   PackageTools::list_of_funs_to_markdown(scriptX)
 }
+file.edit("~/GitHub/Packages/Stringendo/R/list.of.functions.in.Stringendo.det.md")
+file.edit("~/GitHub/Packages/Stringendo/README.md")
+file.remove("~/GitHub/Packages/Stringendo/R/list.of.functions.in.Stringendo.det.md")
 
+r$PackageTools()
 PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
 
 
 # Replaces T with TRUE and F with FALSE ------------------------------------------------
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
 for (scriptX in ls.scripts.full.path) {
   PackageTools::replace_tf_with_true_false(scriptX)
+  PackageTools::replace_short_calls(scriptX)
 }
 
 

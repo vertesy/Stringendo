@@ -15,5 +15,6 @@ sppp(..., make.names = FALSE)
 Simplified Paste by point
 }
 \examples{
-sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
+sppp("A", 1:2, "end", "", NULL)
+kpp("A", 1:2, "end", "", NULL)
 }

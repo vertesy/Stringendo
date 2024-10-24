@@ -18,8 +18,8 @@ can be converted to a numeric value without loss of information and is not inher
 character string, otherwise it returns FALSE.
 }
 \examples{
-testNumericCompatible(0.1)         # Should return TRUE
-testNumericCompatible('0.1')       # Should return TRUE
-testNumericCompatible('apple')     # Should return FALSE
-testNumericCompatible('arma.0.1')  # Should return FALSE
+testNumericCompatible(0.1) # Should return TRUE
+testNumericCompatible("0.1") # Should return TRUE
+testNumericCompatible("apple") # Should return FALSE
+testNumericCompatible("arma.0.1") # Should return FALSE
 }

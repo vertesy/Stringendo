@@ -15,7 +15,9 @@ FormatAsExcelLink(site_name, site_url)
 FormatAsExcelLink
 }
 \examples{
-FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation")
-, site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
+FormatAsExcelLink(
+  site_name = c("Zero Hedge", "Free Software Foundation"),
+  site_url = c("https://www.zerohedge.com", "https://www.fsf.org")
+)
 
 }

@@ -1,21 +1,21 @@
 # ____________________________________________________________________
 # Stringendo ----
 # ____________________________________________________________________
-# String parsing functionalites for generating plotnames, filenames and path.
-# Used by MarkdownReports and ggExpress.
-# Many functionalities were formerly part of CodeAndRoll.
+# String parsing functions and flow control.
+# Used by all of my packages, for input assertions and generating plotnames, filenames, etc.
 
 # devtools::check_man("~/GitHub/Packages/Stringendo")
 # devtools::load_all("~/GitHub/Packages/Stringendo")
 # devtools::document("~/GitHub/Packages/Stringendo")
-# try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = T)
-# try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = T)
+# file.edit("~/GitHub/Packages/Stringendo/Development/Create_the_Stringendo_Package.R")
+
+# try(source("~/GitHub/Packages/Stringendo/R/Stringendo.R"), silent = TRUE)
+# try(source("https://raw.githubusercontent.com/vertesy/Stringendo/main/Stringendo.R"), silent = TRUE)
+
 
 # ______________________________________________________________________________________________----
 # Flow control functions ----
 # _________________________________________________________________________________________________
-
-# ______________________________________________________________________________________________________________________________
 
 
 
@@ -41,19 +41,19 @@
 #'
 #' @export
 stopif <- function(...) {
-  n <- ...length()  # Number of conditions passed
+  n <- ...length() # Number of conditions passed
 
   for (i in seq_len(n)) {
-    condition <- ...elt(i)  # Get each condition
+    condition <- ...elt(i) # Get each condition
 
     # If the condition is TRUE, stop execution with an error
     if (is.logical(condition) && all(condition, na.rm = TRUE)) {
-      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
       stop(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
     }
   }
 
-  invisible()  # No visible output
+  invisible() # No visible output
 }
 
 
@@ -83,19 +83,19 @@ stopif <- function(...) {
 #' @export
 
 warnifnot <- function(...) {
-  n <- ...length()  # Number of conditions passed
+  n <- ...length() # Number of conditions passed
 
   for (i in seq_len(n)) {
-    condition <- ...elt(i)  # Get each condition
+    condition <- ...elt(i) # Get each condition
 
     # If the condition is not TRUE, issue a warning
     if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
-      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
       warning(sprintf("%s is not TRUE", deparse(call)), call. = FALSE)
     }
   }
 
-  invisible()  # Return nothing, just issue warnings if needed
+  invisible() # Return nothing, just issue warnings if needed
 }
 
 
@@ -122,19 +122,19 @@ warnifnot <- function(...) {
 #'
 #' @export
 warnif <- function(...) {
-  n <- ...length()  # Number of conditions passed
+  n <- ...length() # Number of conditions passed
 
   for (i in seq_len(n)) {
-    condition <- ...elt(i)  # Get each condition
+    condition <- ...elt(i) # Get each condition
 
     # If the condition is TRUE, issue a warning
     if (is.logical(condition) && all(condition, na.rm = TRUE)) {
-      call <- match.call()[[i + 1]]  # Get the original expression for better message clarity
+      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
       warning(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
     }
   }
 
-  invisible()  # Return nothing, just issue warnings if needed
+  invisible() # Return nothing, just issue warnings if needed
 }
 
 
@@ -152,12 +152,10 @@ warnif <- function(...) {
 #' @return A logical value indicating whether the input is inherently numeric.
 #'
 #' @examples
-#' testNumericCompatible(0.1)         # Should return TRUE
-#' testNumericCompatible('0.1')       # Should return TRUE
-#' testNumericCompatible('apple')     # Should return FALSE
-#' testNumericCompatible('arma.0.1')  # Should return FALSE
-
-
+#' testNumericCompatible(0.1) # Should return TRUE
+#' testNumericCompatible("0.1") # Should return TRUE
+#' testNumericCompatible("apple") # Should return FALSE
+#' testNumericCompatible("arma.0.1") # Should return FALSE
 testNumericCompatible <- function(x) {
   stopifnot(is.numeric(x) || is.character(x))
   suppressWarnings({
@@ -181,7 +179,7 @@ testNumericCompatible <- function(x) {
 #' c(1, 2, 3) %!in% c(2, 4, 6)
 #' # [1]  TRUE FALSE  TRUE
 #' @export
-'%!in%' <- function(x, y) !('%in%'(x, y))
+"%!in%" <- function(x, y) !("%in%"(x, y))
 
 
 
@@ -244,7 +242,8 @@ idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
 #' @param x Vector to check.
 #' @return Logical indicating if `x` has names.
 #' @examples
-#' HasNames(c(a=1, b=2)); HasNames(1:3)
+#' HasNames(c(a = 1, b = 2))
+#' HasNames(1:3)
 #' @export
 HasNames <- function(x) !is.null(names(x))
 
@@ -410,10 +409,10 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 #' @return A string with special characters replaced by dots.
 #' @export
 
-ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = F) {
+ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = FALSE) {
   x <- gsub(x = string, pattern = ",|\\||\\@|\\[|\\]|\\$|\\/\\(\\)|\\\\", replacement = replacement)
   x <- ReplaceRepeatedWhitespaces(x)
-  if(remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
+  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
   ReplaceRepeatedDots(x)
 }
 
@@ -662,11 +661,12 @@ kollapse <- function(...,
 #' @description Simplified Paste by point
 #' @param ... Multiple simple string variables to parse.
 #' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
-#' @examples sppp("A", 1:2, "end", "", NULL); kpp("A", 1:2, "end", "", NULL)
+#' @examples sppp("A", 1:2, "end", "", NULL)
+#' kpp("A", 1:2, "end", "", NULL)
 #' @export
 sppp <- function(..., make.names = FALSE) {
   string <- kpp(...)
-  if(make.names) string <- make.names(string)
+  if (make.names) string <- make.names(string)
   string <- ReplaceRepeatedDots(string)
   string <- RemoveFinalDot(string)
   string <- RemoveInitialDot(string)
@@ -678,12 +678,13 @@ sppp <- function(..., make.names = FALSE) {
 #' @description Simplified Paste by fwd slash
 #' @param ... Multiple simple variables to parse.
 #' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
-#' @examples spps("A", 1:2, "end", "", NULL); kpps("A", 1:2, "end", "", NULL)
+#' @examples spps("A", 1:2, "end", "", NULL)
+#' kpps("A", 1:2, "end", "", NULL)
 #' @export
 
 spps <- function(..., make.names = FALSE) {
   string <- kpps(...)
-  if(make.names) string <- make.names(string)
+  if (make.names) string <- make.names(string)
   string <- ReplaceRepeatedSlashes(string)
   string <- RemoveFinalSlash(string)
   return(string)
@@ -695,12 +696,13 @@ spps <- function(..., make.names = FALSE) {
 #' @description Simplified Paste by underscore
 #' @param ... Multiple simple variables to parse.
 #' @param make.names Should make.names applied to the concatenated string? Default is FALSE.
-#' @examples sppu("A", 1:2, "end", "", NULL); kppu("A", 1:2, "end", "", NULL)
+#' @examples sppu("A", 1:2, "end", "", NULL)
+#' kppu("A", 1:2, "end", "", NULL)
 #' @export
 
 sppu <- function(..., make.names = FALSE) {
   string <- kppu(...)
-  if(make.names) string <- make.names(string)
+  if (make.names) string <- make.names(string)
   string <- ReplaceRepeatedUnderscores(string)
   string <- RemoveFinalUnderscores(string)
   return(string)
@@ -758,7 +760,7 @@ parsepvalue <- function(pvalue = 0.01) paste0("(p<", pvalue, ")")
 #'
 #' @export
 #' @examples percentage_formatter(x = 4.2822212, digitz = 3)
-percentage_formatter <- function(x, digitz = 3, keep.names = F, prefix = NULL, suffix = NULL, sign_sep = "") {
+percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NULL, suffix = NULL, sign_sep = "") {
   if (keep.names) nmz <- names(x)
   pc_sign <- paste(100 * signif(x, digitz), "%", sep = sign_sep)
   a <- trimws(paste(prefix, pc_sign, suffix, sep = " "))
@@ -798,7 +800,6 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 #' @return An integer representing the number of "." characters in the string.
 #' @export
 countDotOrUnderscoreSeparated <- function(string) {
-
   stopifnot(is.character(string), length(string) == 1)
 
   # Count the number of dots, underscores, and white spaces in the string
@@ -855,9 +856,9 @@ toCamelCase <- function(input_string,
 
   # Split the string into words using the appropriate separator
   words <- if (estimated_separator == "underscore") {
-    strsplit(input_string, "_")[[1]]  # split by underscore
+    strsplit(input_string, "_")[[1]] # split by underscore
   } else if (estimated_separator == "dot") {
-    strsplit(input_string, "\\.")[[1]]  # split by dot
+    strsplit(input_string, "\\.")[[1]] # split by dot
   } else if (estimated_separator == "white space") {
     strsplit(input_string, " ")[[1]] # split by white space
   } else {
@@ -868,7 +869,7 @@ toCamelCase <- function(input_string,
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = T)
+  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = TRUE)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
@@ -908,7 +909,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
   result <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
   stopifnot(is.character(result), nchar(result) > 0)
 
-  if (toclipboard) try(clipr::write_clip(result), silent = T)
+  if (toclipboard) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
   invisible(result)
@@ -950,7 +951,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(result), nchar(result) > 0)
 
   # Handle clipboard functionality
-  if (toclipboard &  requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
+  if (toclipboard & requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
 }
@@ -969,7 +970,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
 #'
 #' @importFrom stringr str_replace_all str_to_title
 toSentence <- function(camelCaseString) {
-    stopifnot(is.character(camelCaseString))
+  stopifnot(is.character(camelCaseString))
 
   # Insert a space before each uppercase letter, except the first character
   sentence <- gsub("([a-z])([A-Z])", "\\1 \\2", camelCaseString)
@@ -1186,7 +1187,7 @@ extPNG <- function(vec) {
 #'
 #' @importFrom checkmate assert_character assert_named
 #' @export
-parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ")  {
+parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ") {
   stopifnot(
     is.vector(named.vec), is.character(sep1), is.character(sep2),
     length(names(named.vec)) == length(named.vec)
@@ -1216,7 +1217,6 @@ parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ")  {
 #' params.2.fname(aa = 1, cc = 2, d = NULL, sep = ".", collapse = "_")
 #' # Returns "aa.1_cc.2"
 params.2.fname <- function(..., sep = ".", collapse = "_") {
-
   x <- list(...)
   nmz <- as.character(substitute(list(...))[-1])
 
@@ -1273,8 +1273,11 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 #' @description Returns the name and its value, if its not FALSE.
 #' @param toggle Binary variable
 #' @param Separator Separator, Default: '_'
-#' @examples Xseed <- 1212; p <- list(); p$"seed" <- 1212
-#' flag.name_value(Xseed); flag.name_value(p$"seed")
+#' @examples Xseed <- 1212
+#' p <- list()
+#' p$"seed" <- 1212
+#' flag.name_value(Xseed)
+#' flag.name_value(p$"seed")
 #'
 #' @export
 flag.name_value <- function(toggle, Separator = "_") {
@@ -1349,8 +1352,11 @@ param.list.flag <- function(par = p$"umap.min_dist") {
 #' @param prefix Append something before?
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param collapsechar Separating character between each parameters-flag
-#' @examples pearson <- TRUE; filtered <- TRUE;  normalized <- FALSE
-#' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized); MyPlotname
+#' @examples pearson <- TRUE
+#' filtered <- TRUE
+#' normalized <- FALSE
+#' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized)
+#' MyPlotname
 #'
 #' @export
 parFlags <-
@@ -1381,8 +1387,11 @@ parFlags <-
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param coll.char Separating character between each parameters-flag
 #' @param coll.char.intra Separating character between parameters and its value
-#' @examples pearson <- TRUE; filtered <- 3;  normalized <- FALSE
-#' MyPlotname <- parFlags2(prefix = "MyPlot", pearson, filtered, normalized); MyPlotname
+#' @examples pearson <- TRUE
+#' filtered <- 3
+#' normalized <- FALSE
+#' MyPlotname <- parFlags2(prefix = "MyPlot", pearson, filtered, normalized)
+#' MyPlotname
 #'
 #' @export
 parFlags2 <-
@@ -1427,8 +1436,10 @@ ww.break.lines <- function(char.vec, max.char = 50) {
 #'
 #' @param site_name Text shown.
 #' @param site_url Hyperlink url.
-#' @examples FormatAsExcelLink(site_name = c("Zero Hedge", "Free Software Foundation")
-#' , site_url = c("https://www.zerohedge.com", "https://www.fsf.org"))
+#' @examples FormatAsExcelLink(
+#'   site_name = c("Zero Hedge", "Free Software Foundation"),
+#'   site_url = c("https://www.zerohedge.com", "https://www.fsf.org")
+#' )
 #'
 #' @export
 FormatAsExcelLink <- function(site_name, site_url) {

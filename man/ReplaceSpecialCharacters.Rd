@@ -7,7 +7,7 @@
 ReplaceSpecialCharacters(
   string = "obj@meta$alpha[[3]]",
   replacement = ".",
-  remove_dots = F
+  remove_dots = FALSE
 )
 }
 \arguments{

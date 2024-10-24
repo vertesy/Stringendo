@@ -16,5 +16,6 @@ Logical indicating if \code{x} has names.
 Check if Vector Has Names
 }
 \examples{
-HasNames(c(a=1, b=2)); HasNames(1:3)
+HasNames(c(a = 1, b = 2))
+HasNames(1:3)
 }
