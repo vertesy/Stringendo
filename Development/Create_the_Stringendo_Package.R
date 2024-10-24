@@ -8,6 +8,7 @@ devtools::load_all("~/GitHub/Packages/PackageTools/")
 
 # Functions ------------------------
 repository.dir <- "~/GitHub/Packages/Stringendo"
+(package.name <- basename(repository.dir))
 config.path <- file.path(repository.dir, "Development/config.R")
 
 "TAKE A LOOK AT"
@@ -71,15 +72,17 @@ if (F) {
 
 
 # Generate the list of functions ------------------------------------------------
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
 for (scriptX in ls.scripts.full.path) {
   PackageTools::list_of_funs_to_markdown(scriptX)
 }
-file.edit("~/GitHub/Packages/Stringendo/R/list.of.functions.in.Stringendo.det.md")
-file.edit("~/GitHub/Packages/Stringendo/README.md")
-file.remove("~/GitHub/Packages/Stringendo/R/list.of.functions.in.Stringendo.det.md")
+file.edit(paste0(repository.dir, "R/list.of.functions.in.", package.name, ".det.md"))
+file.edit(paste0(repository.dir, "README.md"))
+file.remove(paste0(repository.dir, "/R/list.of.functions.in.", package.name, ".det.md"))
 
 r$PackageTools()
 PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
+file.edit(paste0(repository.dir, "README.md"))
 
 
 # Replaces T with TRUE and F with FALSE ------------------------------------------------
