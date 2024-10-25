@@ -4,14 +4,15 @@
 \alias{kollapse}
 \title{Kollapse}
 \usage{
-kollapse(..., collapseby = "", print = TRUE)
+kollapse(..., collapseby = "", print = 1)
 }
 \arguments{
 \item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
 
 \item{collapseby}{collapse elements into a string separated by this character}
 
-\item{print}{Print the results to the terminal. TRUE by default.}
+\item{print}{Print the results to the terminal. Default is 1 for \code{print()}.
+Set to 2 for \code{message()}.}
 }
 \description{
 Collapses values and strings to one string (without a white space).

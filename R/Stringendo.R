@@ -674,7 +674,9 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
 #' It also prints the results (good for a quick check)
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
 #' @param collapseby collapse elements into a string separated by this character
-#' @param print Print the results to the terminal. TRUE by default.
+#' @param print Print the results to the terminal. Default is 1 for `print()`.
+#' Set to 2 for `message()`.
+#'
 #' @examples kollapse(
 #'   "Hello ", LETTERS[24],
 #'   ", the winning numbers are ", c(1, 3, 5, 65, 11), " . Yay!"
@@ -683,9 +685,11 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
 
 kollapse <- function(...,
                      collapseby = "",
-                     print = TRUE) {
-  if (print == TRUE) {
+                     print = 1) {
+  if (print == 1) {
     print(paste0(c(...), collapse = collapseby))
+  } else if (print == 2) {
+    message(paste0(c(...), collapse =  collapseby))
   }
   paste0(c(...), collapse = collapseby)
 }
