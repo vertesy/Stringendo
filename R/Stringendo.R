@@ -138,6 +138,44 @@ warnif <- function(...) {
 }
 
 
+# _______________________________________________________________________________________
+#' @title ifExistsAndTrue
+#'
+#' @description Checks if a variable is defined, and its value is TRUE, else returns FALSE, and
+#' prints a message.
+#' @param varname Name of the variable
+#'
+#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#'
+#' @export
+
+ifExistsAndTrue <- function(varname = "pi" ) {
+  x = FALSE
+  if (exists(varname)) {
+    if (isTRUE(get(varname)))  {x = TRUE} else {x = FALSE; iprint(varname, " exists, but != TRUE; ", get(varname))}
+  }
+  return(x)
+}
+
+
+# _______________________________________________________________________________________
+#' @title ifExistsElse
+#'
+#' @description Checks if a variable is defined, else returns an alternative value.
+#' @param varname Name of the variable
+#' @param alternative Alternative value to return if the variable is not defined
+#' @param v Print messages. Default is FALSE.
+#'
+#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#'
+#' @export
+ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {
+  if(!is.character(varname)) varname <- substitute(varname)
+  if(verbose) message("Checking if ", varname, " exists.")
+  if(exists(varname)) get(varname) else alternative
+}
+
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
