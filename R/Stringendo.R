@@ -171,7 +171,7 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 #' @export
 ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {
   if(!is.character(varname)) varname <- substitute(varname)
-  if(verbose) message("Checking if ", varname, " exists.")
+  if(v) message("Checking if ", varname, " exists.")
   if(exists(varname)) get(varname) else alternative
 }
 
