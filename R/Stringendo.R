@@ -176,6 +176,24 @@ ifExistsElse <- function(varname, alternative = "define an alternative", v = F )
 }
 
 
+# ______________________________________________________________________________________________________________________________
+#' @title Check if Input is Character or NULL
+#'
+#' @description
+#' `is.character.or.NULL()` verifies if the provided input is either a character vector or NULL.
+#' @param x The input to check.
+#'
+#' @return Returns `TRUE` if `x` is either a character vector or `NULL`, otherwise `FALSE`.
+#'
+#' @examples
+#' is.character.or.NULL(NULL)      # TRUE
+#' is.character.or.NULL("example") # TRUE
+#' is.character.or.NULL(123)       # FALSE
+#'
+#' @export
+is.character.or.NULL <- function(x) is.null(x) || is.character(x)
+
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
