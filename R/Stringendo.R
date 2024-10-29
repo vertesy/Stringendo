@@ -194,6 +194,27 @@ ifExistsElse <- function(varname, alternative = "define an alternative", v = F )
 is.character.or.NULL <- function(x) is.null(x) || is.character(x)
 
 
+# ______________________________________________________________________________________________________________________________
+#' @title Check if Input is Numeric or Logical
+#'
+#' @description
+#' `is.numeric.or.logical()` checks if the provided input is either numeric or logical.
+#'
+#' @param x The input to check.
+#'
+#' @return Returns `TRUE` if `x` is either numeric or logical, otherwise `FALSE`.
+#'
+#' @examples
+#' is.numeric.or.logical(123)      # TRUE
+#' is.numeric.or.logical(TRUE)     # TRUE
+#' is.numeric.or.logical("text")   # FALSE
+#'
+#' @export
+is.numeric.or.logical <- function(x) {
+  is.numeric(x) || is.logical(x)
+}
+
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
