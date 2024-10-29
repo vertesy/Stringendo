@@ -264,6 +264,24 @@ testNumericCompatible <- function(x) {
 # Generic auxiliary functions ----
 # _________________________________________________________________________________________________
 
+
+#' @title Get Object Name as String
+#'
+#' @description
+#' `get_object_name()` captures the name of an input object and returns it as a string.
+#'
+#' @param x The object whose name you want to capture.
+#'
+#' @return Returns the name of `obj` as a string.
+#'
+#' @examples
+#' my_var <- 10
+#' get_object_name(my_var)  # "my_var"
+#'
+#' @export
+substitute_deparse <- function(x) deparse(substitute(x))
+
+
 # ______________________________________________________________________________________________________________________________
 #' @title Message without collapsing
 #'
