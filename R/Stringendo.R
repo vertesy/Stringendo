@@ -269,6 +269,8 @@ testNumericCompatible <- function(x) {
 #'
 #' @description
 #' `get_object_name()` captures the name of an input object and returns it as a string.
+#' Replace `deparse\s*\(\s*substitute\s*\(([^()]+)\)\s*\)` to `substitute_deparse($1)`, then
+#' `substitute\s*\(([^()]+)\)\s*\)` to the same.
 #'
 #' @param x The object whose name you want to capture.
 #'
