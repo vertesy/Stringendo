@@ -8,7 +8,7 @@ stopif(...)
 }
 \arguments{
 \item{...}{Logical conditions to be checked. Each condition must evaluate to a logical vector.
-Default: none.}
+Default: none. Named arguments will be used as error messages.}
 }
 \value{
 The function stops execution if any condition evaluates to \code{TRUE}.
@@ -19,10 +19,7 @@ The \code{stopif()} function stops the execution if the condition is \code{TRUE}
 clarity in the code by removing double negations.
 }
 \examples{
-x <- 5
-y <- 10
-
-# This will stop execution because x < y is TRUE
-stopif(x < y, y > 5)
+stopif(6 < 4, 6 > 5)
+stopif("custom message" = 6 > 5)
 
 }

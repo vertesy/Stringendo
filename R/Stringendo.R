@@ -28,32 +28,36 @@
 #' clarity in the code by removing double negations.
 #'
 #' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
-#'   Default: none.
+#'   Default: none. Named arguments will be used as error messages.
 #'
 #' @return The function stops execution if any condition evaluates to `TRUE`.
 #'
 #' @examples
-#' x <- 5
-#' y <- 10
-#'
-#' # This will stop execution because x < y is TRUE
-#' stopif(x < y, y > 5)
+#' stopif(6 < 4, 6 > 5)
+#' stopif("custom message" = 6 > 5)
 #'
 #' @export
 stopif <- function(...) {
-  n <- ...length() # Number of conditions passed
+  args <- list(...)  # Capture all conditions
 
-  for (i in seq_len(n)) {
-    condition <- ...elt(i) # Get each condition
+  for (i in seq_along(args)) {
+    condition <- args[[i]]
+    name <- names(args)[i]
 
-    # If the condition is TRUE, stop execution with an error
+    # Check if condition is logical and TRUE
     if (is.logical(condition) && all(condition, na.rm = TRUE)) {
-      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
-      stop(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
+      # Use the provided name as a custom error message if it exists,
+      # otherwise, use the condition's expression
+      message <- if (!is.null(name) && nzchar(name)) {
+        paste(name, "is TRUE")
+      } else {
+        paste(deparse(match.call()[[i + 1]]), "is TRUE")
+      }
+      stop(message, call. = FALSE)
     }
   }
 
-  invisible() # No visible output
+  invisible()  # No visible output
 }
 
 
@@ -91,7 +95,7 @@ warnifnot <- function(...) {
     # If the condition is not TRUE, issue a warning
     if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
       call <- match.call()[[i + 1]] # Get the original expression for better message clarity
-      warning(sprintf("%s is not TRUE", deparse(call)), call. = FALSE)
+      warning(sprintf("%s is not TRUE", deparse(call)), call. = FALSE, immediate. = TRUE)
     }
   }
 
