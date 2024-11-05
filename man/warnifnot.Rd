@@ -8,23 +8,20 @@ warnifnot(...)
 }
 \arguments{
 \item{...}{Logical conditions to be checked. Each condition must evaluate to a logical vector.
-Default: none.}
+Named arguments will use the name as the warning message.}
 }
 \value{
-The function returns \code{invisible()}, meaning it does not produce any visible output. It
-issues warnings for each condition that evaluates to \code{FALSE} or contains \code{NA}.
+The function returns \code{invisible()}, but issues warnings for each condition that evaluates
+to \code{FALSE} or contains \code{NA}.
 }
 \description{
-The \code{warningifnot()} function checks whether each condition passed to it is \code{TRUE}. If any
-condition is not met, a warning is issued but the execution continues. This is similar to
-\code{stopifnot()}, which throws an error and halts execution, but \code{warningifnot()} only issues a
+The \code{warnifnot()} function checks whether each condition passed to it is \code{TRUE}. If any
+condition is not met, a warning is issued but execution continues. This is similar to
+\code{stopifnot()}, which throws an error and halts execution, but \code{warnifnot()} only issues a
 warning, allowing the program to proceed.
 }
 \examples{
-x <- 5
-y <- 10
-
-# Example: This will issue a warning because x > y is FALSE
-warnifnot(x > y, y > 5)
+warnifnot(6 < 4, 6 > 5)
+warnifnot("custom message" = 6 < 4)
 
 }

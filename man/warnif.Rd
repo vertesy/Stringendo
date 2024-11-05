@@ -8,7 +8,7 @@ warnif(...)
 }
 \arguments{
 \item{...}{Logical conditions to be checked. Each condition must evaluate to a logical vector.
-Default: none.}
+Named arguments will use the name as the warning message.}
 }
 \value{
 The function returns \code{invisible()}, but issues warnings for each condition that evaluates
@@ -16,14 +16,11 @@ to \code{TRUE}.
 }
 \description{
 The \code{warnif()} function issues a warning if the condition is \code{TRUE}. It is the opposite of
-\code{warningifnot()}, which warns if the condition is not \code{TRUE}. This function is useful for issuing
+\code{warnifnot()}, which warns if the condition is not \code{TRUE}. This function is useful for issuing
 warnings when a certain condition is met.
 }
 \examples{
-x <- 5
-y <- 10
-
-# This will issue a warning because x < y is TRUE
-warnif(x < y, y > 5)
+warnif(6 > 4, 6 > 5)
+warnif("custom message" = 6 > 5)
 
 }

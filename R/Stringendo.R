@@ -66,40 +66,43 @@ stopif <- function(...) {
 #' @title Issue warnings if conditions are not TRUE
 #'
 #' @description
-#' The `warningifnot()` function checks whether each condition passed to it is `TRUE`. If any
-#' condition is not met, a warning is issued but the execution continues. This is similar to
-#' `stopifnot()`, which throws an error and halts execution, but `warningifnot()` only issues a
+#' The `warnifnot()` function checks whether each condition passed to it is `TRUE`. If any
+#' condition is not met, a warning is issued but execution continues. This is similar to
+#' `stopifnot()`, which throws an error and halts execution, but `warnifnot()` only issues a
 #' warning, allowing the program to proceed.
 #'
 #' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
-#'   Default: none.
+#'   Named arguments will use the name as the warning message.
 #'
-#' @return The function returns `invisible()`, meaning it does not produce any visible output. It
-#'   issues warnings for each condition that evaluates to `FALSE` or contains `NA`.
+#' @return The function returns `invisible()`, but issues warnings for each condition that evaluates
+#'   to `FALSE` or contains `NA`.
 #'
 #' @examples
-#' x <- 5
-#' y <- 10
-#'
-#' # Example: This will issue a warning because x > y is FALSE
-#' warnifnot(x > y, y > 5)
+#' warnifnot(6 < 4, 6 > 5)
+#' warnifnot("custom message" = 6 < 4)
 #'
 #' @export
-
 warnifnot <- function(...) {
-  n <- ...length() # Number of conditions passed
+  args <- list(...)  # Capture all conditions
 
-  for (i in seq_len(n)) {
-    condition <- ...elt(i) # Get each condition
+  for (i in seq_along(args)) {
+    condition <- args[[i]]
+    name <- names(args)[i]
 
-    # If the condition is not TRUE, issue a warning
+    # Issue a warning if the condition is FALSE or contains NA
     if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
-      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
-      warning(sprintf("%s is not TRUE", deparse(call)), call. = FALSE, immediate. = TRUE)
+      # Use the provided name as a custom warning message if it exists,
+      # otherwise, use the condition's expression
+      message <- if (!is.null(name) && nzchar(name)) {
+        paste(name, "is not TRUE")
+      } else {
+        paste(deparse(match.call()[[i + 1]]), "is not TRUE")
+      }
+      warning(message, call. = FALSE, immediate. = TRUE)
     }
   }
 
-  invisible() # Return nothing, just issue warnings if needed
+  invisible()  # No visible output
 }
 
 
@@ -108,38 +111,43 @@ warnifnot <- function(...) {
 #'
 #' @description
 #' The `warnif()` function issues a warning if the condition is `TRUE`. It is the opposite of
-#' `warningifnot()`, which warns if the condition is not `TRUE`. This function is useful for issuing
+#' `warnifnot()`, which warns if the condition is not `TRUE`. This function is useful for issuing
 #' warnings when a certain condition is met.
 #'
 #' @param ... Logical conditions to be checked. Each condition must evaluate to a logical vector.
-#'   Default: none.
+#'   Named arguments will use the name as the warning message.
 #'
 #' @return The function returns `invisible()`, but issues warnings for each condition that evaluates
 #'   to `TRUE`.
 #'
 #' @examples
-#' x <- 5
-#' y <- 10
-#'
-#' # This will issue a warning because x < y is TRUE
-#' warnif(x < y, y > 5)
+#' warnif(6 > 4, 6 > 5)
+#' warnif("custom message" = 6 > 5)
 #'
 #' @export
 warnif <- function(...) {
-  n <- ...length() # Number of conditions passed
+  args <- list(...)  # Capture all conditions
 
-  for (i in seq_len(n)) {
-    condition <- ...elt(i) # Get each condition
+  for (i in seq_along(args)) {
+    condition <- args[[i]]
+    name <- names(args)[i]
 
-    # If the condition is TRUE, issue a warning
+    # Issue a warning if the condition is TRUE
     if (is.logical(condition) && all(condition, na.rm = TRUE)) {
-      call <- match.call()[[i + 1]] # Get the original expression for better message clarity
-      warning(sprintf("%s is TRUE", deparse(call)), call. = FALSE)
+      # Use the provided name as a custom warning message if it exists,
+      # otherwise, use the condition's expression
+      message <- if (!is.null(name) && nzchar(name)) {
+        paste(name, "is TRUE")
+      } else {
+        paste(deparse(match.call()[[i + 1]]), "is TRUE")
+      }
+      warning(message, call. = FALSE, immediate. = TRUE)
     }
   }
 
-  invisible() # Return nothing, just issue warnings if needed
+  invisible()  # No visible output
 }
+
 
 
 # _______________________________________________________________________________________
