@@ -586,6 +586,15 @@ pps <- function(...) {
 }
 
 # _________________________________________________________________________________________________
+#' @title Paste by colon symbol.
+#' @description Paste by colon symbol. "ppc" reserved for "comma".
+#' @param ... Multiple simple variables to parse.
+#' @export
+ppcol <- function(...) {
+  paste(..., sep = ":")
+}
+
+# _________________________________________________________________________________________________
 #' @title Paste by underscore
 #' @description Paste by underscore
 #' @param ... Multiple simple variables to parse.
@@ -593,7 +602,6 @@ pps <- function(...) {
 ppu <- function(...) {
   paste(..., sep = "_")
 }
-
 
 # _________________________________________________________________________________________________
 #' @title Paste by dash
@@ -728,6 +736,16 @@ knl <- function(...) {
 #' @examples kpwNames(c("a" = 1, "b" = 2))
 #' @export
 kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
+  # Convert one dimensional table to vector preserving the names
+  if(is.table(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
+    x <- as.vector(x)
+  } else if(is.matrix(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
+    x <- as.vector(t(x))
+  } else if(is.data.frame(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
+    x <- as.vector(unlist(x))
+
+  }
+
   stopifnot(
     is.vector(x),
     HasNames(x)
@@ -735,6 +753,9 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
   x <- paste0(names(x), sep1, x, collapse = sep2)
   paste0(prefix, x, suffix)
 }
+
+is.vector(nr.conn.L4.per.motif)
+
 
 
 
