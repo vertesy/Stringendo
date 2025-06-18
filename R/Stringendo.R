@@ -736,14 +736,12 @@ knl <- function(...) {
 #' @examples kpwNames(c("a" = 1, "b" = 2))
 #' @export
 kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
-  # Convert one dimensional table to vector preserving the names
-  if(is.table(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
-    x <- as.vector(x)
-  } else if(is.matrix(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
-    x <- as.vector(t(x))
-  } else if(is.data.frame(nr.conn.L4.per.motif) & length(dim(nr.conn.L4.per.motif))) {
-    x <- as.vector(unlist(x))
 
+  if(is.table(x) & length(dim(x))) {
+    # Convert one dimensional table to vector preserving the names
+    nmz <- names(x)
+    x <- as.vector(x)
+    names(x) <- nmz
   }
 
   stopifnot(
