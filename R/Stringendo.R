@@ -752,9 +752,6 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
   paste0(prefix, x, suffix)
 }
 
-is.vector(nr.conn.L4.per.motif)
-
-
 
 
 # _________________________________________________________________________________________________
