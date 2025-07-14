@@ -1335,7 +1335,6 @@ extPNG <- function(vec) {
 #' parseParamStringWNames(named.vec)
 #' # "ULm: 15 | DLm: 67 | Matm: 33 | EN-Lineage.m: 21"
 #'
-#' @importFrom checkmate assert_character assert_named
 #' @export
 parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ") {
   stopifnot(
