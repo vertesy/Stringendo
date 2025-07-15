@@ -1180,6 +1180,7 @@ fix_special_characters_bash <- function(path) {
 #' @examples
 #' ParseFullFilePath(path = "home/user/docs/", file_name = "report@final", extension = ".txt")
 #' ParseFullFilePath(file_name = "report", extension = "txt")
+#'
 #' @export
 ParseFullFilePath <- function(path, file_name, extension) {
   file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
