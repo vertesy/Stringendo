@@ -452,10 +452,10 @@ RemoveFinalSlash <- function(string) {
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedUnderscores
 #'
-#' @description ReplaceRepeatedUnderscores replaces multiple consecutive slashes with a single slash.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @examples ReplaceRepeatedUnderscores(string = "path//to//folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @description ReplaceRepeatedUnderscores replaces multiple consecutive underscores with a single underscore.
+#' @param string The string (file path) potentially having repeated underscores.
+#' @examples ReplaceRepeatedUnderscores(string = "path__to__folder")
+#' @return A string with repeated underscores replaced by a single underscore.
 #' @export
 ReplaceRepeatedUnderscores <- function(string) {
   gsub(pattern = "_+", replacement = "_", x = string)
