@@ -868,7 +868,7 @@ pad.na <- function(x, len) {
 
 #' @title percentile2value
 #' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.
-#' Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+#' Useful for calculating cutoffs, and displaying them by whist()s "vline" parameter.
 #' @param distribution A numeric vector
 #' @param percentile percentile, Default: 0.95
 #' @param FirstValOverPercentile PARAM_DESCRIPTION, Default: TRUE
