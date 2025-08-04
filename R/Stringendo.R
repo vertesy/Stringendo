@@ -532,14 +532,14 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
 
 #' @title AddTrailingDotIfNonePresent
 #'
-#' @description Adds a final slash '/', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing slash
+#' @description Adds a final dot '.', if missing from a string (file path).
+#' @param string The file path potentially missing the trailing dot
 #' @examples AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
 #'
 #' @export
 AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "\\.") {
+  if (LastChr != ".") {
     string <- paste0(string, ".")
   }
   return(string)

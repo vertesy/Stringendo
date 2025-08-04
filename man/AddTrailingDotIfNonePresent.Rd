@@ -7,10 +7,10 @@
 AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
 }
 \arguments{
-\item{string}{The file path potentially missing the trailing slash}
+\item{string}{The file path potentially missing the trailing dot}
 }
 \description{
-Adds a final slash '/', if missing from a string (file path).
+Adds a final dot '.', if missing from a string (file path).
 }
 \examples{
 AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
