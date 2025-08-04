@@ -10,9 +10,11 @@ License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
 Depends: 
     base
-Imports: 
-    clipr
-Suggests: 
+Imports:
+    clipr,
+    dplyr,
+    stringr
+Suggests:
     MarkdownHelpers,
     MarkdownReports
 Encoding: UTF-8
