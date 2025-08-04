@@ -159,7 +159,7 @@ Simplified Paste by fwd slash. Simplified Paste by fwd slash
 Simplified Paste by underscore. Simplified Paste by underscore
 
 - #### 40 `percentile2value()`
-percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" parameter.
 
 - #### 41 `parsepvalue()`
 parsepvalue. Parse p-value from a number to a string.
