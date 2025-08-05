@@ -15,7 +15,8 @@ percentile2value(
 
 \item{percentile}{percentile, Default: 0.95}
 
-\item{FirstValOverPercentile}{PARAM_DESCRIPTION, Default: TRUE}
+\item{FirstValOverPercentile}{Whether to return the first value at or above the
+percentile (TRUE) or the value just below it (FALSE), Default: TRUE}
 }
 \description{
 Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.

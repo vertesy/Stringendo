@@ -887,7 +887,8 @@ pad.na <- function(x, len) {
 #' Useful for calculating cutoffs, and displaying them by whist()s "vline" parameter.
 #' @param distribution A numeric vector
 #' @param percentile percentile, Default: 0.95
-#' @param FirstValOverPercentile PARAM_DESCRIPTION, Default: TRUE
+#' @param FirstValOverPercentile Whether to return the first value at or above the
+#'   percentile (TRUE) or the value just below it (FALSE), Default: TRUE
 #' @export
 
 
