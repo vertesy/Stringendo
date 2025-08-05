@@ -240,7 +240,7 @@ is.numeric.or.logical <- function(x) {
 #' can be converted to a numeric value without loss of information and is not inherently a
 #' character string, otherwise it returns FALSE.
 #'
-#' @param x The variable to be tested. Default: NA.
+#' @param x The variable to be tested.
 #'
 #' @return A logical value indicating whether the input is inherently numeric.
 #'
