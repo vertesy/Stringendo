@@ -4,6 +4,7 @@ Version: 0.7.1
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
+Maintainer: Abel Vertesy <av@imba.oeaw.ac.at>
 Description: Stringendo is a set of R functions to parse strings from
     variables and to manipulate strings.
 License: GPL-3 + file LICENSE
