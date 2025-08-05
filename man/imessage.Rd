@@ -7,13 +7,13 @@
 imessage(..., collapse = " ")
 }
 \arguments{
-\item{...}{Values to collapse consecutively with spaces.}
-
-\item{collapse}{Separator to be used for collapsing. Default: " "}
+\item{...}{Elements to be concatenated. Each element is converted to a string and
+collapsed in order.}
+\item{collapse}{String inserted between elements when collapsing. Default: " "}
 }
 \description{
-A variant to message() pasting with white space, sibling of iprint().
+A variant of message() pasting with white space, sibling of iprint().
 }
 \examples{
-iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
+imessage("Hello", "you", 3, ",", 11, "year old kids.")
 }

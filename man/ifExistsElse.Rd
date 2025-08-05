@@ -2,21 +2,21 @@
 % Please edit documentation in R/Stringendo.R
 \name{ifExistsElse}
 \alias{ifExistsElse}
-\title{ifExistsElse}
+\title{Return a variable's value or a default if it does not exist}
 \usage{
 ifExistsElse(varname, alternative = "define an alternative", v = F)
 }
 \arguments{
-\item{varname}{Name of the variable}
+\item{varname}{Character string naming the variable to retrieve.}
 
-\item{alternative}{Alternative value to return if the variable is not defined}
+\item{alternative}{Value to return if \code{varname} is not defined.}
 
-\item{v}{Print messages. Default is FALSE.}
+\item{v}{Logical indicating whether to print informative messages. Default is \code{FALSE}.}
 }
 \description{
-Checks if a variable is defined, else returns an alternative value.
+Returns the value of \code{varname} when it exists; otherwise returns \code{alternative}.
+When \code{v} is \code{TRUE}, a message is printed indicating whether the variable was found.
 }
 \examples{
 ifExistsElse("pi"); ifExistsElse("pi22")
-
 }
