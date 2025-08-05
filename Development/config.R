@@ -8,8 +8,8 @@ DESCRIPTION <- list(
   description = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings.",
 
   depends = "base",
-  imports = "clipr",
-  suggests = "MarkdownHelpers, MarkdownReports",
+  imports = "dplyr, clipr",
+  suggests = "MarkdownHelpers, MarkdownReports, devtools, testthat",
 
   author.given = "Abel",
   author.family = "Vertesy",
