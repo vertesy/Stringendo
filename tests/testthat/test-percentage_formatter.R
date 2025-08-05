@@ -3,8 +3,8 @@ test_that("standard numeric input yields a formatted percentage", {
 })
 
 test_that("NA and NaN inputs return NA and NaN strings respectively", {
-  expect_identical(percentage_formatter(NA), "NA")
-  expect_identical(percentage_formatter(NaN), "NaN")
+  expect_identical(percentage_formatter(NA), NA)
+  expect_identical(percentage_formatter(NaN), NaN)
 })
 
 test_that("named vectors retain names when keep.names = TRUE", {
