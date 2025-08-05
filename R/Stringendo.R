@@ -151,13 +151,16 @@ warnif <- function(...) {
 
 
 # _______________________________________________________________________________________
-#' @title ifExistsAndTrue
+#' @title Check whether a variable exists and is TRUE
 #'
-#' @description Checks if a variable is defined, and its value is TRUE, else returns FALSE, and
-#' prints a message.
-#' @param varname Name of the variable
+#' @description Returns `TRUE` if `varname` exists in the current environment and evaluates to
+#' `TRUE`. If the variable is missing or not `TRUE`, the function returns `FALSE` and prints a
+#' message describing the problem.
+#' @param varname Character string naming the variable to check.
 #'
-#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#' @examples
+#' ifExistsAndTrue("pi")
+#' ifExistsAndTrue("pi22")
 #'
 #' @export
 
@@ -171,14 +174,18 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 
 
 # _______________________________________________________________________________________
-#' @title ifExistsElse
+#' @title Return a variable's value or a default if it does not exist
 #'
-#' @description Checks if a variable is defined, else returns an alternative value.
-#' @param varname Name of the variable
-#' @param alternative Alternative value to return if the variable is not defined
-#' @param v Print messages. Default is FALSE.
+#' @description Returns the value of `varname` when it exists; otherwise returns `alternative`.
+#' When `v` is `TRUE`, a message is printed indicating whether the variable was found.
+#' @param varname Character string naming the variable to retrieve.
+#' @param alternative Value to return if `varname` is not defined.
+#' @param v Logical indicating whether to print informative messages. Default is `FALSE`.
 #'
-#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#' @examples
+#' x <- 1
+#' ifExistsElse("x", alternative = 2)
+#' ifExistsElse("y", alternative = 2)
 #'
 #' @export
 ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {

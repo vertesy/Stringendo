@@ -2,18 +2,20 @@
 % Please edit documentation in R/Stringendo.R
 \name{ifExistsAndTrue}
 \alias{ifExistsAndTrue}
-\title{ifExistsAndTrue}
+\title{Check whether a variable exists and is TRUE}
 \usage{
 ifExistsAndTrue(varname = "pi")
 }
 \arguments{
-\item{varname}{Name of the variable}
+\item{varname}{Character string naming the variable to check.}
 }
 \description{
-Checks if a variable is defined, and its value is TRUE, else returns FALSE, and
-prints a message.
+Returns \code{TRUE} if \code{varname} exists in the current environment and evaluates to
+\code{TRUE}. If the variable is missing or not \code{TRUE}, the function returns \code{FALSE} and prints a
+message describing the problem.
 }
 \examples{
-ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+ifExistsAndTrue("pi")
+ifExistsAndTrue("pi22")
 
 }
