@@ -4,7 +4,7 @@
 \alias{is.numeric.or.logical}
 \title{Check if Input is Numeric or Logical}
 \usage{
-\method{is.numeric}{or.logical}(x)
+is.numeric.or.logical(x)
 }
 \arguments{
 \item{x}{The input to check.}

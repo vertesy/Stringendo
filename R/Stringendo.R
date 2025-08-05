@@ -221,7 +221,7 @@ is.character.or.NULL <- function(x) is.null(x) || is.character(x)
 #' is.numeric.or.logical(TRUE)     # TRUE
 #' is.numeric.or.logical("text")   # FALSE
 #'
-#' @export
+#' @export is.numeric.or.logical
 is.numeric.or.logical <- function(x) {
   is.numeric(x) || is.logical(x)
 }
