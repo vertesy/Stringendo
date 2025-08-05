@@ -10,7 +10,7 @@ kpps(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by (forward) slash
+Collapse by forward slash (\code{/})
 }
 \examples{
 kpps("A", 1:2, "end")

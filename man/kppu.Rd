@@ -10,7 +10,7 @@ kppu(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by underscore
+Collapse by underscore (\verb{_})
 }
 \examples{
 kppu("A", 1:2, "end")
