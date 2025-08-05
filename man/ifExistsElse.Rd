@@ -17,6 +17,6 @@ ifExistsElse(varname, alternative = "define an alternative", v = F)
 Checks if a variable is defined, else returns an alternative value.
 }
 \examples{
-ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+ifExistsElse("pi"); ifExistsElse("pi22")
 
 }
