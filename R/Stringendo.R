@@ -946,14 +946,15 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 
 
 # _________________________________________________________________________________________________
-#' @title Count Dots or Underscores in a String and return
+#' @title Identify the dominant separator in a string
 #'
 #' @description
-#' This function counts the number of "." characters in a given string.
+#' Count dots, underscores, and white spaces in a string to guess the most
+#' prevalent separator.
 #'
-#' @param string A character string in which the number of "." characters will be counted. Default: None.
-#' @return An integer representing the number of "." characters in the string.
-#' @export
+#' @param string A character string to analyze.
+#' @return A character string identifying the dominant separator: "dot",
+#'   "underscore", "white space", "none", or "undecided".
 #' @examples
 #' \dontrun{
 #' countDotOrUnderscoreSeparated("Hello.World...")
@@ -963,7 +964,6 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 #' countDotOrUnderscoreSeparated("addTranslatedMetadata")
 #' }
 #' @importFrom dplyr case_when
-#' @return An integer representing the number of "." characters in the string.
 #' @export
 countDotOrUnderscoreSeparated <- function(string) {
   stopifnot(is.character(string), length(string) == 1)
