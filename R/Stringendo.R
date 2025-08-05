@@ -651,7 +651,7 @@ pnl <- function(...) {
 # Collapse (and paste) -----------------------------------------------------------------------
 
 #' @title Collapse and paste by point
-#' @description Collapse by point
+#' @description Collapse by period (`.`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kpp("A", 1:2, "end")
 #' @export
@@ -661,7 +661,7 @@ kpp <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by underscore
-#' @description Collapse by underscore
+#' @description Collapse by underscore (`_`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppu("A", 1:2, "end")
 #' @export
@@ -671,7 +671,7 @@ kppu <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by (forward) slash
-#' @description Collapse by (forward) slash
+#' @description Collapse by forward slash (`/`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kpps("A", 1:2, "end")
 #' @export
@@ -682,7 +682,7 @@ kpps <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by dash
-#' @description Collapse by dash
+#' @description Collapse by dash (`-`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppd("A", 1:2, "end")
 #' @export
@@ -692,7 +692,7 @@ kppd <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by white space
-#' @description Collapse by white space
+#' @description Collapse by white space (` `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppws("A", 1:2, "end")
 #' @export
@@ -703,7 +703,7 @@ kppws <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by comma (and white space)
-#' @description Collapse by white space
+#' @description Collapse by comma and white space (`, `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppc("A", 1:2, "end")
 #' @export
@@ -713,7 +713,7 @@ kppc <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by pipe (|) and white spaces around it
-#' @description Collapse by white space
+#' @description Collapse by pipe (`|`) with surrounding spaces
 #' @param ... Multiple simple variables to parse.
 #' @examples kpipe("A", 1:2, "end")
 #' @export
@@ -723,7 +723,7 @@ kpipe <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by newline (`\n`) preceded by a white space
-#' @description Collapse by white space
+#' @description Collapse by newline (`\n`) preceded by a white space
 #' @param ... Multiple simple variables to parse.
 #' @examples knl("A", 1:2, "end")
 #' @export
