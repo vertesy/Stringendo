@@ -309,11 +309,12 @@ message2 <- function(vec) for (item in vec) message(item)
 
 # ______________________________________________________________________________________________________________________________
 #' @title imessage
-#' @description A variant to message() pasting with white space, sibling of iprint().
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
-#' @param collapse Separator to be used for collapsing. Default: " "
+#' @description A variant of message() pasting with white space, sibling of iprint().
+#' @param ... Elements to be concatenated. Each element is converted to a string and
+#'   collapsed in order.
+#' @param collapse String inserted between elements when collapsing. Default: " "
 #'
-#' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
+#' @examples imessage("Hello", "you", 3, ",", 11, "year old kids.")
 #' @export
 
 imessage <- function(..., collapse = " ") {
