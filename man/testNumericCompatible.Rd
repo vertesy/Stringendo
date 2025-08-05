@@ -7,7 +7,7 @@
 testNumericCompatible(x)
 }
 \arguments{
-\item{x}{The variable to be tested. Default: NA.}
+\item{x}{The variable to be tested.}
 }
 \value{
 A logical value indicating whether the input is inherently numeric.
