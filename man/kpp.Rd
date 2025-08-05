@@ -10,7 +10,7 @@ kpp(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by point
+Collapse by period (\code{.})
 }
 \examples{
 kpp("A", 1:2, "end")

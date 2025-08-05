@@ -9,7 +9,6 @@ imessage(..., collapse = " ")
 \arguments{
 \item{...}{Elements to be concatenated. Each element is converted to a string and
 collapsed in order.}
-
 \item{collapse}{String inserted between elements when collapsing. Default: " "}
 }
 \description{

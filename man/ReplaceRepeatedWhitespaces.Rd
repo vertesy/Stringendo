@@ -7,15 +7,15 @@
 ReplaceRepeatedWhitespaces(string, replacement = " ")
 }
 \arguments{
-\item{string}{The string (file path) potentially having repeated slashes.}
+\item{string}{The string potentially containing repeated whitespace.}
 
-\item{replacement}{The string to replace the white spaces with. Default: ''.}
+\item{replacement}{The string to replace repeated whitespace with. Default: ' '.}
 }
 \value{
-A string with repeated slashes replaced by a single slash.
+A string with repeated whitespace replaced by \code{replacement}.
 }
 \description{
-ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
+ReplaceRepeatedWhitespaces collapses multiple consecutive whitespace characters into a single replacement.
 }
 \examples{
 ReplaceRepeatedWhitespaces(string = "path   to    folder")

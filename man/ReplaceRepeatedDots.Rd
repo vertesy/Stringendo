@@ -7,12 +7,12 @@
 ReplaceRepeatedDots(string)
 }
 \arguments{
-\item{string}{The string (file name or path) potentially having multiple dots}
+\item{string}{A string (file name or path) that may contain repeated dots/periods}
 }
 \description{
-ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
+ReplaceRepeatedDots collapses multiple consecutive dots (periods) in a string into a single dot.
 }
 \examples{
-ReplaceRepeatedDots(string = "stairway..to...heaven....") # replace by a single dot.
+ReplaceRepeatedDots(string = "stairway..to...heaven....") # "stairway.to.heaven."
 
 }
