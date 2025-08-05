@@ -2,20 +2,20 @@
 % Please edit documentation in R/Stringendo.R
 \name{countDotOrUnderscoreSeparated}
 \alias{countDotOrUnderscoreSeparated}
-\title{Count Dots or Underscores in a String and return}
+\title{Identify the dominant separator in a string}
 \usage{
 countDotOrUnderscoreSeparated(string)
 }
 \arguments{
-\item{string}{A character string in which the number of "." characters will be counted. Default: None.}
+\item{string}{A character string to analyze.}
 }
 \value{
-An integer representing the number of "." characters in the string.
-
-An integer representing the number of "." characters in the string.
+A character string identifying the dominant separator: "dot",
+"underscore", "white space", "none", or "undecided".
 }
 \description{
-This function counts the number of "." characters in a given string.
+Count dots, underscores, and white spaces in a string to guess the most
+prevalent separator.
 }
 \examples{
 \dontrun{
