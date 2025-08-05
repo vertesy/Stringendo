@@ -1,9 +1,9 @@
 # Configuration for the Package
-# file.edit("~/GitHub/Packages/XXXXXXXXXX/Development/config.R")
+# file.edit("~/GitHub/Packages/Stringendo/Development/config.R")
 
 DESCRIPTION <- list(
   package.name = "Stringendo",
-  version = "0.8.0",
+  version = "0.8.5",
   title = "Stringendo - string parser",
   description = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings.",
 

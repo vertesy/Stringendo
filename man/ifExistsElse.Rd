@@ -19,4 +19,5 @@ When \code{v} is \code{TRUE}, a message is printed indicating whether the variab
 }
 \examples{
 ifExistsElse("pi"); ifExistsElse("pi22")
+
 }

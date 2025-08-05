@@ -7,7 +7,7 @@
 ReplaceRepeatedDots(string)
 }
 \arguments{
-\item{string}{A string (file name or path) that may contain repeated dots/periods}
+\item{string}{A string (file name or path) that may contain repeated dots/periods.}
 }
 \description{
 ReplaceRepeatedDots collapses multiple consecutive dots (periods) in a string into a single dot.
