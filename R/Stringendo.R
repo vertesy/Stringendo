@@ -1136,8 +1136,6 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
 #' @examples
 #' toSentence("mergeSmallCategories")
 #' @export
-#'
-#' @importFrom stringr str_replace_all str_to_title
 toSentence <- function(camelCaseString) {
   stopifnot(is.character(camelCaseString))
 
