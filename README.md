@@ -101,11 +101,11 @@ ReplaceRepeatedWhitespaces. ReplaceRepeatedWhitespaces replaces multiple consecu
 - #### 20 `ReplaceSpecialCharacters()`
 ReplaceSpecialCharacters. ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 
-- #### 21 `AddTrailingDotIfNonePresent()`
-AddTrailingDotIfNonePresent. Adds a final slash '/', if missing from a string (file path).
+- #### 21 `AddTrailingDotIfMissing()`
+AddTrailingDotIfMissing. Adds a trailing dot ('.') to a string if it is missing.
 
-- #### 22 `AddTrailingSlashfNonePresent()`
-AddTrailingSlashfNonePresent. Adds a final slash '/', if missing from a string (file path).
+- #### 22 `AddTrailingSlashIfMissing()`
+AddTrailingSlashIfMissing. Adds a trailing slash ('/') to a string if it is missing.
 
 - #### 23 `ppp()`
 Paste by point. Paste by point

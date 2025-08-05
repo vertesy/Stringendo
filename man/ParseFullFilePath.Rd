@@ -26,4 +26,5 @@ string clean-up operations to each component and ensures proper formatting.
 \examples{
 ParseFullFilePath(path = "home/user/docs/", file_name = "report@final", extension = ".txt")
 ParseFullFilePath(file_name = "report", extension = "txt")
+
 }
