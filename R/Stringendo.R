@@ -254,7 +254,7 @@ testNumericCompatible <- function(x) {
 }
 
 
-# _____________________________________________________________________________________________________________________________ f f_
+# _____________________________________________________________________________________________________________________________
 #' @title Negation of the `in` (w. grapes) operator
 #'
 #' @description `%!in%` is used to test if elements of one vector are not present in another vector.
