@@ -914,8 +914,8 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
   if (keep.names) nmz <- names(x)
   pc_sign <- paste(100 * signif(x, digitz), "%", sep = sign_sep)
   a <- trimws(paste(prefix, pc_sign, suffix, sep = " "))
-  a[a == "NaN %"] <- NaN
-  a[a == "NA %"] <- NA
+  a[is.nan(x)] <- "NaN"
+  a[is.na(x) & !is.nan(x)] <- "NA"
   if (keep.names) names(a) <- nmz
   return(a)
 }
