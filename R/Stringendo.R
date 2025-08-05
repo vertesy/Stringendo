@@ -465,10 +465,10 @@ ReplaceRepeatedUnderscores <- function(string) {
 # _________________________________________________________________________________________________
 #' @title RemoveFinalUnderscores
 #'
-#' @description RemoveFinalUnderscores removes the final slash(es) from a string (file path).
-#' @param string The string (file path) potentially having a final slash.
-#' @examples RemoveFinalUnderscores(string = "path/to/folder/")
-#' @return A string with the final slash removed.
+#' @description RemoveFinalUnderscores removes trailing underscore(s) from a string.
+#' @param string The string potentially ending with an underscore.
+#' @examples RemoveFinalUnderscores(string = "path_to_folder_")
+#' @return A string with the final underscore removed.
 #' @export
 RemoveFinalUnderscores <- function(string) {
   gsub(pattern = "_+$", replacement = "", x = string)
@@ -478,12 +478,12 @@ RemoveFinalUnderscores <- function(string) {
 # _________________________________________________________________________________________________
 #' @title RemoveWhitespaces
 #'
-#' @description RemoveWhitespaces replaces any nr of white spaces.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @param replacement The string to replace the white spaces with. Default: ''.
+#' @description RemoveWhitespaces removes all whitespace characters from a string or replaces them with a specified value.
+#' @param string The string potentially containing whitespace.
+#' @param replacement The string to replace whitespace with. Default: ''.
 #'
 #' @examples RemoveWhitespaces(string = "path   To    Folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @return A string with all whitespace replaced by `replacement`.
 #' @export
 RemoveWhitespaces <- function(string, replacement = "") {
   gsub(pattern = " +", replacement = replacement, x = string)
@@ -494,12 +494,12 @@ RemoveWhitespaces <- function(string, replacement = "") {
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedWhitespaces
 #'
-#' @description ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @param replacement The string to replace the white spaces with. Default: ''.
+#' @description ReplaceRepeatedWhitespaces collapses multiple consecutive whitespace characters into a single replacement.
+#' @param string The string potentially containing repeated whitespace.
+#' @param replacement The string to replace repeated whitespace with. Default: ' '.
 #'
 #' @examples ReplaceRepeatedWhitespaces(string = "path   to    folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @return A string with repeated whitespace replaced by `replacement`.
 #' @export
 ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
   gsub(pattern = " +", replacement = replacement, x = string)
@@ -1205,12 +1205,13 @@ ParseFullFilePath <- function(path, file_name, extension) {
 # _________________________________________________________________________________________________
 #' @title FixUnderscores
 #'
-#' @description FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
-#' @param string The file path potentially having Double Slash
-#' @param trimFinal Remove final undescore?
+#' @description FixUnderscores removes multiple consecutive underscores from a string and optionally trims a trailing underscore.
+#' @param string The string potentially containing repeated underscores.
+#' @param trimFinal Remove the final underscore? Default: TRUE.
+#' @return A string with repeated underscores condensed and trailing underscores optionally removed.
 #' @export
 #'
-#' @examples FixUnderscores(string = "stairway//to/heaven")
+#' @examples FixUnderscores(string = "stairway__to_heaven_")
 FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
   string <- gsub(x = string, pattern = "_+", replacement = "_")
   LastChr <- substr(string, nchar(string), nchar(string))
