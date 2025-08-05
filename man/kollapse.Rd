@@ -7,7 +7,7 @@
 kollapse(..., collapseby = "", print = 1)
 }
 \arguments{
-\item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+\item{...}{Values to collapse consecutively without spaces.}
 
 \item{collapseby}{collapse elements into a string separated by this character}
 

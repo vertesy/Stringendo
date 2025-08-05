@@ -7,7 +7,7 @@
 imessage(..., collapse = " ")
 }
 \arguments{
-\item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+\item{...}{Values to collapse consecutively with spaces.}
 
 \item{collapse}{Separator to be used for collapsing. Default: " "}
 }
