@@ -389,9 +389,9 @@ substrRight <- function(x, n) {
 
 #' @title ReplaceRepeatedDots
 #'
-#' @description ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
-#' @param string The string (file name or path) potentially having multiple dots
-#' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # replace by a single dot.
+#' @description ReplaceRepeatedDots collapses multiple consecutive dots (periods) in a string into a single dot.
+#' @param string A string (file name or path) that may contain repeated dots/periods.
+#' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # "stairway.to.heaven."
 #'
 #' @export
 ReplaceRepeatedDots <- function(string) {
