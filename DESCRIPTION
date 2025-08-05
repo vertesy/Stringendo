@@ -13,10 +13,10 @@ Depends:
 Imports:
     clipr,
     dplyr,
-    stringr
 Suggests:
     MarkdownHelpers,
-    MarkdownReports
+    MarkdownReports,
+    testthat
 Encoding: UTF-8
 Packaged: 2025-07-15 17:24:58.696675
 Roxygen: list(markdown = TRUE)
