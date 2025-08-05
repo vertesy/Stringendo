@@ -337,11 +337,23 @@ iprint <- function(...) {
 # _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
 #'
+#' @description
+#' Returns the current system date and time formatted as a character
+#' string. The default format uses dot separated components, but any
+#' format recognised by [base::format] can be supplied.
+#' 
 #' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#'
+#' @return A character string of the current date/time formatted according
+#'   to `Format`.
+#'
+#' @examples
+#' idate()
+#' idate("%Y-%m-%d")
 #' @export
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
-  format(Sys.time(), format = Format)
+  return(format(Sys.time(), format = Format))
 }
 
 

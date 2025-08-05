@@ -7,8 +7,15 @@
 idate(Format = c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")[2])
 }
 \arguments{
-\item{Format}{Date format. Default: c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")\link{2}}
+\item{Format}{Date format. Default: c("\%Y.\%m.\%d_\%H.\%M", "\%Y.\%m.\%d_\%Hh")[2]}
+}
+\value{
+A character string of the current date/time formatted according to \code{Format}.
 }
 \description{
-Parse current date, dot separated.
+Returns the current system date and time formatted as a character string.
+}
+\examples{
+idate()
+idate("%Y-%m-%d")
 }
