@@ -182,14 +182,11 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 #' @param alternative Value to return if `varname` is not defined.
 #' @param v Logical indicating whether to print informative messages. Default is `FALSE`.
 #'
-#' @examples
-#' x <- 1
-#' ifExistsElse("x", alternative = 2)
-#' ifExistsElse("y", alternative = 2)
+#' @examples ifExistsElse("pi"); ifExistsElse("pi22")
 #'
 #' @export
 ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {
-  if(!is.character(varname)) varname <- substitute(varname)
+  if(!is.character(varname)) varname <- deparse(substitute(varname))
   if(v) message("Checking if ", varname, " exists.")
   if(exists(varname)) get(varname) else alternative
 }
