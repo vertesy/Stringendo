@@ -530,14 +530,14 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
 # Special character addition -------------------------------------------------------------------------------------------------
 
 
-#' @title AddTrailingDotIfNonePresent
+#' @title AddTrailingDotIfMissing
 #'
-#' @description Adds a final dot '.', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing dot
-#' @examples AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
+#' @description Adds a trailing dot ('.') to a string if it is missing.
+#' @param string A string to check for a missing trailing dot.
+#' @examples AddTrailingDotIfMissing(string = "stairway.to.heaven")
 #'
 #' @export
-AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
+AddTrailingDotIfMissing <- function(string = "stairway.to.heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (LastChr != ".") {
     string <- paste0(string, ".")
@@ -547,14 +547,14 @@ AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
 
 
 
-#' @title AddTrailingSlashfNonePresent
+#' @title AddTrailingSlashIfMissing
 #'
-#' @description Adds a final slash '/', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing slash
-#' @examples AddTrailingSlashfNonePresent(string = "stairway/to/heaven")
+#' @description Adds a trailing slash ('/') to a string if it is missing.
+#' @param string A file path to check for a missing trailing slash.
+#' @examples AddTrailingSlashIfMissing(string = "stairway/to/heaven")
 #'
 #' @export
-AddTrailingSlashfNonePresent <- function(string = "stairway/to/heaven") {
+AddTrailingSlashIfMissing <- function(string = "stairway/to/heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!LastChr == "/") {
     string <- paste0(string, "/")
@@ -1186,7 +1186,7 @@ ParseFullFilePath <- function(path, file_name, extension) {
   file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
 
   if (hasArg(path)) {
-    path <- AddTrailingSlashfNonePresent(ReplaceRepeatedSlashes(path))
+    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path))
     full_path <- paste0(path, file_name)
   } else {
     full_path <- file_name
@@ -1275,7 +1275,7 @@ FixPlotName <- function(string = "obj@meta$alpha[[3]]", ...) {
 ParseDirPath <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
-  string <- AddTrailingSlashfNonePresent(string)
+  string <- AddTrailingSlashIfMissing(string)
   return(string)
 }
 
