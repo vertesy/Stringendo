@@ -7,7 +7,7 @@
 iprint(...)
 }
 \arguments{
-\item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+\item{...}{Values to collapse consecutively with spaces.}
 }
 \description{
 A more intelligent printing function that collapses any variable passed to it by white spaces.

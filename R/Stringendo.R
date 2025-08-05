@@ -310,9 +310,9 @@ message2 <- function(vec) for (item in vec) message(item)
 # ______________________________________________________________________________________________________________________________
 #' @title imessage
 #' @description A variant to message() pasting with white space, sibling of iprint().
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively with spaces.
 #' @param collapse Separator to be used for collapsing. Default: " "
-#'
+#' 
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -325,7 +325,7 @@ imessage <- function(..., collapse = " ") {
 # ______________________________________________________________________________________________________________________________
 #' @title iprint
 #' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively with spaces.
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -759,7 +759,7 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
 #'
 #' @description Collapses values and strings to one string (without a white space).
 #' It also prints the results (good for a quick check)
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively without spaces.
 #' @param collapseby collapse elements into a string separated by this character
 #' @param print Print the results to the terminal. Default is 1 for `print()`.
 #' Set to 2 for `message()`.
