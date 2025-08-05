@@ -10,7 +10,7 @@ kpipe(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by white space
+Collapse by pipe (\code{|}) with surrounding spaces
 }
 \examples{
 kpipe("A", 1:2, "end")

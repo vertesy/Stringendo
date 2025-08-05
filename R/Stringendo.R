@@ -151,13 +151,16 @@ warnif <- function(...) {
 
 
 # _______________________________________________________________________________________
-#' @title ifExistsAndTrue
+#' @title Check whether a variable exists and is TRUE
 #'
-#' @description Checks if a variable is defined, and its value is TRUE, else returns FALSE, and
-#' prints a message.
-#' @param varname Name of the variable
+#' @description Returns `TRUE` if `varname` exists in the current environment and evaluates to
+#' `TRUE`. If the variable is missing or not `TRUE`, the function returns `FALSE` and prints a
+#' message describing the problem.
+#' @param varname Character string naming the variable to check.
 #'
-#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#' @examples
+#' ifExistsAndTrue("pi")
+#' ifExistsAndTrue("pi22")
 #'
 #' @export
 
@@ -171,14 +174,18 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 
 
 # _______________________________________________________________________________________
-#' @title ifExistsElse
+#' @title Return a variable's value or a default if it does not exist
 #'
-#' @description Checks if a variable is defined, else returns an alternative value.
-#' @param varname Name of the variable
-#' @param alternative Alternative value to return if the variable is not defined
-#' @param v Print messages. Default is FALSE.
+#' @description Returns the value of `varname` when it exists; otherwise returns `alternative`.
+#' When `v` is `TRUE`, a message is printed indicating whether the variable was found.
+#' @param varname Character string naming the variable to retrieve.
+#' @param alternative Value to return if `varname` is not defined.
+#' @param v Logical indicating whether to print informative messages. Default is `FALSE`.
 #'
-#' @examples ifExistsAndTrue("pi"); ifExistsAndTrue("pi22")
+#' @examples
+#' x <- 1
+#' ifExistsElse("x", alternative = 2)
+#' ifExistsElse("y", alternative = 2)
 #'
 #' @export
 ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {
@@ -254,7 +261,7 @@ testNumericCompatible <- function(x) {
 }
 
 
-# _____________________________________________________________________________________________________________________________ f f_
+# _____________________________________________________________________________________________________________________________
 #' @title Negation of the `in` (w. grapes) operator
 #'
 #' @description `%!in%` is used to test if elements of one vector are not present in another vector.
@@ -310,9 +317,9 @@ message2 <- function(vec) for (item in vec) message(item)
 # ______________________________________________________________________________________________________________________________
 #' @title imessage
 #' @description A variant to message() pasting with white space, sibling of iprint().
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively with spaces.
 #' @param collapse Separator to be used for collapsing. Default: " "
-#'
+#' 
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -325,7 +332,7 @@ imessage <- function(..., collapse = " ") {
 # ______________________________________________________________________________________________________________________________
 #' @title iprint
 #' @description A more intelligent printing function that collapses any variable passed to it by white spaces.
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively with spaces.
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -337,11 +344,23 @@ iprint <- function(...) {
 # _________________________________________________________________________________________________
 #' @title Parse current date, dot separated.
 #'
+#' @description
+#' Returns the current system date and time formatted as a character
+#' string. The default format uses dot separated components, but any
+#' format recognised by [base::format] can be supplied.
+#' 
 #' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#'
+#' @return A character string of the current date/time formatted according
+#'   to `Format`.
+#'
+#' @examples
+#' idate()
+#' idate("%Y-%m-%d")
 #' @export
 
 idate <- function(Format = c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]) {
-  format(Sys.time(), format = Format)
+  return(format(Sys.time(), format = Format))
 }
 
 
@@ -377,9 +396,9 @@ substrRight <- function(x, n) {
 
 #' @title ReplaceRepeatedDots
 #'
-#' @description ReplaceRepeatedDots removes multiple consecutive slashes (e.g. '..') from a string (file path).
-#' @param string The string (file name or path) potentially having multiple dots
-#' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # replace by a single dot.
+#' @description ReplaceRepeatedDots collapses multiple consecutive dots (periods) in a string into a single dot.
+#' @param string A string (file name or path) that may contain repeated dots/periods.
+#' @examples ReplaceRepeatedDots(string = "stairway..to...heaven....") # "stairway.to.heaven."
 #'
 #' @export
 ReplaceRepeatedDots <- function(string) {
@@ -452,10 +471,10 @@ RemoveFinalSlash <- function(string) {
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedUnderscores
 #'
-#' @description ReplaceRepeatedUnderscores replaces multiple consecutive slashes with a single slash.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @examples ReplaceRepeatedUnderscores(string = "path//to//folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @description ReplaceRepeatedUnderscores replaces multiple consecutive underscores with a single underscore.
+#' @param string The string (file path) potentially having repeated underscores.
+#' @examples ReplaceRepeatedUnderscores(string = "path__to__folder")
+#' @return A string with repeated underscores replaced by a single underscore.
 #' @export
 ReplaceRepeatedUnderscores <- function(string) {
   gsub(pattern = "_+", replacement = "_", x = string)
@@ -465,10 +484,10 @@ ReplaceRepeatedUnderscores <- function(string) {
 # _________________________________________________________________________________________________
 #' @title RemoveFinalUnderscores
 #'
-#' @description RemoveFinalUnderscores removes the final slash(es) from a string (file path).
-#' @param string The string (file path) potentially having a final slash.
-#' @examples RemoveFinalUnderscores(string = "path/to/folder/")
-#' @return A string with the final slash removed.
+#' @description RemoveFinalUnderscores removes trailing underscore(s) from a string.
+#' @param string The string potentially ending with an underscore.
+#' @examples RemoveFinalUnderscores(string = "path_to_folder_")
+#' @return A string with the final underscore removed.
 #' @export
 RemoveFinalUnderscores <- function(string) {
   gsub(pattern = "_+$", replacement = "", x = string)
@@ -478,12 +497,12 @@ RemoveFinalUnderscores <- function(string) {
 # _________________________________________________________________________________________________
 #' @title RemoveWhitespaces
 #'
-#' @description RemoveWhitespaces replaces any nr of white spaces.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @param replacement The string to replace the white spaces with. Default: ''.
+#' @description RemoveWhitespaces removes all whitespace characters from a string or replaces them with a specified value.
+#' @param string The string potentially containing whitespace.
+#' @param replacement The string to replace whitespace with. Default: ''.
 #'
 #' @examples RemoveWhitespaces(string = "path   To    Folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @return A string with all whitespace replaced by `replacement`.
 #' @export
 RemoveWhitespaces <- function(string, replacement = "") {
   gsub(pattern = " +", replacement = replacement, x = string)
@@ -494,12 +513,12 @@ RemoveWhitespaces <- function(string, replacement = "") {
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedWhitespaces
 #'
-#' @description ReplaceRepeatedWhitespaces replaces multiple consecutive white spaces with a single one.
-#' @param string The string (file path) potentially having repeated slashes.
-#' @param replacement The string to replace the white spaces with. Default: ''.
+#' @description ReplaceRepeatedWhitespaces collapses multiple consecutive whitespace characters into a single replacement.
+#' @param string The string potentially containing repeated whitespace.
+#' @param replacement The string to replace repeated whitespace with. Default: ' '.
 #'
 #' @examples ReplaceRepeatedWhitespaces(string = "path   to    folder")
-#' @return A string with repeated slashes replaced by a single slash.
+#' @return A string with repeated whitespace replaced by `replacement`.
 #' @export
 ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
   gsub(pattern = " +", replacement = replacement, x = string)
@@ -530,14 +549,14 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
 # Special character addition -------------------------------------------------------------------------------------------------
 
 
-#' @title AddTrailingDotIfNonePresent
+#' @title AddTrailingDotIfMissing
 #'
-#' @description Adds a final dot '.', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing dot
-#' @examples AddTrailingDotIfNonePresent(string = "stairway.to.heaven")
+#' @description Adds a trailing dot ('.') to a string if it is missing.
+#' @param string A string to check for a missing trailing dot.
+#' @examples AddTrailingDotIfMissing(string = "stairway.to.heaven")
 #'
 #' @export
-AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
+AddTrailingDotIfMissing <- function(string = "stairway.to.heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (LastChr != ".") {
     string <- paste0(string, ".")
@@ -547,14 +566,14 @@ AddTrailingDotIfNonePresent <- function(string = "stairway.to.heaven") {
 
 
 
-#' @title AddTrailingSlashfNonePresent
+#' @title AddTrailingSlashIfMissing
 #'
-#' @description Adds a final slash '/', if missing from a string (file path).
-#' @param string The file path potentially missing the trailing slash
-#' @examples AddTrailingSlashfNonePresent(string = "stairway/to/heaven")
+#' @description Adds a trailing slash ('/') to a string if it is missing.
+#' @param string A file path to check for a missing trailing slash.
+#' @examples AddTrailingSlashIfMissing(string = "stairway/to/heaven")
 #'
 #' @export
-AddTrailingSlashfNonePresent <- function(string = "stairway/to/heaven") {
+AddTrailingSlashIfMissing <- function(string = "stairway/to/heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
   if (!LastChr == "/") {
     string <- paste0(string, "/")
@@ -639,7 +658,7 @@ pnl <- function(...) {
 # Collapse (and paste) -----------------------------------------------------------------------
 
 #' @title Collapse and paste by point
-#' @description Collapse by point
+#' @description Collapse by period (`.`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kpp("A", 1:2, "end")
 #' @export
@@ -649,7 +668,7 @@ kpp <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by underscore
-#' @description Collapse by underscore
+#' @description Collapse by underscore (`_`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppu("A", 1:2, "end")
 #' @export
@@ -659,7 +678,7 @@ kppu <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by (forward) slash
-#' @description Collapse by (forward) slash
+#' @description Collapse by forward slash (`/`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kpps("A", 1:2, "end")
 #' @export
@@ -670,7 +689,7 @@ kpps <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by dash
-#' @description Collapse by dash
+#' @description Collapse by dash (`-`)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppd("A", 1:2, "end")
 #' @export
@@ -680,7 +699,7 @@ kppd <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by white space
-#' @description Collapse by white space
+#' @description Collapse by white space (` `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppws("A", 1:2, "end")
 #' @export
@@ -691,7 +710,7 @@ kppws <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by comma (and white space)
-#' @description Collapse by white space
+#' @description Collapse by comma and white space (`, `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppc("A", 1:2, "end")
 #' @export
@@ -701,7 +720,7 @@ kppc <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by pipe (|) and white spaces around it
-#' @description Collapse by white space
+#' @description Collapse by pipe (`|`) with surrounding spaces
 #' @param ... Multiple simple variables to parse.
 #' @examples kpipe("A", 1:2, "end")
 #' @export
@@ -711,7 +730,7 @@ kpipe <- function(...) {
 
 # _________________________________________________________________________________________________
 #' @title Collapse and paste by newline (`\n`) preceded by a white space
-#' @description Collapse by white space
+#' @description Collapse by newline (`\n`) preceded by a white space
 #' @param ... Multiple simple variables to parse.
 #' @examples knl("A", 1:2, "end")
 #' @export
@@ -759,7 +778,7 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
 #'
 #' @description Collapses values and strings to one string (without a white space).
 #' It also prints the results (good for a quick check)
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Values to collapse consecutively without spaces.
 #' @param collapseby collapse elements into a string separated by this character
 #' @param print Print the results to the terminal. Default is 1 for `print()`.
 #' Set to 2 for `message()`.
@@ -868,7 +887,7 @@ pad.na <- function(x, len) {
 
 #' @title percentile2value
 #' @description Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.
-#' Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+#' Useful for calculating cutoffs, and displaying them by whist()s "vline" parameter.
 #' @param distribution A numeric vector
 #' @param percentile percentile, Default: 0.95
 #' @param FirstValOverPercentile PARAM_DESCRIPTION, Default: TRUE
@@ -1186,7 +1205,7 @@ ParseFullFilePath <- function(path, file_name, extension) {
   file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
 
   if (hasArg(path)) {
-    path <- AddTrailingSlashfNonePresent(ReplaceRepeatedSlashes(path))
+    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path))
     full_path <- paste0(path, file_name)
   } else {
     full_path <- file_name
@@ -1205,12 +1224,13 @@ ParseFullFilePath <- function(path, file_name, extension) {
 # _________________________________________________________________________________________________
 #' @title FixUnderscores
 #'
-#' @description FixUnderscores removes multiple consecutive underscores (e.g. '_') from a string, and optionally also removes a final '_'.
-#' @param string The file path potentially having Double Slash
-#' @param trimFinal Remove final undescore?
+#' @description FixUnderscores removes multiple consecutive underscores from a string and optionally trims a trailing underscore.
+#' @param string The string potentially containing repeated underscores.
+#' @param trimFinal Remove the final underscore? Default: TRUE.
+#' @return A string with repeated underscores condensed and trailing underscores optionally removed.
 #' @export
 #'
-#' @examples FixUnderscores(string = "stairway//to/heaven")
+#' @examples FixUnderscores(string = "stairway__to_heaven_")
 FixUnderscores <- function(string = "stairway__to_heaven_", trimFinal = TRUE) {
   string <- gsub(x = string, pattern = "_+", replacement = "_")
   LastChr <- substr(string, nchar(string), nchar(string))
@@ -1275,7 +1295,7 @@ FixPlotName <- function(string = "obj@meta$alpha[[3]]", ...) {
 ParseDirPath <- function(...) {
   string <- kpps(...)
   string <- ReplaceRepeatedSlashes(string)
-  string <- AddTrailingSlashfNonePresent(string)
+  string <- AddTrailingSlashIfMissing(string)
   return(string)
 }
 

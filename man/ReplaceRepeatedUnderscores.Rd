@@ -7,14 +7,14 @@
 ReplaceRepeatedUnderscores(string)
 }
 \arguments{
-\item{string}{The string (file path) potentially having repeated slashes.}
+\item{string}{The string (file path) potentially having repeated underscores.}
 }
 \value{
-A string with repeated slashes replaced by a single slash.
+A string with repeated underscores replaced by a single underscore.
 }
 \description{
-ReplaceRepeatedUnderscores replaces multiple consecutive slashes with a single slash.
+ReplaceRepeatedUnderscores replaces multiple consecutive underscores with a single underscore.
 }
 \examples{
-ReplaceRepeatedUnderscores(string = "path//to//folder")
+ReplaceRepeatedUnderscores(string = "path__to__folder")
 }

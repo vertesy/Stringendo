@@ -10,7 +10,7 @@ kppd(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by dash
+Collapse by dash (\code{-})
 }
 \examples{
 kppd("A", 1:2, "end")

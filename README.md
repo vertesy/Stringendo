@@ -101,11 +101,11 @@ ReplaceRepeatedWhitespaces. ReplaceRepeatedWhitespaces replaces multiple consecu
 - #### 20 `ReplaceSpecialCharacters()`
 ReplaceSpecialCharacters. ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 
-- #### 21 `AddTrailingDotIfNonePresent()`
-AddTrailingDotIfNonePresent. Adds a final slash '/', if missing from a string (file path).
+- #### 21 `AddTrailingDotIfMissing()`
+AddTrailingDotIfMissing. Adds a trailing dot ('.') to a string if it is missing.
 
-- #### 22 `AddTrailingSlashfNonePresent()`
-AddTrailingSlashfNonePresent. Adds a final slash '/', if missing from a string (file path).
+- #### 22 `AddTrailingSlashIfMissing()`
+AddTrailingSlashIfMissing. Adds a trailing slash ('/') to a string if it is missing.
 
 - #### 23 `ppp()`
 Paste by point. Paste by point
@@ -159,7 +159,7 @@ Simplified Paste by fwd slash. Simplified Paste by fwd slash
 Simplified Paste by underscore. Simplified Paste by underscore
 
 - #### 40 `percentile2value()`
-percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" paramter.
+percentile2value. Calculate what is the actual value of the N-th percentile in a distribution or set of numbers.  Useful for calculating cutoffs, and displaying them by whist()s "vline" parameter.
 
 - #### 41 `parsepvalue()`
 parsepvalue. Parse p-value from a number to a string.

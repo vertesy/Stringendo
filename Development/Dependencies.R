@@ -17,7 +17,7 @@ $`package:methods`
 [1] "hasArg"
 
 $`package:Stringendo`
- [1] "AddTrailingSlashfNonePresent" "kollapse"                    
+ [1] "AddTrailingSlashIfMissing" "kollapse"
  [3] "kpp"                          "kppd"                        
  [5] "kpps"                         "kppu"                        
  [7] "ppp"                          "RemoveTrailingDots"          

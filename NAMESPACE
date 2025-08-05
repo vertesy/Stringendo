@@ -2,8 +2,8 @@
 
 S3method(is.numeric,or.logical)
 export("%!in%")
-export(AddTrailingDotIfNonePresent)
-export(AddTrailingSlashfNonePresent)
+export(AddTrailingDotIfMissing)
+export(AddTrailingSlashIfMissing)
 export(FixPath)
 export(FixPlotName)
 export(FixUnderscores)

@@ -7,13 +7,16 @@
 FixUnderscores(string = "stairway__to_heaven_", trimFinal = TRUE)
 }
 \arguments{
-\item{string}{The file path potentially having Double Slash}
+\item{string}{The string potentially containing repeated underscores.}
 
-\item{trimFinal}{Remove final undescore?}
+\item{trimFinal}{Remove the final underscore? Default: TRUE.}
+}
+\value{
+A string with repeated underscores condensed and trailing underscores optionally removed.
 }
 \description{
-FixUnderscores removes multiple consecutive underscores (e.g. '\emph{') from a string, and optionally also removes a final '}'.
+FixUnderscores removes multiple consecutive underscores from a string and optionally trims a trailing underscore.
 }
 \examples{
-FixUnderscores(string = "stairway//to/heaven")
+FixUnderscores(string = "stairway__to_heaven_")
 }

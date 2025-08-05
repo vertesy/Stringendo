@@ -10,7 +10,7 @@ kppws(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by white space
+Collapse by white space (\verb{ })
 }
 \examples{
 kppws("A", 1:2, "end")

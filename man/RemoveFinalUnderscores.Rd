@@ -7,14 +7,14 @@
 RemoveFinalUnderscores(string)
 }
 \arguments{
-\item{string}{The string (file path) potentially having a final slash.}
+\item{string}{The string potentially ending with an underscore.}
 }
 \value{
-A string with the final slash removed.
+A string with the final underscore removed.
 }
 \description{
-RemoveFinalUnderscores removes the final slash(es) from a string (file path).
+RemoveFinalUnderscores removes trailing underscore(s) from a string.
 }
 \examples{
-RemoveFinalUnderscores(string = "path/to/folder/")
+RemoveFinalUnderscores(string = "path_to_folder_")
 }

@@ -10,7 +10,7 @@ kppc(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by white space
+Collapse by comma and white space (\verb{, })
 }
 \examples{
 kppc("A", 1:2, "end")

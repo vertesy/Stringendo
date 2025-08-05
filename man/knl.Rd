@@ -10,7 +10,7 @@ knl(...)
 \item{...}{Multiple simple variables to parse.}
 }
 \description{
-Collapse by white space
+Collapse by newline (\verb{\\n}) preceded by a white space
 }
 \examples{
 knl("A", 1:2, "end")
