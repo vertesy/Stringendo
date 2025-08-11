@@ -21,8 +21,10 @@ source(config.path)
 # install.packages('ggExtra')
 require(PackageTools)
 
+
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 'git add commit push to remote'
+
 
 
 # Install your package ------------------------------------------------
