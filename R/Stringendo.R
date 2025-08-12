@@ -937,8 +937,22 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
   return(a)
 }
 
-
-# Format numbers as human readable strings
+#' @title Format numbers for human readability
+#'
+#' @description Convert numeric input to character strings with 
+#' thousands separators and configurable decimal marks.
+#'
+#' @param x Numeric vector to format.
+#' @param digits Minimum number of significant digits to display. Passed to
+#'   [format()].
+#' @param big.mark Character used between groups of thousands.
+#' @param decimal.mark Character used for the decimal point.
+#'
+#' @return A character vector containing the formatted numbers.
+#' @examples
+#' format_number_h(1234)
+#' format_number_h(1234.56, digits = 6, decimal.mark = ",")
+#' @export
 format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
   stopifnot(is.numeric(x))
   x <- format(x, big.mark = big.mark, decimal.mark = decimal.mark, digits = digits)
@@ -949,9 +963,8 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 # _________________________________________________________________________________________________
 #' @title Identify the dominant separator in a string
 #'
-#' @description
-#' Count dots, underscores, and white spaces in a string to guess the most
-#' prevalent separator.
+#' @description Count dots, underscores, and white spaces in a string 
+#' to guess the most prevalent separator.
 #'
 #' @param string A character string to analyze.
 #' @return A character string identifying the dominant separator: "dot",
