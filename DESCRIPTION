@@ -22,4 +22,4 @@ Suggests:
 Encoding: UTF-8
 Packaged: 2025-08-05 15:28:06.697097
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
