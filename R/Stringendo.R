@@ -1036,7 +1036,7 @@ toCamelCase <- function(input_string,
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(words), silent = TRUE)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
