@@ -30,3 +30,4 @@ vignettes/*.pdf
 *.Rproj
 Stringendo.Rproj
 Stringendo.Rproj
+.DS_Store
