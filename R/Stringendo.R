@@ -937,8 +937,22 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
   return(a)
 }
 
-
-# Format numbers as human readable strings
+#' Format numbers for human readability
+#'
+#' Convert numeric input to character strings with thousands separators and
+#' configurable decimal marks.
+#'
+#' @param x Numeric vector to format.
+#' @param digits Minimum number of significant digits to display. Passed to
+#'   [format()].
+#' @param big.mark Character used between groups of thousands.
+#' @param decimal.mark Character used for the decimal point.
+#'
+#' @return A character vector containing the formatted numbers.
+#' @examples
+#' format_number_h(1234)
+#' format_number_h(1234.56, digits = 6, decimal.mark = ",")
+#' @export
 format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
   stopifnot(is.numeric(x))
   x <- format(x, big.mark = big.mark, decimal.mark = decimal.mark, digits = digits)
