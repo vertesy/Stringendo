@@ -535,7 +535,17 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 #' @export
 
 ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = FALSE) {
-  x <- gsub(x = string, pattern = "[,\\|@\\[\\]\\$\\(\\)/\\\\]", replacement = replacement, perl = TRUE)
+  # ,   comma
+  # @   at sign
+  # \|  pipe
+  # \[  left bracket
+  # \]  right bracket
+  # \$  dollar sign
+  # \(  left parenthesis
+  # \)  right parenthesis
+  # \\  backslash
+  # /   forward slash
+  x <- gsub(x = string, pattern = "[,@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
   x <- ReplaceRepeatedWhitespaces(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
   ReplaceRepeatedDots(x)
