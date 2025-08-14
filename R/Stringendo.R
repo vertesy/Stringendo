@@ -185,7 +185,7 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 #' @examples ifExistsElse("pi"); ifExistsElse("pi22")
 #'
 #' @export
-ifExistsElse <- function(varname, alternative = "define an alternative", v = F ) {
+ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE ) {
   if(!is.character(varname)) varname <- deparse(substitute(varname))
   if(v) message("Checking if ", varname, " exists.")
   if(exists(varname)) get(varname) else alternative
@@ -249,13 +249,13 @@ is.numeric.or.logical <- function(x) {
 #' testNumericCompatible("0.1") # Should return TRUE
 #' testNumericCompatible("apple") # Should return FALSE
 #' testNumericCompatible("arma.0.1") # Should return FALSE
-testNumericCompatible <- function(x) {
-  stopifnot(is.numeric(x) || is.character(x))
-  suppressWarnings({
-    x_is_numeric <- !is.na(as.numeric(x)) & is.numeric(as.numeric(x))
-  })
-  return(x_is_numeric)
-}
+  testNumericCompatible <- function(x) {
+    stopifnot(is.numeric(x) || is.character(x))
+    suppressWarnings({
+      x_is_numeric <- !is.na(as.numeric(x))
+    })
+    return(x_is_numeric)
+  }
 
 
 # _____________________________________________________________________________________________________________________________
@@ -535,7 +535,17 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 #' @export
 
 ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = FALSE) {
-  x <- gsub(x = string, pattern = ",|\\||\\@|\\[|\\]|\\$|\\/\\(\\)|\\\\", replacement = replacement)
+  # ,   comma
+  # @   at sign
+  # \|  pipe
+  # \[  left bracket
+  # \]  right bracket
+  # \$  dollar sign
+  # \(  left parenthesis
+  # \)  right parenthesis
+  # \\  backslash
+  # /   forward slash
+  x <- gsub(x = string, pattern = "[,@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
   x <- ReplaceRepeatedWhitespaces(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
   ReplaceRepeatedDots(x)
@@ -572,7 +582,7 @@ AddTrailingDotIfMissing <- function(string = "stairway.to.heaven") {
 #' @export
 AddTrailingSlashIfMissing <- function(string = "stairway/to/heaven") {
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!LastChr == "/") {
+  if (LastChr != "/") {
     string <- paste0(string, "/")
   }
   return(string)
@@ -753,7 +763,7 @@ knl <- function(...) {
 #' @export
 kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
 
-  if(is.table(x) & length(dim(x))) {
+  if (is.table(x) && length(dim(x)) > 0) {
     # Convert one dimensional table to vector preserving the names
     nmz <- names(x)
     x <- as.vector(x)
@@ -983,10 +993,10 @@ countDotOrUnderscoreSeparated <- function(string) {
 
   estimated_separator <- dplyr::case_when(
     dot_count > max(usc_count, ws_count) ~ "dot",
-    usc_count > max(usc_count, ws_count) ~ "underscore",
+    usc_count > max(dot_count, ws_count) ~ "underscore",
     ws_count > max(dot_count, usc_count) ~ "white space",
-    dot_count == 0 & usc_count == 0 & ws_count == 0 ~ "none",
-    dot_count == usc_count & dot_count == usc_count ~ "undecided"
+    dot_count == 0 && usc_count == 0 && ws_count == 0 ~ "none",
+    dot_count == usc_count && dot_count == ws_count ~ "undecided"
   )
 
   message("Estimated separator: ", estimated_separator)
@@ -1036,7 +1046,7 @@ toCamelCase <- function(input_string,
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(words), silent = TRUE)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
@@ -1118,7 +1128,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(result), nchar(result) > 0)
 
   # Handle clipboard functionality
-  if (toclipboard & requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
 }
@@ -1254,7 +1264,7 @@ FixPath <- function(string = "stairway//to/heaven", ..., is.file = FALSE) {
   string <- ReplaceRepeatedDots(string)
   string <- ReplaceRepeatedSlashes(string)
   LastChr <- substr(string, nchar(string), nchar(string))
-  if (!is.file & !LastChr == "/") {
+  if (!is.file && LastChr != "/") {
     string <- paste0(string, "/")
   }
   return(string)
