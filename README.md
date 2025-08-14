@@ -14,7 +14,7 @@ Install directly from **GitHub** via **devtools** with one R command:
 ```R
 # install.packages("devtools"); # If you don't have it.
 require("devtools")
-devtools::install_github(repo = "vertesy/Stringendo")
+devtools::install_github(repo = "vertesy/Stringendo", ref = "main")
 ```
 
 ...then simply load the package:

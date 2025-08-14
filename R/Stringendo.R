@@ -937,10 +937,12 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
   return(a)
 }
 
-#' Format numbers for human readability
+
+# _________________________________________________________________________________________________
+#' @title Format numbers for human readability
 #'
-#' Convert numeric input to character strings with thousands separators and
-#' configurable decimal marks.
+#' @description Convert numeric input to character strings with 
+#' thousands separators and configurable decimal marks.
 #'
 #' @param x Numeric vector to format.
 #' @param digits Minimum number of significant digits to display. Passed to
@@ -963,9 +965,8 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 # _________________________________________________________________________________________________
 #' @title Identify the dominant separator in a string
 #'
-#' @description
-#' Count dots, underscores, and white spaces in a string to guess the most
-#' prevalent separator.
+#' @description Count dots, underscores, and white spaces in a string 
+#' to guess the most prevalent separator.
 #'
 #' @param string A character string to analyze.
 #' @return A character string identifying the dominant separator: "dot",
@@ -1050,7 +1051,7 @@ toCamelCase <- function(input_string,
   words[-1] <- sapply(words[-1], function(word) {
     paste0(toupper(substr(word, 1, 1)), tolower(substr(word, 2, nchar(word))))
   })
-  if (toclipboard & require(clipr)) try(clipr::write_clip(words), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(words), silent = TRUE)
 
   # Concatenate the words back together
   return(paste0(words, collapse = ""))
