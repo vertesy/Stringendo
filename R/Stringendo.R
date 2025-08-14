@@ -928,7 +928,6 @@ parsepvalue <- function(pvalue = 0.01) paste0("(p<", pvalue, ")")
 #' @export
 #' @examples percentage_formatter(x = 4.2822212, digitz = 3)
 percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NULL, suffix = NULL, sign_sep = "") {
-  if (length(x) == 1 && is.na(x)) return(x)
   if (keep.names) nmz <- names(x)
   pc_sign <- paste(100 * signif(x, digitz), "%", sep = sign_sep)
   a <- trimws(paste(prefix, pc_sign, suffix, sep = " "))
