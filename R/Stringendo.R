@@ -937,6 +937,8 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
   return(a)
 }
 
+
+# _________________________________________________________________________________________________
 #' @title Format numbers for human readability
 #'
 #' @description Convert numeric input to character strings with 
