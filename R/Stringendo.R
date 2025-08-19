@@ -316,7 +316,7 @@ message2 <- function(vec) for (item in vec) message(item)
 #' @description A variant to message() pasting with white space, sibling of iprint().
 #' @param ... Values to collapse consecutively with spaces.
 #' @param collapse Separator to be used for collapsing. Default: " "
-#' 
+#'
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -345,7 +345,7 @@ iprint <- function(...) {
 #' Returns the current system date and time formatted as a character
 #' string. The default format uses dot separated components, but any
 #' format recognised by [base::format] can be supplied.
-#' 
+#'
 #' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
 #'
 #' @return A character string of the current date/time formatted according
@@ -644,7 +644,7 @@ ppipe <- function(...) {
 #'
 #' @param ... Multiple simple variables to parse.
 #' @export
-pnl <- function(...) {
+ppnl <- function(...) {
   paste(..., sep = " \n")
 }
 
@@ -729,9 +729,9 @@ kpipe <- function(...) {
 #' @title Collapse and paste by newline (`\n`) preceded by a white space
 #' @description Collapse by newline (`\n`) preceded by a white space
 #' @param ... Multiple simple variables to parse.
-#' @examples knl("A", 1:2, "end")
+#' @examples kpnl("A", 1:2, "end")
 #' @export
-knl <- function(...) {
+kpnl <- function(...) {
   paste(c(...), sep = " \n", collapse = " \n")
 }
 
@@ -941,7 +941,7 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
 # _________________________________________________________________________________________________
 #' @title Format numbers for human readability
 #'
-#' @description Convert numeric input to character strings with 
+#' @description Convert numeric input to character strings with
 #' thousands separators and configurable decimal marks.
 #'
 #' @param x Numeric vector to format.
@@ -965,7 +965,7 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 # _________________________________________________________________________________________________
 #' @title Identify the dominant separator in a string
 #'
-#' @description Count dots, underscores, and white spaces in a string 
+#' @description Count dots, underscores, and white spaces in a string
 #' to guess the most prevalent separator.
 #'
 #' @param string A character string to analyze.

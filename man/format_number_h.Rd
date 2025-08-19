@@ -20,8 +20,8 @@ format_number_h(x, digits = 1, big.mark = " ", decimal.mark = ".")
 A character vector containing the formatted numbers.
 }
 \description{
-Convert numeric input to character strings with thousands separators and
-configurable decimal marks.
+Convert numeric input to character strings with
+thousands separators and configurable decimal marks.
 }
 \examples{
 format_number_h(1234)
