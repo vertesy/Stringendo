@@ -628,6 +628,14 @@ ppd <- function(...) {
   paste(..., sep = "-")
 }
 
+# _________________________________________________________________________________________________
+#' @title Paste by a comma followed by a white space
+#'
+#' @param ... Multiple simple variables to parse.
+#' @export
+ppc <- function(...) {
+  paste(..., sep = ", ")
+}
 
 # _________________________________________________________________________________________________
 #' @title Paste by pipe (|) and white space around it
@@ -706,7 +714,7 @@ kppws <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Collapse and paste by comma (and white space)
+#' @title Collapse and paste by a comma followed by a white space
 #' @description Collapse by comma and white space (`, `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppc("A", 1:2, "end")
