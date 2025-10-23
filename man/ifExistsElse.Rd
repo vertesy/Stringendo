@@ -4,7 +4,7 @@
 \alias{ifExistsElse}
 \title{Return a variable's value or a default if it does not exist}
 \usage{
-ifExistsElse(varname, alternative = "define an alternative", v = F)
+ifExistsElse(varname, alternative = "define an alternative", v = FALSE)
 }
 \arguments{
 \item{varname}{Character string naming the variable to retrieve.}
