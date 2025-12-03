@@ -19,6 +19,6 @@ Replace \verb{deparse\\s*\\(\\s*substitute\\s*\\(([^()]+)\\)\\s*\\)} to \verb{su
 }
 \examples{
 my_var <- 10
-get_object_name(my_var)  # "my_var"
+get_object_name(my_var) # "my_var"
 
 }

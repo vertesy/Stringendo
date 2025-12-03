@@ -38,7 +38,7 @@
 #'
 #' @export
 stopif <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -57,7 +57,7 @@ stopif <- function(...) {
     }
   }
 
-  invisible()  # No visible output
+  invisible() # No visible output
 }
 
 
@@ -83,7 +83,7 @@ stopif <- function(...) {
 #'
 #' @export
 warnifnot <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -102,7 +102,7 @@ warnifnot <- function(...) {
     }
   }
 
-  invisible()  # No visible output
+  invisible() # No visible output
 }
 
 
@@ -126,7 +126,7 @@ warnifnot <- function(...) {
 #'
 #' @export
 warnif <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -145,7 +145,7 @@ warnif <- function(...) {
     }
   }
 
-  invisible()  # No visible output
+  invisible() # No visible output
 }
 
 
@@ -164,10 +164,15 @@ warnif <- function(...) {
 #'
 #' @export
 
-ifExistsAndTrue <- function(varname = "pi" ) {
-  x = FALSE
+ifExistsAndTrue <- function(varname = "pi") {
+  x <- FALSE
   if (exists(varname)) {
-    if (isTRUE(get(varname)))  {x = TRUE} else {x = FALSE; iprint(varname, " exists, but != TRUE; ", get(varname))}
+    if (isTRUE(get(varname))) {
+      x <- TRUE
+    } else {
+      x <- FALSE
+      iprint(varname, " exists, but != TRUE; ", get(varname))
+    }
   }
   return(x)
 }
@@ -182,13 +187,14 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 #' @param alternative Value to return if `varname` is not defined.
 #' @param v Logical indicating whether to print informative messages. Default is `FALSE`.
 #'
-#' @examples ifExistsElse("pi"); ifExistsElse("pi22")
+#' @examples ifExistsElse("pi")
+#' ifExistsElse("pi22")
 #'
 #' @export
-ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE ) {
-  if(!is.character(varname)) varname <- deparse(substitute(varname))
-  if(v) message("Checking if ", varname, " exists.")
-  if(exists(varname)) get(varname) else alternative
+ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE) {
+  if (!is.character(varname)) varname <- deparse(substitute(varname))
+  if (v) message("Checking if ", varname, " exists.")
+  if (exists(varname)) get(varname) else alternative
 }
 
 
@@ -202,9 +208,9 @@ ifExistsElse <- function(varname, alternative = "define an alternative", v = FAL
 #' @return Returns `TRUE` if `x` is either a character vector or `NULL`, otherwise `FALSE`.
 #'
 #' @examples
-#' is.character.or.NULL(NULL)      # TRUE
+#' is.character.or.NULL(NULL) # TRUE
 #' is.character.or.NULL("example") # TRUE
-#' is.character.or.NULL(123)       # FALSE
+#' is.character.or.NULL(123) # FALSE
 #'
 #' @export
 is.character.or.NULL <- function(x) is.null(x) || is.character(x)
@@ -221,9 +227,9 @@ is.character.or.NULL <- function(x) is.null(x) || is.character(x)
 #' @return Returns `TRUE` if `x` is either numeric or logical, otherwise `FALSE`.
 #'
 #' @examples
-#' is.numeric.or.logical(123)      # TRUE
-#' is.numeric.or.logical(TRUE)     # TRUE
-#' is.numeric.or.logical("text")   # FALSE
+#' is.numeric.or.logical(123) # TRUE
+#' is.numeric.or.logical(TRUE) # TRUE
+#' is.numeric.or.logical("text") # FALSE
 #'
 #' @export is.numeric.or.logical
 is.numeric.or.logical <- function(x) {
@@ -249,13 +255,13 @@ is.numeric.or.logical <- function(x) {
 #' testNumericCompatible("0.1") # Should return TRUE
 #' testNumericCompatible("apple") # Should return FALSE
 #' testNumericCompatible("arma.0.1") # Should return FALSE
-  testNumericCompatible <- function(x) {
-    stopifnot(is.numeric(x) || is.character(x))
-    suppressWarnings({
-      x_is_numeric <- !is.na(as.numeric(x))
-    })
-    return(x_is_numeric)
-  }
+testNumericCompatible <- function(x) {
+  stopifnot(is.numeric(x) || is.character(x))
+  suppressWarnings({
+    x_is_numeric <- !is.na(as.numeric(x))
+  })
+  return(x_is_numeric)
+}
 
 
 # _____________________________________________________________________________________________________________________________
@@ -294,7 +300,7 @@ is.numeric.or.logical <- function(x) {
 #'
 #' @examples
 #' my_var <- 10
-#' get_object_name(my_var)  # "my_var"
+#' get_object_name(my_var) # "my_var"
 #'
 #' @export
 substitute_deparse <- function(x) deparse(substitute(x))
@@ -770,7 +776,6 @@ kpnl <- function(...) {
 #' @examples kpwNames(c("a" = 1, "b" = 2))
 #' @export
 kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
-
   if (is.table(x) && length(dim(x)) > 0) {
     # Convert one dimensional table to vector preserving the names
     nmz <- names(x)
@@ -810,7 +815,7 @@ kollapse <- function(...,
   if (print == 1) {
     print(paste0(c(...), collapse = collapseby))
   } else if (print == 2) {
-    message(paste0(c(...), collapse =  collapseby))
+    message(paste0(c(...), collapse = collapseby))
   }
   paste0(c(...), collapse = collapseby)
 }

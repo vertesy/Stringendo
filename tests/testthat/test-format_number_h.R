@@ -6,4 +6,3 @@ test_that("format_number_h formats numbers with separators", {
 test_that("format_number_h errors on non-numeric input", {
   expect_error(format_number_h("a"))
 })
-

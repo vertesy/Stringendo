@@ -18,6 +18,7 @@ Returns the value of \code{varname} when it exists; otherwise returns \code{alte
 When \code{v} is \code{TRUE}, a message is printed indicating whether the variable was found.
 }
 \examples{
-ifExistsElse("pi"); ifExistsElse("pi22")
+ifExistsElse("pi")
+ifExistsElse("pi22")
 
 }

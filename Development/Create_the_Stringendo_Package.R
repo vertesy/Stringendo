@@ -84,8 +84,8 @@ if (F) {
 for (scriptX in ls.scripts.full.path) {
   PackageTools::list_of_funs_to_markdown(scriptX)
 }
-file.edit(paste0(repository.dir, "R/list.of.functions.in.", package.name, ".det.md"))
-file.edit(paste0(repository.dir, "README.md"))
+file.edit(paste0(repository.dir, "/R/list.of.functions.in.", package.name, ".det.md"))
+file.edit(paste0(repository.dir, "/README.md"))
 file.remove(paste0(repository.dir, "/R/list.of.functions.in.", package.name, ".det.md"))
 
 r$PackageTools()
@@ -101,6 +101,7 @@ for (scriptX in ls.scripts.full.path) {
 }
 
 
+PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 
 
 
