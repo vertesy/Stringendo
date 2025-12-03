@@ -18,6 +18,6 @@ Suggests:
     devtools,
     testthat
 Encoding: UTF-8
-Packaged: 2025-12-03 10:48:04.078783
+Packaged: 2025-12-03 10:56:21.465331
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

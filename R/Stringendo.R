@@ -1563,15 +1563,13 @@ param.list.flag <- function(par = p$"umap.min_dist") {
 #' MyPlotname
 #'
 #' @export
-parFlags <-
-  function(prefix = "",
+parFlags <- function(prefix = "",
            ...,
            pasteflg = TRUE,
            collapsechar = ".") {
     namez <- as.character(as.list(match.call())[-(1:2)])
     val <- c(...)
     names(val) <- namez
-    # flg = names(which(as.logical.wNames(val))) # which_names()
     flg <- names(val)[val]
     print(flg)
     flg <- if (pasteflg) {
@@ -1598,8 +1596,7 @@ parFlags <-
 #' MyPlotname
 #'
 #' @export
-parFlags2 <-
-  function(prefix = ".",
+parFlags2 <- function(prefix = ".",
            ...,
            pasteflg = TRUE,
            coll.char = ".",
@@ -1627,7 +1624,7 @@ parFlags2 <-
 #' @param max.char Max characters per line
 #' @examples ww.break.lines(char.vec = kppd(LETTERS))
 #'
-#' @export
+#' @export ww.break.lines
 ww.break.lines <- function(char.vec, max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }

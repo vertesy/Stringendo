@@ -39,8 +39,7 @@ source("https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R
 <br>
 
 ## List of Functions in Stringendo.R (76) 
-Updated: 2025/12/03 10:48
-
+Updated: 2025/12/03 10:53
 - #### 1 `stopif()`
 Stop execution if condition is TRUE.   The `stopif()` function stops the execution if the condition is `TRUE`. It is the opposite of  `stopifnot()`, which stops if the condition is not `TRUE`. This function is useful to increase  clarity in the code by removing double negations. 
 
@@ -263,7 +262,7 @@ flag.names_list.all.new. Returns the name and value of each element in a list of
 - #### 74 `param.list.flag()`
 param.list.flag. Returns the name and value of each element in a list of parameters.
 
-- #### 75 `()`
+- #### 75 `parFlags()`
 parFlags. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
 - #### 76 `FormatAsExcelLink()`
