@@ -93,10 +93,11 @@ warnifnot <- function(...) {
     if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
       # Use the provided name as a custom warning message if it exists,
       # otherwise, use the condition's expression
+      default_msg <- paste(deparse(match.call()[[i + 1]]), "is not TRUE")
       message <- if (!is.null(name) && nzchar(name)) {
-        paste(name, "is not TRUE")
+        paste(name, "\n", default_msg, "\n")
       } else {
-        paste(deparse(match.call()[[i + 1]]), "is not TRUE")
+        default_msg
       }
       warning(message, call. = FALSE, immediate. = TRUE)
     }
