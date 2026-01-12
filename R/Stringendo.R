@@ -1530,11 +1530,17 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param ls List of parameters (name, value), Default: p.hm
+#' @param sep_name_val Separator name-2-value, Default: "_"
+#' @param sep_elem Separator between elements, Default: "-"
 #'
 #' @export
-flag.names_list <- function(ls = p.hm, sep = "_") {
-  if (length(ls)) kppd(paste(names(ls), ls, sep = sep))
+flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
+  if (length(ls))
+    paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
 }
+# flag.names_list <- function(ls = p.hm, sep_elem = "_") {
+#   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
+# }
 
 flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
@@ -1619,7 +1625,6 @@ parFlags2 <- function(prefix = ".",
 
 
 
-
 # _________________________________________________________________________________________________
 #' @title break.lines for plot titles
 #'
@@ -1631,7 +1636,6 @@ parFlags2 <- function(prefix = ".",
 ww.break.lines <- function(char.vec, max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
-
 
 
 

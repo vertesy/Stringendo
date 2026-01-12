@@ -4,10 +4,14 @@
 \alias{flag.names_list}
 \title{flag.names_list.all.new}
 \usage{
-flag.names_list(ls = p.hm, sep = "_")
+flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 }
 \arguments{
 \item{ls}{List of parameters (name, value), Default: p.hm}
+
+\item{sep_name_val}{Separator name-2-value, Default: "_"}
+
+\item{sep_elem}{Separator between elements, Default: "-"}
 }
 \description{
 Returns the name and value of each element in a list of parameters.
