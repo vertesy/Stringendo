@@ -1515,28 +1515,28 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 # _________________________________________________________________________________________________
-#' @title flag.names_list
-#' @description Returns the name and value of each element in a list of parameters.
-#' @param par A list element e.g.: p$umap
-#' @examples # flag.names_list(par = p$'umap.n_neighbors')
-#'
-#' @export
-flag.names_list <- function(par) {
-  if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
-}
+#' #' @title flag.names_list
+#' #' @description Returns the name and value of each element in a list of parameters.
+#' #' @param par A list element e.g.: p$umap
+#' #' @examples # flag.names_list(par = p$'umap.n_neighbors')
+#' #'
+#' #' @export
+#' flag.names_list <- function(par) {
+#'   if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
+#' }
 
 
 # _________________________________________________________________________________________________
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
-#' @param pl List of parameters, Default: p.hm
+#' @param ls List of parameters (name, value), Default: p.hm
 #'
 #' @export
-flag.names_list.all.new <- function(pl = p.hm) {
-  # if (length(pl)) paste(kppu(names(pl)), kppu(pl) , sep = "_")
-  if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
+flag.names_list <- function(ls = p.hm, sep = "_") {
+  if (length(ls)) kppd(paste(names(ls), ls, sep = sep))
 }
 
+flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
 # _________________________________________________________________________________________________
 #' @title param.list.flag
@@ -1569,6 +1569,7 @@ parFlags <- function(prefix = "",
            ...,
            pasteflg = TRUE,
            collapsechar = ".") {
+    .deprecated("parFlags2")
     namez <- as.character(as.list(match.call())[-(1:2)])
     val <- c(...)
     names(val) <- namez
