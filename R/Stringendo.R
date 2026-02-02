@@ -194,6 +194,7 @@ ifExistsAndTrue <- function(varname = "pi") {
 #'
 #' @export
 ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE) {
+  .Deprecated("get0")
   if (!is.character(varname)) varname <- deparse(substitute(varname))
   if (v) message("Checking if ", varname, " exists.")
   if (exists(varname)) get(varname) else alternative
