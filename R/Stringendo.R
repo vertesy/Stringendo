@@ -531,7 +531,6 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title ReplaceSpecialCharacters
 #'
@@ -545,7 +544,7 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 
 ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = FALSE) {
   # [:cntrl:]  control characters
-  # ,   comma
+  # ,:;    comma, colon, semicolon
   # @   at sign
   # \|  pipe
   # \[  left bracket
@@ -555,7 +554,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # \)  right parenthesis
   # \\  backslash
   # /   forward slash
-  x <- gsub(x = string, pattern = "[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
+  x <- gsub(x = string, pattern = "[[:cntrl:],:;@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
   # Old one "[,@\\|\\[\\]\\$\\(\\)\\\\/]"
   x <- ReplaceRepeatedWhitespaces(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
