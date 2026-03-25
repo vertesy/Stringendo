@@ -566,8 +566,10 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
 
   # Old one "[,@\\|\\[\\]\\$\\(\\)\\\\/]"
   x <- ReplaceRepeatedWhitespaces(x)
-  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
+  # Replace " ." or ". " with "."
+  x <- gsub(x = x, pattern = " \\.|\\. ", replacement = ".", perl = TRUE)
   ReplaceRepeatedDots(x)
+  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
 }
 
 
