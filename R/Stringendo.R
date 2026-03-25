@@ -536,7 +536,8 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 #'
 #' @description ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 #' @param string The string potentially having special characters.
-#' @param replacement The character to replace special characters with. Pattern = `"[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/]"`
+#' @param replacement The character to replace special characters with.
+#' Pattern = `"[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/<>\\{\\}]"`
 #' @param remove_dots If TRUE, all dots are removed from the string (overwrites if replacement is a dot).
 #' @examples ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
 #' @return A string with special characters replaced by dots.
@@ -549,12 +550,20 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # \|  pipe
   # \[  left bracket
   # \]  right bracket
+  # <  left angle brackets
+  # >  right angle brackets
+  # { left curly brackets
+  # } right curly brackets
+
   # \$  dollar sign
   # \(  left parenthesis
   # \)  right parenthesis
   # \\  backslash
   # /   forward slash
-  x <- gsub(x = string, pattern = "[[:cntrl:],:;@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
+  #  Pattern to replace including angle And curvy brackets.
+  x <- gsub(x = string, pattern = "[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/<>\\{\\}]", replacement = replacement, perl = TRUE)
+  # x <- gsub(x = string, pattern = "[[:cntrl:],:;@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
+
   # Old one "[,@\\|\\[\\]\\$\\(\\)\\\\/]"
   x <- ReplaceRepeatedWhitespaces(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
@@ -934,10 +943,15 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @title parsepvalue
 #' @description Parse p-value from a number to a string.
 #' @param pvalue pvalue to parse. Default: 0.01
-
+#' @param digits Number of digits to keep. Default: 2
+#' @param brackets Whether to enclose the result in brackets. Default: FALSE
 #' @export
-parsepvalue <- function(pvalue = 0.01) paste0("(p<", pvalue, ")")
-# Parse p-value from a number to a string.
+parsepvalue <- function(pvalue = 0.01, digits = 2, brackets = F, prefix = F) {
+  pv <- paste0("p<=", signif(pvalue, digits = digits ), "")
+  if (brackets) paste0("(", pv, ")") else pv
+  if (!isFALSE(prefix)) paste0(prefix, pv) else pv
+}
+
 
 
 # _________________________________________________________________________________________________

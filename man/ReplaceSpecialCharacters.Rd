@@ -13,7 +13,8 @@ ReplaceSpecialCharacters(
 \arguments{
 \item{string}{The string potentially having special characters.}
 
-\item{replacement}{The character to replace special characters with. Pattern = \verb{"[[:cntrl:]@,\\\\|\\\[\\\]\\\\$\\\\(\\\\)\\\\\\\\/]"}}
+\item{replacement}{The character to replace special characters with.
+Pattern = \verb{"[[:cntrl:]@,\\\\|\\\[\\\]\\\\$\\\\(\\\\)\\\\\\\\/<>\\\\\{\\\\\}]"}}
 
 \item{remove_dots}{If TRUE, all dots are removed from the string (overwrites if replacement is a dot).}
 }

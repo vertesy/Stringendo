@@ -4,10 +4,14 @@
 \alias{parsepvalue}
 \title{parsepvalue}
 \usage{
-parsepvalue(pvalue = 0.01)
+parsepvalue(pvalue = 0.01, digits = 2, brackets = F, prefix = F)
 }
 \arguments{
 \item{pvalue}{pvalue to parse. Default: 0.01}
+
+\item{digits}{Number of digits to keep. Default: 2}
+
+\item{brackets}{Whether to enclose the result in brackets. Default: FALSE}
 }
 \description{
 Parse p-value from a number to a string.
