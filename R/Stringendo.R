@@ -18,7 +18,6 @@
 # _________________________________________________________________________________________________
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title Stop execution if condition is TRUE
 #'
@@ -59,7 +58,6 @@ stopif <- function(...) {
 
   invisible() # No visible output
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -151,7 +149,6 @@ warnif <- function(...) {
 }
 
 
-
 # _______________________________________________________________________________________
 #' @title Check whether a variable exists and is TRUE
 #'
@@ -240,7 +237,6 @@ is.numeric.or.logical <- function(x) {
 }
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title Test if a Variable is Inherently Numeric ('0.1' as numeric)
 #'
@@ -282,7 +278,6 @@ testNumericCompatible <- function(x) {
 #' # [1]  TRUE FALSE  TRUE
 #' @export
 "%!in%" <- function(x, y) !("%in%"(x, y))
-
 
 
 # ______________________________________________________________________________________________----
@@ -393,7 +388,6 @@ HasNames <- function(x) !is.null(names(x))
 substrRight <- function(x, n) {
   substr(x, nchar(x) - n + 1, nchar(x))
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -515,7 +509,6 @@ RemoveWhitespaces <- function(string, replacement = "") {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedWhitespaces
 #'
@@ -567,8 +560,8 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # Old one "[,@\\|\\[\\]\\$\\(\\)\\\\/]"
   x <- ReplaceRepeatedWhitespaces(x)
   # Replace " ." or ". " with "."
-  x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE )
-  x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE )
+  x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
+  x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
   ReplaceRepeatedDots(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
 }
@@ -592,7 +585,6 @@ AddTrailingDotIfMissing <- function(string = "stairway.to.heaven") {
   }
   return(string)
 }
-
 
 
 #' @title AddTrailingSlashIfMissing
@@ -687,8 +679,6 @@ ppipe <- function(...) {
 ppnl <- function(...) {
   paste(..., sep = " \n")
 }
-
-
 
 
 # ______________________________________________________________________________________________----
@@ -808,7 +798,6 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title Kollapse
 #'
@@ -896,7 +885,6 @@ sppu <- function(..., make.names = FALSE) {
 # Padding  ----------------------------------------------------------------------------------
 
 
-
 # _________________________________________________________________________________________________
 #' @title pad.na
 #' @description This function fills up a vector to a given length by appending NA-values at the end.
@@ -914,7 +902,6 @@ pad.na <- function(x, len) {
   c(x, rep(NA, len - length(x)))
 }
 # See str_pad
-
 
 
 # ______________________________________________________________________________________________----
@@ -950,11 +937,10 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @param brackets Whether to enclose the result in brackets. Default: FALSE
 #' @export
 parsepvalue <- function(pvalue = 0.01, digits = 2, brackets = F, prefix = F) {
-  pv <- paste0("p<=", signif(pvalue, digits = digits ), "")
+  pv <- paste0("p<=", signif(pvalue, digits = digits), "")
   if (brackets) paste0("(", pv, ")") else pv
   if (!isFALSE(prefix)) paste0(prefix, pv) else pv
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1205,7 +1191,6 @@ toSentence <- function(camelCaseString) {
 }
 
 
-
 # ______________________________________________________________________________________________----
 # Path parsing ----
 # _________________________________________________________________________________________________
@@ -1273,7 +1258,6 @@ ParseFullFilePath <- function(path, file_name, extension) {
 
   return(full_path)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1366,7 +1350,6 @@ PasteDirNameFromFlags <- function(...) {
   CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
   return(CleanDirName)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1492,7 +1475,6 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title flag.name_value
 #' @description Returns the name and its value, if its not FALSE.
@@ -1554,8 +1536,9 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 #'
 #' @export
 flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
-  if (length(ls))
+  if (length(ls)) {
     paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
+  }
 }
 # flag.names_list <- function(ls = p.hm, sep_elem = "_") {
 #   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
@@ -1591,20 +1574,20 @@ param.list.flag <- function(par = p$"umap.min_dist") {
 #'
 #' @export
 parFlags <- function(prefix = "",
-           ...,
-           pasteflg = TRUE,
-           collapsechar = ".") {
-    .deprecated("parFlags2")
-    namez <- as.character(as.list(match.call())[-(1:2)])
-    val <- c(...)
-    names(val) <- namez
-    flg <- names(val)[val]
-    print(flg)
-    flg <- if (pasteflg) {
-      paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))
-    }
-    return(flg)
+                     ...,
+                     pasteflg = TRUE,
+                     collapsechar = ".") {
+  .deprecated("parFlags2")
+  namez <- as.character(as.list(match.call())[-(1:2)])
+  val <- c(...)
+  names(val) <- namez
+  flg <- names(val)[val]
+  print(flg)
+  flg <- if (pasteflg) {
+    paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))
   }
+  return(flg)
+}
 
 
 # _________________________________________________________________________________________________
@@ -1625,23 +1608,22 @@ parFlags <- function(prefix = "",
 #'
 #' @export
 parFlags2 <- function(prefix = ".",
-           ...,
-           pasteflg = TRUE,
-           coll.char = ".",
-           coll.char.intra = "_") {
-    val <- c(...)
-    namez <- as.character(as.list(match.call())[-(1:2)])
-    names(val) <- namez
-    flg <- if (pasteflg) {
-      paste0(
-        prefix,
-        coll.char,
-        paste0(namez, coll.char.intra, val, collapse = coll.char)
-      )
-    }
-    return(flg)
+                      ...,
+                      pasteflg = TRUE,
+                      coll.char = ".",
+                      coll.char.intra = "_") {
+  val <- c(...)
+  namez <- as.character(as.list(match.call())[-(1:2)])
+  names(val) <- namez
+  flg <- if (pasteflg) {
+    paste0(
+      prefix,
+      coll.char,
+      paste0(namez, coll.char.intra, val, collapse = coll.char)
+    )
   }
-
+  return(flg)
+}
 
 
 # _________________________________________________________________________________________________
@@ -1655,7 +1637,6 @@ parFlags2 <- function(prefix = ".",
 ww.break.lines <- function(char.vec, max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1680,8 +1661,6 @@ FormatAsExcelLink <- function(site_name, site_url) {
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Misc   -------------------------------------------------------------------------------------------
 
@@ -1695,12 +1674,9 @@ eval_parse_kollapse <- function(...) {
 }
 
 
-
-
 # _________________________________________________________________________________________________
 
 # _________________________________________________________________________________________________
-
 
 
 # #' @title Stop Execution If Condition is True
