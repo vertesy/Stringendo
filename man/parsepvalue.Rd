@@ -4,7 +4,7 @@
 \alias{parsepvalue}
 \title{parsepvalue}
 \usage{
-parsepvalue(pvalue = 0.01, digits = 2, brackets = F, prefix = F)
+parsepvalue(pvalue = 0.01, digits = 2, brackets = FALSE, prefix = FALSE)
 }
 \arguments{
 \item{pvalue}{pvalue to parse. Default: 0.01}
