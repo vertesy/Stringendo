@@ -13,7 +13,7 @@ Default: No default value, a string must be provided.}
 \item{toclipboard}{Copy to clipboard? Default: TRUE}
 }
 \value{
-A character string converted to dot-separated format. The result is always in lowercase.
+Invisibly, a lowercase character string in dot-separated format.
 }
 \description{
 Converts a string from camelCase or underscore_separated format to dot.separated.name format.

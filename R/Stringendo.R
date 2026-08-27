@@ -1128,7 +1128,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
 #' @param input_string A character string in camelCase or underscore_separated format to be converted.
 #'                     Default: No default value, a string must be provided.
 #' @param toclipboard Copy to clipboard? Default: TRUE
-#' @return A character string converted to dot-separated format. The result is always in lowercase.
+#' @return Invisibly, a lowercase character string in dot-separated format.
 #' @examples
 #' toDotSeparated("plotMetadataCorHeatMap")
 #' toDotSeparated("plot_Metadata_Cor_HeatMap")
@@ -1156,6 +1156,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
+  invisible(result)
 }
 
 # _____________________________________________________________________________________________
