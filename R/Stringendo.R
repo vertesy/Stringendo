@@ -1098,7 +1098,7 @@ toCamelCase <- function(input_string,
 #' @importFrom clipr write_clip
 #'
 #' @export
-toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
+toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
 
   # Handle white space-separated input
@@ -1111,7 +1111,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
   result <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
   stopifnot(is.character(result), nchar(result) > 0)
 
-  if (toclipboard) try(clipr::write_clip(result), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
   invisible(result)
