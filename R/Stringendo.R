@@ -1577,8 +1577,7 @@ parFlags <- function(prefix = "",
                      ...,
                      pasteflg = TRUE,
                      collapsechar = ".") {
-  .deprecated("parFlags2")
-  namez <- as.character(as.list(match.call())[-(1:2)])
+  .Deprecated("parFlags2")
   val <- c(...)
   names(val) <- namez
   flg <- names(val)[val]
