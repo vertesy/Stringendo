@@ -543,16 +543,6 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # \|  pipe
   # \[  left bracket
   # \]  right bracket
-  # <  left angle brackets
-  # >  right angle brackets
-  # { left curly brackets
-  # } right curly brackets
-
-  # \$  dollar sign
-  # \(  left parenthesis
-  # \)  right parenthesis
-  # \\  backslash
-  # /   forward slash
   #  Pattern to replace including angle And curvy brackets.
   x <- gsub(x = string, pattern = "[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/<>\\{\\}]", replacement = replacement, perl = TRUE)
   # x <- gsub(x = string, pattern = "[[:cntrl:],:;@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
