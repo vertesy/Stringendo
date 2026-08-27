@@ -9,7 +9,7 @@ DESCRIPTION <- list(
 
   depends = "base",
   imports = "dplyr, clipr",
-  suggests = "MarkdownHelpers, MarkdownReports, devtools, testthat",
+  suggests = "devtools, testthat", # removed MarkdownHelpers, MarkdownReports, 
 
   author.given = "Abel",
   author.family = "Vertesy",
