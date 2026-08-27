@@ -1516,15 +1516,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 # _________________________________________________________________________________________________
-#' #' @title flag.names_list
-#' #' @description Returns the name and value of each element in a list of parameters.
-#' #' @param par A list element e.g.: p$umap
-#' #' @examples # flag.names_list(par = p$'umap.n_neighbors')
-#' #'
-#' #' @export
-#' flag.names_list <- function(par) {
-#'   if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
-#' }
+# (Removed obsolete roxygen for old flag.names_list(par); see current flag.names_list() below.)
 
 
 # _________________________________________________________________________________________________
