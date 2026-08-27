@@ -1466,7 +1466,7 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
     "all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1))
   )
 
-  cleanPath <- ReplaceRepeatedSlashes(sub("/$", "", path)) # Normalize slashes; strip trailing slash.
+  cleanPath <- RemoveFinalSlash(ReplaceRepeatedSlashes(path)) # Normalize slashes; strip trailing slash(es).
   cleanFlags <- PasteDirNameFromFlags(...)                 # Clean flags independently (no path dots).
   if (nzchar(cleanFlags)) {
     return(paste0(cleanPath, ".", cleanFlags, "/"))        # Dot-append flags then close the dir name.
