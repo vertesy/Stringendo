@@ -16,8 +16,8 @@ Returns \code{TRUE} if \code{x} is either a character vector or \code{NULL}, oth
 \code{is.character.or.NULL()} verifies if the provided input is either a character vector or NULL.
 }
 \examples{
-is.character.or.NULL(NULL)      # TRUE
+is.character.or.NULL(NULL) # TRUE
 is.character.or.NULL("example") # TRUE
-is.character.or.NULL(123)       # FALSE
+is.character.or.NULL(123) # FALSE
 
 }

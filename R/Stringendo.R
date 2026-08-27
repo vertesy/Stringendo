@@ -18,7 +18,6 @@
 # _________________________________________________________________________________________________
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title Stop execution if condition is TRUE
 #'
@@ -38,7 +37,7 @@
 #'
 #' @export
 stopif <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -57,9 +56,8 @@ stopif <- function(...) {
     }
   }
 
-  invisible()  # No visible output
+  invisible() # No visible output
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -83,7 +81,7 @@ stopif <- function(...) {
 #'
 #' @export
 warnifnot <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -93,16 +91,17 @@ warnifnot <- function(...) {
     if (!(is.logical(condition) && all(condition, na.rm = TRUE))) {
       # Use the provided name as a custom warning message if it exists,
       # otherwise, use the condition's expression
+      default_msg <- paste(deparse(match.call()[[i + 1]]), "is not TRUE")
+
       message <- if (!is.null(name) && nzchar(name)) {
-        paste(name, "is not TRUE")
+        paste(name, "\n", default_msg, "\n")
       } else {
-        paste(deparse(match.call()[[i + 1]]), "is not TRUE")
+        default_msg
       }
       warning(message, call. = FALSE, immediate. = TRUE)
     }
   }
-
-  invisible()  # No visible output
+  invisible()
 }
 
 
@@ -126,7 +125,7 @@ warnifnot <- function(...) {
 #'
 #' @export
 warnif <- function(...) {
-  args <- list(...)  # Capture all conditions
+  args <- list(...) # Capture all conditions
 
   for (i in seq_along(args)) {
     condition <- args[[i]]
@@ -136,18 +135,18 @@ warnif <- function(...) {
     if (is.logical(condition) && all(condition, na.rm = TRUE)) {
       # Use the provided name as a custom warning message if it exists,
       # otherwise, use the condition's expression
+      default_msg <- paste(deparse(match.call()[[i + 1]]), "is TRUE")
+
       message <- if (!is.null(name) && nzchar(name)) {
-        paste(name, "is TRUE")
+        paste(name, "\n", default_msg, "\n")
       } else {
-        paste(deparse(match.call()[[i + 1]]), "is TRUE")
+        default_msg
       }
       warning(message, call. = FALSE, immediate. = TRUE)
     }
   }
-
-  invisible()  # No visible output
+  invisible()
 }
-
 
 
 # _______________________________________________________________________________________
@@ -164,10 +163,15 @@ warnif <- function(...) {
 #'
 #' @export
 
-ifExistsAndTrue <- function(varname = "pi" ) {
-  x = FALSE
+ifExistsAndTrue <- function(varname = "pi") {
+  x <- FALSE
   if (exists(varname)) {
-    if (isTRUE(get(varname)))  {x = TRUE} else {x = FALSE; iprint(varname, " exists, but != TRUE; ", get(varname))}
+    if (isTRUE(get(varname))) {
+      x <- TRUE
+    } else {
+      x <- FALSE
+      iprint(varname, " exists, but != TRUE; ", get(varname))
+    }
   }
   return(x)
 }
@@ -182,13 +186,15 @@ ifExistsAndTrue <- function(varname = "pi" ) {
 #' @param alternative Value to return if `varname` is not defined.
 #' @param v Logical indicating whether to print informative messages. Default is `FALSE`.
 #'
-#' @examples ifExistsElse("pi"); ifExistsElse("pi22")
+#' @examples ifExistsElse("pi")
+#' ifExistsElse("pi22")
 #'
 #' @export
-ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE ) {
-  if(!is.character(varname)) varname <- deparse(substitute(varname))
-  if(v) message("Checking if ", varname, " exists.")
-  if(exists(varname)) get(varname) else alternative
+ifExistsElse <- function(varname, alternative = "define an alternative", v = FALSE) {
+  .Deprecated("get0")
+  if (!is.character(varname)) varname <- deparse(substitute(varname))
+  if (v) message("Checking if ", varname, " exists.")
+  if (exists(varname)) get(varname) else alternative
 }
 
 
@@ -202,9 +208,9 @@ ifExistsElse <- function(varname, alternative = "define an alternative", v = FAL
 #' @return Returns `TRUE` if `x` is either a character vector or `NULL`, otherwise `FALSE`.
 #'
 #' @examples
-#' is.character.or.NULL(NULL)      # TRUE
+#' is.character.or.NULL(NULL) # TRUE
 #' is.character.or.NULL("example") # TRUE
-#' is.character.or.NULL(123)       # FALSE
+#' is.character.or.NULL(123) # FALSE
 #'
 #' @export
 is.character.or.NULL <- function(x) is.null(x) || is.character(x)
@@ -221,15 +227,14 @@ is.character.or.NULL <- function(x) is.null(x) || is.character(x)
 #' @return Returns `TRUE` if `x` is either numeric or logical, otherwise `FALSE`.
 #'
 #' @examples
-#' is.numeric.or.logical(123)      # TRUE
-#' is.numeric.or.logical(TRUE)     # TRUE
-#' is.numeric.or.logical("text")   # FALSE
+#' is.numeric.or.logical(123) # TRUE
+#' is.numeric.or.logical(TRUE) # TRUE
+#' is.numeric.or.logical("text") # FALSE
 #'
 #' @export is.numeric.or.logical
 is.numeric.or.logical <- function(x) {
   is.numeric(x) || is.logical(x)
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -249,13 +254,13 @@ is.numeric.or.logical <- function(x) {
 #' testNumericCompatible("0.1") # Should return TRUE
 #' testNumericCompatible("apple") # Should return FALSE
 #' testNumericCompatible("arma.0.1") # Should return FALSE
-  testNumericCompatible <- function(x) {
-    stopifnot(is.numeric(x) || is.character(x))
-    suppressWarnings({
-      x_is_numeric <- !is.na(as.numeric(x))
-    })
-    return(x_is_numeric)
-  }
+testNumericCompatible <- function(x) {
+  stopifnot(is.numeric(x) || is.character(x))
+  suppressWarnings({
+    x_is_numeric <- !is.na(as.numeric(x))
+  })
+  return(x_is_numeric)
+}
 
 
 # _____________________________________________________________________________________________________________________________
@@ -273,7 +278,6 @@ is.numeric.or.logical <- function(x) {
 #' # [1]  TRUE FALSE  TRUE
 #' @export
 "%!in%" <- function(x, y) !("%in%"(x, y))
-
 
 
 # ______________________________________________________________________________________________----
@@ -294,7 +298,7 @@ is.numeric.or.logical <- function(x) {
 #'
 #' @examples
 #' my_var <- 10
-#' get_object_name(my_var)  # "my_var"
+#' get_object_name(my_var) # "my_var"
 #'
 #' @export
 substitute_deparse <- function(x) deparse(substitute(x))
@@ -316,7 +320,7 @@ message2 <- function(vec) for (item in vec) message(item)
 #' @description A variant to message() pasting with white space, sibling of iprint().
 #' @param ... Values to collapse consecutively with spaces.
 #' @param collapse Separator to be used for collapsing. Default: " "
-#' 
+#'
 #' @examples iprint("Hello ", "you ", 3, ", ", 11, " year old kids.")
 #' @export
 
@@ -345,7 +349,7 @@ iprint <- function(...) {
 #' Returns the current system date and time formatted as a character
 #' string. The default format uses dot separated components, but any
 #' format recognised by [base::format] can be supplied.
-#' 
+#'
 #' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
 #'
 #' @return A character string of the current date/time formatted according
@@ -384,7 +388,6 @@ HasNames <- function(x) !is.null(names(x))
 substrRight <- function(x, n) {
   substr(x, nchar(x) - n + 1, nchar(x))
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -506,7 +509,6 @@ RemoveWhitespaces <- function(string, replacement = "") {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title ReplaceRepeatedWhitespaces
 #'
@@ -522,33 +524,36 @@ ReplaceRepeatedWhitespaces <- function(string, replacement = " ") {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title ReplaceSpecialCharacters
 #'
 #' @description ReplaceSpecialCharacters replaces special characters '[]$@()' with dots.
 #' @param string The string potentially having special characters.
 #' @param replacement The character to replace special characters with.
+#' Pattern = `"[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/<>\\{\\}]"`
 #' @param remove_dots If TRUE, all dots are removed from the string (overwrites if replacement is a dot).
 #' @examples ReplaceSpecialCharacters(string = "obj@meta$alpha[[3]]")
 #' @return A string with special characters replaced by dots.
 #' @export
 
 ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement = ".", remove_dots = FALSE) {
-  # ,   comma
+  # [:cntrl:]  control characters
+  # ,:;    comma, colon, semicolon
   # @   at sign
   # \|  pipe
   # \[  left bracket
   # \]  right bracket
-  # \$  dollar sign
-  # \(  left parenthesis
-  # \)  right parenthesis
-  # \\  backslash
-  # /   forward slash
-  x <- gsub(x = string, pattern = "[,@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
+  #  Pattern to replace including angle And curvy brackets.
+  x <- gsub(x = string, pattern = "[[:cntrl:]@,\\|\\[\\]\\$\\(\\)\\\\/<>\\{\\}]", replacement = replacement, perl = TRUE)
+  # x <- gsub(x = string, pattern = "[[:cntrl:],:;@\\|\\[\\]\\$\\(\\)\\\\/]", replacement = replacement, perl = TRUE)
+
+  # Old one "[,@\\|\\[\\]\\$\\(\\)\\\\/]"
   x <- ReplaceRepeatedWhitespaces(x)
-  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
+  # Replace " ." or ". " with "."
+  x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
+  x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
   ReplaceRepeatedDots(x)
+  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
 }
 
 
@@ -570,7 +575,6 @@ AddTrailingDotIfMissing <- function(string = "stairway.to.heaven") {
   }
   return(string)
 }
-
 
 
 #' @title AddTrailingSlashIfMissing
@@ -638,6 +642,14 @@ ppd <- function(...) {
   paste(..., sep = "-")
 }
 
+# _________________________________________________________________________________________________
+#' @title Paste by a comma followed by a white space
+#'
+#' @param ... Multiple simple variables to parse.
+#' @export
+ppc <- function(...) {
+  paste(..., sep = ", ")
+}
 
 # _________________________________________________________________________________________________
 #' @title Paste by pipe (|) and white space around it
@@ -654,11 +666,9 @@ ppipe <- function(...) {
 #'
 #' @param ... Multiple simple variables to parse.
 #' @export
-pnl <- function(...) {
+ppnl <- function(...) {
   paste(..., sep = " \n")
 }
-
-
 
 
 # ______________________________________________________________________________________________----
@@ -716,7 +726,7 @@ kppws <- function(...) {
 
 
 # _________________________________________________________________________________________________
-#' @title Collapse and paste by comma (and white space)
+#' @title Collapse and paste by a comma followed by a white space
 #' @description Collapse by comma and white space (`, `)
 #' @param ... Multiple simple variables to parse.
 #' @examples kppc("A", 1:2, "end")
@@ -739,9 +749,9 @@ kpipe <- function(...) {
 #' @title Collapse and paste by newline (`\n`) preceded by a white space
 #' @description Collapse by newline (`\n`) preceded by a white space
 #' @param ... Multiple simple variables to parse.
-#' @examples knl("A", 1:2, "end")
+#' @examples kpnl("A", 1:2, "end")
 #' @export
-knl <- function(...) {
+kpnl <- function(...) {
   paste(c(...), sep = " \n", collapse = " \n")
 }
 
@@ -762,7 +772,6 @@ knl <- function(...) {
 #' @examples kpwNames(c("a" = 1, "b" = 2))
 #' @export
 kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix = NULL, suffix = NULL) {
-
   if (is.table(x) && length(dim(x)) > 0) {
     # Convert one dimensional table to vector preserving the names
     nmz <- names(x)
@@ -777,7 +786,6 @@ kpwNames <- function(x = c("a" = 1, "b" = 2), sep1 = ": ", sep2 = " | ", prefix 
   x <- paste0(names(x), sep1, x, collapse = sep2)
   paste0(prefix, x, suffix)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -802,7 +810,7 @@ kollapse <- function(...,
   if (print == 1) {
     print(paste0(c(...), collapse = collapseby))
   } else if (print == 2) {
-    message(paste0(c(...), collapse =  collapseby))
+    message(paste0(c(...), collapse = collapseby))
   }
   paste0(c(...), collapse = collapseby)
 }
@@ -867,7 +875,6 @@ sppu <- function(..., make.names = FALSE) {
 # Padding  ----------------------------------------------------------------------------------
 
 
-
 # _________________________________________________________________________________________________
 #' @title pad.na
 #' @description This function fills up a vector to a given length by appending NA-values at the end.
@@ -885,7 +892,6 @@ pad.na <- function(x, len) {
   c(x, rep(NA, len - length(x)))
 }
 # See str_pad
-
 
 
 # ______________________________________________________________________________________________----
@@ -917,10 +923,14 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @title parsepvalue
 #' @description Parse p-value from a number to a string.
 #' @param pvalue pvalue to parse. Default: 0.01
-
+#' @param digits Number of digits to keep. Default: 2
+#' @param brackets Whether to enclose the result in brackets. Default: FALSE
 #' @export
-parsepvalue <- function(pvalue = 0.01) paste0("(p<", pvalue, ")")
-# Parse p-value from a number to a string.
+parsepvalue <- function(pvalue = 0.01, digits = 2, brackets = FALSE, prefix = FALSE) {
+  pv <- paste0("p<=", signif(pvalue, digits = digits), "")
+  if (brackets) paste0("(", pv, ")") else pv
+  if (!isFALSE(prefix)) paste0(prefix, pv) else pv
+}
 
 
 # _________________________________________________________________________________________________
@@ -948,7 +958,23 @@ percentage_formatter <- function(x, digitz = 3, keep.names = FALSE, prefix = NUL
 }
 
 
-# Format numbers as human readable strings
+# _________________________________________________________________________________________________
+#' @title Format numbers for human readability
+#'
+#' @description Convert numeric input to character strings with
+#' thousands separators and configurable decimal marks.
+#'
+#' @param x Numeric vector to format.
+#' @param digits Minimum number of significant digits to display. Passed to
+#'   [format()].
+#' @param big.mark Character used between groups of thousands.
+#' @param decimal.mark Character used for the decimal point.
+#'
+#' @return A character vector containing the formatted numbers.
+#' @examples
+#' format_number_h(1234)
+#' format_number_h(1234.56, digits = 6, decimal.mark = ",")
+#' @export
 format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
   stopifnot(is.numeric(x))
   x <- format(x, big.mark = big.mark, decimal.mark = decimal.mark, digits = digits)
@@ -959,9 +985,8 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 # _________________________________________________________________________________________________
 #' @title Identify the dominant separator in a string
 #'
-#' @description
-#' Count dots, underscores, and white spaces in a string to guess the most
-#' prevalent separator.
+#' @description Count dots, underscores, and white spaces in a string
+#' to guess the most prevalent separator.
 #'
 #' @param string A character string to analyze.
 #' @return A character string identifying the dominant separator: "dot",
@@ -1156,7 +1181,6 @@ toSentence <- function(camelCaseString) {
 }
 
 
-
 # ______________________________________________________________________________________________----
 # Path parsing ----
 # _________________________________________________________________________________________________
@@ -1224,7 +1248,6 @@ ParseFullFilePath <- function(path, file_name, extension) {
 
   return(full_path)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1317,7 +1340,6 @@ PasteDirNameFromFlags <- function(...) {
   CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
   return(CleanDirName)
 }
-
 
 
 # _________________________________________________________________________________________________
@@ -1443,7 +1465,6 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
 }
 
 
-
 # _________________________________________________________________________________________________
 #' @title flag.name_value
 #' @description Returns the name and its value, if its not FALSE.
@@ -1485,28 +1506,27 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 # _________________________________________________________________________________________________
-#' @title flag.names_list
-#' @description Returns the name and value of each element in a list of parameters.
-#' @param par A list element e.g.: p$umap
-#' @examples # flag.names_list(par = p$'umap.n_neighbors')
-#'
-#' @export
-flag.names_list <- function(par) {
-  if (length(par)) paste(substitute(par), kppu(par), sep = "_")[[3]]
-}
+# (Removed obsolete roxygen for old flag.names_list(par); see current flag.names_list() below.)
 
 
 # _________________________________________________________________________________________________
 #' @title flag.names_list.all.new
 #' @description Returns the name and value of each element in a list of parameters.
-#' @param pl List of parameters, Default: p.hm
+#' @param ls List of parameters (name, value), Default: p.hm
+#' @param sep_name_val Separator name-2-value, Default: "_"
+#' @param sep_elem Separator between elements, Default: "-"
 #'
 #' @export
-flag.names_list.all.new <- function(pl = p.hm) {
-  # if (length(pl)) paste(kppu(names(pl)), kppu(pl) , sep = "_")
-  if (length(pl)) kppd(paste(names(pl), pl, sep = "_"))
+flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
+  if (length(ls)) {
+    paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
+  }
 }
+# flag.names_list <- function(ls = p.hm, sep_elem = "_") {
+#   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
+# }
 
+flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
 # _________________________________________________________________________________________________
 #' @title param.list.flag
@@ -1535,22 +1555,20 @@ param.list.flag <- function(par = p$"umap.min_dist") {
 #' MyPlotname
 #'
 #' @export
-parFlags <-
-  function(prefix = "",
-           ...,
-           pasteflg = TRUE,
-           collapsechar = ".") {
-    namez <- as.character(as.list(match.call())[-(1:2)])
-    val <- c(...)
-    names(val) <- namez
-    # flg = names(which(as.logical.wNames(val))) # which_names()
-    flg <- names(val)[val]
-    print(flg)
-    flg <- if (pasteflg) {
-      paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))
-    }
-    return(flg)
+parFlags <- function(prefix = "",
+                     ...,
+                     pasteflg = TRUE,
+                     collapsechar = ".") {
+  .Deprecated("parFlags2")
+  val <- c(...)
+  names(val) <- namez
+  flg <- names(val)[val]
+  print(flg)
+  flg <- if (pasteflg) {
+    paste0(prefix, collapsechar, paste0(flg, collapse = collapsechar))
   }
+  return(flg)
+}
 
 
 # _________________________________________________________________________________________________
@@ -1570,26 +1588,23 @@ parFlags <-
 #' MyPlotname
 #'
 #' @export
-parFlags2 <-
-  function(prefix = ".",
-           ...,
-           pasteflg = TRUE,
-           coll.char = ".",
-           coll.char.intra = "_") {
-    val <- c(...)
-    namez <- as.character(as.list(match.call())[-(1:2)])
-    names(val) <- namez
-    flg <- if (pasteflg) {
-      paste0(
-        prefix,
-        coll.char,
-        paste0(namez, coll.char.intra, val, collapse = coll.char)
-      )
-    }
-    return(flg)
+parFlags2 <- function(prefix = ".",
+                      ...,
+                      pasteflg = TRUE,
+                      coll.char = ".",
+                      coll.char.intra = "_") {
+  val <- c(...)
+  namez <- as.character(as.list(match.call())[-(1:2)])
+  names(val) <- namez
+  flg <- if (pasteflg) {
+    paste0(
+      prefix,
+      coll.char,
+      paste0(namez, coll.char.intra, val, collapse = coll.char)
+    )
   }
-
-
+  return(flg)
+}
 
 
 # _________________________________________________________________________________________________
@@ -1599,12 +1614,10 @@ parFlags2 <-
 #' @param max.char Max characters per line
 #' @examples ww.break.lines(char.vec = kppd(LETTERS))
 #'
-#' @export
+#' @export ww.break.lines
 ww.break.lines <- function(char.vec, max.char = 50) {
   gsub(pattern = paste0("(.{", max.char, "})"), "\\1\n", char.vec)
 }
-
-
 
 
 # _________________________________________________________________________________________________
@@ -1629,8 +1642,6 @@ FormatAsExcelLink <- function(site_name, site_url) {
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Misc   -------------------------------------------------------------------------------------------
 
@@ -1644,12 +1655,9 @@ eval_parse_kollapse <- function(...) {
 }
 
 
-
-
 # _________________________________________________________________________________________________
 
 # _________________________________________________________________________________________________
-
 
 
 # #' @title Stop Execution If Condition is True

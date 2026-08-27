@@ -14,8 +14,8 @@ A character string identifying the dominant separator: "dot",
 "underscore", "white space", "none", or "undecided".
 }
 \description{
-Count dots, underscores, and white spaces in a string to guess the most
-prevalent separator.
+Count dots, underscores, and white spaces in a string
+to guess the most prevalent separator.
 }
 \examples{
 \dontrun{

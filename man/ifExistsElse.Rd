@@ -4,7 +4,7 @@
 \alias{ifExistsElse}
 \title{Return a variable's value or a default if it does not exist}
 \usage{
-ifExistsElse(varname, alternative = "define an alternative", v = F)
+ifExistsElse(varname, alternative = "define an alternative", v = FALSE)
 }
 \arguments{
 \item{varname}{Character string naming the variable to retrieve.}
@@ -18,6 +18,7 @@ Returns the value of \code{varname} when it exists; otherwise returns \code{alte
 When \code{v} is \code{TRUE}, a message is printed indicating whether the variable was found.
 }
 \examples{
-ifExistsElse("pi"); ifExistsElse("pi22")
+ifExistsElse("pi")
+ifExistsElse("pi22")
 
 }

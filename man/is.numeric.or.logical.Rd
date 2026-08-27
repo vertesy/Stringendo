@@ -16,8 +16,8 @@ Returns \code{TRUE} if \code{x} is either numeric or logical, otherwise \code{FA
 \code{is.numeric.or.logical()} checks if the provided input is either numeric or logical.
 }
 \examples{
-is.numeric.or.logical(123)      # TRUE
-is.numeric.or.logical(TRUE)     # TRUE
-is.numeric.or.logical("text")   # FALSE
+is.numeric.or.logical(123) # TRUE
+is.numeric.or.logical(TRUE) # TRUE
+is.numeric.or.logical("text") # FALSE
 
 }

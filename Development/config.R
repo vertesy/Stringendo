@@ -3,8 +3,8 @@
 
 DESCRIPTION <- list(
   package.name = "Stringendo",
-  version = "0.8.5",
-  title = "Stringendo - string parser",
+  version = "1.2.0",
+  title = "Stringendo - string manipulation utilities",
   description = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings.",
 
   depends = "base",
