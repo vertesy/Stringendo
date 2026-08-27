@@ -925,10 +925,11 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @param pvalue pvalue to parse. Default: 0.01
 #' @param digits Number of digits to keep. Default: 2
 #' @param brackets Whether to enclose the result in brackets. Default: FALSE
+#' @param prefix String to prepend to the result, or FALSE to add no prefix. Default: FALSE
 #' @export
 parsepvalue <- function(pvalue = 0.01, digits = 2, brackets = FALSE, prefix = FALSE) {
   pv <- paste0("p<=", signif(pvalue, digits = digits), "")
-  if (brackets) paste0("(", pv, ")") else pv
+  if (brackets) pv <- paste0("(", pv, ")")
   if (!isFALSE(prefix)) paste0(prefix, pv) else pv
 }
 
