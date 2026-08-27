@@ -1,10 +1,9 @@
 # CI for Stringendo: builds the package and runs `R CMD check` on every
 # push and pull request against main/dev, on a clean Ubuntu + R-release runner.
 #
-# Stringendo's own dependencies (clipr, dplyr) are on CRAN. Its two
-# GitHub-only @vertesy packages (MarkdownHelpers, MarkdownReports) are
-# listed as Suggests, so they're listed explicitly below to make sure
-# the dependency installer (pak) fetches them from GitHub, not CRAN.
+# Stringendo has no GitHub-only dependencies — everything in its
+# DESCRIPTION (clipr, dplyr, devtools, testthat) is on CRAN, so no
+# extra @vertesy packages need to be listed below.
 #
 # Based on the standard r-lib/actions check-standard workflow:
 # https://github.com/r-lib/actions/tree/v2-branch/examples#standard-ci-workflow
