@@ -3,13 +3,13 @@
 
 DESCRIPTION <- list(
   package.name = "Stringendo",
-  version = "1.2.1",
+  version = "1.2.2",
   title = "Stringendo - string manipulation utilities",
   description = "Stringendo is a set of R functions to parse strings from variables and to manipulate strings.",
 
   depends = "base",
-  imports = "dplyr, clipr",
-  suggests = "devtools, testthat", # removed MarkdownHelpers, MarkdownReports, 
+  imports = "methods",
+  suggests = "devtools, testthat, clipr", # removed MarkdownHelpers, MarkdownReports, dplyr (no longer used)
 
   author.given = "Abel",
   author.family = "Vertesy",

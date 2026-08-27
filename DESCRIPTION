@@ -1,18 +1,18 @@
 Package: Stringendo
 Title: Stringendo - string manipulation utilities
-Version: 1.2.1
-Authors@R: 
+Version: 1.2.2
+Authors@R:
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Description: Stringendo is a set of R functions to parse strings from
     variables and to manipulate strings.
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/Stringendo/issues
-Depends: 
+Depends:
     base
-Imports: 
+Imports:
+    methods
+Suggests:
     clipr,
-    dplyr
-Suggests: 
     devtools,
     testthat
 Encoding: UTF-8
