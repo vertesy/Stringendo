@@ -42,8 +42,6 @@ jobs:
           needs: check
           extra-packages: |
             any::rcmdcheck
-            vertesy/MarkdownHelpers
-            vertesy/MarkdownReports
 
       - uses: r-lib/actions/check-r-package@v2
         with:
