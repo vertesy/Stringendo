@@ -14,8 +14,6 @@ Imports:
     dplyr
 Suggests: 
     devtools,
-    MarkdownHelpers,
-    MarkdownReports,
     testthat
 Encoding: UTF-8
 Packaged: 2026-08-25 16:27:22.721912

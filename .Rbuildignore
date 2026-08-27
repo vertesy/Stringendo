@@ -1,3 +1,7 @@
 ^StringParser\.Rproj$
 ^\.Rproj\.user$
 ^Stringendo\.Rproj$
+^\.github$
+^Development$
+^AGENTS\.md$
+^CITATION\.cff$
