@@ -14,3 +14,7 @@ PasteOutdirFromFlags(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...)
 \description{
 Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 }
+\examples{
+PasteOutdirFromFlags("results/.cache", "", "filtered")
+# "results/.cache.filtered/"
+}
