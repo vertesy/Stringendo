@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{flag.names_list}
 \alias{flag.names_list}
-\title{flag.names_list.all.new}
+\title{flag.names_list}
 \usage{
 flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 }
@@ -15,15 +15,4 @@ flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 }
 \description{
 Returns the name and value of each element in a list of parameters.
-}
-\details{
-#' @title flag.names_list
-#' @description Returns the name and value of each element in a list of parameters.
-#' @param par A list element e.g.: p$umap
-#' @examples # flag.names_list(par = p$'umap.n_neighbors')
-#'
-#' @export
-flag.names_list <- function(par) {
-if (length(par)) paste(substitute(par), kppu(par), sep = "_")[\link{3}]
-}
 }

@@ -350,7 +350,7 @@ iprint <- function(...) {
 #' string. The default format uses dot separated components, but any
 #' format recognised by [base::format] can be supplied.
 #'
-#' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#' @param Format Date format. Default: `c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]`
 #'
 #' @return A character string of the current date/time formatted according
 #'   to `Format`.
@@ -1518,11 +1518,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 # _________________________________________________________________________________________________
-# (Removed obsolete roxygen for old flag.names_list(par); see current flag.names_list() below.)
-
-
-# _________________________________________________________________________________________________
-#' @title flag.names_list.all.new
+#' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param ls List of parameters (name, value), Default: p.hm
 #' @param sep_name_val Separator name-2-value, Default: "_"
@@ -1534,9 +1530,6 @@ flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
     paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
   }
 }
-# flag.names_list <- function(ls = p.hm, sep_elem = "_") {
-#   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
-# }
 
 flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
@@ -1665,24 +1658,3 @@ FormatAsExcelLink <- function(site_name, site_url) {
 eval_parse_kollapse <- function(...) {
   substitute(eval(parse(text = kollapse(..., print = FALSE))))
 }
-
-
-# _________________________________________________________________________________________________
-
-# _________________________________________________________________________________________________
-
-
-# #' @title Stop Execution If Condition is True
-# #'
-# #' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
-# #' It is the complement of the `stopifnot()` function and is used for asserting conditions where
-# #' an error should be thrown if the condition is TRUE, rather than FALSE.
-# #' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
-# #' @param message An optional error message to display if the condition is TRUE.
-# #'
-# #' @examples a <- 1
-# #' stopif(a != 1, message = "A is 1")
-# #' @export
-# stopif <- function(condition, message = 'Condition is TRUE.') {
-#   if (isTRUE(condition)) stop(message)
-# }
