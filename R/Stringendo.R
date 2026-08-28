@@ -1128,7 +1128,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
 #' @param input_string A character string in camelCase or underscore_separated format to be converted.
 #'                     Default: No default value, a string must be provided.
 #' @param toclipboard Copy to clipboard? Default: TRUE
-#' @return A character string converted to dot-separated format. The result is always in lowercase.
+#' @return Invisibly, a lowercase character string in dot-separated format.
 #' @examples
 #' toDotSeparated("plotMetadataCorHeatMap")
 #' toDotSeparated("plot_Metadata_Cor_HeatMap")
@@ -1156,6 +1156,7 @@ toDotSeparated <- function(input_string, toclipboard = TRUE) {
   if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
+  invisible(result)
 }
 
 # _____________________________________________________________________________________________
@@ -1333,12 +1334,19 @@ ParseDirPath <- function(...) {
 #' @title PasteDirNameFromFlags
 #' @description Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
 #' @param ... Multiple simple variables to parse.
+#' @examples
+#' PasteDirNameFromFlags("sample", "", "filtered")
+#' # "sample.filtered"
 #' @export
 PasteDirNameFromFlags <- function(...) {
+  stopifnot("all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1)))
+
   flagList <- c(...)
+  if (length(flagList) == 0L) return("")
+
   pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
-  return(CleanDirName)
+  cleanDirName <- RemoveTrailingDots(ReplaceRepeatedDots(pastedFlagList))
+  return(cleanDirName)
 }
 
 
@@ -1451,17 +1459,23 @@ param.list.2.fname <- function(ls.of.params = p, sep = ".", collapse = "_") {
 #' @param path path, Default: '~/Dropbox/Abel.IMBA/AnalysisD'
 #' @param ... Multiple simple variables to parse.
 #'
+#' @examples
+#' PasteOutdirFromFlags("results/.cache", "", "filtered")
+#' # "results/.cache.filtered/"
 #' @export
 PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
-  flagList <- c(path, ...)
-  pastedFlagList <- kpp(flagList)
-  CleanDirName <- gsub(x = pastedFlagList, pattern = "[\\..] + ", replacement = "\\.")
+  stopifnot(
+    is.character(path), length(path) == 1L, !is.na(path),
+    "all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1))
+  )
 
-  pastedOutDir <- paste0(CleanDirName, "/")
-  CleanDirName <- gsub(x = pastedOutDir, pattern = "[//] + ", replacement = "/")
-  CleanDirName <- gsub(x = pastedOutDir, pattern = "[/] + ", replacement = "/")
-  CleanDirName <- gsub(x = pastedOutDir, pattern = "/\\.+", replacement = "/") # remove invisible directories '/.dirname'
-  return(CleanDirName)
+  cleanPath <- RemoveFinalSlash(ReplaceRepeatedSlashes(path)) # Normalize slashes; strip trailing slash(es).
+  cleanFlags <- PasteDirNameFromFlags(...)                 # Clean flags independently (no path dots).
+  if (nzchar(cleanFlags)) {
+    return(paste0(cleanPath, ".", cleanFlags, "/"))        # Dot-append flags then close the dir name.
+  } else {
+    return(paste0(cleanPath, "/"))                         # No flags: just close the path.
+  }
 }
 
 

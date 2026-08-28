@@ -12,3 +12,7 @@ PasteDirNameFromFlags(...)
 \description{
 Paste a dot (point) separated string from a list of inputs (that can be empty), and clean up the output string from dot multiplets (e.g: ..).
 }
+\examples{
+PasteDirNameFromFlags("sample", "", "filtered")
+# "sample.filtered"
+}
