@@ -1342,6 +1342,8 @@ PasteDirNameFromFlags <- function(...) {
   stopifnot("all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1)))
 
   flagList <- c(...)
+  if (length(flagList) == 0L) return("")
+
   pastedFlagList <- kpp(flagList)
   cleanDirName <- RemoveTrailingDots(ReplaceRepeatedDots(pastedFlagList))
   return(cleanDirName)
