@@ -16,14 +16,3 @@ flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 \description{
 Returns the name and value of each element in a list of parameters.
 }
-\details{
-#' @title flag.names_list
-#' @description Returns the name and value of each element in a list of parameters.
-#' @param par A list element e.g.: p$umap
-#' @examples # flag.names_list(par = p$'umap.n_neighbors')
-#'
-#' @export
-flag.names_list <- function(par) {
-if (length(par)) paste(substitute(par), kppu(par), sep = "_")[\link{3}]
-}
-}
