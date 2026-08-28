@@ -22,6 +22,19 @@ source(config.path)
 require(PackageTools)
 
 
+# Automated Codebase linting to tidyverse style & custom corrections ------------------------------------------------
+styler::style_pkg(repository.dir)
+
+
+(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
+for (scriptX in ls.scripts.full.path) {
+  PackageTools::replace_tf_with_true_false(scriptX)
+  PackageTools::replace_short_calls(scriptX)
+}
+
+
+# Automated Codebase linting to tidyverse style ------------------------------------------------
+
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 'git add commit push to remote'
 
@@ -45,8 +58,6 @@ devtools::check_man(repository.dir)
 checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
-# Automated Codebase linting to tidyverse style ------------------------------------------------
-styler::style_pkg(repository.dir)
 
 
 # Extract package dependencies ------------------------------------------------
@@ -94,11 +105,6 @@ file.edit(paste0(repository.dir, "README.md"))
 
 
 # Replaces T with TRUE and F with FALSE ------------------------------------------------
-(ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
-for (scriptX in ls.scripts.full.path) {
-  PackageTools::replace_tf_with_true_false(scriptX)
-  PackageTools::replace_short_calls(scriptX)
-}
 
 
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')

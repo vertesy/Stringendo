@@ -1,55 +1,56 @@
-Dependency file generated on Tue Aug 25 15:49:43 2026 
+Dependency file generated on Fri Aug 28 18:42:21 2026 
 
 #################################################################################################### 
 Stringendo.R
 #################################################################################################### 
-$`c("package:Stringendo", "package:PackageTools")`
+$`c("package:Stringendo", "package:dplyr")`
+[1] "case_when"
+
+$`c("package:Stringendo", "package:PackageTools", "package:clipr", "package:MarkdownReports")`
 [1] "write_clip"
 
-$`character(0)`
-[1] ".deprecated"
+$`c("package:Stringendo", "package:Seurat.utils", "package:MarkdownReports")`
+[1] "iprint"
+
+$`c("package:Stringendo", "package:Seurat.utils")`
+[1] "kollapse" "kpp"      "kppu"    
 
 $`package:base`
- [1] ".Deprecated"      "all"              "any"             
- [4] "as.character"     "as.list"          "as.numeric"      
- [7] "as.vector"        "c"                "ceiling"         
-[10] "deparse"          "dim"              "eval"            
-[13] "exists"           "floor"            "format"          
-[16] "get"              "gsub"             "invisible"       
-[19] "is.character"     "is.logical"       "is.na"           
-[22] "is.nan"           "is.null"          "is.numeric"      
-[25] "is.table"         "is.vector"        "isFALSE"         
-[28] "isTRUE"           "length"           "list"            
-[31] "make.names"       "match.call"       "max"             
-[34] "message"          "names"            "nchar"           
-[37] "nzchar"           "parse"            "paste"           
-[40] "paste0"           "print"            "rep"             
-[43] "requireNamespace" "return"           "sapply"          
-[46] "seq_along"        "signif"           "sort"            
-[49] "stop"             "stopifnot"        "strsplit"        
-[52] "substitute"       "substr"           "sum"             
-[55] "suppressWarnings" "Sys.time"         "tolower"         
-[58] "toupper"          "trimws"           "try"             
-[61] "warning"         
+ [1] ".Deprecated"      "all"              "any"              "as.character"    
+ [5] "as.list"          "as.numeric"       "as.vector"        "c"               
+ [9] "ceiling"          "deparse"          "dim"              "eval"            
+[13] "exists"           "floor"            "format"           "get"             
+[17] "gsub"             "invisible"        "is.atomic"        "is.character"    
+[21] "is.logical"       "is.na"            "is.nan"           "is.null"         
+[25] "is.numeric"       "is.table"         "is.vector"        "isFALSE"         
+[29] "isTRUE"           "length"           "list"             "logical"         
+[33] "make.names"       "match.call"       "max"              "message"         
+[37] "names"            "nchar"            "nzchar"           "parse"           
+[41] "paste"            "paste0"           "print"            "rep"             
+[45] "requireNamespace" "return"           "sapply"           "seq_along"       
+[49] "signif"           "sort"             "stop"             "stopifnot"       
+[53] "strsplit"         "substitute"       "substr"           "sum"             
+[57] "suppressWarnings" "Sys.time"         "tolower"          "toupper"         
+[61] "trimws"           "try"              "vapply"           "warning"         
 
 $`package:methods`
 [1] "hasArg"
 
 $`package:Stringendo`
- [1] "AddTrailingSlashIfMissing"     "case_when"                    
- [3] "countDotOrUnderscoreSeparated" "HasNames"                     
- [5] "iprint"                        "kollapse"                     
- [7] "kpp"                           "kpps"                         
- [9] "kppu"                          "ppp"                          
-[11] "RemoveFinalDot"                "RemoveFinalSlash"             
-[13] "RemoveFinalUnderscores"        "RemoveInitialDot"             
-[15] "RemoveTrailingDots"            "ReplaceRepeatedDots"          
-[17] "ReplaceRepeatedSlashes"        "ReplaceRepeatedUnderscores"   
-[19] "ReplaceRepeatedWhitespaces"    "ReplaceSpecialCharacters"     
-[21] "sppp"                          "spps"                         
+ [1] "AddTrailingSlashIfMissing"     "countDotOrUnderscoreSeparated"
+ [3] "HasNames"                      "kpps"                         
+ [5] "PasteDirNameFromFlags"         "ppp"                          
+ [7] "RemoveFinalDot"                "RemoveFinalSlash"             
+ [9] "RemoveFinalUnderscores"        "RemoveInitialDot"             
+[11] "RemoveTrailingDots"            "ReplaceRepeatedDots"          
+[13] "ReplaceRepeatedSlashes"        "ReplaceRepeatedUnderscores"   
+[15] "ReplaceRepeatedWhitespaces"    "ReplaceSpecialCharacters"     
+[17] "sppp"                          "spps"                         
 
-c("Stringendo", "PackageTools")
-character(0)
+c("Stringendo", "dplyr")
+c("Stringendo", "PackageTools", "clipr", "MarkdownReports")
+c("Stringendo", "Seurat.utils", "MarkdownReports")
+c("Stringendo", "Seurat.utils")
 base
 methods
 Stringendo

@@ -1342,7 +1342,9 @@ PasteDirNameFromFlags <- function(...) {
   stopifnot("all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1)))
 
   flagList <- c(...)
-  if (length(flagList) == 0L) return("")
+  if (length(flagList) == 0L) {
+    return("")
+  }
 
   pastedFlagList <- kpp(flagList)
   cleanDirName <- RemoveTrailingDots(ReplaceRepeatedDots(pastedFlagList))
@@ -1470,11 +1472,11 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   )
 
   cleanPath <- RemoveFinalSlash(ReplaceRepeatedSlashes(path)) # Normalize slashes; strip trailing slash(es).
-  cleanFlags <- PasteDirNameFromFlags(...)                 # Clean flags independently (no path dots).
+  cleanFlags <- PasteDirNameFromFlags(...) # Clean flags independently (no path dots).
   if (nzchar(cleanFlags)) {
-    return(paste0(cleanPath, ".", cleanFlags, "/"))        # Dot-append flags then close the dir name.
+    return(paste0(cleanPath, ".", cleanFlags, "/")) # Dot-append flags then close the dir name.
   } else {
-    return(paste0(cleanPath, "/"))                         # No flags: just close the path.
+    return(paste0(cleanPath, "/")) # No flags: just close the path.
   }
 }
 
