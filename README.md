@@ -42,7 +42,7 @@ source("https://raw.githubusercontent.com/vertesy/Stringendo/main/R/Stringendo.R
 
 ## List of Functions in Stringendo.R (75)
 
-Updated: 2026/08/25 16:05
+Updated: 2026/08/28 18:43
 
 - #### 1 `stopif()`
 
@@ -308,39 +308,90 @@ Updated: 2026/08/25 16:05
 
   Parse Parameter String with Names. This function parses a named vector and intermingles the names and values  into a single string, with specified separators for the odd and even elements. 
 
-- #### 67 `params.2.fname()`
-
-  Convert Named Parameters to Filename. This function takes named parameters and converts them into a filename string with  specified separators and collapse characters. It excludes any parameters with NULL values. 
-
-- #### 68 `param.list.2.fname()`
+- #### 67 `param.list.2.fname()`
 
   param.list.2.fname. Take a list of parameters and parse a string from their names and values.
 
-- #### 69 `PasteOutdirFromFlags()`
+- #### 68 `PasteOutdirFromFlags()`
 
   PasteOutdirFromFlags. Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 
-- #### 70 `flag.name_value()`
+- #### 69 `flag.name_value()`
 
   flag.name_value. Returns the name and its value, if its not FALSE.
 
-- #### 71 `#' flag.names_list()`
+- #### 70 `flag.nameiftrue()`
 
   flag.nameiftrue. Returns the name and its value, if its TRUE.
 
-- #### 72 `flag.names_list.all.new()`
+- #### 71 `flag.names_list.all.new()`
 
   flag.names_list.all.new. Returns the name and value of each element in a list of parameters.
 
-- #### 73 `param.list.flag()`
+- #### 72 `param.list.flag()`
 
   param.list.flag. Returns the name and value of each element in a list of parameters.
 
-- #### 74 `parFlags()`
+- #### 73 `parFlags()`
 
   parFlags. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
-- #### 75 `FormatAsExcelLink()`
+- #### 74 `FormatAsExcelLink()`
 
   parFlags2. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
+
+
+## Function relationships
+> (of connected functions)
+
+```mermaid
+ flowchart LR 
+
+  toDotSeparated(toDotSeparated) --> sppp(sppp)
+  sppu(sppu) --> kppu(kppu)
+  sppu(sppu) --> ReplaceRepeatedUnderscores(ReplaceRepeatedUnderscores)
+  sppu(sppu) --> RemoveFinalUnderscores(RemoveFinalUnderscores)
+  kpwNames(kpwNames) --> HasNames(HasNames)
+  ifExistsAndTrue(ifExistsAndTrue) --> iprint(iprint)
+  extPNG(extPNG) --> ppp(ppp)
+  extPDF(extPDF) --> ppp(ppp)
+  eval_parse_kollapse(eval_parse_kollapse) --> kollapse(kollapse)
+  PasteOutdirFromFlags(PasteOutdirFromFlags) --> RemoveFinalSlash(RemoveFinalSlash)
+  PasteOutdirFromFlags(PasteOutdirFromFlags) --> PasteDirNameFromFlags(PasteDirNameFromFlags)
+  PasteOutdirFromFlags(PasteOutdirFromFlags) --> ReplaceRepeatedSlashes(ReplaceRepeatedSlashes)
+  PasteDirNameFromFlags(PasteDirNameFromFlags) --> kpp(kpp)
+  PasteDirNameFromFlags(PasteDirNameFromFlags) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  PasteDirNameFromFlags(PasteDirNameFromFlags) --> RemoveTrailingDots(RemoveTrailingDots)
+  ParseFullFilePath(ParseFullFilePath) --> RemoveInitialDot(RemoveInitialDot)
+  ParseFullFilePath(ParseFullFilePath) --> AddTrailingSlashIfMissing(AddTrailingSlashIfMissing)
+  ParseFullFilePath(ParseFullFilePath) --> ReplaceSpecialCharacters(ReplaceSpecialCharacters)
+  ParseFullFilePath(ParseFullFilePath) --> ReplaceRepeatedSlashes(ReplaceRepeatedSlashes)
+  ParseFullFilePath(ParseFullFilePath) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  ParseDirPath(ParseDirPath) --> kpps(kpps)
+  ParseDirPath(ParseDirPath) --> AddTrailingSlashIfMissing(AddTrailingSlashIfMissing)
+  ParseDirPath(ParseDirPath) --> ReplaceRepeatedSlashes(ReplaceRepeatedSlashes)
+  sppp(sppp) --> RemoveFinalDot(RemoveFinalDot)
+  sppp(sppp) --> kpp(kpp)
+  sppp(sppp) --> RemoveInitialDot(RemoveInitialDot)
+  sppp(sppp) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  ReplaceSpecialCharacters(ReplaceSpecialCharacters) --> ReplaceRepeatedWhitespaces(ReplaceRepeatedWhitespaces)
+  ReplaceSpecialCharacters(ReplaceSpecialCharacters) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  FixPlotName(FixPlotName) --> sppp(sppp)
+  FixPlotName(FixPlotName) --> ReplaceSpecialCharacters(ReplaceSpecialCharacters)
+  FixPlotName(FixPlotName) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  FixPlotName(FixPlotName) --> RemoveTrailingDots(RemoveTrailingDots)
+  spps(spps) --> RemoveFinalSlash(RemoveFinalSlash)
+  spps(spps) --> kpps(kpps)
+  spps(spps) --> ReplaceRepeatedSlashes(ReplaceRepeatedSlashes)
+  RemoveTrailingDots(RemoveTrailingDots) --> RemoveFinalDot(RemoveFinalDot)
+  RemoveTrailingDots(RemoveTrailingDots) --> RemoveInitialDot(RemoveInitialDot)
+  FixPath(FixPath) --> spps(spps)
+  FixPath(FixPath) --> ReplaceRepeatedSlashes(ReplaceRepeatedSlashes)
+  FixPath(FixPath) --> ReplaceRepeatedDots(ReplaceRepeatedDots)
+  FixPath(FixPath) --> RemoveTrailingDots(RemoveTrailingDots)
+subgraph SubGraphOne
+
+end
+```
+*created by `convert_igraph_to_mermaid()`*
