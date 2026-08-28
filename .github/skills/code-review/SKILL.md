@@ -1,0 +1,6 @@
+- Make it very easy for the human reviewer to review the agent's work. 
+    - Individual changes should be a small but meaningful amount so that they can be approved or rejected one by one. 
+    - Explanations should use simple plain English, and structured text 
+- Pool easy/obvious changes into one PR (all typos; one repeated doc fix; one deprecated-function swap repo-wide).
+-Isolate anything behavior-, logic-, or result-affecting into its own PR.
+-Every PR touching a critical/logical bug includes a plain-language description: what the bug was, why it happened, and the numeric/behavioral impact of the old (wrong) behavior.
