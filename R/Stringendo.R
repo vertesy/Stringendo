@@ -1342,6 +1342,10 @@ PasteDirNameFromFlags <- function(...) {
   stopifnot("all flags must be atomic vectors or NULL" = vapply(list(...), function(x) is.atomic(x) || is.null(x), logical(1)))
 
   flagList <- c(...)
+  if (length(flagList) == 0L) {
+    return("")
+  }
+
   pastedFlagList <- kpp(flagList)
   cleanDirName <- RemoveTrailingDots(ReplaceRepeatedDots(pastedFlagList))
   return(cleanDirName)
@@ -1468,11 +1472,11 @@ PasteOutdirFromFlags <- function(path = "~/Dropbox/Abel.IMBA/AnalysisD", ...) {
   )
 
   cleanPath <- RemoveFinalSlash(ReplaceRepeatedSlashes(path)) # Normalize slashes; strip trailing slash(es).
-  cleanFlags <- PasteDirNameFromFlags(...)                 # Clean flags independently (no path dots).
+  cleanFlags <- PasteDirNameFromFlags(...) # Clean flags independently (no path dots).
   if (nzchar(cleanFlags)) {
-    return(paste0(cleanPath, ".", cleanFlags, "/"))        # Dot-append flags then close the dir name.
+    return(paste0(cleanPath, ".", cleanFlags, "/")) # Dot-append flags then close the dir name.
   } else {
-    return(paste0(cleanPath, "/"))                         # No flags: just close the path.
+    return(paste0(cleanPath, "/")) # No flags: just close the path.
   }
 }
 
@@ -1538,9 +1542,13 @@ flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
 #   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
 # }
 
-flag.names_list.all.new <- function(...) {
+flag.names_list.all.new <- function(pl, ...) {
   .Deprecated("flag.names_list")
-  flag.names_list(...)
+  if (!missing(pl)) {
+    flag.names_list(ls = pl, ...)
+  } else {
+    flag.names_list(...)
+  }
 }
 
 # _________________________________________________________________________________________________
@@ -1576,7 +1584,7 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
-  namez <- as.character(as.list(match.call())[-(1:2)])
+  namez <- as.character(match.call(expand.dots = FALSE)[["..."]])
   names(val) <- namez
   flg <- names(val)[val]
   print(flg)
