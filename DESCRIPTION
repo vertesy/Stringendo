@@ -1,6 +1,6 @@
 Package: Stringendo
 Title: Stringendo - string manipulation utilities
-Version: 1.2.2
+Version: 1.2.5
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Description: Stringendo is a set of R functions to parse strings from
@@ -16,6 +16,6 @@ Suggests:
     devtools,
     testthat
 Encoding: UTF-8
-Packaged: 2026-08-25 16:27:22.721912
+Packaged: 2026-08-28 18:41:52.073716
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

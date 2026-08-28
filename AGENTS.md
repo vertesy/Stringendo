@@ -40,7 +40,7 @@ Package rebuilds overwrite these files, so always update the upstream source fir
 ## II: Repos of R function libraries
 
 - New arguments go at the end, just before `...`. Never insert in the middle.
-- Do not use tests.
+- **Do not use tests!**
 - Whenever you are implementing a larger change (a bug fix, a substantial code change), you shoud increase the version number in `Development/config.R` by 0.0.1.
 
 ## III: Stringendo specific
@@ -49,3 +49,4 @@ Package rebuilds overwrite these files, so always update the upstream source fir
 
 - `R/`: single main source file, ~75 exported functions, mostly small pure string utilities.
 - `tests/testthat/`: this repo has an existing test suite — unlike other @vertesy library repos, keep it maintained.
+- Do not use tests!
