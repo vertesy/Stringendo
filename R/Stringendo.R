@@ -1018,6 +1018,7 @@ countDotOrUnderscoreSeparated <- function(string) {
     message(paste("Number of white spaces in the string:", ws_count))
   }
 
+  # First separator that's strictly more frequent than both others wins; a tie is "undecided".
   estimated_separator <- dplyr::case_when(
     dot_count > max(usc_count, ws_count) ~ "dot",
     usc_count > max(dot_count, ws_count) ~ "underscore",
@@ -1235,17 +1236,17 @@ fix_special_characters_bash <- function(path) {
 #'
 #' @export
 ParseFullFilePath <- function(path, file_name, extension) {
-  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
+  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name)) # sanitize the file name itself
 
   if (hasArg(path)) {
-    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path))
+    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path)) # normalize slashes; ensure trailing slash
     full_path <- paste0(path, file_name)
   } else {
     full_path <- file_name
   }
 
   if (hasArg(extension)) {
-    extension <- RemoveInitialDot(extension)
+    extension <- RemoveInitialDot(extension) # avoid a double dot before the extension
     full_path <- paste0(full_path, ".", extension)
   }
 
@@ -1588,8 +1589,7 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
-  namez <- as.character(match.call(expand.dots = FALSE)[["..."]])
-  names(val) <- namez
+  names(val) <- as.character(match.call(expand.dots = FALSE)[["..."]])
   flg <- names(val)[val]
   print(flg)
   flg <- if (pasteflg) {
@@ -1622,7 +1622,12 @@ parFlags2 <- function(prefix = ".",
                       coll.char = ".",
                       coll.char.intra = "_") {
   val <- c(...)
-  namez <- as.character(as.list(match.call())[-(1:2)])
+  
+  
+  
+  
+  
+  <- as.character(as.list(match.call())[-(1:2)])
   names(val) <- namez
   flg <- if (pasteflg) {
     paste0(
