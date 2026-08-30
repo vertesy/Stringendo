@@ -1560,7 +1560,9 @@ flag.names_list.all.new <- function(pl, ...) {
 #'
 #' @export
 param.list.flag <- function(par = p$"umap.min_dist") {
-  paste(substitute(par), par, sep = "_")[[3]]
+  output <- paste(substitute(par), par, sep = "_")
+  if (length(output) > 1) output <- output[length(output)] # fix for when input is a list element like p$'myparam'
+  output
 } # param.list.flag(par = p$umap.n_neighbors)
 
 
