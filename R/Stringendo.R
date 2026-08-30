@@ -1538,14 +1538,7 @@ flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
   }
 }
 
-flag.names_list.all.new <- function(pl, ...) {
-  .Deprecated("flag.names_list")
-  if (!missing(pl)) {
-    flag.names_list(ls = pl, ...)
-  } else {
-    flag.names_list(...)
-  }
-}
+flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
 # _________________________________________________________________________________________________
 #' @title param.list.flag
