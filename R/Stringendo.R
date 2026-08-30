@@ -552,7 +552,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # Replace " ." or ". " with "."
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
-  ReplaceRepeatedDots(x)
+  x <- ReplaceRepeatedDots(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
 }
 
@@ -1577,6 +1577,7 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
+  namez <- as.character(as.list(match.call())[-(1:2)])
   names(val) <- namez
   flg <- names(val)[val]
   print(flg)
