@@ -36,6 +36,8 @@ for (scriptX in ls.scripts.full.path) {
 # Automated Codebase linting to tidyverse style ------------------------------------------------
 
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
+namespace.lines <- readLines(file.path(repository.dir, "NAMESPACE"))
+stopifnot("NAMESPACE regeneration produced no exports (roxygen2::document() likely failed silently) - fix before committing" = any(grepl("^export", namespace.lines)))
 'git add commit push to remote'
 
 
@@ -108,6 +110,7 @@ file.edit(paste0(repository.dir, "README.md"))
 
 
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
-
+namespace.lines <- readLines(file.path(repository.dir, "NAMESPACE"))
+stopifnot("NAMESPACE regeneration produced no exports (roxygen2::document() likely failed silently) - fix before committing" = any(grepl("^export", namespace.lines)))
 
 
