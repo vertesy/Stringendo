@@ -552,6 +552,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # Replace " ." or ". " with "."
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
+  # NOTE: result not assigned back to x -- repeated-dot collapsing below is currently a no-op.
   ReplaceRepeatedDots(x)
   if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
 }
@@ -1016,6 +1017,7 @@ countDotOrUnderscoreSeparated <- function(string) {
     message(paste("Number of white spaces in the string:", ws_count))
   }
 
+  # First separator that's strictly more frequent than both others wins; a tie is "undecided".
   estimated_separator <- dplyr::case_when(
     dot_count > max(usc_count, ws_count) ~ "dot",
     usc_count > max(dot_count, ws_count) ~ "underscore",
@@ -1233,17 +1235,17 @@ fix_special_characters_bash <- function(path) {
 #'
 #' @export
 ParseFullFilePath <- function(path, file_name, extension) {
-  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
+  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name)) # sanitize the file name itself
 
   if (hasArg(path)) {
-    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path))
+    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path)) # normalize slashes; ensure trailing slash
     full_path <- paste0(path, file_name)
   } else {
     full_path <- file_name
   }
 
   if (hasArg(extension)) {
-    extension <- RemoveInitialDot(extension)
+    extension <- RemoveInitialDot(extension) # avoid a double dot before the extension
     full_path <- paste0(full_path, ".", extension)
   }
 
@@ -1577,6 +1579,7 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
+  # NOTE: 'namez' is not defined in this deprecated version -- always errors; see parFlags2().
   names(val) <- namez
   flg <- names(val)[val]
   print(flg)
