@@ -1429,9 +1429,10 @@ parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ") {
 #' @examples
 #' params.2.fname(aa = 1, cc = 2, d = NULL, sep = ".", collapse = "_")
 #' # Returns "aa.1_cc.2"
+#' @export
 params.2.fname <- function(..., sep = ".", collapse = "_") {
   x <- list(...)
-  nmz <- as.character(substitute(list(...))[-1])
+  nmz <- names(x)
 
   # Filter out NULL values
   idx.empty <- sapply(x, is.null)
