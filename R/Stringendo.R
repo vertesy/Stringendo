@@ -1610,13 +1610,14 @@ parFlags2 <- function(prefix = ".",
                       pasteflg = TRUE,
                       coll.char = ".",
                       coll.char.intra = "_") {
+  stopifnot(
+    is.character(prefix), length(prefix) == 1,
+    is.logical(pasteflg), length(pasteflg) == 1,
+    is.character(coll.char), length(coll.char) == 1,
+    is.character(coll.char.intra), length(coll.char.intra) == 1
+  )
   val <- c(...)
-  
-  
-  
-  
-  
-  <- as.character(as.list(match.call())[-(1:2)])
+  namez <- as.character(as.list(match.call())[-(1:2)])
   names(val) <- namez
   flg <- if (pasteflg) {
     paste0(
