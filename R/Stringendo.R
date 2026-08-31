@@ -553,7 +553,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
   x <- ReplaceRepeatedDots(x)
-  if (remove_dots) gsub(x = x, pattern = "\\.", replacement = "") else x # This is the return line. 
+  if (remove_dots) gsub(x = x, pattern = "\\.", replacement = "") else x # This is the return line.
 }
 
 
@@ -1617,7 +1617,7 @@ parFlags2 <- function(prefix = ".",
   )
   val <- c(...)
   names(val) <- as.character(match.call(expand.dots = FALSE)[["..."]])
-  
+
   flg <- if (pasteflg) {
     paste0(
       prefix,
