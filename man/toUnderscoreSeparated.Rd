@@ -25,4 +25,5 @@ It then converts all characters to lowercase.
 toUnderscoreSeparated("plot.Metadata.cor.heatMap")
 toUnderscoreSeparated("plotMetadataCorHeatMap")
 toUnderscoreSeparated("plot.metadataCor.heatMap")
+
 }
