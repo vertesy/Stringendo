@@ -1617,8 +1617,8 @@ parFlags2 <- function(prefix = ".",
     is.character(coll.char.intra), length(coll.char.intra) == 1
   )
   val <- c(...)
-  namez <- as.character(as.list(match.call())[-(1:2)])
-  names(val) <- namez
+  names(val) <- as.character(match.call(expand.dots = FALSE)[["..."]])
+  
   flg <- if (pasteflg) {
     paste0(
       prefix,
