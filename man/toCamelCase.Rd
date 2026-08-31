@@ -31,4 +31,5 @@ each word (except the first word), and then concatenates them back together.
 \examples{
 toCamelCase("plot.metadata.cor.heatMap")
 toCamelCase("plot_metadata_cor_heat_map")
+
 }
