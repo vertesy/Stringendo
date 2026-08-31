@@ -7,6 +7,7 @@
   sppu(sppu) --> kppu(kppu)
   sppu(sppu) --> ReplaceRepeatedUnderscores(ReplaceRepeatedUnderscores)
   sppu(sppu) --> RemoveFinalUnderscores(RemoveFinalUnderscores)
+  params.2.fname(params.2.fname) --> sppp(sppp)
   kpwNames(kpwNames) --> HasNames(HasNames)
   ifExistsAndTrue(ifExistsAndTrue) --> iprint(iprint)
   extPNG(extPNG) --> ppp(ppp)

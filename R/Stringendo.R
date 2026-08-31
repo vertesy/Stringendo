@@ -1409,6 +1409,41 @@ parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ") {
 }
 
 # _________________________________________________________________________________________________
+#' @title Convert Named Parameters to Filename
+#'
+#' @description This function takes named parameters and converts them into a filename string with
+#' specified separators and collapse characters. It excludes any parameters with NULL values.
+#'
+#' @param ... Named parameters to be converted. Default: None.
+#' @param sep A string to separate parameter names and their values. Default: ".".
+#' @param collapse A string to separate different parameters in the output string. Default: "_".
+#'
+#' @return A character string that represents the combined parameter names and values, separated
+#' by the specified `sep` and `collapse` characters.
+#'
+#' @examples
+#' params.2.fname(aa = 1, cc = 2, d = NULL, sep = ".", collapse = "_")
+#' # Returns "aa.1_cc.2"
+#' @export
+params.2.fname <- function(..., sep = ".", collapse = "_") {
+  x <- list(...)
+  nmz <- names(x)
+
+  # Filter out NULL values
+  idx.empty <- sapply(x, is.null)
+  x <- x[!idx.empty]
+  nmz <- nmz[!idx.empty]
+
+  # Fix if not a single value
+  x <- sapply(x, sppp)
+
+  result <- paste(nmz, x, sep = sep, collapse = collapse)
+
+  return(result)
+}
+
+
+# _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
 #' @param ls.of.params List of parameters, Default: p

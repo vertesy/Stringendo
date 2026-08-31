@@ -308,35 +308,39 @@ Updated: 2026/08/28 18:43
 
   Parse Parameter String with Names. This function parses a named vector and intermingles the names and values  into a single string, with specified separators for the odd and even elements. 
 
-- #### 67 `param.list.2.fname()`
+- #### 67 `params.2.fname()`
+
+  Convert Named Parameters to Filename. This function takes named parameters and converts them into a filename string with  specified separators and collapse characters. It excludes any parameters with NULL values. 
+
+- #### 68 `param.list.2.fname()`
 
   param.list.2.fname. Take a list of parameters and parse a string from their names and values.
 
-- #### 68 `PasteOutdirFromFlags()`
+- #### 69 `PasteOutdirFromFlags()`
 
   PasteOutdirFromFlags. Paste OutDir from (1) a path and (2) a from a list of inputs (that can be empty), and clean up the output string from dot and forward slash multiplets (e.g: ..).
 
-- #### 69 `flag.name_value()`
+- #### 70 `flag.name_value()`
 
   flag.name_value. Returns the name and its value, if its not FALSE.
 
-- #### 70 `flag.nameiftrue()`
+- #### 71 `flag.nameiftrue()`
 
   flag.nameiftrue. Returns the name and its value, if its TRUE.
 
-- #### 71 `flag.names_list.all.new()`
+- #### 72 `flag.names_list.all.new()`
 
   flag.names_list.all.new. Returns the name and value of each element in a list of parameters.
 
-- #### 72 `param.list.flag()`
+- #### 73 `param.list.flag()`
 
   param.list.flag. Returns the name and value of each element in a list of parameters.
 
-- #### 73 `parFlags()`
+- #### 74 `parFlags()`
 
   parFlags. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
-- #### 74 `FormatAsExcelLink()`
+- #### 75 `FormatAsExcelLink()`
 
   parFlags2. Create a string from the names of the (boolean) parameters (TRUE or FALSE) of true values.  Use it for Suffixing plot names with the parameters that were used for that plot.
 
@@ -352,6 +356,7 @@ Updated: 2026/08/28 18:43
   sppu(sppu) --> kppu(kppu)
   sppu(sppu) --> ReplaceRepeatedUnderscores(ReplaceRepeatedUnderscores)
   sppu(sppu) --> RemoveFinalUnderscores(RemoveFinalUnderscores)
+  params.2.fname(params.2.fname) --> sppp(sppp)
   kpwNames(kpwNames) --> HasNames(HasNames)
   ifExistsAndTrue(ifExistsAndTrue) --> iprint(iprint)
   extPNG(extPNG) --> ppp(ppp)
