@@ -553,8 +553,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
   x <- ReplaceRepeatedDots(x)
-  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
-  x
+  if (remove_dots) gsub(x = x, pattern = "\\.", replacement = "") else x # This is the return line. 
 }
 
 
@@ -1001,7 +1000,6 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 #' countDotOrUnderscoreSeparated("add translated metadata")
 #' countDotOrUnderscoreSeparated("addTranslatedMetadata")
 #' }
-#' @importFrom dplyr case_when
 #' @export
 countDotOrUnderscoreSeparated <- function(string) {
   stopifnot(is.character(string), length(string) == 1)
@@ -1018,14 +1016,19 @@ countDotOrUnderscoreSeparated <- function(string) {
     message(paste("Number of white spaces in the string:", ws_count))
   }
 
-  # First separator that's strictly more frequent than both others wins; a tie is "undecided".
-  estimated_separator <- dplyr::case_when(
-    dot_count > max(usc_count, ws_count) ~ "dot",
-    usc_count > max(dot_count, ws_count) ~ "underscore",
-    ws_count > max(dot_count, usc_count) ~ "white space",
-    dot_count == 0 && usc_count == 0 && ws_count == 0 ~ "none",
-    dot_count == usc_count && dot_count == ws_count ~ "undecided"
-  )
+  # Any other tie among the counts (not just a three-way tie) is genuinely
+  # ambiguous, so it also falls back to "undecided" rather than NA.
+  estimated_separator <- if (dot_count > max(usc_count, ws_count)) {
+    "dot"
+  } else if (usc_count > max(dot_count, ws_count)) {
+    "underscore"
+  } else if (ws_count > max(dot_count, usc_count)) {
+    "white space"
+  } else if (dot_count == 0 && usc_count == 0 && ws_count == 0) {
+    "none"
+  } else {
+    "undecided"
+  }
 
   message("Estimated separator: ", estimated_separator)
 
@@ -1051,7 +1054,6 @@ countDotOrUnderscoreSeparated <- function(string) {
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
 #' toCamelCase("plot_metadata_cor_heat_map")
-#' @importFrom clipr write_clip
 #'
 #' @export
 toCamelCase <- function(input_string,
@@ -1098,7 +1100,6 @@ toCamelCase <- function(input_string,
 #' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
 #' toUnderscoreSeparated("plotMetadataCorHeatMap")
 #' toUnderscoreSeparated("plot.metadataCor.heatMap")
-#' @importFrom clipr write_clip
 #'
 #' @export
 toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
@@ -1135,7 +1136,6 @@ toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
 #' @examples
 #' toDotSeparated("plotMetadataCorHeatMap")
 #' toDotSeparated("plot_Metadata_Cor_HeatMap")
-#' @importFrom clipr write_clip
 #' @export
 
 toDotSeparated <- function(input_string, toclipboard = TRUE) {
@@ -1234,6 +1234,7 @@ fix_special_characters_bash <- function(path) {
 #' ParseFullFilePath(path = "home/user/docs/", file_name = "report@final", extension = ".txt")
 #' ParseFullFilePath(file_name = "report", extension = "txt")
 #'
+#' @importFrom methods hasArg
 #' @export
 ParseFullFilePath <- function(path, file_name, extension) {
   file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name)) # sanitize the file name itself
@@ -1427,9 +1428,10 @@ parseParamStringWNames <- function(named.vec, sep1 = ": ", sep2 = " | ") {
 #' @examples
 #' params.2.fname(aa = 1, cc = 2, d = NULL, sep = ".", collapse = "_")
 #' # Returns "aa.1_cc.2"
+#' @export
 params.2.fname <- function(..., sep = ".", collapse = "_") {
   x <- list(...)
-  nmz <- as.character(substitute(list(...))[-1])
+  nmz <- names(x)
 
   # Filter out NULL values
   idx.empty <- sapply(x, is.null)
@@ -1607,14 +1609,15 @@ parFlags2 <- function(prefix = ".",
                       pasteflg = TRUE,
                       coll.char = ".",
                       coll.char.intra = "_") {
+  stopifnot(
+    is.character(prefix), length(prefix) == 1,
+    is.logical(pasteflg), length(pasteflg) == 1,
+    is.character(coll.char), length(coll.char) == 1,
+    is.character(coll.char.intra), length(coll.char.intra) == 1
+  )
   val <- c(...)
+  names(val) <- as.character(match.call(expand.dots = FALSE)[["..."]])
   
-  
-  
-  
-  
-  <- as.character(as.list(match.call())[-(1:2)])
-  names(val) <- namez
   flg <- if (pasteflg) {
     paste0(
       prefix,
