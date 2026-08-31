@@ -1577,7 +1577,11 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
-  namez <- as.character(as.list(match.call())[-(1:2)])
+  dotz <- match.call(expand.dots = FALSE)$"..."
+  namez <- vapply(seq_along(dotz), function(i) {
+    nm <- names(dotz)[i]
+    if (!is.null(nm) && nzchar(nm)) nm else deparse(dotz[[i]])
+  }, character(1))
   names(val) <- namez
   flg <- names(val)[val]
   print(flg)
