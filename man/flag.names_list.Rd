@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stringendo.R
 \name{flag.names_list}
 \alias{flag.names_list}
-\title{flag.names_list.all.new}
+\title{flag.names_list}
 \usage{
 flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 }

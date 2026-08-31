@@ -12,6 +12,8 @@ parsepvalue(pvalue = 0.01, digits = 2, brackets = FALSE, prefix = FALSE)
 \item{digits}{Number of digits to keep. Default: 2}
 
 \item{brackets}{Whether to enclose the result in brackets. Default: FALSE}
+
+\item{prefix}{String to prepend to the result, or FALSE to add no prefix. Default: FALSE}
 }
 \description{
 Parse p-value from a number to a string.
