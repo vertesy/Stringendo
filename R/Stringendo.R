@@ -553,8 +553,7 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
   x <- ReplaceRepeatedDots(x)
-  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
-  x
+  if (remove_dots) gsub(x = x, pattern = "\\.", replacement = "") else x # This is the return line. 
 }
 
 
