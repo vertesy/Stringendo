@@ -350,7 +350,7 @@ iprint <- function(...) {
 #' string. The default format uses dot separated components, but any
 #' format recognised by [base::format] can be supplied.
 #'
-#' @param Format Date format. Default: c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]
+#' @param Format Date format. Default: `c("%Y.%m.%d_%H.%M", "%Y.%m.%d_%Hh")[2]`
 #'
 #' @return A character string of the current date/time formatted according
 #'   to `Format`.
@@ -552,8 +552,9 @@ ReplaceSpecialCharacters <- function(string = "obj@meta$alpha[[3]]", replacement
   # Replace " ." or ". " with "."
   x <- gsub(x = x, pattern = " \\.", replacement = ".", perl = TRUE)
   x <- gsub(x = x, pattern = "\\. ", replacement = ".", perl = TRUE)
-  ReplaceRepeatedDots(x)
-  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "") else x
+  x <- ReplaceRepeatedDots(x)
+  if (remove_dots) x <- gsub(x = x, pattern = "\\.", replacement = "")
+  x
 }
 
 
@@ -925,10 +926,11 @@ percentile2value <- function(distribution, percentile = 0.95, FirstValOverPercen
 #' @param pvalue pvalue to parse. Default: 0.01
 #' @param digits Number of digits to keep. Default: 2
 #' @param brackets Whether to enclose the result in brackets. Default: FALSE
+#' @param prefix String to prepend to the result, or FALSE to add no prefix. Default: FALSE
 #' @export
 parsepvalue <- function(pvalue = 0.01, digits = 2, brackets = FALSE, prefix = FALSE) {
   pv <- paste0("p<=", signif(pvalue, digits = digits), "")
-  if (brackets) paste0("(", pv, ")") else pv
+  if (brackets) pv <- paste0("(", pv, ")")
   if (!isFALSE(prefix)) paste0(prefix, pv) else pv
 }
 
@@ -999,7 +1001,6 @@ format_number_h <- function(x, digits = 1, big.mark = " ", decimal.mark = ".") {
 #' countDotOrUnderscoreSeparated("add translated metadata")
 #' countDotOrUnderscoreSeparated("addTranslatedMetadata")
 #' }
-#' @importFrom dplyr case_when
 #' @export
 countDotOrUnderscoreSeparated <- function(string) {
   stopifnot(is.character(string), length(string) == 1)
@@ -1016,13 +1017,19 @@ countDotOrUnderscoreSeparated <- function(string) {
     message(paste("Number of white spaces in the string:", ws_count))
   }
 
-  estimated_separator <- dplyr::case_when(
-    dot_count > max(usc_count, ws_count) ~ "dot",
-    usc_count > max(dot_count, ws_count) ~ "underscore",
-    ws_count > max(dot_count, usc_count) ~ "white space",
-    dot_count == 0 && usc_count == 0 && ws_count == 0 ~ "none",
-    dot_count == usc_count && dot_count == ws_count ~ "undecided"
-  )
+  # Any other tie among the counts (not just a three-way tie) is genuinely
+  # ambiguous, so it also falls back to "undecided" rather than NA.
+  estimated_separator <- if (dot_count > max(usc_count, ws_count)) {
+    "dot"
+  } else if (usc_count > max(dot_count, ws_count)) {
+    "underscore"
+  } else if (ws_count > max(dot_count, usc_count)) {
+    "white space"
+  } else if (dot_count == 0 && usc_count == 0 && ws_count == 0) {
+    "none"
+  } else {
+    "undecided"
+  }
 
   message("Estimated separator: ", estimated_separator)
 
@@ -1048,7 +1055,6 @@ countDotOrUnderscoreSeparated <- function(string) {
 #' @examples
 #' toCamelCase("plot.metadata.cor.heatMap")
 #' toCamelCase("plot_metadata_cor_heat_map")
-#' @importFrom clipr write_clip
 #'
 #' @export
 toCamelCase <- function(input_string,
@@ -1095,10 +1101,9 @@ toCamelCase <- function(input_string,
 #' toUnderscoreSeparated("plot.Metadata.cor.heatMap")
 #' toUnderscoreSeparated("plotMetadataCorHeatMap")
 #' toUnderscoreSeparated("plot.metadataCor.heatMap")
-#' @importFrom clipr write_clip
 #'
 #' @export
-toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
+toUnderscoreSeparated <- function(input_string, toclipboard = TRUE) {
   stopifnot(is.character(input_string), length(input_string) > 0, !any(is.na(input_string)))
 
   # Handle white space-separated input
@@ -1111,7 +1116,7 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
   result <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", temp_string))
   stopifnot(is.character(result), nchar(result) > 0)
 
-  if (toclipboard) try(clipr::write_clip(result), silent = TRUE)
+  if (toclipboard && requireNamespace("clipr", quietly = TRUE)) try(clipr::write_clip(result), silent = TRUE)
 
   message(result)
   invisible(result)
@@ -1132,7 +1137,6 @@ toUnderscoreSeparated <- function(input_string, toclipboard = FALSE) {
 #' @examples
 #' toDotSeparated("plotMetadataCorHeatMap")
 #' toDotSeparated("plot_Metadata_Cor_HeatMap")
-#' @importFrom clipr write_clip
 #' @export
 
 toDotSeparated <- function(input_string, toclipboard = TRUE) {
@@ -1231,19 +1235,20 @@ fix_special_characters_bash <- function(path) {
 #' ParseFullFilePath(path = "home/user/docs/", file_name = "report@final", extension = ".txt")
 #' ParseFullFilePath(file_name = "report", extension = "txt")
 #'
+#' @importFrom methods hasArg
 #' @export
 ParseFullFilePath <- function(path, file_name, extension) {
-  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name))
+  file_name <- ReplaceRepeatedDots(ReplaceSpecialCharacters(file_name)) # sanitize the file name itself
 
   if (hasArg(path)) {
-    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path))
+    path <- AddTrailingSlashIfMissing(ReplaceRepeatedSlashes(path)) # normalize slashes; ensure trailing slash
     full_path <- paste0(path, file_name)
   } else {
     full_path <- file_name
   }
 
   if (hasArg(extension)) {
-    extension <- RemoveInitialDot(extension)
+    extension <- RemoveInitialDot(extension) # avoid a double dot before the extension
     full_path <- paste0(full_path, ".", extension)
   }
 
@@ -1523,11 +1528,7 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 
 
 # _________________________________________________________________________________________________
-# (Removed obsolete roxygen for old flag.names_list(par); see current flag.names_list() below.)
-
-
-# _________________________________________________________________________________________________
-#' @title flag.names_list.all.new
+#' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
 #' @param ls List of parameters (name, value), Default: p.hm
 #' @param sep_name_val Separator name-2-value, Default: "_"
@@ -1539,9 +1540,6 @@ flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
     paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
   }
 }
-# flag.names_list <- function(ls = p.hm, sep_elem = "_") {
-#   if (length(ls)) kppd(paste(names(ls), ls, sep = sep_elem))
-# }
 
 flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 
@@ -1552,7 +1550,9 @@ flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 #'
 #' @export
 param.list.flag <- function(par = p$"umap.min_dist") {
-  paste(substitute(par), par, sep = "_")[[3]]
+  output <- paste(substitute(par), par, sep = "_")
+  if (length(output) > 1) output <- output[length(output)] # fix for when input is a list element like p$'myparam'
+  output
 } # param.list.flag(par = p$umap.n_neighbors)
 
 
@@ -1578,7 +1578,7 @@ parFlags <- function(prefix = "",
                      collapsechar = ".") {
   .Deprecated("parFlags2")
   val <- c(...)
-  names(val) <- namez
+  names(val) <- as.character(match.call(expand.dots = FALSE)[["..."]])
   flg <- names(val)[val]
   print(flg)
   flg <- if (pasteflg) {
@@ -1611,7 +1611,12 @@ parFlags2 <- function(prefix = ".",
                       coll.char = ".",
                       coll.char.intra = "_") {
   val <- c(...)
-  namez <- as.character(as.list(match.call())[-(1:2)])
+  
+  
+  
+  
+  
+  <- as.character(as.list(match.call())[-(1:2)])
   names(val) <- namez
   flg <- if (pasteflg) {
     paste0(
@@ -1670,24 +1675,3 @@ FormatAsExcelLink <- function(site_name, site_url) {
 eval_parse_kollapse <- function(...) {
   substitute(eval(parse(text = kollapse(..., print = FALSE))))
 }
-
-
-# _________________________________________________________________________________________________
-
-# _________________________________________________________________________________________________
-
-
-# #' @title Stop Execution If Condition is True
-# #'
-# #' @description This function stops the execution of the script if the provided condition evaluates to TRUE.
-# #' It is the complement of the `stopifnot()` function and is used for asserting conditions where
-# #' an error should be thrown if the condition is TRUE, rather than FALSE.
-# #' @param condition A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.
-# #' @param message An optional error message to display if the condition is TRUE.
-# #'
-# #' @examples a <- 1
-# #' stopif(a != 1, message = "A is 1")
-# #' @export
-# stopif <- function(condition, message = 'Condition is TRUE.') {
-#   if (isTRUE(condition)) stop(message)
-# }
