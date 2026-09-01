@@ -16,7 +16,7 @@ file.edit(config.path)
 source(config.path)
 
 # Install your package ------------------------------------------------
-require(PackageTools)
+# irequire(PackageTools)
 
 # Check and Document your package ------------------------------------------------
 devtools::check_man(repository.dir)
