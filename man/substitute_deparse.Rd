@@ -13,12 +13,13 @@ substitute_deparse(x)
 Returns the name of \code{obj} as a string.
 }
 \description{
-\code{get_object_name()} captures the name of an input object and returns it as a string.
+\code{substitute_deparse()} captures its input expression and returns the deparsed expression as a
+character string.
 Replace \verb{deparse\\s*\\(\\s*substitute\\s*\\(([^()]+)\\)\\s*\\)} to \verb{substitute_deparse($1)}, then
 \verb{substitute\\s*\\(([^()]+)\\)\\s*\\)} to the same.
 }
 \examples{
 my_var <- 10
-get_object_name(my_var) # "my_var"
+substitute_deparse(my_var) # "my_var"
 
 }

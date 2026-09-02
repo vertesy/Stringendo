@@ -22,4 +22,5 @@ testNumericCompatible(0.1) # Should return TRUE
 testNumericCompatible("0.1") # Should return TRUE
 testNumericCompatible("apple") # Should return FALSE
 testNumericCompatible("arma.0.1") # Should return FALSE
+
 }
