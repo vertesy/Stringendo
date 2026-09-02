@@ -1622,7 +1622,7 @@ parFlags2 <- function(prefix = ".",
     paste0(
       prefix,
       coll.char,
-      paste0(namez, coll.char.intra, val, collapse = coll.char)
+      paste0(names(val), coll.char.intra, val, collapse = coll.char)
     )
   }
   return(flg)
