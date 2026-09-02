@@ -4,10 +4,10 @@
 \alias{flag.names_list}
 \title{flag.names_list}
 \usage{
-flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
+flag.names_list(ls, sep_name_val = "_", sep_elem = "-")
 }
 \arguments{
-\item{ls}{List of parameters (name, value), Default: p.hm}
+\item{ls}{List of parameters (name, value).}
 
 \item{sep_name_val}{Separator name-2-value, Default: "_"}
 
@@ -15,4 +15,9 @@ flag.names_list(ls = p.hm, sep_name_val = "_", sep_elem = "-")
 }
 \description{
 Returns the name and value of each element in a list of parameters.
+}
+\examples{
+parameters <- list(method = "pearson", dimensions = 20)
+flag.names_list(parameters)
+
 }

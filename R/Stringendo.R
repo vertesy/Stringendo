@@ -32,8 +32,8 @@
 #' @return The function stops execution if any condition evaluates to `TRUE`.
 #'
 #' @examples
-#' stopif(6 < 4, 6 > 5)
-#' stopif("custom message" = 6 > 5)
+#' try(stopif(6 < 4, 6 > 5), silent = TRUE)
+#' try(stopif("custom message" = 6 > 5), silent = TRUE)
 #'
 #' @export
 stopif <- function(...) {
@@ -254,6 +254,8 @@ is.numeric.or.logical <- function(x) {
 #' testNumericCompatible("0.1") # Should return TRUE
 #' testNumericCompatible("apple") # Should return FALSE
 #' testNumericCompatible("arma.0.1") # Should return FALSE
+#'
+#' @export
 testNumericCompatible <- function(x) {
   stopifnot(is.numeric(x) || is.character(x))
   suppressWarnings({
@@ -265,6 +267,7 @@ testNumericCompatible <- function(x) {
 
 # _____________________________________________________________________________________________________________________________
 #' @title Negation of the `in` (w. grapes) operator
+#' @name grapes-not-in-grapes
 #'
 #' @description `%!in%` is used to test if elements of one vector are not present in another vector.
 #' It is the negation of the `%in%` operator. This operator returns `TRUE` for elements
@@ -288,7 +291,8 @@ testNumericCompatible <- function(x) {
 #' @title Get Object Name as String
 #'
 #' @description
-#' `get_object_name()` captures the name of an input object and returns it as a string.
+#' `substitute_deparse()` captures its input expression and returns the deparsed expression as a
+#' character string.
 #' Replace `deparse\s*\(\s*substitute\s*\(([^()]+)\)\s*\)` to `substitute_deparse($1)`, then
 #' `substitute\s*\(([^()]+)\)\s*\)` to the same.
 #'
@@ -298,7 +302,7 @@ testNumericCompatible <- function(x) {
 #'
 #' @examples
 #' my_var <- 10
-#' get_object_name(my_var) # "my_var"
+#' substitute_deparse(my_var) # "my_var"
 #'
 #' @export
 substitute_deparse <- function(x) deparse(substitute(x))
@@ -1450,12 +1454,18 @@ params.2.fname <- function(..., sep = ".", collapse = "_") {
 # _________________________________________________________________________________________________
 #' @title param.list.2.fname
 #' @description Take a list of parameters and parse a string from their names and values.
-#' @param ls.of.params List of parameters, Default: p
+#' @param ls.of.params List of parameters.
 #' @param sep Separator name-2-value, Default: "."
 #' @param collapse Separator between elements, Default: "_"
 #'
+#' @examples
+#' parameters <- list(alpha = 1, beta = 2)
+#' param.list.2.fname(parameters)
+#'
 #' @export
-param.list.2.fname <- function(ls.of.params = p, sep = ".", collapse = "_") {
+param.list.2.fname <- function(ls.of.params, sep = ".", collapse = "_") {
+  stopifnot(is.list(ls.of.params), is.character(sep), length(sep) == 1, is.character(collapse), length(collapse) == 1)
+
   paste(names(ls.of.params), ls.of.params, sep = sep, collapse = collapse)
 }
 
@@ -1529,12 +1539,18 @@ flag.nameiftrue <- function(toggle, prefix = NULL, suffix = NULL, name.if.not = 
 # _________________________________________________________________________________________________
 #' @title flag.names_list
 #' @description Returns the name and value of each element in a list of parameters.
-#' @param ls List of parameters (name, value), Default: p.hm
+#' @param ls List of parameters (name, value).
 #' @param sep_name_val Separator name-2-value, Default: "_"
 #' @param sep_elem Separator between elements, Default: "-"
 #'
+#' @examples
+#' parameters <- list(method = "pearson", dimensions = 20)
+#' flag.names_list(parameters)
+#'
 #' @export
-flag.names_list <- function(ls = p.hm, sep_name_val = "_", sep_elem = "-") {
+flag.names_list <- function(ls, sep_name_val = "_", sep_elem = "-") {
+  stopifnot(is.list(ls), is.character(sep_name_val), length(sep_name_val) == 1, is.character(sep_elem), length(sep_elem) == 1)
+
   if (length(ls)) {
     paste(paste(names(ls), ls, sep = sep_name_val), collapse = sep_elem)
   }
@@ -1545,10 +1561,16 @@ flag.names_list.all.new <- function() .Deprecated("flag.names_list")
 # _________________________________________________________________________________________________
 #' @title param.list.flag
 #' @description Returns the name and value of each element in a list of parameters.
-#' @param par parameter, Default: p$umap.min_dist
+#' @param par Parameter value.
+#'
+#' @examples
+#' umap_min_dist <- 0.1
+#' param.list.flag(umap_min_dist)
 #'
 #' @export
-param.list.flag <- function(par = p$"umap.min_dist") {
+param.list.flag <- function(par) {
+  stopifnot(is.atomic(par), length(par) == 1)
+
   output <- paste(substitute(par), par, sep = "_")
   if (length(output) > 1) output <- output[length(output)] # fix for when input is a list element like p$'myparam'
   output
@@ -1622,7 +1644,7 @@ parFlags2 <- function(prefix = ".",
     paste0(
       prefix,
       coll.char,
-      paste0(namez, coll.char.intra, val, collapse = coll.char)
+      paste0(names(val), coll.char.intra, val, collapse = coll.char)
     )
   }
   return(flg)

@@ -4,10 +4,10 @@
 \alias{param.list.2.fname}
 \title{param.list.2.fname}
 \usage{
-param.list.2.fname(ls.of.params = p, sep = ".", collapse = "_")
+param.list.2.fname(ls.of.params, sep = ".", collapse = "_")
 }
 \arguments{
-\item{ls.of.params}{List of parameters, Default: p}
+\item{ls.of.params}{List of parameters.}
 
 \item{sep}{Separator name-2-value, Default: "."}
 
@@ -15,4 +15,9 @@ param.list.2.fname(ls.of.params = p, sep = ".", collapse = "_")
 }
 \description{
 Take a list of parameters and parse a string from their names and values.
+}
+\examples{
+parameters <- list(alpha = 1, beta = 2)
+param.list.2.fname(parameters)
+
 }

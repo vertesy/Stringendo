@@ -4,11 +4,16 @@
 \alias{param.list.flag}
 \title{param.list.flag}
 \usage{
-param.list.flag(par = p$umap.min_dist)
+param.list.flag(par)
 }
 \arguments{
-\item{par}{parameter, Default: p$umap.min_dist}
+\item{par}{Parameter value.}
 }
 \description{
 Returns the name and value of each element in a list of parameters.
+}
+\examples{
+umap_min_dist <- 0.1
+param.list.flag(umap_min_dist)
+
 }
