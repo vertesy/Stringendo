@@ -19,7 +19,7 @@ The \code{stopif()} function stops the execution if the condition is \code{TRUE}
 clarity in the code by removing double negations.
 }
 \examples{
-stopif(6 < 4, 6 > 5)
-stopif("custom message" = 6 > 5)
+try(stopif(6 < 4, 6 > 5), silent = TRUE)
+try(stopif("custom message" = 6 > 5), silent = TRUE)
 
 }

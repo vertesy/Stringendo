@@ -32,8 +32,8 @@
 #' @return The function stops execution if any condition evaluates to `TRUE`.
 #'
 #' @examples
-#' stopif(6 < 4, 6 > 5)
-#' stopif("custom message" = 6 > 5)
+#' try(stopif(6 < 4, 6 > 5), silent = TRUE)
+#' try(stopif("custom message" = 6 > 5), silent = TRUE)
 #'
 #' @export
 stopif <- function(...) {
