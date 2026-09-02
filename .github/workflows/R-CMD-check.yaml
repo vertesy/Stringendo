@@ -10,10 +10,10 @@
 
 on:
  workflow_dispatch: {}
- # push:
- #   branches: [main, dev]
- # pull_request:
- #   branches: [main, dev]
+ push:
+   branches: [main, dev]
+ pull_request:
+   branches: [main, dev]
 
 name: R-CMD-check
 
