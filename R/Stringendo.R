@@ -254,6 +254,8 @@ is.numeric.or.logical <- function(x) {
 #' testNumericCompatible("0.1") # Should return TRUE
 #' testNumericCompatible("apple") # Should return FALSE
 #' testNumericCompatible("arma.0.1") # Should return FALSE
+#'
+#' @export
 testNumericCompatible <- function(x) {
   stopifnot(is.numeric(x) || is.character(x))
   suppressWarnings({
@@ -289,7 +291,8 @@ testNumericCompatible <- function(x) {
 #' @title Get Object Name as String
 #'
 #' @description
-#' `get_object_name()` captures the name of an input object and returns it as a string.
+#' `substitute_deparse()` captures its input expression and returns the deparsed expression as a
+#' character string.
 #' Replace `deparse\s*\(\s*substitute\s*\(([^()]+)\)\s*\)` to `substitute_deparse($1)`, then
 #' `substitute\s*\(([^()]+)\)\s*\)` to the same.
 #'
@@ -299,7 +302,7 @@ testNumericCompatible <- function(x) {
 #'
 #' @examples
 #' my_var <- 10
-#' get_object_name(my_var) # "my_var"
+#' substitute_deparse(my_var) # "my_var"
 #'
 #' @export
 substitute_deparse <- function(x) deparse(substitute(x))
