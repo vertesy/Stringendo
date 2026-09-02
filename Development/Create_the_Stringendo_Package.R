@@ -16,16 +16,18 @@ file.edit(config.path)
 source(config.path)
 
 # Install your package ------------------------------------------------
-# install.packages('pracma')
-# install.packages('stringdist')
-# install.packages('ggExtra')
-require(PackageTools)
+# irequire(PackageTools)
+
+# Check and Document your package ------------------------------------------------
+devtools::check_man(repository.dir)
+PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 
 
 # Automated Codebase linting to tidyverse style & custom corrections ------------------------------------------------
 styler::style_pkg(repository.dir)
 
 
+# Replace shorthands, and short function aliases (e.g.: T with TRUE, dfilter with dplyr::filter) ------------------------------------------------
 (ls.scripts.full.path <- list.files(file.path(repository.dir, "R"), full.names = T, pattern = '.R$'))
 for (scriptX in ls.scripts.full.path) {
   PackageTools::replace_tf_with_true_false(scriptX)
@@ -33,7 +35,8 @@ for (scriptX in ls.scripts.full.path) {
 }
 
 
-# Automated Codebase linting to tidyverse style ------------------------------------------------
+#  ------------------------------------------------
+devtools::check_man(repository.dir)
 
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 namespace.lines <- readLines(file.path(repository.dir, "NAMESPACE"))
@@ -45,7 +48,7 @@ stopifnot("NAMESPACE regeneration produced no exports (roxygen2::document() like
 # Install your package ------------------------------------------------
 "disable rprofile by"
 rprofile()
-devtools::install_local(repository.dir, upgrade = F)
+devtools::install_local(repository.dir, upgrade = F, force = T)
 
 
 # Test if you can install from github ------------------------------------------------
@@ -56,7 +59,6 @@ pak::pkg_install(remote.path)
 # # remove.packages(DESCRIPTION$'package.name')
 
 # CMD CHECK ------------------------------------------------
-devtools::check_man(repository.dir)
 checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
@@ -106,8 +108,6 @@ r$PackageTools()
 PackageTools::copy_github_badge("active") # Add badge to readme via clipboard
 file.edit(paste0(repository.dir, "README.md"))
 
-
-# Replaces T with TRUE and F with FALSE ------------------------------------------------
 
 
 PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')

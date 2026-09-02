@@ -12,6 +12,10 @@ Version: 2026.08.31-00:01
 
 - Every function starts with a COMPACT input-argument assertion for key inputs, using combined `stopifnot()` statements. For per-element checks across a vector/list, use `vapply()` inside `stopifnot()` with a named, static error message (not pasted/dynamic), e.g. `stopifnot("some of the X is not ..." = vapply(...))`.
 
+### Update the Source, Not Just the Documentation
+
+Documentations rebuilt and overwritten from upstream sources: `.Rd` files from roxygen annotations and DESCRIPTION and NAMESPACE from  `config.R` by `PackageTools::document_and_create_package()` relying on  `devtools::document()`  when I manually, regularly run `/Development/MYPACKAGE/Development/Create_the_MYPACKAGE_Package.R")`. Thus  always update the upstream sources first, then fix the downstream documentations correspondingly.
+
 ### 2. Code Review Rules
 
 Make every finding easy to scan and understand.
