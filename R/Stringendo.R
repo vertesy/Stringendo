@@ -1589,11 +1589,14 @@ param.list.flag <- function(par) {
 #' @param prefix Append something before?
 #' @param pasteflg Boolean: paste the parameters-flags together?
 #' @param collapsechar Separating character between each parameters-flag
-#' @examples pearson <- TRUE
+#' @examples
+#' \dontrun{
+#' pearson <- TRUE
 #' filtered <- TRUE
 #' normalized <- FALSE
 #' MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized)
 #' MyPlotname
+#' }
 #'
 #' @export
 parFlags <- function(prefix = "",
