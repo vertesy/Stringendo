@@ -20,10 +20,12 @@ Create a string from the names of the (boolean) parameters (TRUE or FALSE) of tr
 Use it for Suffixing plot names with the parameters that were used for that plot.
 }
 \examples{
+\dontrun{
 pearson <- TRUE
 filtered <- TRUE
 normalized <- FALSE
 MyPlotname <- parFlags(prefix = "MyPlot", pearson, filtered, normalized)
 MyPlotname
+}
 
 }
